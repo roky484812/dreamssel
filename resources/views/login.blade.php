@@ -1,10 +1,11 @@
 @extends('layouts.auth')
     <!-- Section: Design Block -->
     @section('content')
-        <div class="container">
+        <div class="container @if(Session::has('page')) sign-up-mode @endif">
             <div class="forms-container">
                 <div class="signin-signup">
                     <form method="POST" action="{{ route('login') }}" class="sign-in-form">
+
                         <img src="{{asset('assets/img/auth/logo.svg')}}" class="logo-sign-in" alt="">
                         @csrf
                         @if(Session::has('error'))
@@ -13,20 +14,24 @@
                             </p>
                         @endif
                         <h2 class="title">Sign in</h2>
-                        <div class="input-field">
+                        <div class="input-field @error('email') is-invalid @enderror">
                             <i class="fas fa-user"></i>
-                            <input type="email" value="{{old('email')}}" id="email" name="email" class="@error('email') is-invalid @enderror" placeholder="Enter your email"/>
-                            @error('email')
-                                <p class="invalid-feedback">{{$errors->first('email')}}</p>
-                            @enderror
+                            <input type="email" value="{{old('email')}}" id="email" name="email"  placeholder="Enter your email"/>
                         </div>
-                        <div class="input-field">
+                        @error('email')
+                            <p class="invalid-feedback">{{$errors->first('email')}}</p>
+                        @enderror
+                        <div class="input-field @error('password') is-invalid @enderror">
                             <i class="fas fa-lock"></i>
-                            <input type="password" value="{{old('password')}}" id="password" name="password" class="@error('password') is-invalid @enderror" placeholder="Enter your password"/>
-                            @error('password')
-                                <p class="invalid-feedback">{{$errors->first('password')}}</p>
-                            @enderror
+                            <input type="password" value="{{old('password')}}" id="password" name="password" class="inputPass" placeholder="Enter your password"/>
+                            <button class="eyeBtn" type="button">
+                                <span class="openEye"><i class="fas fa-eye"></i></span>
+                                <span class="closeEye"><i class="fas fa-eye-slash"></i></span>	
+                            </button>
                         </div>
+                        @error('password')
+                            <p class="invalid-feedback">{{$errors->first('password')}}</p>
+                        @enderror
                         <input type="submit" value="Login" class="btn solid" />
                         <p class="social-text">Or Sign in with social platforms</p>
                         <div class="social-media">
@@ -48,28 +53,31 @@
                         @csrf
                         <img src="{{asset('assets/img/auth/logo.svg')}}" class="logo-sign-in" alt="">
                         <h2 class="title">Sign up</h2>
-                        <div class="input-field">
+                        <div class="input-field @error('signup_username') is-invalid @enderror"">
                             <i class="fas fa-user"></i>
                             <input type="text" placeholder="Enter your username" value="{{old('signup_usernmae')}}" name="signup_username" class="@error('signup_username') is-invalid @enderror" />
-
-                            @error('signup_username')
-                                <p class="invalid-feedback">{{$errors->first('signup_username')}}</p>
-                            @enderror
                         </div>
-                        <div class="input-field">
+                        @error('signup_username')
+                            <p class="invalid-feedback">{{$errors->first('signup_username')}}</p>
+                        @enderror
+                        <div class="input-field @error('signup_email') is-invalid @enderror"">
                             <i class="fas fa-envelope"></i>
                             <input type="email" value="{{old('signup_email')}}" name="signup_email" class="@error('signup_email') is-invalid @enderror" placeholder="Enter your email"/>
-                            @error('signup_email')
-                                <p class="invalid-feedback">{{$errors->first('signup_email')}}</p>
-                            @enderror
                         </div>
-                        <div class="input-field">
+                        @error('signup_email')
+                            <p class="invalid-feedback">{{$errors->first('signup_email')}}</p>
+                        @enderror
+                        <div class="input-field @error('signup_password') is-invalid @enderror"">
                             <i class="fas fa-lock"></i>
-                            <input type="password" value="{{old('signup_password')}}" name="signup_password" class="@error('signup_password') is-invalid @enderror" placeholder="Enter your password"/>
-                            @error('signup_password')
-                                <p class="invalid-feedback">{{$errors->first('signup_password')}}</p>
-                            @enderror
+                            <input type="password" value="{{old('signup_password')}}" name="signup_password" class="inputPass @error('signup_password') is-invalid @enderror" placeholder="Enter your password"/>
+                            <button class="eyeBtn" type="button">
+                                <span class="openEye"><i class="fas fa-eye"></i></span>
+                                <span class="closeEye"><i class="fas fa-eye-slash"></i></span>	
+                            </button>
                         </div>
+                        @error('signup_password')
+                            <p class="invalid-feedback">{{$errors->first('signup_password')}}</p>
+                        @enderror
                         <input type="submit" class="btn" value="Sign up" />
                         <p class="social-text">Or Sign up with social platforms</p>
                         <div class="social-media">
@@ -119,4 +127,16 @@
                 </div>
             </div>
         </div>
+    @endsection
+    
+    @section('custom_js')
+        @if (Session::has('page'))
+            <script>
+                // const sign_in_btn = document.querySelector("#sign-in-btn");
+                // const sign_up_btn = document.querySelector("#sign-up-btn");
+                // const container = document.querySelector(".container");
+               
+            </script>
+          
+        @endif
     @endsection

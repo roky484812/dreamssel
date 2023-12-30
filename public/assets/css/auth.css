@@ -292,6 +292,30 @@ form.sign-in-form {
   height: 100px;
   width: 100px;
 }
+/* from emon */
+.passInputBox 
+{
+  position: relative;
+}
+.eyeBtn
+{
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 0;
+  padding: 0px 15px;
+}
+.closeEye
+{
+  display: none;
+}
+.invalid-feedback
+{
+  color: rgb(252, 25, 25);
+}
+.is-invalid{
+  border: 1px solid red;
+}
 
 @media (max-width: 870px) {
   .container {
@@ -395,6 +419,19 @@ form.sign-in-form {
     top: 5%;
     transform: translate(-50%, 0);
   }
+  .sign-in-form
+  {
+    margin-top: 50px;
+  }
+  .container
+  {
+    height: 157vh;
+  }
+  .signin-signup
+  {
+    top: 88%;
+  }
+  
 }
 
 @media (max-width: 570px) {
@@ -422,5 +459,18 @@ form.sign-in-form {
   .container.sign-up-mode:before {
     bottom: 28%;
     left: 50%;
+  }
+  .container.sign-up-mode .signin-signup {
+    top: 1%;
+    bottom: 28%;
+
+  }
+  .container
+  {
+    height: 100vh;
+  }
+  .signin-signup
+  {
+    top: 95%;
   }
 }

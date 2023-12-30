@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -33,19 +34,24 @@ class AuthController extends Controller
     }
 
     public function register(Request $req){
-        $req->validate([
+        $validator = Validator::make($req->all() ,[
             'signup_username'=> 'required|unique:users,username|min:4|string',
             'signup_email'=> 'required|email|email:rfc,dns|unique:users,email',
             'signup_password'=> 'required|min:6|max:32'
         ]);
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->with('page', 'signup');
+        }
         $temp_user = new Temp_user();
         $temp_user->username = $req->input('signup_username');
         $temp_user->email = $req->input('signup_email');
         $temp_user->password = Hash::make($req->input('signup_password'));
         if($temp_user->save()){
-            return back()->with('signup_success', 'Lets verify your email address.');
+            return back()->with('signup_success', 'Lets verify your email address.')->with('page', 'signup');
         }else{
-            return back()->with('signup_errors', 'Something went wrong while registering user.');
+            return back()->with('signup_errors', 'Something went wrong while registering user.')->with('page', 'signup');
         }
     }
 

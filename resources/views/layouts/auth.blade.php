@@ -10,6 +10,8 @@
 <body>
 
     @yield('content')
+
 	<script src="{{ asset('assets/js/auth.js') }}"></script>
+	@yield('custom_js')
 </body>
 </html>
