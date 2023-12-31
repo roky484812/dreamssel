@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -107,6 +108,32 @@ class AuthController extends Controller
             
         }else{
             return "Can't verify your email address. Maybe your token is expired or already been verified.";
+        }
+    }
+
+
+    public function login_with_facebook(){
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function login_with_facebook_callback(){
+        $user = Socialite::driver('facebook')->user();
+        $findUser = User::where('facebook_id', $user->id);
+        if($findUser->exists()){
+            Auth::login($findUser->first());
+            $route = $this->redirectDash();
+            return redirect($route);
+        
+        }else{
+            $newUser = User::updateOrCreate([
+                'email' => $user->email,
+                'facebook_id'=> $user->id,
+                'password'=> Hash::make($user->id.$user->email)
+            ]);
+
+            Auth::login($newUser);
+            $route = $this->redirectDash();
+            return redirect($route);
         }
     }
 

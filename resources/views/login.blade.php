@@ -34,17 +34,11 @@
                         <input type="submit" value="Login" class="btn solid" />
                         <p class="social-text">Or Sign in with social platforms</p>
                         <div class="social-media">
-                            <a href="#" class="social-icon">
+                            <a href="{{route('login.facebook')}}" class="social-icon">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                             <a href="#" class="social-icon">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="social-icon">
                                 <i class="fab fa-google"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="fab fa-linkedin-in"></i>
                             </a>
                         </div>
                     </form>
@@ -91,17 +85,11 @@
                         <input type="submit" class="btn" value="Sign up" />
                         <p class="social-text">Or Sign up with social platforms</p>
                         <div class="social-media">
-                            <a href="#" class="social-icon">
+                            <a href="{{route('login.facebook')}}" class="social-icon">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                             <a href="#" class="social-icon">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="social-icon">
                                 <i class="fab fa-google"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="fab fa-linkedin-in"></i>
                             </a>
                         </div>
                     </form>

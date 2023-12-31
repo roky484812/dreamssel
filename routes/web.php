@@ -42,4 +42,6 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->name('login');
     Route::post('/signup', 'register')->name('register.dist');
     Route::get('/email_verify', 'email_verify')->name('email_verify');
+    Route::get('/facebook', 'login_with_facebook')->name('login.facebook');
+    Route::get('/facebook/callback', 'login_with_facebook_callback')->name('facebook.callback');
 });
