@@ -5,15 +5,14 @@
             <div class="forms-container">
                 <div class="signin-signup">
                     <form method="POST" action="{{ route('login') }}" class="sign-in-form">
-
-                        <img src="{{asset('assets/img/auth/logo.svg')}}" class="logo-sign-in" alt="">
+                        <img src="{{asset('assets/img/auth/logo.svg')}}" class="logo-sign-in" alt="Dreamssel Logo">
                         @csrf
+                        <h2 class="title">Sign in</h2>
                         @if(Session::has('error'))
-                            <p class="text-center text-danger">
+                            <p class="invalid-feedback">
                                 {{Session::get('error')}}
                             </p>
                         @endif
-                        <h2 class="title">Sign in</h2>
                         <div class="input-field @error('email') is-invalid @enderror">
                             <i class="fas fa-user"></i>
                             <input type="email" value="{{old('email')}}" id="email" name="email"  placeholder="Enter your email"/>
@@ -51,11 +50,22 @@
                     </form>
                     <form method="POST" action="{{route('register.dist')}}" class="sign-up-form">
                         @csrf
+
                         <img src="{{asset('assets/img/auth/logo.svg')}}" class="logo-sign-in" alt="">
                         <h2 class="title">Sign up</h2>
+                        @if(Session::has('signup_success'))
+                            <p class="text-center text-danger">
+                                {{Session::get('signup_success')}}
+                            </p>
+                        @endif
+                        @if(Session::has('signup_error'))
+                            <p class="text-center invalid_feedback">
+                                {{Session::get('signup_error')}}
+                            </p>
+                        @endif
                         <div class="input-field @error('signup_username') is-invalid @enderror"">
                             <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Enter your username" value="{{old('signup_usernmae')}}" name="signup_username" class="@error('signup_username') is-invalid @enderror" />
+                            <input type="text" placeholder="Enter your username" value="{{old('signup_username')}}" name="signup_username" class="@error('signup_username') is-invalid @enderror" />
                         </div>
                         @error('signup_username')
                             <p class="invalid-feedback">{{$errors->first('signup_username')}}</p>
@@ -127,16 +137,4 @@
                 </div>
             </div>
         </div>
-    @endsection
-    
-    @section('custom_js')
-        @if (Session::has('page'))
-            <script>
-                // const sign_in_btn = document.querySelector("#sign-in-btn");
-                // const sign_up_btn = document.querySelector("#sign-up-btn");
-                // const container = document.querySelector(".container");
-               
-            </script>
-          
-        @endif
     @endsection

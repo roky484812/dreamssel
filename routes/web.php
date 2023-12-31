@@ -41,4 +41,5 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/login','loginView');
     Route::post('/login', 'login')->name('login');
     Route::post('/signup', 'register')->name('register.dist');
+    Route::get('/email_verify', 'email_verify')->name('email_verify');
 });
