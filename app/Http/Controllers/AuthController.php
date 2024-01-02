@@ -27,7 +27,7 @@ class AuthController extends Controller
 
     public function login(Request $req){
         $req->validate([
-            'email'=> 'required|email|',
+            'email'=> 'required|email',
             'password'=> 'required|min:5|max:32'
         ]);
         $Credential = $req->only('email', 'password');
@@ -123,18 +123,45 @@ class AuthController extends Controller
             Auth::login($findUser->first());
             $route = $this->redirectDash();
             return redirect($route);
-        
         }else{
-            $newUser = User::updateOrCreate([
-                'email' => $user->email,
-                'facebook_id'=> $user->id,
-                'password'=> Hash::make($user->id.$user->email)
-            ]);
+            $newUser = User::updateOrCreate(
+                ['email' => $user->email],
+                [
+                    'facebook_id'=> $user->id,
+                    'password'=> Hash::make($user->id.$user->email)
+                ]
+            );
 
             Auth::login($newUser);
             $route = $this->redirectDash();
             return redirect($route);
         }
+    }
+
+    public function login_with_google(){
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function login_with_google_callback(){
+        $user = Socialite::driver('google')->user();
+        $findUser = User::where('google_id', $user->id);
+        if($findUser->exists()){
+            Auth::login($findUser->first());
+            $route = $this->redirectDash();
+            return redirect($route);
+        }else{
+            $newUser = User::updateOrCreate(
+                ['email' => $user->email],
+                [
+                    'google_id' => $user->id,
+                    'password' => Hash::make($user->id.$user->email),
+                ]
+            );
+            Auth::login($newUser);
+            $route = $this->redirectDash();
+            return redirect($route);
+        }
+
     }
 
     public function redirectDash(){

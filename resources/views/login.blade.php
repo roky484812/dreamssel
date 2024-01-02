@@ -37,7 +37,7 @@
                             <a href="{{route('login.facebook')}}" class="social-icon">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="social-icon">
+                            <a href="{{route('login.google')}}" class="social-icon">
                                 <i class="fab fa-google"></i>
                             </a>
                         </div>
@@ -88,7 +88,7 @@
                             <a href="{{route('login.facebook')}}" class="social-icon">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="social-icon">
+                            <a href="{{route('login.google')}}" class="social-icon">
                                 <i class="fab fa-google"></i>
                             </a>
                         </div>

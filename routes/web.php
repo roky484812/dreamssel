@@ -44,4 +44,6 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/email_verify', 'email_verify')->name('email_verify');
     Route::get('/facebook', 'login_with_facebook')->name('login.facebook');
     Route::get('/facebook/callback', 'login_with_facebook_callback')->name('facebook.callback');
+    Route::get('/google', 'login_with_google')->name('login.google');
+    Route::get('/google/callback', 'login_with_google_callback')->name('google.callback');
 });
