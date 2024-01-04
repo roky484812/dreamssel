@@ -22,16 +22,25 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], function(){
+    Route::controller(AuthController::class)->group(function(){
+        Route::get('/logout', 'logout')->name('admin.logout');
+    });
     Route::controller(AdminDashboard::class)->group(function(){
         Route::get('/dashboard', 'index')->name('admin.dashboard');
     });
 });
 Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){
+    Route::controller(AuthController::class)->group(function(){
+        Route::get('/logout', 'logout')->name('editor.logout');
+    });
     Route::controller(EditorDashboard::class)->group(function(){
         Route::get('/dashboard', 'index')->name('editor.dashboard');
     });
 });
 Route::group(['middleware'=> ['web', 'type.distributor']], function(){
+    Route::controller(AuthController::class)->group(function(){
+        Route::get('/logout', 'logout')->name('dist.logout');
+    });
     Route::controller(DistDashboard::class)->group(function(){
         Route::get('/dashboard', 'index')->name('dist.dashboard');
     });

@@ -161,7 +161,11 @@ class AuthController extends Controller
             $route = $this->redirectDash();
             return redirect($route);
         }
+    }
 
+    public function logout(){
+        Auth::logout();
+        return redirect('/login');
     }
 
     public function redirectDash(){

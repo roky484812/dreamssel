@@ -14,12 +14,15 @@ class User_role_seeder extends Seeder
     public function run(): void
     {
         DB::table('user_roles')->insert([
+            'id'=> '1',
             'role'=> 'admin'
         ]);
         DB::table('user_roles')->insert([
+            'id'=> '2',
             'role'=> 'editor'
         ]);
         DB::table('user_roles')->insert([
+            'id'=> '3',
             'role'=> 'distributor'
         ]);
     }

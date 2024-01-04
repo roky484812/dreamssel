@@ -5,7 +5,7 @@
             <div class="forms-container">
                 <div class="signin-signup">
                     <form method="POST" action="{{ route('login') }}" class="sign-in-form">
-                        <img src="{{asset('assets/img/auth/logo.svg')}}" class="logo-sign-in" alt="Dreamssel Logo">
+                        <img src="{{asset('assets/auth_layout/img/auth/logo.svg')}}" class="logo-sign-in" alt="Dreamssel Logo">
                         @csrf
                         <h2 class="title">Sign in</h2>
                         @if(Session::has('error'))
@@ -45,7 +45,7 @@
                     <form method="POST" action="{{route('register.dist')}}" class="sign-up-form">
                         @csrf
 
-                        <img src="{{asset('assets/img/auth/logo.svg')}}" class="logo-sign-in" alt="">
+                        <img src="{{asset('assets/auth_layout/img/auth/logo.svg')}}" class="logo-sign-in" alt="">
                         <h2 class="title">Sign up</h2>
                         @if(Session::has('signup_success'))
                             <p class="text-center text-danger">
@@ -108,7 +108,7 @@
                             Sign up
                         </button>
                     </div>
-                    <img src="{{asset('assets/img/auth/login1.svg')}}" class="image" alt="" />
+                    <img src="{{asset('assets/auth_layout/img/auth/login1.svg')}}" class="image" alt="" />
                 </div>
                 <div class="panel right-panel">
                     <div class="content">
@@ -121,7 +121,7 @@
                             Sign in
                         </button>
                     </div>
-                    <img src="{{asset('assets/img/auth/register1.svg')}}" class="image" alt="" />
+                    <img src="{{asset('assets/auth_layout/img/auth/register1.svg')}}" class="image" alt="" />
                 </div>
             </div>
         </div>

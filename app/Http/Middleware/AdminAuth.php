@@ -16,6 +16,10 @@ class AdminAuth
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth()->user() && Auth()->user()->role == 1){
+            if(Auth()->user()->is_active == 0){
+                Auth()->logout();
+                return redirect('/login')->with('error', 'You are not a active user. Please contact to dreamssel.');
+            }
             return $next($request);
         }
         return redirect('/login');
