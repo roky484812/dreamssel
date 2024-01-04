@@ -13,7 +13,7 @@
         content="admin, admin template, dashboard, admin dashboard, bootstrap 5, responsive, clean, ui, admin panel, ui kit, responsive admin, application, bootstrap 4, flat, bootstrap5, admin dashboard template" />
 
     <!-- Title -->
-    <title>{{$title}}</title>
+    <title>Dreamssel | {{$title}}</title>
 
     <!--Favicon -->
     <link rel="icon" href="{{asset('assets/admin/images/brand/favicon.ico')}}" type="image/x-icon" />
@@ -212,7 +212,7 @@
                                                     <span class="text-center user-semi-title">App Developer</span>
                                                     <div class="dropdown-divider"></div>
                                                 </div>
-                                                <a class="dropdown-item d-flex" href="profile-2.html">
+                                                <a class="dropdown-item d-flex" href="{{route('admin.profile')}}">
                                                     <svg class="header-icon me-3" x="1008" y="1248" viewBox="0 0 24 24"
                                                         height="100%" width="100%" preserveAspectRatio="xMidYMid meet"
                                                         focusable="false">

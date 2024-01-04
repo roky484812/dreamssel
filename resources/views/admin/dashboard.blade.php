@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['title'=> 'Dreamssel | Dashboard'])
+@extends('layouts.admin', ['title'=> 'Dashboard'])
 @section('content')
     <div class="app-content main-content">
         <div class="side-app">

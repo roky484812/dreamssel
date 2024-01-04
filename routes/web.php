@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Dashboard as AdminDashboard;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Distributor\Dashboard as DistDashboard;
@@ -27,6 +28,9 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     });
     Route::controller(AdminDashboard::class)->group(function(){
         Route::get('/dashboard', 'index')->name('admin.dashboard');
+    });
+    Route::controller(AdminController::class)->group(function(){
+        Route::get('/profile', 'profile')->name('admin.profile');
     });
 });
 Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){
