@@ -31,6 +31,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     });
     Route::controller(AdminController::class)->group(function(){
         Route::get('/profile', 'profile')->name('admin.profile');
+        Route::get('/profile/edit', 'edit_profile')->name('admin.profile.edit');
     });
 });
 Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){

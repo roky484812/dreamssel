@@ -12,4 +12,8 @@ class AdminController extends Controller
         // $user = Auth::user();
         return view('admin.profile');
     }
+
+    public function edit_profile(){
+        return view('admin.editprofile');
+    }
 }
