@@ -186,7 +186,7 @@ class AuthController extends Controller
         $user->update([
             'password'=> Hash::make($req->input('new_password'))
         ]);
-        return back()->with('success', 'Your password has been updated.');
+        return back()->with('success', 'You have successfuly changed your password.');
     }
 
     public function logout(){

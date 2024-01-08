@@ -33,124 +33,12 @@
                 <!-- Row -->
                 <div class="row">
                     <div class="col-xl-4 col-lg-5">
-                        <div class="card box-widget widget-user">
-                            <div class="widget-user-image mx-auto mt-5 text-center"><img alt="User Avatar"
-                                    class="rounded-circle" src="../assets/images/users/16.jpg"></div>
-                            <div class="card-body text-center">
-                                <div class="pro-user">
-                                    <h3 class="pro-user-username text-dark mb-1">Jenna Side</h3>
-                                    <h6 class="pro-user-desc text-muted">Web Designer</h6>
-                                    <a href="{{route('admin.profile')}}" class="btn btn-primary mt-3">View Profile</a>
-                                </div>
-                            </div>
-                        </div>
-                        <form class="card" action="{{route('admin.change_password')}}" method="POST">
-                            @csrf
-                            <div class="card-header">
-                                <div class="card-title">Edit Password</div>
-                            </div>
-                            <div class="card-body">
-                                @if (Session::has('error'))
-                                    <p class="text-center text-danger">{{Session::get('error')}}</p>
-                                @endif
-                                <div class="mb-3">
-                                    <label class="form-label">Current Password</label>
-                                    <input type="password" class="form-control @error('current_password') is-invalid @enderror" placeholder="Current Password" name="current_password">
-                                    @error('current_password')
-                                        <p class="invalid-feedback">{{$errors->first('current_password')}}</p>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">New Password</label>
-                                    <input type="password" class="form-control @error('new_password') is-invalid @enderror" placeholder="Password" name="new_password">
-                                    @error('new_password')
-                                        <p class="invalid-feedback">{{$errors->first('new_password')}}</p>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" placeholder="Confirm Password" name="new_password_confirmation">
-                                </div>
-                            </div>
-                            <div class="card-footer text-end">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
-                            </div>
-                        </form>
-                        <form class="card" style="background: #ff000021;">
-                            <div class="card-header">
-                                <div class="card-title">Delete Profile</div>
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" class="form-control" placeholder="Enter your password" name="password">
-                                </div>
-                            </div>
-                            <div class="card-footer text-end">
-                                <button type="submit" class="btn btn-danger">Delete Profile</button>
-                            </div>
-                        </form>
+                        @include('admin.widgets.profile.update_image')
+                        @include('admin.widgets.profile.updatepassword')
+                        @include('admin.widgets.profile.deleteprofile')
                     </div>
                     <div class="col-xl-8 col-lg-7">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">Edit Profile</div>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title font-weight-bold">Basic info:</div>
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Full Name</label>
-                                            <input type="text" class="form-control" value="First Name" name="fullname">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Username</label>
-                                            <input type="text" class="form-control" value="First Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Email address</label>
-                                            <input type="email" class="form-control" value="Email">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Phone Number</label>
-                                            <input type="number" class="form-control" value="01700000000">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Address</label>
-                                            <input type="text" class="form-control" value="Home Address">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="mb-3">
-                                            <label class="form-label">City</label>
-                                            <input type="text" class="form-control" value="City">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-3">
-                                        <div class="mb-3">
-                                            <label class="form-label">Postal Code</label>
-                                            <input type="number" class="form-control" value="00000">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer text-end">
-                                <div class="btn-list">
-                                    <a href="javascript:void(0)" class="btn btn-primary">Update</a>
-                                    <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
+                        @include('admin.widgets.profile.updateprofileinfo')
                     </div>
                 </div>
                 <!-- End Row-->
