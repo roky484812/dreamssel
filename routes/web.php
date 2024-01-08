@@ -25,6 +25,7 @@ Route::get('/', function () {
 Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], function(){
     Route::controller(AuthController::class)->group(function(){
         Route::get('/logout', 'logout')->name('admin.logout');
+        Route::post('/profile/password', 'change_password')->name('admin.change_password');
     });
     Route::controller(AdminDashboard::class)->group(function(){
         Route::get('/dashboard', 'index')->name('admin.dashboard');

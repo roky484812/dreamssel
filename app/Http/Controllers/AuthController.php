@@ -28,7 +28,9 @@ class AuthController extends Controller
     public function login(Request $req){
         $req->validate([
             'email'=> 'required|email',
-            'password'=> 'required|min:5|max:32'
+            'password'=> 'required|min:5|max:32||regex:/^[^\s]+$/'
+        ],[
+            'password.regex' => 'The password field cannot contain spaces.'
         ]);
         $Credential = $req->only('email', 'password');
         if(Auth::attempt($Credential)){
@@ -43,9 +45,10 @@ class AuthController extends Controller
         $validator = Validator::make($req->all() ,[
             'signup_username'=> 'required|unique:users,username|min:4|string|regex:/^[^\s]+$/',
             'signup_email'=> 'required|email|email:rfc,dns|unique:users,email',
-            'signup_password'=> 'required|min:5|max:32'
+            'signup_password'=> 'required|min:5|max:32|regex:/^[^\s]+$/'
         ], [
-            'signup_username.regex' => 'The username cannot contain spaces.'
+            'signup_username.regex' => 'The username cannot contain spaces.',
+            'signup_password.regex' => 'The signup password cannot contain spaces.'
         ]);
         if ($validator->fails()) {
             return back()
@@ -163,6 +166,28 @@ class AuthController extends Controller
         }
     }
 
+    public function change_password(Request $req){
+        $req->validate([
+            'current_password'=> 'required||regex:/^[^\s]+$/|min:5|max:32',
+            'new_password'=> 'required|regex:/^[^\s]+$/|min:5|max:32|confirmed',
+        ], [
+            'current_password.regex' => 'The current password field cannot contain spaces.',
+            'new_password.regex' => 'The new password field cannot contain spaces.'
+        ]);
+        // $valiator = Validator::make($req->all(), $roles);
+        // if($valiator->fails()){
+        //     return back()->withErrors($valiator);
+        // }
+
+        $user = Auth::user();
+        if(!Hash::check($req->input('current_password'), $user->password)){
+            return back()->with('error', 'Current password is incorrect');
+        }
+        $user->update([
+            'password'=> Hash::make($req->input('new_password'))
+        ]);
+        return back()->with('success', 'Your password has been updated.');
+    }
 
     public function logout(){
         Auth::logout();

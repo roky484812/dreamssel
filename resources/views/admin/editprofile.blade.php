@@ -4,7 +4,6 @@
     <div class="app-content main-content">
         <div class="side-app">
             <div class="container-fluid main-container">
-
                 <!--Page header-->
                 <div class="page-header">
                     <div class="page-leftheader">
@@ -45,22 +44,32 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="card">
+                        <form class="card" action="{{route('admin.change_password')}}" method="POST">
+                            @csrf
                             <div class="card-header">
                                 <div class="card-title">Edit Password</div>
                             </div>
                             <div class="card-body">
+                                @if (Session::has('error'))
+                                    <p class="text-center text-danger">{{Session::get('error')}}</p>
+                                @endif
                                 <div class="mb-3">
                                     <label class="form-label">Current Password</label>
-                                    <input type="password" class="form-control" placeholder="Current Password" name="current_password">
+                                    <input type="password" class="form-control @error('current_password') is-invalid @enderror" placeholder="Current Password" name="current_password">
+                                    @error('current_password')
+                                        <p class="invalid-feedback">{{$errors->first('current_password')}}</p>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">New Password</label>
-                                    <input type="password" class="form-control" placeholder="Password" name="password">
+                                    <input type="password" class="form-control @error('new_password') is-invalid @enderror" placeholder="Password" name="new_password">
+                                    @error('new_password')
+                                        <p class="invalid-feedback">{{$errors->first('new_password')}}</p>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password">
+                                    <input type="password" class="form-control" placeholder="Confirm Password" name="new_password_confirmation">
                                 </div>
                             </div>
                             <div class="card-footer text-end">
@@ -75,7 +84,7 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label class="form-label">Password</label>
-                                    <input type="password" class="form-control" placeholder="Enter your password to delete your profile" name="password">
+                                    <input type="password" class="form-control" placeholder="Enter your password" name="password">
                                 </div>
                             </div>
                             <div class="card-footer text-end">
@@ -132,18 +141,6 @@
                                             <label class="form-label">Postal Code</label>
                                             <input type="number" class="form-control" value="00000">
                                         </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label class="form-label">Role</label>
-                                        <select class="form-control nice-select select2">
-                                            <optgroup label="Categories">
-                                                <option data-select2-id="5">--Select--</option>
-                                                <option value="1">Distributor</option>
-                                                <option value="2">Editor</option>
-                                                <option value="3">Admin</option>
-                                            </optgroup>
-                                        </select>
                                     </div>
                                 </div>
                             </div>
