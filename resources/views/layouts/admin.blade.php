@@ -45,7 +45,6 @@
         <img src="{{asset('assets/admin/images/svgs/loader.svg')}}" alt="loader">
     </div>
 
-
     <div class="page">
         <div class="page-main">
 
@@ -281,8 +280,8 @@
                                         src="{{asset('assets/admin//images/users/16.jpg')}}">
                                 </div>
                                 <div class="user-info text-center">
-                                    <h5 class=" mb-1 font-weight-bold">John Thomson</h5>
-                                    <span class="text-muted app-sidebar__user-name text-sm">App Developer</span>
+                                    <h5 class=" mb-1 font-weight-bold">{{$user->name}}</h5>
+                                    <span class="text-muted app-sidebar__user-name text-sm">{{$user->role_name}}</span>
                                 </div>
                             </div>
                         </div>
