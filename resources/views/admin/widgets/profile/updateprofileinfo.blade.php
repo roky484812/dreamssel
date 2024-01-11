@@ -13,18 +13,6 @@
             </div>
             <div class="col-sm-6 col-md-6">
                 <div class="mb-3">
-                    <label class="form-label">Username</label>
-                    <input type="text" class="form-control" value="First Name">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6">
-                <div class="mb-3">
-                    <label class="form-label">Email address</label>
-                    <input type="email" class="form-control" value="Email">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6">
-                <div class="mb-3">
                     <label class="form-label">Phone Number</label>
                     <input type="number" class="form-control" value="01700000000">
                 </div>

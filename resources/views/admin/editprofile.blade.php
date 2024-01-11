@@ -35,10 +35,19 @@
                     <div class="col-xl-4 col-lg-5">
                         @include('admin.widgets.profile.update_image')
                         @include('admin.widgets.profile.updatepassword')
-                        @include('admin.widgets.profile.deleteprofile')
                     </div>
                     <div class="col-xl-8 col-lg-7">
-                        @include('admin.widgets.profile.updateprofileinfo')
+                        <div class="row">
+                            <div class="col-md-12">
+                                @include('admin.widgets.profile.updateprofileinfo')
+                            </div>
+                            <div class="col-md-6">
+                                @include('admin.widgets.profile.update_email')
+                            </div>
+                            <div class="col-md-6">
+                                @include('admin.widgets.profile.deleteprofile')
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- End Row-->

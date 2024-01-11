@@ -11,8 +11,8 @@
     <input type="file" name="profile_picture" id="profile_picture" class="d-none" accept="image/*" onchange="this.form.submit()">
     <div class="card-body text-center">
         <div class="pro-user">
-            <h3 class="pro-user-username text-dark mb-1">Jenna Side</h3>
-            <h6 class="pro-user-desc text-muted">Web Designer</h6>
+            <h3 class="pro-user-username text-dark mb-1">{{$user->name}}</h3>
+            <h6 class="pro-user-desc text-muted text-capitalize">{{$user->role_name}}</h6>
             <a href="{{route('admin.profile')}}" class="btn btn-primary mt-3">View Profile</a>
         </div>
     </div>

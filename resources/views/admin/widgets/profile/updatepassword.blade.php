@@ -30,7 +30,6 @@
         </div>
     </div>
     <div class="card-footer text-end">
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
+        <button type="submit" class="btn btn-primary">Update Password</button>
     </div>
 </form>
