@@ -40,7 +40,7 @@
     <div class="card-footer text-end">
         <div class="btn-list">
             <a href="javascript:void(0)" class="btn btn-primary">Update</a>
-            <a href="{{url()->previous()}}" class="btn btn-danger">Cancel</a>
+            <a href="{{url()->previous()}}" class="btn btn-danger">Back</a>
         </div>
     </div>
 </div>

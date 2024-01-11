@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Dashboard as AdminDashboard;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Distributor\Dashboard as DistDashboard;
 use App\Http\Controllers\Editor\Dashboard as EditorDashboard;
+use App\Http\Controllers\EditProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,8 @@ Route::get('/', function () {
 Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], function(){
     Route::controller(AuthController::class)->group(function(){
         Route::get('/logout', 'logout')->name('admin.logout');
+    });
+    Route::controller(EditProfileController::class)->group(function(){
         Route::post('/profile/update/password', 'change_password')->name('admin.change_password');
         Route::post('/profile/update/picture', 'change_profile_picture')->name('admin.change_profile_picture');
     });
