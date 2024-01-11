@@ -30,6 +30,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     Route::controller(EditProfileController::class)->group(function(){
         Route::post('/profile/update/password', 'change_password')->name('admin.change_password');
         Route::post('/profile/update/picture', 'change_profile_picture')->name('admin.change_profile_picture');
+        Route::post('/profile/update/user_meta', 'update_user_meta')->name('admin.update_user_meta');
     });
     Route::controller(AdminDashboard::class)->group(function(){
         Route::get('/dashboard', 'index')->name('admin.dashboard');

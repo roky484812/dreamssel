@@ -16,7 +16,6 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('key', 30);
             $table->string('value', 100);
-            $table->timestamps();
         });
     }
 

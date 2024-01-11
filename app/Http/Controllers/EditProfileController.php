@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\profile_meta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -62,6 +63,64 @@ class EditProfileController extends Controller
         }
     }
 
+    public function update_user_meta(Request $req){
+        $req->validate([
+            'fullname'=> 'required|string|min:3|max:100',
+            'phone'=> 'min:10',
+            'address'=> 'required|max:100',
+            'city'=> 'required|max:50',
+            'post_code'=> 'min:4|max:6'
+        ]);
 
+        try {
+            $user_id = Auth::user()->id;
+            User::whereId($user_id)->update([
+                'name'=> $req->input('fullname')
+            ]);
+            if($req->input('phone')){
+                profile_meta::updateOrCreate(
+                    [
+                        'user_id'=> $user_id,
+                        'key'=> 'phone'
+                    ],[
+                        'value'=> $req->input('phone')
+                    ]
+                );
+            }
+
+            profile_meta::updateOrCreate(
+                [
+                    'user_id'=> $user_id,
+                    'key'=> 'address'
+                ],[
+                    'value'=> $req->input('address')
+                ]
+            );
+
+            profile_meta::updateOrCreate(
+                [
+                    'user_id'=> $user_id,
+                    'key'=> 'city'
+                ],[
+                    'value'=> $req->input('city')
+                ]
+            );
+
+            if($req->input('post_code')){
+                profile_meta::updateOrCreate(
+                    [
+                        'user_id'=> $user_id,
+                        'key'=> 'post_code'
+                    ],[
+                        'value'=> $req->input('post_code')
+                    ]
+                );
+            }
+            return redirect()->back()->with('success', 'You have successfuly updated your profile.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+        
+    }
 
 }
