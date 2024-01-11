@@ -209,11 +209,13 @@ class AuthController extends Controller
             // read image from file system
             $image = $manager->read($profile_picture);
             $image->cover(300, 300);
-            $image->save($profile_picture_dest, 50);
+            $image->save($profile_picture_dest, 50);    
             User::whereId($user->id)->update([
                 'profile_picture'=> $profile_picture_path
             ]);
             return redirect()->back()->with('success', 'You have changed your profiie picture successfuly.');
+        }else{
+            return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
 
