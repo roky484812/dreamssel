@@ -32,6 +32,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::post('/profile/update/password', 'change_password')->name('admin.change_password');
         Route::post('/profile/update/picture', 'change_profile_picture')->name('admin.change_profile_picture');
         Route::post('/profile/update/user_meta', 'update_user_meta')->name('admin.update_user_meta');
+        Route::post('/profile/update/otp', 'send_otp')->name('admin.update_email');
     });
     Route::controller(AdminDashboard::class)->group(function(){
         Route::get('/dashboard', 'index')->name('admin.dashboard');

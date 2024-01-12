@@ -1,4 +1,4 @@
-<form action="" class="card">
+<form class="card" id="updateEmailForm">
     <div class="card-header">
         <div class="card-title">
             Update Email
@@ -15,6 +15,6 @@
         </div>
     </div>
     <div class="card-footer text-end">
-        <button class="btn btn-primary">Update Email</button>
+        <button class="btn btn-primary" type="submit">Send OTP</button>
     </div>
 </form>

@@ -78,4 +78,55 @@
                 window.onload = successAlert;
             </script>
         @endif
+        <script>
+            // function send_otp(event){
+            //     event.preventDefault();
+            //     let button = $(event.target).find('button[type="submit"]');
+            //     console.log(button);
+            //     $.ajax({
+            //         url: {{route('admin.update_email')}},
+            //         type: 'POST',
+            //         // data: $(this).serialize(),
+            //         // success: function(response) {
+            //         //     // Handle the response as needed
+            //         //     console.log('Response:', response);
+            //         // },
+            //         // error: function(error) {
+            //         //     // Handle errors
+            //         //     console.error('Error:', error);
+            //         // },
+            //         // complete: function() {
+            //         //     // Remove the class after the AJAX request is complete
+            //         //     $submitButton.removeClass('btn-sending');
+            //         // }
+            //     });
+            // }
+
+            $(document).ready(function() {
+                $('#updateEmailForm').submit(function(event) {
+                    let button = $(event.target).find('button[type="submit"]');
+                    console.log('Sending OTP...');
+                    event.preventDefault();
+                    $.ajax({
+                        url: "{{ route('admin.update_email') }}",
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log('Response:', response);
+                        },
+                        error: function(error) {
+                            console.error('Error:', error);
+                        },
+                        complete: function() {
+                            // $submitButton.removeClass('btn-sending');
+                        }
+                    });
+
+                });
+            });
+            // $(document).ready(function() {
+            //     console.log('hello world');
+            // });
+
+        </script>
 @endsection

@@ -122,5 +122,10 @@ class EditProfileController extends Controller
         }
     }
 
+    public function send_otp(){
+        $otp = rand(100000, 999999);
+        return $otp;
+    }
+
     
 }

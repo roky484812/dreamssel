@@ -24,7 +24,19 @@ class AdminController extends Controller
         return $user;
     }
     public function edit_profile(){
-        $user_meta = $this->user_meta(1);
+        $user_meta = $this->user_meta(Auth::user()->id);
+        if(empty($user_meta['post_code'])){
+            $user_meta['post_code'] = '';
+        }
+        if(empty($user_meta['address'])){
+            $user_meta['address'] = '';
+        }
+        if(empty($user_meta['city'])){
+            $user_meta['city'] = '';
+        }
+        if(empty($user_meta['phone'])){
+            $user_meta['phone'] = '';
+        }
         return view('admin.editprofile', ['user_meta'=> $user_meta]);
     }
 }
