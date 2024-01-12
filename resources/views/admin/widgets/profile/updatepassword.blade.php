@@ -4,12 +4,6 @@
         <div class="card-title">Edit Password</div>
     </div>
     <div class="card-body">
-        @if (Session::has('error'))
-            <p class="text-center text-danger">{{Session::get('error')}}</p>
-        @endif
-        @if (Session::has('success'))
-            <p class="text-center text-primary">{{Session::get('success')}}</p>
-        @endif
         <div class="mb-3">
             <label class="form-label">Current Password</label>
             <input type="password" class="form-control @error('current_password') is-invalid @enderror" placeholder="Current Password" name="current_password">

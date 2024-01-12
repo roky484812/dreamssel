@@ -166,6 +166,18 @@ class AuthController extends Controller
         }
     }
 
+    public function delete_profile(Request $req){
+        $req->validate([
+            'password'=> 'required'
+        ]);
+        $user = Auth::user();
+        if(!Hash::check($req->input('current_password'), $user->password)){
+            return redirect()->back()->with('error', 'Password Does not matched.');
+        }
+        $user->delete();
+        Auth::logout();
+        return redirect('/login');
+    }
 
     public function logout(){
         Auth::logout();

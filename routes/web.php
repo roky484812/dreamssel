@@ -26,6 +26,7 @@ Route::get('/', function () {
 Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], function(){
     Route::controller(AuthController::class)->group(function(){
         Route::get('/logout', 'logout')->name('admin.logout');
+        Route::post('profile/update/delete', 'delete_profile')->name('admin.profile.delete');
     });
     Route::controller(EditProfileController::class)->group(function(){
         Route::post('/profile/update/password', 'change_password')->name('admin.change_password');
@@ -37,7 +38,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     });
     Route::controller(AdminController::class)->group(function(){
         Route::get('/profile', 'profile')->name('admin.profile');
-        Route::get('/profile/edit', 'edit_profile')->name('admin.profile.edit');
+        Route::get('/profile/update', 'edit_profile')->name('admin.profile.edit');
     });
 });
 Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){

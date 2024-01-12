@@ -57,7 +57,7 @@ class EditProfileController extends Controller
             User::whereId($user->id)->update([
                 'profile_picture'=> $profile_picture_path
             ]);
-            return redirect()->back()->with('success', 'You have changed your profiie picture successfuly.');
+            return redirect()->back()->with('success', 'You have successfuly changed your profile picture.');
         }else{
             return redirect()->back()->with('error', 'Something went wrong.');
         }
@@ -116,11 +116,11 @@ class EditProfileController extends Controller
                     ]
                 );
             }
-            return redirect()->back()->with('success', 'You have successfuly updated your profile.');
+            return redirect()->back()->with('success', 'You have successfuly updated your profile informations.');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', 'Something went wrong.');
         }
-        
     }
 
+    
 }

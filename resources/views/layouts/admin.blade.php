@@ -490,6 +490,7 @@
 
     <!-- Custom js-->
     <script src="{{asset('assets/admin/js/custom.js')}}"></script>
+    @yield('custom_js')
 
 
 </body>
