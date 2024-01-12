@@ -9,7 +9,7 @@
             <div class="col-sm-6 col-md-6">
                 <div class="mb-3">
                     <label class="form-label">Full Name</label>
-                    <input type="text" class="form-control @error('fullname') is-invalid @enderror" value="{{$user->name}}" name="fullname">
+                    <input type="text" class="form-control @error('fullname') is-invalid @enderror" value="{{$user->name}}" name="fullname" placeholder="Enter your name">
                     @error('fullname')
                         <p class="invalid-feedback">{{$errors->first('fullname')}}</p>
                     @enderror
@@ -18,7 +18,7 @@
             <div class="col-sm-6 col-md-6">
                 <div class="mb-3">
                     <label class="form-label">Phone Number</label>
-                    <input type="number" class="form-control @error('phone') is-invalid @enderror" value="{{$user_meta['phone']}}" name="phone">
+                    <input type="number" class="form-control @error('phone') is-invalid @enderror" value="{{$user_meta['phone']}}" name="phone" placeholder="Enter your phone number">
                     @error('phone')
                         <p class="invalid-feedback">{{$errors->first('phone')}}</p>
                     @enderror
@@ -27,7 +27,7 @@
             <div class="col-md-12">
                 <div class="mb-3">
                     <label class="form-label">Address</label>
-                    <input type="text" class="form-control @error('address') is-invalid @enderror" value="{{$user_meta['address']}}" name="address">
+                    <input type="text" class="form-control @error('address') is-invalid @enderror" value="{{$user_meta['address']}}" name="address" placeholder="Enter your address">
                     @error('address')
                         <p class="invalid-feedback">{{$errors->first('address')}}</p>
                     @enderror
@@ -36,7 +36,7 @@
             <div class="col-sm-6 col-md-4">
                 <div class="mb-3">
                     <label class="form-label">City</label>
-                    <input type="text" class="form-control @error('city') is-invalid @enderror" value="{{$user_meta['city']}}" name="city">
+                    <input type="text" class="form-control @error('city') is-invalid @enderror" value="{{$user_meta['city']}}" name="city" placeholder="Enter your city name">
                     @error('city')
                         <p class="invalid-feedback">{{$errors->first('city')}}</p>
                     @enderror
@@ -45,7 +45,7 @@
             <div class="col-sm-6 col-md-3">
                 <div class="mb-3">
                     <label class="form-label">Postal Code</label>
-                    <input type="number" class="form-control @error('post_code') is-invalid @enderror" value="{{$user_meta['post_code']}}" name="post_code">
+                    <input type="number" class="form-control @error('post_code') is-invalid @enderror" value="{{$user_meta['post_code']}}" name="post_code" placeholder="Enter your postal code.">
                     @error('post_code')
                         <p class="invalid-feedback">{{$errors->first('post_code')}}</p>
                     @enderror

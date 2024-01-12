@@ -39,7 +39,7 @@ class EditProfileController extends Controller
         $req->validate([
             'profile_picture'=> 'image|mimes:jpeg,jpg,png'
         ],[
-            'profile_picture.mimes' => 'The profile picture field must be a file of type: jpeg, jpg, png.'
+            'profile_picture.mimes' => 'The profile picture must be a file of type: jpeg, jpg, png.'
         ]);
         $user = Auth::user();
         if($req->hasFile('profile_picture')){
@@ -65,10 +65,10 @@ class EditProfileController extends Controller
 
     public function update_user_meta(Request $req){
         $req->validate([
-            'fullname'=> 'required|string|min:3|max:100',
+            'fullname'=> 'string|min:3|max:100',
             'phone'=> 'min:10',
-            'address'=> 'required|max:100',
-            'city'=> 'required|max:50',
+            'address'=> 'max:100',
+            'city'=> 'max:50',
             'post_code'=> 'min:4|max:6'
         ]);
 

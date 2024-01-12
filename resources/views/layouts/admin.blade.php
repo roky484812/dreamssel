@@ -199,16 +199,15 @@
                                             <a href="javascript:void(0)" class="nav-link icon leading-none"
                                                 data-bs-toggle="dropdown">
                                                 <span>
-                                                    <img src="{{asset('assets/admin//images/users/16.jpg')}}" alt="img"
+                                                    <img src="{{asset($user->profile_picture)}}" alt="img"
                                                         class="avatar avatar-md brround">
                                                 </span>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow animated">
                                                 <div class="text-center">
                                                     <a href="javascript:void(0)"
-                                                        class="dropdown-item text-center user pb-0 font-weight-bold">John
-                                                        Thomson</a>
-                                                    <span class="text-center user-semi-title">App Developer</span>
+                                                        class="dropdown-item text-center user pb-0 font-weight-bold">{{$user->name}}</a>
+                                                    <span class="text-center user-semi-title text-capitalize">{{$user->role_name}}</span>
                                                     <div class="dropdown-divider"></div>
                                                 </div>
                                                 <a class="dropdown-item d-flex" href="{{route('admin.profile')}}">
@@ -277,7 +276,7 @@
                             <div class="dropdown user-pro-body text-center">
                                 <div class="user-pic">
                                     <img alt="user-img" class="avatar avatar-xl brround mb-1"
-                                        src="{{asset('assets/admin//images/users/16.jpg')}}">
+                                        src="{{asset($user->profile_picture)}}">
                                 </div>
                                 <div class="user-info text-center">
                                     <h5 class=" mb-1 font-weight-bold">{{$user->name}}</h5>
