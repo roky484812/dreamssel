@@ -9,7 +9,8 @@
             <div class="col-12">
                 <div class="mb-3">
                     <label class="form-label">Email address</label>
-                    <input type="email" class="form-control" value="{{$user->email}}">
+                    <input type="email" class="form-control" name="email" value="{{$user->email}}">
+                    <div id="emailError" class="text-danger"></div>
                 </div>
             </div>
         </div>
@@ -18,3 +19,4 @@
         <button class="btn btn-primary" type="submit">Send OTP</button>
     </div>
 </form>
+@include('admin.widgets.profile.update_email_modal')

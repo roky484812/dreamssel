@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UpdateEmail;
 use App\Models\profile_meta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Exception;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -122,9 +126,34 @@ class EditProfileController extends Controller
         }
     }
 
-    public function send_otp(){
+    public function generateOpt(){
         $otp = rand(100000, 999999);
         return $otp;
+    }
+    public function send_otp(Request $req){
+        $validator = Validator::make($req->all(), [
+            'email'=> 'required|email|unique:users,email|email:rfc,dns'
+        ]);
+        $data= [];
+        $data['email'] = $req->input('email');
+        $data['otp'] = $this->generateOpt();
+        $data['subject'] = 'Update Email OTP';
+        if($validator->fails()){
+            return response()->json(['errors'=>$validator->errors()], 422);
+        }
+        try{
+            Mail::to($req->input('email'))->send(new UpdateEmail($data));
+            $user_id = Auth::user()->id;
+            User::whereId($user_id)->update([
+                'remember_token'=> $data['otp']
+            ]);
+            return response()->json([
+                'status'=> true,
+                'message'=> 'OTP sent to '.$req->input('email').' successfuly.'
+            ]);
+        }catch(Exception $e){
+            return response()->json(['stauts'=> false, 'errors'=> $e], 422);
+        }
     }
 
     

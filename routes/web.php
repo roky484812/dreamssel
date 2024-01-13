@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Dashboard as AdminDashboard;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Distributor\Dashboard as DistDashboard;
 use App\Http\Controllers\Editor\Dashboard as EditorDashboard;
@@ -40,6 +42,13 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     Route::controller(AdminController::class)->group(function(){
         Route::get('/profile', 'profile')->name('admin.profile');
         Route::get('/profile/update', 'edit_profile')->name('admin.profile.edit');
+    });
+    Route::controller(UserListController::class)->group(function(){
+        Route::get('/user', 'userList')->name('admin.userlist');
+    });
+    Route::controller(ProductController::class)->group(function(){
+        Route::get('/product', 'ProductPage')->name('admin.productManagement');
+        Route::get('/product/add', 'AddProductPage')->name('admin.product.add');
     });
 });
 Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){

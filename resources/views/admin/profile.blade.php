@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['title'=> 'Profile'])
+@extends('layouts.admin', ['title'=> 'Profile', 'active'=> ''])
 @section('content')
     <div class="app-content main-content">
         <div class="side-app">
