@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\DistributorSignup;
+use App\Models\profile_meta;
 use App\Models\Temp_user;
 use App\Models\User;
 use Exception;
@@ -171,11 +172,12 @@ class AuthController extends Controller
             'password'=> 'required'
         ]);
         $user = Auth::user();
-        if(!Hash::check($req->input('current_password'), $user->password)){
+        if(!Hash::check($req->input('password'), $user->password)){
             return redirect()->back()->with('error', 'Password Does not matched.');
         }
         Auth::logout();
         User::whereId($user->id)->delete();
+        profile_meta::where('user_id', $user->id)->delete();
         return redirect('/login');
     }
 
