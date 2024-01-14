@@ -115,7 +115,7 @@
                     // Make the AJAX request
                     button.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Loading...');
                     $.ajax({
-                        url: "{{ route('admin.update_email') }}",
+                        url: "{{ route('admin.update_email.otp') }}",
                         type: 'POST',
                         dataType: 'json',
                         data: formData,
@@ -123,9 +123,11 @@
                             'X-CSRF-TOKEN': csrfToken
                         },
                         success: function(response) {
+                            console.log(response.email);
                             if(response.status){
                                 $('#update_email_message').html(response.message)
                                 $('#myModal').modal('show');
+                                $('#otp_email').attr('value', response.email);
                             }
                             emailError.html('');
                         },

@@ -24,11 +24,6 @@ class EditProfileController extends Controller
             'current_password.regex' => 'The current password field cannot contain spaces.',
             'new_password.regex' => 'The new password field cannot contain spaces.'
         ]);
-        // $valiator = Validator::make($req->all(), $roles);
-        // if($valiator->fails()){
-        //     return back()->withErrors($valiator);
-        // }
-
         $user = Auth::user();
         if(!Hash::check($req->input('current_password'), $user->password)){
             return back()->with('error', 'Current password is incorrect');
@@ -134,7 +129,7 @@ class EditProfileController extends Controller
         $validator = Validator::make($req->all(), [
             'email'=> 'required|email|unique:users,email|email:rfc,dns'
         ]);
-        $data= [];
+        $data = [];
         $data['email'] = $req->input('email');
         $data['otp'] = $this->generateOpt();
         $data['subject'] = 'Update Email OTP';
@@ -149,12 +144,27 @@ class EditProfileController extends Controller
             ]);
             return response()->json([
                 'status'=> true,
-                'message'=> 'OTP sent to '.$req->input('email').' successfuly.'
+                'message'=> 'OTP sent to '.$req->input('email').' successfuly.',
+                'email'=> $data['email']
             ]);
         }catch(Exception $e){
-            return response()->json(['stauts'=> false, 'errors'=> $e], 422);
+            return response()->json([
+                'status'=> false,
+                'message'=> 'Something went wrong.',
+                'errors'=> $e
+            ], 500);
         }
     }
-
-    
+    public function update_email(Request $req){
+        $req->validate([
+            'otp'=> 'required',
+            'email'=> 'required|email|unique:users,email|email:rfc,dns'
+        ]);
+        if($req->input('otp') == auth()->user()->remember_token){
+            User::whereId(Auth::user()->id)->update(['email'=> $req->input('email')]);
+            return redirect()->back()->with('success', 'Email Updated successfuly.');
+        }else{
+            return redirect()->back()->with('error', 'OTP did not matched.');
+        }
+    }
 }
