@@ -34,7 +34,7 @@
                                 <div class="card-body pb-2">
                                     <div class="row">
                                         <div class="col mb-4">
-                                            <a href="add-user.html" class="btn btn-primary"><i
+                                            <a href="{{route('admin.adduserView')}}" class="btn btn-primary"><i
                                                     class="fe fe-plus"></i> Add New User</a>
                                         </div>
                                         <div class="col col-auto mb-4">
