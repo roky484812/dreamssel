@@ -47,6 +47,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     Route::controller(UserListController::class)->group(function(){
         Route::get('/user', 'userList')->name('admin.userlist');
         Route::get('/user/add', 'addUserView')->name('admin.adduserView');
+        Route::post('user/add', 'addUser')->name('admin.adduser');
     });
     Route::controller(ProductController::class)->group(function(){
         Route::get('/product', 'ProductPage')->name('admin.productManagement');
