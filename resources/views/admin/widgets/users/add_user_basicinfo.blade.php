@@ -45,7 +45,7 @@
             <div class="col-sm-6 col-md-6">
                 <div class="mb-3">
                     <label class="form-label" for="password">Password</label>
-                    <input type="text" class="form-control  @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required>
+                    <input type="password" class="form-control  @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required>
                     @error('password')
                         <p class="invalid-feedback">{{$errors->first('password')}}</p>
                     @enderror
@@ -54,13 +54,12 @@
             <div class="col-sm-6 col-md-6">
                 <div class="mb-3">
                     <label class="form-label" for="c_password">Confirm Password</label>
-                    <input type="text" class="form-control  @error('password_confirmation') is-invalid @enderror" id="c_password" name="password_confirmation" placeholder="Confirm Password" required>
+                    <input type="password" class="form-control  @error('password_confirmation') is-invalid @enderror" id="c_password" name="password_confirmation" placeholder="Confirm Password" required>
                     @error('password_confirmation')
                         <p class="invalid-feedback">{{$errors->first('password_confirmation')}}</p>
                     @enderror
                 </div>
             </div>
-            
             <div class="col-md-12">
                 <div class="mb-3">
                     <label class="form-label" for="address">Address</label>
@@ -92,15 +91,15 @@
                 <div class="mb-3">
                     <label class="form-label" for="role">Role</label>
                     <select class="form-control nice-select select2 select2-hidden-accessible @error('role') is-invalid @enderror" tabindex="-1" name="role" id="role" aria-hidden="true">
-                        <option data-select2-id="5" selected disabled>-- Select User Role --</option>
-                        <option value="1">Distributor</option>
+                        <option value="3" selected>Distributor</option>
                         <option value="2">Editor</option>
-                        <option value="3">Admin</option>
                     </select>
+                    @error('role')
+                        <p class="invalid-feedback">
+                           {{ $message }}
+                        </p>
+                    @enderror
                 </div>
-                @error('role')
-                    <p class="invalid-feedback">{{$errors->first('role')}}</p>
-                @enderror
             </div>
         </div>
     </div>
