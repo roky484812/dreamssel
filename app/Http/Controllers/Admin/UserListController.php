@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class UserListController extends Controller
 {
     public function userList(){
-        $users = User::select('users.id', 'users.name', 'users.username', 'users.email', 'users.profile_picture', 'user_roles.role as role_name')
+        $users = User::select('users.id', 'users.name', 'users.username', 'users.email', 'users.profile_picture', 'users.is_active', 'user_roles.role as role_name')
         ->leftJoin('user_roles', 'user_roles.id', 'users.role')
         ->where('users.role', '!=', '1')
         ->with('profileMeta') // Eager load the profileMeta relationship
@@ -36,6 +36,20 @@ class UserListController extends Controller
     public function addUserView(){
         return view('admin.add_user');
     }
+
+    public function user_status(Request $req){
+        $req->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $user = User::findOrFail($req->input('user_id'));
+        User::whereId($user->id)->update(['is_active' => !$user->is_active]);
+    
+        $message = $user->is_active ? 'User Activated Successfully.' : 'User Blocked Successfully.';
+    
+        return redirect()->back()->with('success', $message);
+    }
+
     public function addUser(Request $req){
         $req->validate([
             'fullname'=> 'max:100',
