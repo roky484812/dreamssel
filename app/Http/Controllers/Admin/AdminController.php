@@ -40,3 +40,4 @@ class AdminController extends Controller
         return view('admin.editprofile', ['user_meta'=> $user_meta]);
     }
 }
+

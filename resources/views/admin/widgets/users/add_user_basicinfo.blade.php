@@ -69,7 +69,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4">
+            <div class="col-sm-4 col-md-3">
                 <div class="mb-3">
                     <label class="form-label" for="city">City</label>
                     <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" placeholder="City">
@@ -78,7 +78,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4">
+            <div class="col-sm-4 col-md-3">
                 <div class="mb-3">
                     <label class="form-label" for="post_code">Postal Code</label>
                     <input type="number" class="form-control @error('post_code') is-invalid @enderror" id="post_code" name="post_code" placeholder="00000">
@@ -87,7 +87,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4">
+            <div class="col-sm-4 col-md-3">
                 <div class="mb-3">
                     <label class="form-label" for="role">Role</label>
                     <select class="form-control nice-select select2 select2-hidden-accessible @error('role') is-invalid @enderror" tabindex="-1" name="role" id="role" aria-hidden="true">
@@ -95,6 +95,20 @@
                         <option value="2">Editor</option>
                     </select>
                     @error('role')
+                        <p class="invalid-feedback">
+                           {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="mb-3">
+                    <label class="form-label" for="status">Status</label>
+                    <select class="form-control nice-select select2 select2-hidden-accessible @error('is_active') is-invalid @enderror" tabindex="-1" name="is_active" id="status" aria-hidden="true">
+                        <option value="1" selected>Active</option>
+                        <option value="2">Block</option>
+                    </select>
+                    @error('is_active')
                         <p class="invalid-feedback">
                            {{ $message }}
                         </p>

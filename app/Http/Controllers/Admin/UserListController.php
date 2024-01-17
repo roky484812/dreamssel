@@ -11,7 +11,27 @@ use Illuminate\Support\Facades\Hash;
 class UserListController extends Controller
 {
     public function userList(){
-        return view('admin.userList');
+        $users = User::select('users.id', 'users.name', 'users.username', 'users.email', 'users.profile_picture', 'user_roles.role as role_name')
+        ->leftJoin('user_roles', 'user_roles.id', 'users.role')
+        ->where('users.role', '!=', '1')
+        ->with('profileMeta') // Eager load the profileMeta relationship
+        ->get();
+        
+        $users = $users->map(function ($user) {
+            $userMeta = $user->profileMeta->pluck('value', 'key')->toArray();
+            
+            $keys = ['phone', 'address', 'city', 'post_code'];
+        
+            // Ensure every key exists and set value to empty string if not present
+            foreach ($keys as $key) {
+                $user->setAttribute('user_meta.' . $key, $userMeta[$key] ?? '');
+            }
+            unset($user->profileMeta);
+            return $user;
+        });
+    
+        // return $users;
+        return view('admin.userList', ['users_data'=> $users]);
     }
     public function addUserView(){
         return view('admin.add_user');
@@ -27,6 +47,7 @@ class UserListController extends Controller
             'address'=> 'max:100',
             'city'=> 'max:50',
             'post_code'=> 'max:6',
+            'is_active'=> 'in:0,1'
         ], [
             'password.regex'=> 'The current password field cannot contain spaces.',
             'role.in' => 'The selected role is invalid.'
@@ -38,6 +59,7 @@ class UserListController extends Controller
             $user->email = $req->input('email');
             $user->password = Hash::make($req->input('password'));
             $user->role = $req->input('role');
+            $user->is_active = $req->input('is_active');
             $save_user = $user->save();
             $user_id = $user->id;
             if($save_user){
