@@ -49,6 +49,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::get('/user/add', 'addUserView')->name('admin.adduserView');
         Route::post('/user/add', 'addUser')->name('admin.adduser');
         Route::get('/user/status', 'user_status')->name('admin.user.status');
+        Route::get('/user/delete', 'user_delete')->name('admin.user.delete');
     });
     Route::controller(ProductController::class)->group(function(){
         Route::get('/product', 'ProductPage')->name('admin.productManagement');

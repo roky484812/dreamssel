@@ -42,13 +42,26 @@ class UserListController extends Controller
             'user_id' => 'required|exists:users,id',
         ]);
 
-        $user = User::findOrFail($req->input('user_id'));
-        $update = User::whereId($user->id)->update(['is_active' => !$user->is_active]);
-        if($update){
+        $user = User::whereId($req->input('user_id'))->first();
+        $update_user = User::whereId($user->id)->update(['is_active' => !$user->is_active]);
+        if($update_user){
             $message = !$user->is_active ? 'User Activated Successfully.' : 'User Blocked Successfully.';
             return redirect()->back()->with('success', $message);
         }else{
             return redirect()->back()->with('error', "Can't update user status.");
+        }
+    }
+
+    public function user_delete(Request $req){
+        $req->validate([
+            'user_id' => 'required|exists:users,id'
+        ]);
+
+        $delete_user = User::whereId($req->input('user_id'))->delete();
+        if($delete_user){
+            return redirect()->back()->with('success', 'An user delete successfully.');
+        }else{
+            return redirect()->back()->with('error', "Can't delete user right now.");
         }
     }
 
