@@ -155,13 +155,11 @@
 
     @if (Session::has('success'))
         <script>
-            console.log();
             window.onload = successAlert;
         </script>
     @endif
     @if (Session::has('error'))
         <script>
-            console.log();
             window.onload = errorAlert;
         </script>
     @endif
