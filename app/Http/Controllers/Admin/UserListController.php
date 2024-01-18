@@ -43,11 +43,13 @@ class UserListController extends Controller
         ]);
 
         $user = User::findOrFail($req->input('user_id'));
-        User::whereId($user->id)->update(['is_active' => !$user->is_active]);
-    
-        $message = !$user->is_active ? 'User Activated Successfully.' : 'User Blocked Successfully.';
-    
-        return redirect()->back()->with('success', $message);
+        $update = User::whereId($user->id)->update(['is_active' => !$user->is_active]);
+        if($update){
+            $message = !$user->is_active ? 'User Activated Successfully.' : 'User Blocked Successfully.';
+            return redirect()->back()->with('success', $message);
+        }else{
+            return redirect()->back()->with('error', "Can't update user status.");
+        }
     }
 
     public function addUser(Request $req){

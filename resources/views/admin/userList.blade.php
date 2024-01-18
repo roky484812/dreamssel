@@ -148,12 +148,21 @@
         function successAlert(message) {
             swal('Saved!', '{{Session::get('success')}}', 'success');
         };
+        function errorAlert(message) {
+            swal('Error!', '{{Session::get('success')}}', 'error');
+        };
     </script>
 
     @if (Session::has('success'))
         <script>
             console.log();
             window.onload = successAlert;
+        </script>
+    @endif
+    @if (Session::has('error'))
+        <script>
+            console.log();
+            window.onload = errorAlert;
         </script>
     @endif
 @endsection
