@@ -124,9 +124,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-footer">
-
-                                                        <a href="profile-2.html"
-                                                            class="btn btn-primary btn-sm">View Profile</a>
+                                                        <a href="profile-2.html" class="btn btn-primary btn-sm">View Profile</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,4 +141,19 @@
         </div>
     </div>
 </div>
+@endsection
+@section('custom_js')
+    <script src="{{asset('assets/admin/plugins/sweet-alert/sweetalert.min.js')}}"></script>
+    <script>
+        function successAlert(message) {
+            swal('Saved!', '{{Session::get('success')}}', 'success');
+        };
+    </script>
+
+    @if (Session::has('success'))
+        <script>
+            console.log();
+            window.onload = successAlert;
+        </script>
+    @endif
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['title'=> 'Edit Profile', 'active'=> '']);
+s@extends('layouts.admin', ['title'=> 'Edit Profile', 'active'=> '']);
 
 @section('content')
     <div class="app-content main-content">
@@ -66,90 +66,63 @@
             swal('Error!', '{{Session::get('error')}}', 'error');
         };
         
-        </script>
+    </script>
 
-        @if (Session::has('error'))
-            <script>
-                window.onload = errorAlert;
-            </script>
-        @endif
-        @if (Session::has('success'))
-            <script>
-                window.onload = successAlert;
-            </script>
-        @endif
+    @if (Session::has('error'))
         <script>
-            // function send_otp(event){
-            //     event.preventDefault();
-            //     let button = $(event.target).find('button[type="submit"]');
-            //     console.log(button);
-            //     $.ajax({
-            //         url: {{route('admin.update_email')}},
-            //         type: 'POST',
-            //         // data: $(this).serialize(),
-            //         // success: function(response) {
-            //         //     // Handle the response as needed
-            //         //     console.log('Response:', response);
-            //         // },
-            //         // error: function(error) {
-            //         //     // Handle errors
-            //         //     console.error('Error:', error);
-            //         // },
-            //         // complete: function() {
-            //         //     // Remove the class after the AJAX request is complete
-            //         //     $submitButton.removeClass('btn-sending');
-            //         // }
-            //     });
-            // }
+            window.onload = errorAlert;
+        </script>
+    @endif
+    @if (Session::has('success'))
+        <script>
+            window.onload = successAlert;
+        </script>
+    @endif
 
-            $(document).ready(function() {
-                $('#updateEmailForm').submit(function(event) {
-                    let button = $(event.target).find('button[type="submit"]');
-                    console.log('Sending OTP...');
-                    event.preventDefault();
-                    let emailError = $(this).find('#emailError');
-                    // Get the CSRF token from the meta tag
-                    let csrfToken = $('meta[name="csrf-token"]').attr('content');
-                    //form data
-                    let formData = $(this).serialize();
-                    // Make the AJAX request
-                    button.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Loading...');
-                    $.ajax({
-                        url: "{{ route('admin.update_email.otp') }}",
-                        type: 'POST',
-                        dataType: 'json',
-                        data: formData,
-                        headers: {
-                            'X-CSRF-TOKEN': csrfToken
-                        },
-                        success: function(response) {
-                            console.log(response.email);
-                            if(response.status){
-                                $('#update_email_message').html(response.message)
-                                $('#myModal').modal('show');
-                                $('#otp_email').attr('value', response.email);
-                            }
-                            emailError.html('');
-                        },
-                        error: function(error) {
-                            if (error.responseJSON && error.responseJSON.errors) {
-                                // Display email validation error
-                                if (error.responseJSON.errors.email) {
-                                    console.error('Error:', error);
-                                    emailError.html(error.responseJSON.errors.email[0]);
-                                }
-                            }
-                        },
-                        complete: function() {
-                            button.prop('disabled', false).html('Submit');
+    <script>
+        $(document).ready(function() {
+            $('#updateEmailForm').submit(function(event) {
+                let button = $(event.target).find('button[type="submit"]');
+                console.log('Sending OTP...');
+                event.preventDefault();
+                let emailError = $(this).find('#emailError');
+                // Get the CSRF token from the meta tag
+                let csrfToken = $('meta[name="csrf-token"]').attr('content');
+                //form data
+                let formData = $(this).serialize();
+                // Make the AJAX request
+                button.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Loading...');
+                $.ajax({
+                    url: "{{ route('admin.update_email.otp') }}",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                        console.log(response.email);
+                        if(response.status){
+                            $('#update_email_message').html(response.message)
+                            $('#myModal').modal('show');
+                            $('#otp_email').attr('value', response.email);
                         }
-                    });
+                        emailError.html('');
+                    },
+                    error: function(error) {
+                        if (error.responseJSON && error.responseJSON.errors) {
+                            // Display email validation error
+                            if (error.responseJSON.errors.email) {
+                                console.error('Error:', error);
+                                emailError.html(error.responseJSON.errors.email[0]);
+                            }
+                        }
+                    },
+                    complete: function() {
+                        button.prop('disabled', false).html('Submit');
+                    }
                 });
             });
-
-            // $(document).ready(function() {
-            //     console.log('hello world');
-            // });
-
-        </script>
+        });
+    </script>
 @endsection

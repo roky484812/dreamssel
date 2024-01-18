@@ -45,7 +45,7 @@ class UserListController extends Controller
         $user = User::findOrFail($req->input('user_id'));
         User::whereId($user->id)->update(['is_active' => !$user->is_active]);
     
-        $message = $user->is_active ? 'User Activated Successfully.' : 'User Blocked Successfully.';
+        $message = !$user->is_active ? 'User Activated Successfully.' : 'User Blocked Successfully.';
     
         return redirect()->back()->with('success', $message);
     }
