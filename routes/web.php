@@ -57,7 +57,8 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     });
     Route::controller(AnnouncementController::class)->group(function(){
         Route::get('/announcement', 'announcementList')->name('admin.announcement.list');
-
+        Route::get('/announcement/add', 'add_announcement_view')->name('admin.announcement.addview');
+        Route::post('/announcement/add', 'add_announcement')->name('admin.announcement.add');
     });
     Route::controller(ProductController::class)->group(function(){
         Route::get('/product', 'ProductPage')->name('admin.productManagement');

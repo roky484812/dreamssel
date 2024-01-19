@@ -33,7 +33,7 @@
     <link href="{{asset('assets/admin/plugins/web-fonts/icons.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/admin/plugins/web-fonts/font-awesome/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/admin/plugins/web-fonts/plugin.css')}}" rel="stylesheet" />
-
+    @yield('custom_css')
 </head>
 
 <body class="main-body app sidebar-mini light-mode ltr">

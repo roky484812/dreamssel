@@ -30,7 +30,7 @@
                             <div class="card-body pb-2">
                                 <div class="row">
                                     <div class="col mb-4">
-                                        <a href="http://localhost:8000/admin/user/add" class="btn btn-primary">
+                                        <a href="{{route('admin.announcement.addview')}}" class="btn btn-primary">
                                             <i class="fe fe-plus"></i>
                                             Post new announcement
                                         </a>
