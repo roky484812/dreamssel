@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\Dashboard as AdminDashboard;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserListController;
@@ -53,6 +54,10 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::put('/user/update', 'updateUser')->name('admin.user.update');
         Route::get('/user/status', 'user_status')->name('admin.user.status');
         Route::get('/user/delete', 'user_delete')->name('admin.user.delete');
+    });
+    Route::controller(AnnouncementController::class)->group(function(){
+        Route::get('/announcement', 'announcementList')->name('admin.announcement.list');
+
     });
     Route::controller(ProductController::class)->group(function(){
         Route::get('/product', 'ProductPage')->name('admin.productManagement');

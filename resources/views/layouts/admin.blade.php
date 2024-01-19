@@ -322,31 +322,31 @@
 
                             <li class="slide">
                                 <a class="side-menu__item @if ($active=='product') active @endif" data-bs-toggle="slide" href="{{route('admin.productManagement')}}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="side-menu__icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="side-menu__icon">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                     </svg>
-                                    <span class="side-menu__label">Product Management</span></a>
-
+                                    <span class="side-menu__label">Product Management</span>
+                                </a>
                             </li>
 
-
-
-
-
-
-
+                            <li class="slide">
+                                <a class="side-menu__item @if ($active=='announcement') active @endif" data-bs-toggle="slide" href="{{route('admin.announcement.list')}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="side-menu__icon">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                    <span class="side-menu__label">Announcement</span>
+                                </a>
+                            </li>
 
                         </ul>
                         <div class="app-sidebar-help">
                             <div class="dropdown text-center">
                                 <div class="help d-flex">
-                                    <a href="javascript:void(0)" class="nav-link p-0 help-dropdown"
-                                        data-bs-toggle="dropdown">
-                                        <span class="font-weight-bold">Help Info</span> <i
-                                            class="fa fa-angle-down ms-2"></i>
+                                    <a href="javascript:void(0)" class="nav-link p-0 help-dropdown" data-bs-toggle="dropdown">
+                                        <span class="font-weight-bold">Help Info</span>
+                                        <i class="fa fa-angle-down ms-2"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow p-4">
                                         <div class="sidebar-dropdown-divider pb-3">
