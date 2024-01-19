@@ -112,7 +112,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-footer">
-                                                        <a href="profile-2.html" class="btn btn-primary btn-sm">View Profile</a>
+                                                        <a href="{{route('admin.user.view', ['user_id'=>$user_data['id']])}}" class="btn btn-primary btn-sm">View Profile</a>
                                                     </div>
                                                 </div>
                                             </div>

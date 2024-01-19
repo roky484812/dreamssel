@@ -33,11 +33,8 @@ class UserListController extends Controller
         // return $users;
         return view('admin.userList', ['users_data'=> $users]);
     }
-    public function addUserView(){
-        return view('admin.add_user');
-    }
 
-    public function updateUserView($user_id){
+    static function single_user($user_id){
         $user = User::select('users.*', 'user_roles.role as role_name')
         ->leftJoin('user_roles', 'user_roles.id', 'users.role')
         ->where('users.id', $user_id)
@@ -51,7 +48,20 @@ class UserListController extends Controller
             $user->setAttribute('user_meta.' . $key, $user_meta[$key] ?? '');
         }
         unset($user->profileMeta);
-        
+        return $user;
+    }
+
+    public function addUserView(){
+        return view('admin.add_user');
+    }
+
+    public function viewUser($user_id){
+        $user = $this->single_user($user_id);
+        return view('admin.user_view', ['user_data'=> $user]);
+    }
+
+    public function updateUserView($user_id){
+        $user = $this->single_user($user_id);
         return view('admin.edit_user', ['user_data'=> $user]);
     }
 

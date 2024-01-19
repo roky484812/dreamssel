@@ -49,6 +49,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::get('/user/add', 'addUserView')->name('admin.adduserView');
         Route::post('/user/add', 'addUser')->name('admin.adduser');
         Route::get('/user/update/{user_id}', 'updateUserView')->name('admin.updateuserView');
+        Route::get('/user/{user_id}', 'viewUser')->name('admin.user.view');
         Route::put('/user/update', 'updateUser')->name('admin.user.update');
         Route::get('/user/status', 'user_status')->name('admin.user.status');
         Route::get('/user/delete', 'user_delete')->name('admin.user.delete');
