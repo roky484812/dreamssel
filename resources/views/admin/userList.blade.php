@@ -118,6 +118,7 @@
                                             </div>
                                         @endforeach
                                     </div>
+                                    {{$users_data->links()}}
                                 </div>
                             </div>
                         </div>
@@ -137,7 +138,7 @@
             swal('Saved!', '{{Session::get('success')}}', 'success');
         };
         function errorAlert(message) {
-            swal('Error!', '{{Session::get('success')}}', 'error');
+            swal('Error!', '{{Session::get('error')}}', 'error');
         };
     </script>
 

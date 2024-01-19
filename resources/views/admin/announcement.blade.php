@@ -44,14 +44,18 @@
                                                     <div class="col-md-6 p-2">
                                                         <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start active">
                                                             <div class="d-flex w-100 justify-content-between">
-                                                                <h5 class="mb-4">{{$announcement['title']}}</h5>
-                                                                <small>3 days ago</small>
+                                                                <h5 class="mb-4">{{ $announcement['title'] }}</h5>
+                                                                <small>{{ \Carbon\Carbon::createFromDate($announcement['created_at'])->diffForHumans() }}</small>
                                                             </div>
                                                             <div class="d-flex w-100 justify-content-between">
-                                                                <p class="mb-1">{{$announcement['short_description']}}</p>
+                                                                <p class="mb-1">{{ $announcement['short_description'] }}</p>
                                                                 <div class="text-right">
-                                                                    <button class="btn text-warning border btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                                                    <button class="btn text-danger border btn-sm m-1"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                    <form action="">
+                                                                        <button class="btn text-warning border btn-sm m-1" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                                                    </form>
+                                                                    <form action="">
+                                                                        <button class="btn text-danger border btn-sm m-1" href="#"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </a>
@@ -60,6 +64,7 @@
                                                 
                                             </div>
                                         </div>
+                                            {{$announcements->links()}}
                                     </div>
                                 </div>
                             </div>

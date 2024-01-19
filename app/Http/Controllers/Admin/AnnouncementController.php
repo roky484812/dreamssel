@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AnnouncementController extends Controller
 {
     public function announcementList(){
-        $announcements = Announcement::get();
+        $announcements = Announcement::paginate(10);
         return view('admin.announcement', ['announcements'=> $announcements]);
     }
     public function add_announcement_view(){
@@ -30,5 +31,12 @@ class AnnouncementController extends Controller
         }else{
             return redirect()->back()->with('error', "Can't post new announcement. Something went wrong.");
         }
+    }
+    
+    public function delete_announcement(Request $req){
+        $req->validate([
+            'announcement_id'=> $req->input('announcement_id')
+        ]);
+        
     }
 }
