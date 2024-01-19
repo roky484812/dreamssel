@@ -37,6 +37,94 @@ class UserListController extends Controller
         return view('admin.add_user');
     }
 
+    public function updateUserView($user_id){
+        $user = User::select('users.*', 'user_roles.role as role_name')
+        ->leftJoin('user_roles', 'user_roles.id', 'users.role')
+        ->where('users.id', $user_id)
+        ->with('profileMeta')
+        ->first();
+        
+        $user_meta = $user->profileMeta->pluck('value', 'key')->toArray();
+        $keys = ['phone', 'address', 'city', 'post_code'];
+        // Ensure every key exists and set value to empty string if not present
+        foreach ($keys as $key) {
+            $user->setAttribute('user_meta.' . $key, $user_meta[$key] ?? '');
+        }
+        unset($user->profileMeta);
+        
+        return view('admin.edit_user', ['user_data'=> $user]);
+    }
+
+    public function updateUser(Request $req){
+        $req->validate([
+            'user_id'=> 'required',
+            'fullname'=> 'max:100',
+            'email'=> 'required|email|email:rfc,dns|unique:users,email,'.$req->user_id,
+            'password'=> 'nullable|regex:/^[^\s]+$/|min:5|max:32|confirmed',
+            'role' => 'in:2,3',
+            'phone'=> 'nullable|max:15',
+            'address'=> 'nullable|max:100',
+            'city'=> 'nullable|max:50',
+            'post_code'=> 'nullable|max:6',
+            'is_active'=> 'in:0,1'
+        ], [
+            'password.regex'=> 'The current password field cannot contain spaces.'
+        ]);
+        try {
+            $user_id = $req->user_id;
+            $pass = [];
+            if($req->input('password')){
+                $pass['password'] = Hash::make($req->input('password'));
+            }
+            
+            User::whereId($user_id)->update(array_merge([
+                'name'=> $req->input('fullname'),
+                'email'=> $req->input('email'),
+                'role'=> $req->input('role'),
+                'is_active'=> $req->input('is_active')
+            ], $pass));
+
+            profile_meta::updateOrCreate(
+                [
+                    'user_id'=> $user_id,
+                    'key'=> 'phone'
+                ],[
+                    'value'=> $req->input('phone')
+                ]
+            );
+
+            profile_meta::updateOrCreate(
+                [
+                    'user_id'=> $user_id,
+                    'key'=> 'address'
+                ],[
+                    'value'=> $req->input('address')
+                ]
+            );
+
+            profile_meta::updateOrCreate(
+                [
+                    'user_id'=> $user_id,
+                    'key'=> 'city'
+                ],[
+                    'value'=> $req->input('city')
+                ]
+            );
+
+            profile_meta::updateOrCreate(
+                [
+                    'user_id'=> $user_id,
+                    'key'=> 'post_code'
+                ],[
+                    'value'=> $req->input('post_code')
+                ]
+            );
+            return redirect()->route('admin.userlist')->with('success', 'User updated successfully.');
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.userlist')->with('error', "Can't update user. Something went wrong.");
+        }
+    }
+
     public function user_status(Request $req){
         $req->validate([
             'user_id' => 'required|exists:users,id',

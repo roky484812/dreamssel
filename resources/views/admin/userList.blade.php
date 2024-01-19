@@ -65,9 +65,10 @@
                                                                 <a href="javascript:void(0)" class="option-dots" data-bs-toggle="dropdown" aria-expanded="false">
                                                                     <i class="fa fa-ellipsis-v"></i></a>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="editprofile.html">
+                                                                    <a class="dropdown-item" href="{{route('admin.updateuserView', ['user_id'=>$user_data['id']])}}">
                                                                         <i class="fe fe-edit me-2"></i>
-                                                                        Edit</a>
+                                                                        Edit
+                                                                    </a>
                                                                     <a class="dropdown-item" href="{{route('admin.user.status', ['user_id' => $user_data['id']])}}">
                                                                         @if ($user_data['is_active'])
                                                                             <i class="fa fa-lock me-2" aria-hidden="true"></i>
@@ -77,8 +78,7 @@
                                                                             Unblock
                                                                         @endif
                                                                     </a>
-                                                                    <a class="dropdown-item"
-                                                                        href="{{route('admin.user.delete', ['user_id'=> $user_data['id']])}}">
+                                                                    <a class="dropdown-item" href="{{route('admin.user.delete', ['user_id'=> $user_data['id']])}}">
                                                                         <i class="fe fe-trash me-2"></i>
                                                                         Delete
                                                                     </a>
