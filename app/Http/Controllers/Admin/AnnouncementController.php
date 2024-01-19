@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class AnnouncementController extends Controller
 {
     public function announcementList(){
-        return view('admin.announcement');
+        $announcements = Announcement::get();
+        return view('admin.announcement', ['announcements'=> $announcements]);
     }
     public function add_announcement_view(){
         return view('admin.add_announcement');

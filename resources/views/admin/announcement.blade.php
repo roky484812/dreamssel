@@ -40,21 +40,23 @@
                                     <div class="col-xl-12 col-lg-12">
                                         <div class="list-group">
                                             <div class="row">
-                                                <div class="col-md-6 p-2">
-                                                    <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start active">
-                                                        <div class="d-flex w-100 justify-content-between">
-                                                            <h5 class="mb-4">List group item heading</h5>
-                                                            <small>3 days ago</small>
-                                                        </div>
-                                                        <div class="d-flex w-100 justify-content-between">
-                                                            <p class="mb-1"> quos quod, non exercitationem voluptate vitae repellat laboriosam sint voluptatibus, facilis in, doloribus temporibus.</p>
-                                                            <div class="text-right">
-                                                                <button class="btn text-warning border btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                                                <button class="btn text-danger border btn-sm m-1"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                @foreach ($announcements as $announcement)
+                                                    <div class="col-md-6 p-2">
+                                                        <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start active">
+                                                            <div class="d-flex w-100 justify-content-between">
+                                                                <h5 class="mb-4">{{$announcement['title']}}</h5>
+                                                                <small>3 days ago</small>
                                                             </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
+                                                            <div class="d-flex w-100 justify-content-between">
+                                                                <p class="mb-1">{{$announcement['short_description']}}</p>
+                                                                <div class="text-right">
+                                                                    <button class="btn text-warning border btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                                                    <button class="btn text-danger border btn-sm m-1"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                @endforeach
                                                 
                                             </div>
                                         </div>
