@@ -50,7 +50,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::get('/user/add', 'addUserView')->name('admin.adduserView');
         Route::post('/user/add', 'addUser')->name('admin.adduser');
         Route::get('/user/update/{user_id}', 'updateUserView')->name('admin.updateuserView');
-        Route::get('/user/{user_id}', 'viewUser')->name('admin.user.view');
+        Route::get('/user/view/{user_id}', 'viewUser')->name('admin.user.view');
         Route::put('/user/update', 'updateUser')->name('admin.user.update');
         Route::get('/user/status/{user_id}', 'user_status')->name('admin.user.status');
         Route::get('/user/delete/{user_id}', 'user_delete')->name('admin.user.delete');
@@ -59,6 +59,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::get('/announcement', 'announcementList')->name('admin.announcement.list');
         Route::get('/announcement/add', 'add_announcement_view')->name('admin.announcement.addview');
         Route::post('/announcement/add', 'add_announcement')->name('admin.announcement.add');
+        Route::delete('/announcement/delete', 'delete_announcement')->name('admin.announcement.delete');
     });
     Route::controller(ProductController::class)->group(function(){
         Route::get('/product', 'ProductPage')->name('admin.productManagement');

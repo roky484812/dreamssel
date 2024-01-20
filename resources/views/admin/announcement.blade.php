@@ -53,8 +53,11 @@
                                                                     <form action="">
                                                                         <button class="btn text-warning border btn-sm m-1" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                                                     </form>
-                                                                    <form action="">
-                                                                        <button class="btn text-danger border btn-sm m-1" href="#"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                    <form action="{{route('admin.announcement.delete')}}" method="POST">
+                                                                        @method('DELETE')
+                                                                        @csrf
+                                                                        <input type="hidden" name="announcement_id" value="{{$announcement['id']}}">
+                                                                        <button class="btn text-danger border btn-sm m-1"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                                     </form>
                                                                 </div>
                                                             </div>

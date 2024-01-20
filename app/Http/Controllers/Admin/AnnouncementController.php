@@ -35,8 +35,13 @@ class AnnouncementController extends Controller
     
     public function delete_announcement(Request $req){
         $req->validate([
-            'announcement_id'=> $req->input('announcement_id')
+            'announcement_id'=> 'required|exists:announcements,id'
         ]);
-        
+        $delete = Announcement::whereId($req->input('announcement_id'))->delete();
+        if($delete){
+            return redirect()->back()->with('success', 'An announcement deleted successfully.');
+        }else{
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
     }
 }
