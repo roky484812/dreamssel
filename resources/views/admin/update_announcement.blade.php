@@ -52,4 +52,5 @@
             });
         });
     </script>
+    @include('admin.widgets.alert')
 @endsection
