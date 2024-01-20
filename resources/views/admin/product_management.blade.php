@@ -109,7 +109,7 @@
                                     <tr>
                                         <td>Mens Jackets</td>
 
-                                        <td class="text-center"><a href="update_product.html"><i class="fa-solid fa-pen-to-square "></i></a>
+                                        <td class="text-center"><a href="update_product.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                         </td>
 
                                         <td class="text-center">China
