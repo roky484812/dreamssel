@@ -1,5 +1,7 @@
-<form class="card" action="{{route('admin.announcement.add')}}" method="POST">
+<form class="card" action="{{route('admin.announcement.update')}}" method="POST">
     @csrf
+    @method('PUT')
+    <input type="hidden" name="announcement_id" value="{{$announcement['id']}}">
     <div class="card-header">
         <div class="card-title">Update announcement</div>
     </div>
@@ -28,7 +30,7 @@
     </div>
     <div class="card-footer text-end">
         <div class="btn-list">
-            <button type="submit" class="btn btn-primary">Post Announcement</button>
+            <button type="submit" class="btn btn-primary">Update Announcement</button>
             <a href="{{url()->previous()}}" class="btn btn-danger">Back</a>
         </div>
     </div>

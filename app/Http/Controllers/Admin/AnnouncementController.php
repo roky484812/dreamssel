@@ -49,4 +49,23 @@ class AnnouncementController extends Controller
         $announcement = Announcement::whereId($announcement_id)->first();
         return view('admin.update_announcement', ['announcement'=> $announcement]);
     }
+
+    public function update_announcement(Request $req){
+        $req->validate([
+            'announcement_id' => 'required|exists:announcements,id',
+            'title'=> 'required|max:100',
+            'short_description'=> 'required|max:255',
+            'description'=> 'required'
+        ]);
+        $update = Announcement::whereId($req->input('announcement_id'))->update([
+            'title'=> $req->input('title'),
+            'short_description'=> $req->input('short_description'),
+            'description'=> $req->input('description')
+        ]);
+        if($update){
+            return redirect()->route('admin.announcement.list')->with('success', 'An announcement updated successfully');
+        }else{
+            return redirect()->back()->with('error', "Can't update announcement. Something went wrong.");
+        }
+    }
 }

@@ -61,6 +61,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::post('/announcement/add', 'add_announcement')->name('admin.announcement.add');
         Route::delete('/announcement/delete', 'delete_announcement')->name('admin.announcement.delete');
         Route::get('/announcement/update/{announcement_id}', 'update_announcement_view')->name('admin.announcement.updateView');
+        Route::put('/announcement/update', 'update_announcement')->name('admin.announcement.update');
     });
     Route::controller(ProductController::class)->group(function(){
         Route::get('/product', 'ProductPage')->name('admin.productManagement');
