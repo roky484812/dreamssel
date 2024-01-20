@@ -60,6 +60,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::get('/announcement/add', 'add_announcement_view')->name('admin.announcement.addview');
         Route::post('/announcement/add', 'add_announcement')->name('admin.announcement.add');
         Route::delete('/announcement/delete', 'delete_announcement')->name('admin.announcement.delete');
+        Route::get('/announcement/update/{announcement_id}', 'update_announcement_view')->name('admin.announcement.updateView');
     });
     Route::controller(ProductController::class)->group(function(){
         Route::get('/product', 'ProductPage')->name('admin.productManagement');

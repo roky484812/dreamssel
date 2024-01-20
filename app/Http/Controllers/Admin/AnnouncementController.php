@@ -44,4 +44,9 @@ class AnnouncementController extends Controller
             return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
+
+    public function update_announcement_view($announcement_id){
+        $announcement = Announcement::whereId($announcement_id)->first();
+        return view('admin.update_announcement', ['announcement'=> $announcement]);
+    }
 }

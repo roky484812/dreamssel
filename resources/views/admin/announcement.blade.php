@@ -50,8 +50,8 @@
                                                             <div class="d-flex w-100 justify-content-between">
                                                                 <p class="mb-1">{{ $announcement['short_description'] }}</p>
                                                                 <div class="text-right">
-                                                                    <form action="">
-                                                                        <button class="btn text-warning border btn-sm m-1" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                                                    <form action="{{route('admin.announcement.updateView', ['announcement_id'=> $announcement['id']])}}" method="GET">
+                                                                        <button class="btn text-warning border btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                                                     </form>
                                                                     <form action="{{route('admin.announcement.delete')}}" method="POST">
                                                                         @method('DELETE')
