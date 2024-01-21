@@ -292,6 +292,16 @@
 	});
 	/*Switcher Toggle End*/
 
+    // password mathing - system
+    $('.new-pass, .conf-pass').on('keyup', function () {
+        if ($('.new-pass').val() === $('.conf-pass').val()) {
+          $('.conf-pass').removeClass("is-invalid");
+        } 
+        else{
+            $('.conf-pass').addClass("is-invalid");
+        }
+
+      });
 
 
    
