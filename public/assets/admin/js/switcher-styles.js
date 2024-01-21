@@ -15,8 +15,8 @@ function switcherEvents() {
 			$('.fc-theme-standard').addClass('fc-direction-rtl');
 			$('.fc-header-toolbar').removeClass('fc-toolbar-ltr');
 			$('.fc-header-toolbar').addClass('fc-toolbar-rtl');
-			localStorage.setItem("dashticrtl", true);
-			localStorage.removeItem("dashticltr");
+			localStorage.setItem("pirhotechrtl", true);
+			localStorage.removeItem("pirhotechltr");
 			$("head link#style").attr("href", $(this));
 			(document.getElementById("style")?.setAttribute("href", "../assets/plugins/bootstrap/css/bootstrap.rtl.min.css"));
 
@@ -47,8 +47,8 @@ function switcherEvents() {
 			$('.fc-theme-standard').removeClass('fc-direction-rtl');
 			$('.fc-header-toolbar').addClass('fc-toolbar-ltr');
 			$('.fc-header-toolbar').removeClass('fc-toolbar-rtl');
-			localStorage.setItem("dashticltr", true);
-			localStorage.removeItem("dashticrtl");
+			localStorage.setItem("pirhotechltr", true);
+			localStorage.removeItem("pirhotechrtl");
 			$("head link#style").attr("href", $(this));
 			(document.getElementById("style")?.setAttribute("href", "../assets/plugins/bootstrap/css/bootstrap.min.css"));
 			var carousel = $('.owl-carousel');
@@ -81,8 +81,8 @@ function switcherEvents() {
 			$('#myonoffswitch3').prop('checked', true);
 			$('#myonoffswitch6').prop('checked', true);
 
-			localStorage.setItem('dashticlightMode', true)
-			localStorage.removeItem('dashticdarkMode', false)
+			localStorage.setItem('pirhotechlightMode', true)
+			localStorage.removeItem('pirhotechdarkMode', false)
 		} 
 	});
 	/***************** LIGHT THEME End *********************/
@@ -104,11 +104,11 @@ function switcherEvents() {
 
 			html.style.removeProperty("--dark-body");
 			html.style.removeProperty("--dark-theme");
-			localStorage.removeItem("dashticbgColor");
-			localStorage.removeItem("dashticthemeColor");
+			localStorage.removeItem("pirhotechbgColor");
+			localStorage.removeItem("pirhotechthemeColor");
 
-			localStorage.setItem('dashticdarkMode', true);
-			localStorage.removeItem('dashticlightMode', false);
+			localStorage.setItem('pirhotechdarkMode', true);
+			localStorage.removeItem('pirhotechlightMode', false);
 			
 		} 
 	});
@@ -133,9 +133,9 @@ function switcherEvents() {
 
 			$('#myonoffswitch13').prop('checked', true);
 
-			localStorage.setItem("dashticvertical", true);
-			localStorage.removeItem("dashtichorizontal");
-			localStorage.removeItem("dashtichorizontalHover");
+			localStorage.setItem("pirhotechvertical", true);
+			localStorage.removeItem("pirhotechhorizontal");
+			localStorage.removeItem("pirhotechhorizontalHover");
 			if (document.querySelector('body').classList.contains('horizontal')&& !(document.querySelector('body').classList.contains('error-page'))) {
 				checkHoriMenu();
 				menuClick();
@@ -180,9 +180,9 @@ function switcherEvents() {
 			$('body').removeClass('icontext-menu');
 			$('body').removeClass('sideicon-menu');
 
-			localStorage.setItem("dashtichorizontal", true);
-			localStorage.removeItem("dashtichorizontalHover");
-			localStorage.removeItem("dashticvertical");
+			localStorage.setItem("pirhotechhorizontal", true);
+			localStorage.removeItem("pirhotechhorizontalHover");
+			localStorage.removeItem("pirhotechvertical");
 			// $('#slide-left').removeClass('d-none');
 			// $('#slide-right').removeClass('d-none');
 			if (document.querySelector('body').classList.contains('horizontal')&& !(document.querySelector('body').classList.contains('error-page'))) {
@@ -239,9 +239,9 @@ function switcherEvents() {
 			$('body').removeClass('icontext-menu');
 			$('body').removeClass('sideicon-menu');
 
-			localStorage.setItem("dashtichorizontalHover", true);
-			localStorage.removeItem("dashtichorizontal");
-			localStorage.removeItem("dashticvertical");
+			localStorage.setItem("pirhotechhorizontalHover", true);
+			localStorage.removeItem("pirhotechhorizontal");
+			localStorage.removeItem("pirhotechvertical");
 			HorizontalHovermenu();
 			if (document.querySelector('body').classList.contains('horizontal')&& !(document.querySelector('body').classList.contains('error-page'))) {
 				checkHoriMenu();
@@ -263,12 +263,12 @@ function switcherEvents() {
 			$('body').removeClass('sidenav-toggled');
 			$('body').removeClass('hover-submenu');
 			$('body').removeClass('hover-submenu1');
-			localStorage.setItem("dashticdefaultmenu", true);
-			localStorage.removeItem("dashticclosedmenu");
-			localStorage.removeItem("dashticicontextmenu");
-			localStorage.removeItem("dashticsideiconmenu");
-			localStorage.removeItem("dashtichoversubmenu");
-			localStorage.removeItem("dashtichoversubmenu1");
+			localStorage.setItem("pirhotechdefaultmenu", true);
+			localStorage.removeItem("pirhotechclosedmenu");
+			localStorage.removeItem("pirhotechicontextmenu");
+			localStorage.removeItem("pirhotechsideiconmenu");
+			localStorage.removeItem("pirhotechhoversubmenu");
+			localStorage.removeItem("pirhotechhoversubmenu1");
 		}
 	});
 	/***************** DEFAULT-MENU End*********************/
@@ -284,12 +284,12 @@ function switcherEvents() {
 			$('body').removeClass('sideicon-menu');
 			$('body').removeClass('hover-submenu');
 			$('body').removeClass('hover-submenu1');
-			localStorage.setItem("dashticclosedmenu", true);
-			localStorage.removeItem("dashticdefaultmenu");
-			localStorage.removeItem("dashticicontextmenu");
-			localStorage.removeItem("dashticsideiconmenu");
-			localStorage.removeItem("dashtichoversubmenu");
-			localStorage.removeItem("dashtichoversubmenu1");
+			localStorage.setItem("pirhotechclosedmenu", true);
+			localStorage.removeItem("pirhotechdefaultmenu");
+			localStorage.removeItem("pirhotechicontextmenu");
+			localStorage.removeItem("pirhotechsideiconmenu");
+			localStorage.removeItem("pirhotechhoversubmenu");
+			localStorage.removeItem("pirhotechhoversubmenu1");
 		}
 	});
 	/***************** CLOSED-MENU End*********************/
@@ -305,12 +305,12 @@ function switcherEvents() {
 			$('body').removeClass('closed-menu');
 			$('body').removeClass('hover-submenu');
 			$('body').removeClass('hover-submenu1');
-			localStorage.setItem("dashticicontextmenu", true);
-			localStorage.removeItem("dashticdefaultmenu");
-			localStorage.removeItem("dashticclosedmenu");
-			localStorage.removeItem("dashticsideiconmenu");
-			localStorage.removeItem("dashtichoversubmenu");
-			localStorage.removeItem("dashtichoversubmenu1");
+			localStorage.setItem("pirhotechicontextmenu", true);
+			localStorage.removeItem("pirhotechdefaultmenu");
+			localStorage.removeItem("pirhotechclosedmenu");
+			localStorage.removeItem("pirhotechsideiconmenu");
+			localStorage.removeItem("pirhotechhoversubmenu");
+			localStorage.removeItem("pirhotechhoversubmenu1");
 
 		}
 	});
@@ -327,12 +327,12 @@ function switcherEvents() {
 			$('body').removeClass('closed-menu');
 			$('body').removeClass('hover-submenu');
 			$('body').removeClass('hover-submenu1');
-			localStorage.setItem("dashticsideiconmenu", true);
-			localStorage.removeItem("dashticdefaultmenu");
-			localStorage.removeItem("dashticclosedmenu");
-			localStorage.removeItem("dashticicontextmenu");
-			localStorage.removeItem("dashtichoversubmenu");
-			localStorage.removeItem("dashtichoversubmenu1");
+			localStorage.setItem("pirhotechsideiconmenu", true);
+			localStorage.removeItem("pirhotechdefaultmenu");
+			localStorage.removeItem("pirhotechclosedmenu");
+			localStorage.removeItem("pirhotechicontextmenu");
+			localStorage.removeItem("pirhotechhoversubmenu");
+			localStorage.removeItem("pirhotechhoversubmenu1");
 		}
 	});
 	/***************** ICON-OVERLAY-MENU End*********************/
@@ -348,12 +348,12 @@ function switcherEvents() {
 			$('body').removeClass('sideicon-menu');
 			$('body').removeClass('closed-menu');
 			$('body').removeClass('hover-submenu1');
-			localStorage.setItem("dashtichoversubmenu", true);
-			localStorage.removeItem("dashticdefaultmenu");
-			localStorage.removeItem("dashticclosedmenu");
-			localStorage.removeItem("dashticicontextmenu");
-			localStorage.removeItem("dashticsideiconmenu");
-			localStorage.removeItem("dashtichoversubmenu1");
+			localStorage.setItem("pirhotechhoversubmenu", true);
+			localStorage.removeItem("pirhotechdefaultmenu");
+			localStorage.removeItem("pirhotechclosedmenu");
+			localStorage.removeItem("pirhotechicontextmenu");
+			localStorage.removeItem("pirhotechsideiconmenu");
+			localStorage.removeItem("pirhotechhoversubmenu1");
 		}
 	});
 	/***************** HOVER-SUBMENU-MENU End*********************/
@@ -369,12 +369,12 @@ function switcherEvents() {
 			$('body').removeClass('sideicon-menu');
 			$('body').removeClass('closed-menu');
 			$('body').removeClass('hover-submenu');
-			localStorage.setItem("dashtichoversubmenu1", true);
-			localStorage.removeItem("dashticdefaultmenu");
-			localStorage.removeItem("dashticclosedmenu");
-			localStorage.removeItem("dashticicontextmenu");
-			localStorage.removeItem("dashticsideiconmenu");
-			localStorage.removeItem("dashtichoversubmenu");
+			localStorage.setItem("pirhotechhoversubmenu1", true);
+			localStorage.removeItem("pirhotechdefaultmenu");
+			localStorage.removeItem("pirhotechclosedmenu");
+			localStorage.removeItem("pirhotechicontextmenu");
+			localStorage.removeItem("pirhotechsideiconmenu");
+			localStorage.removeItem("pirhotechhoversubmenu");
 		}
 	});
 	/***************** HOVER-SUBMENU-MENU-1 End*********************/
@@ -384,8 +384,8 @@ function switcherEvents() {
 		if (this.checked) {
 			$('body').addClass('body-style1');
 			$('body').removeClass('body-default');
-			localStorage.setItem("dashticbodystyle", true);
-			localStorage.removeItem("dashticdefaultbody");
+			localStorage.setItem("pirhotechbodystyle", true);
+			localStorage.removeItem("pirhotechdefaultbody");
 		}
 	});
 
@@ -393,8 +393,8 @@ function switcherEvents() {
 		if (this.checked) {
 			$('body').removeClass('body-style1');
 			$('body').addClass('body-default');
-			localStorage.setItem("dashticdefaultbody", true);
-			localStorage.removeItem("dashticbodystyle");
+			localStorage.setItem("pirhotechdefaultbody", true);
+			localStorage.removeItem("pirhotechbodystyle");
 		}
 	});
 	/***************** BODY-STYLE End*********************/
@@ -404,8 +404,8 @@ function switcherEvents() {
 		if (this.checked) {
 			$('body').addClass('layout-fullwidth');
 			$('body').removeClass('layout-boxed');
-			localStorage.setItem("dashticfullwidth", true);
-			localStorage.removeItem("dashticboxedwidth");
+			localStorage.setItem("pirhotechfullwidth", true);
+			localStorage.removeItem("pirhotechboxedwidth");
 		}
 	});
 
@@ -413,8 +413,8 @@ function switcherEvents() {
 		if (this.checked) {
 			$('body').addClass('layout-boxed');
 			$('body').removeClass('layout-fullwidth');
-			localStorage.setItem("dashticboxedwidth", true);
-			localStorage.removeItem("dashticfullwidth");
+			localStorage.setItem("pirhotechboxedwidth", true);
+			localStorage.removeItem("pirhotechfullwidth");
 		}
 	});
 	/***************** LAYOUT-STYLE End*********************/
@@ -424,8 +424,8 @@ function switcherEvents() {
 		if (this.checked) {
 			$('body').addClass('fixed-layout');
 			$('body').removeClass('scrollable-layout');
-			localStorage.setItem("dashticfixed", true);
-			localStorage.removeItem("dashticscrollable");
+			localStorage.setItem("pirhotechfixed", true);
+			localStorage.removeItem("pirhotechscrollable");
 		}
 	});
 
@@ -433,8 +433,8 @@ function switcherEvents() {
 		if (this.checked) {
 			$('body').addClass('scrollable-layout');
 			$('body').removeClass('fixed-layout');
-			localStorage.setItem("dashticscrollable", true);
-			localStorage.removeItem("dashticfixed");
+			localStorage.setItem("pirhotechscrollable", true);
+			localStorage.removeItem("pirhotechfixed");
 		}
 	});
 	/***************** LAYOUT-POSITIONS End*********************/
@@ -445,9 +445,9 @@ function switcherEvents() {
 			$('body').addClass('light-menu');
 			$('body').removeClass('color-menu');
 			$('body').removeClass('dark-menu');
-			localStorage.setItem("dashticlightmenu", true);
-			localStorage.removeItem("dashticcolormenu");
-			localStorage.removeItem("dashticdarkmenu");
+			localStorage.setItem("pirhotechlightmenu", true);
+			localStorage.removeItem("pirhotechcolormenu");
+			localStorage.removeItem("pirhotechdarkmenu");
 		}
 	});
 	
@@ -456,9 +456,9 @@ function switcherEvents() {
 			$('body').addClass('color-menu');
 			$('body').removeClass('light-menu');
 			$('body').removeClass('dark-menu');
-			localStorage.setItem("dashticcolormenu", true);
-			localStorage.removeItem("dashticlightmenu");
-			localStorage.removeItem("dashticdarkmenu");
+			localStorage.setItem("pirhotechcolormenu", true);
+			localStorage.removeItem("pirhotechlightmenu");
+			localStorage.removeItem("pirhotechdarkmenu");
 		}
 	});
 	
@@ -467,9 +467,9 @@ function switcherEvents() {
 			$('body').addClass('dark-menu');
 			$('body').removeClass('color-menu');
 			$('body').removeClass('light-menu');
-			localStorage.setItem("dashticdarkmenu", true);
-			localStorage.removeItem("dashticlightmenu");
-			localStorage.removeItem("dashticcolormenu");
+			localStorage.setItem("pirhotechdarkmenu", true);
+			localStorage.removeItem("pirhotechlightmenu");
+			localStorage.removeItem("pirhotechcolormenu");
 		}
 	});
 	/***************** MENU-STYLES End*********************/
@@ -480,9 +480,9 @@ function switcherEvents() {
 			$('body').addClass('light-header');
 			$('body').removeClass('color-header');
 			$('body').removeClass('dark-header');
-			localStorage.setItem("dashticlightheader", true);
-			localStorage.removeItem("dashticcolorheader");
-			localStorage.removeItem("dashticdarkheader");
+			localStorage.setItem("pirhotechlightheader", true);
+			localStorage.removeItem("pirhotechcolorheader");
+			localStorage.removeItem("pirhotechdarkheader");
 		} 
 	});
 
@@ -491,9 +491,9 @@ function switcherEvents() {
 			$('body').addClass('color-header');
 			$('body').removeClass('light-header');
 			$('body').removeClass('dark-header');
-			localStorage.setItem("dashticcolorheader", true);
-			localStorage.removeItem("dashticlightheader");
-			localStorage.removeItem("dashticdarkheader");
+			localStorage.setItem("pirhotechcolorheader", true);
+			localStorage.removeItem("pirhotechlightheader");
+			localStorage.removeItem("pirhotechdarkheader");
 		}
 	});
 
@@ -502,9 +502,9 @@ function switcherEvents() {
 			$('body').addClass('dark-header');
 			$('body').removeClass('color-header');
 			$('body').removeClass('light-header');
-			localStorage.setItem("dashticdarkheader", true);
-			localStorage.removeItem("dashticlightheader");
-			localStorage.removeItem("dashticcolorheader");
+			localStorage.setItem("pirhotechdarkheader", true);
+			localStorage.removeItem("pirhotechlightheader");
+			localStorage.removeItem("pirhotechcolorheader");
 		}
 	});
 	/***************** HEADER-STYLES End*********************/
@@ -512,7 +512,7 @@ function switcherEvents() {
 
 	/***************** Add Switcher Classes *********************/
 	//LTR & RTL
-	if (!localStorage.getItem('dashticrtl') && !localStorage.getItem('dashticltr')) {
+	if (!localStorage.getItem('pirhotechrtl') && !localStorage.getItem('pirhotechltr')) {
 
 		/***************** RTL *********************/
 		// $('body').addClass('rtl');
@@ -523,7 +523,7 @@ function switcherEvents() {
 
 	}
 	//Light-mode & Dark-mode
-	if (!localStorage.getItem('dashticlight') && !localStorage.getItem('dashticdark')) {
+	if (!localStorage.getItem('pirhotechlight') && !localStorage.getItem('pirhotechdark')) {
 		/***************** Light THEME *********************/
 		// $('body').addClass('light-theme');
 		/***************** Light THEME *********************/
@@ -534,7 +534,7 @@ function switcherEvents() {
 	}
 
 	//Vertical-menu & Horizontal-menu
-	if (!localStorage.getItem('dashticvertical') && !localStorage.getItem('dashtichorizontal') && !localStorage.getItem('dashtichorizontalHover')) {
+	if (!localStorage.getItem('pirhotechvertical') && !localStorage.getItem('pirhotechhorizontal') && !localStorage.getItem('pirhotechhorizontalHover')) {
 		/***************** Horizontal THEME *********************/
 		// $('body').addClass('horizontal');
 		/***************** Horizontal THEME *********************/
@@ -545,7 +545,7 @@ function switcherEvents() {
 	}
 
 	//Vertical Layout Style
-	if (!localStorage.getItem('dashticdefaultmenu') && !localStorage.getItem('dashticclosedmenu') && !localStorage.getItem('dashticicontextmenu')&& !localStorage.getItem('dashticsideiconmenu')&& !localStorage.getItem('dashtichoversubmenu')&& !localStorage.getItem('dashtichoversubmenu1')) {
+	if (!localStorage.getItem('pirhotechdefaultmenu') && !localStorage.getItem('pirhotechclosedmenu') && !localStorage.getItem('pirhotechicontextmenu')&& !localStorage.getItem('pirhotechsideiconmenu')&& !localStorage.getItem('pirhotechhoversubmenu')&& !localStorage.getItem('pirhotechhoversubmenu1')) {
 		/**Default-Menu**/
 		// $('body').addClass('default-menu');
 		/**Default-Menu**/
@@ -572,22 +572,22 @@ function switcherEvents() {
 	}
 
 	//Body Style
-	if (!localStorage.getItem('dashticdefaultbody') && !localStorage.getItem('dashticbodystyle')) {
+	if (!localStorage.getItem('pirhotechdefaultbody') && !localStorage.getItem('pirhotechbodystyle')) {
 	// $('body').addClass('body-style1');
 	}
 
 	//Boxed Layout Style
-	if (!localStorage.getItem('dashticfullwidth') && !localStorage.getItem('dashticboxedwidth')) {
+	if (!localStorage.getItem('pirhotechfullwidth') && !localStorage.getItem('pirhotechboxedwidth')) {
 	// $('body').addClass('layout-boxed');
 	}
 
 	//Scrollable-Layout Style
-	if (!localStorage.getItem('dashticfixed') && !localStorage.getItem('dashticscrollable')) {
+	if (!localStorage.getItem('pirhotechfixed') && !localStorage.getItem('pirhotechscrollable')) {
 	// $('body').addClass('scrollable-layout');
 	}
 
 	//Menu Styles
-	if (!localStorage.getItem('dashticlightmenu') && !localStorage.getItem('dashticcolormenu') && !localStorage.getItem('dashticdarkmenu')) {
+	if (!localStorage.getItem('pirhotechlightmenu') && !localStorage.getItem('pirhotechcolormenu') && !localStorage.getItem('pirhotechdarkmenu')) {
 		/**Light-menu**/
 		// $('body').addClass('light-menu');
 		/**Light-menu**/
@@ -601,7 +601,7 @@ function switcherEvents() {
 		/**Dark-menu**/
 	}
 	//Header Styles
-	if (!localStorage.getItem('dashticlightheader') && !localStorage.getItem('dashticcolorheader') && !localStorage.getItem('dashticdarkheader')) {
+	if (!localStorage.getItem('pirhotechlightheader') && !localStorage.getItem('pirhotechcolorheader') && !localStorage.getItem('pirhotechdarkheader')) {
 		/**Light-Header**/
 		// $('body').addClass('light-header');
 		/**Light-Header**/
@@ -934,8 +934,8 @@ function resetData() {
 	$('body').removeClass('rtl');
 	$("html[lang=en]").attr("dir", "ltr");
 	$(".select2-container").attr("dir", "ltr");
-	localStorage.setItem("dashticltr", true);
-	localStorage.removeItem("dashticrtl");
+	localStorage.setItem("pirhotechltr", true);
+	localStorage.removeItem("pirhotechrtl");
 	$("head link#style").attr("href", $(this));
 	(document.getElementById("style")?.setAttribute("href", "../assets/plugins/bootstrap/css/bootstrap.min.css"));
 	var carousel = $('.owl-carousel');

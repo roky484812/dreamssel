@@ -6,7 +6,7 @@
     <!-- Meta data -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
-    <meta content="Dashtic - Bootstrap Webapp Responsive Dashboard Simple Admin Panel Premium HTML5 Template"
+    <meta content="pirhotech - Bootstrap Webapp Responsive Dashboard Simple Admin Panel Premium HTML5 Template"
         name="description">
     <meta content="Spruko Technologies Private Limited" name="author">
     <meta name="keywords" content="admin, admin template, dashboard, admin dashboard, bootstrap 5, responsive, clean, ui, admin panel, ui kit, responsive admin, application, bootstrap 4, flat, bootstrap5, admin dashboard template" />
@@ -74,13 +74,13 @@
                         </div>
                         <a class="header-brand" href="index.html">
                             <img src="{{asset('assets/admin//images/brand/lineLogo.svg')}}" class="header-brand-img desktop-lgo"
-                                alt="Dashtic logo">
+                                alt="pirhotech logo">
                             <img src="{{asset('assets/admin//images/brand/Line_logo_white.svg')}}" class="header-brand-img dark-logo"
-                                alt="Dashtic logo">
+                                alt="pirhotech logo">
                             <img src="{{asset('assets/admin//images/brand/black_single_logo.svg')}}" class="header-brand-img mobile-logo"
-                                alt="Dashtic logo">
+                                alt="pirhotech logo">
                             <img src="{{asset('assets/admin//images/brand/white_single_logo.svg')}}"
-                                class="header-brand-img darkmobile-logo" alt="Dashtic logo">
+                                class="header-brand-img darkmobile-logo" alt="pirhotech logo">
                         </a>
 
                         <div class="d-flex order-lg-2 ms-lg-auto">
@@ -416,7 +416,7 @@
 
     <!-- Back to top -->
     <a href="#top" id="back-to-top">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="back-to-top-icon">
             <path d="M0 0h24v24H0V0z" fill="none" />
             <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" />
         </svg>

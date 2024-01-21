@@ -58,17 +58,17 @@ function localStorageBackup() {
 
     // if there is a value stored, update color picker and background color
     // Used to retrive the data from local storage
-    if (localStorage.dashticprimaryColor) {
-        // document.getElementById('colorID').value = localStorage.dashticprimaryColor;
-        document.querySelector('html').style.setProperty('--primary-bg-color', localStorage.dashticprimaryColor);
-        document.querySelector('html').style.setProperty('--primary-bg-hover', localStorage.dashticprimaryHoverColor);
-        document.querySelector('html').style.setProperty('--primary-bg-border', localStorage.dashticprimaryBorderColor);
+    if (localStorage.pirhotechprimaryColor) {
+        // document.getElementById('colorID').value = localStorage.pirhotechprimaryColor;
+        document.querySelector('html').style.setProperty('--primary-bg-color', localStorage.pirhotechprimaryColor);
+        document.querySelector('html').style.setProperty('--primary-bg-hover', localStorage.pirhotechprimaryHoverColor);
+        document.querySelector('html').style.setProperty('--primary-bg-border', localStorage.pirhotechprimaryBorderColor);
     }
 
-    if (localStorage.dashticbgColor) {
-        // document.getElementById('bgID').value = localStorage.dashticthemeColor;
-        document.querySelector('html').style.setProperty('--dark-body', localStorage.dashticbgColor);
-        document.querySelector('html').style.setProperty('--dark-theme', localStorage.dashticthemeColor);
+    if (localStorage.pirhotechbgColor) {
+        // document.getElementById('bgID').value = localStorage.pirhotechthemeColor;
+        document.querySelector('html').style.setProperty('--dark-body', localStorage.pirhotechbgColor);
+        document.querySelector('html').style.setProperty('--dark-theme', localStorage.pirhotechthemeColor);
         document.body.classList.add('dark-mode');
         document.body.classList.remove('light-mode');
         document.body.classList.remove('light-menu');
@@ -83,7 +83,7 @@ function localStorageBackup() {
         $('#myonoffswitch7').prop('checked', true);
     }
 
-    if(localStorage.dashticlightMode){
+    if(localStorage.pirhotechlightMode){
         document.querySelector('body')?.classList.add('light-mode');
 		document.querySelector('body')?.classList.remove('dark-mode');
         $('#myonoffswitch1').prop('checked', true);
@@ -91,7 +91,7 @@ function localStorageBackup() {
         $('#myonoffswitch6').prop('checked', true);
     }
 
-    if(localStorage.dashticdarkMode){
+    if(localStorage.pirhotechdarkMode){
         document.querySelector('body')?.classList.remove('light-mode');
 		document.querySelector('body')?.classList.add('dark-mode');
         $('#myonoffswitch2').prop('checked', true);
@@ -99,71 +99,71 @@ function localStorageBackup() {
         $('#myonoffswitch8').prop('checked', true);
     }
 
-    if(localStorage.dashtichorizontal){
+    if(localStorage.pirhotechhorizontal){
         document.querySelector('body').classList.add('horizontal')
     }
 
-    if(localStorage.dashtichorizontalHover){
+    if(localStorage.pirhotechhorizontalHover){
         document.querySelector('body').classList.add('horizontal-hover')
     }
 
-    if(localStorage.dashticrtl){
+    if(localStorage.pirhotechrtl){
         document.querySelector('body').classList.add('rtl')
     }
 
-    if(localStorage.dashticclosedmenu){
+    if(localStorage.pirhotechclosedmenu){
         document.querySelector('body').classList.add('closed-menu')
     }
 
-    if(localStorage.dashticicontextmenu){
+    if(localStorage.pirhotechicontextmenu){
         document.querySelector('body').classList.add('icontext-menu')
     }
 
-    if(localStorage.dashticsideiconmenu){
+    if(localStorage.pirhotechsideiconmenu){
         document.querySelector('body').classList.add('sideicon-menu')
     }
 
-    if(localStorage.dashtichoversubmenu){
+    if(localStorage.pirhotechhoversubmenu){
         document.querySelector('body').classList.add('hover-submenu')
     }
 
-    if(localStorage.dashtichoversubmenu1){
+    if(localStorage.pirhotechhoversubmenu1){
         document.querySelector('body').classList.add('hover-submenu1')
     }
 
-    if(localStorage.dashticbodystyle){
+    if(localStorage.pirhotechbodystyle){
         document.querySelector('body').classList.add('body-style1')
     }
 
-    if(localStorage.dashticboxedwidth){
+    if(localStorage.pirhotechboxedwidth){
         document.querySelector('body').classList.add('layout-boxed')
     }
 
-    if(localStorage.dashticscrollable){
+    if(localStorage.pirhotechscrollable){
         document.querySelector('body').classList.add('scrollable-layout')
     }
 
-    if(localStorage.dashticlightmenu){
+    if(localStorage.pirhotechlightmenu){
         document.querySelector('body').classList.add('light-menu')
     }
 
-    if(localStorage.dashticcolormenu){
+    if(localStorage.pirhotechcolormenu){
         document.querySelector('body').classList.add('color-menu')
     }
 
-    if(localStorage.dashticdarkmenu){
+    if(localStorage.pirhotechdarkmenu){
         document.querySelector('body').classList.add('dark-menu')
     }
 
-    if(localStorage.dashticlightheader){
+    if(localStorage.pirhotechlightheader){
         document.querySelector('body').classList.add('light-header')
     }
 
-    if(localStorage.dashticcolorheader){
+    if(localStorage.pirhotechcolorheader){
         document.querySelector('body').classList.add('color-header')
     }
 
-    if(localStorage.dashticdarkheader){
+    if(localStorage.pirhotechdarkheader){
         document.querySelector('body').classList.add('dark-header')
     }
 }
@@ -174,10 +174,10 @@ function changePrimaryColor() {
     checkOptions();
 
     var userColor = document.getElementById('colorID').value;
-    localStorage.setItem('dashticprimaryColor', userColor);
+    localStorage.setItem('pirhotechprimaryColor', userColor);
     // to store value as opacity 0.95 we use 95
-    localStorage.setItem('dashticprimaryHoverColor', userColor + 95);
-    localStorage.setItem('dashticprimaryBorderColor', userColor);
+    localStorage.setItem('pirhotechprimaryHoverColor', userColor + 95);
+    localStorage.setItem('pirhotechprimaryBorderColor', userColor);
 
     names()
 }
@@ -185,8 +185,8 @@ function changePrimaryColor() {
 function changeBackgroundColor() {
 
     var userColor = document.getElementById('bgID').value;
-    localStorage.setItem('dashticbgColor', userColor + 'dd');
-    localStorage.setItem('dashticthemeColor', userColor);
+    localStorage.setItem('pirhotechbgColor', userColor + 'dd');
+    localStorage.setItem('pirhotechthemeColor', userColor);
     names();
 
     document.body.classList.add('dark-mode');
@@ -238,7 +238,7 @@ function names() {
     let primaryColorVal = getComputedStyle(document.documentElement).getPropertyValue('--primary-bg-color').trim();
 
     //get variable
-    myVarVal = localStorage.getItem("dashticprimaryColor")  || primaryColorVal;
+    myVarVal = localStorage.getItem("pirhotechprimaryColor")  || primaryColorVal;
 
 
     // index charts

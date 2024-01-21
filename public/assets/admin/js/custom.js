@@ -280,14 +280,14 @@
 			$('body').addClass('dark-mode');
 			$('body').removeClass('light-mode');
 
-            localStorage.setItem('dashticdarkMode', true)
-            localStorage.removeItem('dashticlightMode', false)
+            localStorage.setItem('pirhotechdarkMode', true)
+            localStorage.removeItem('pirhotechlightMode', false)
 		} else {
 			$('body').removeClass('dark-mode');
 			$('body').addClass('light-mode');
 
-            localStorage.setItem('dashticlightMode', true)
-            localStorage.removeItem('dashticdarkMode', false)
+            localStorage.setItem('pirhotechlightMode', true)
+            localStorage.removeItem('pirhotechdarkMode', false)
 		}
 	});
 	/*Switcher Toggle End*/

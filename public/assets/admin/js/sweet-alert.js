@@ -5,7 +5,7 @@ $(function(){
 	$("#but1").on("click", function(e){
 		var message = $("#message").val();
 		if(message == ""){
-			message  = "New Notification from Dashtic";
+			message  = "New Notification from pirhotech";
 		}
 		swal(message);
 	});
@@ -15,7 +15,7 @@ $(function(){
 		var message = $("#message").val();
 		var title = $("#title").val();
 		if(message == ""){
-			message  = "New Notification from Dashtic";
+			message  = "New Notification from pirhotech";
 		}
 		if(title == ""){
 			title = "Notification Styles";
@@ -28,7 +28,7 @@ $(function(){
 		var message = $("#message").val();
 		var title = $("#title").val();
 		if(message == ""){
-			message  = "New Notification from Dashtic";
+			message  = "New Notification from pirhotech";
 		}
 		if(title == ""){
 			title = "Notification Styles";
@@ -45,7 +45,7 @@ $(function(){
 		var message = $("#message").val();
 		var title = $("#title").val();
 		if(message == ""){
-			message  = "New Notification from Dashtic";
+			message  = "New Notification from pirhotech";
 		}
 		if(title == ""){
 			title = "Notification Styles";
@@ -64,7 +64,7 @@ $(function(){
 		var type = $("#type").val();
 		swal({
 			title: "Notification Styles",
-			text: "New Notification from Dashtic",
+			text: "New Notification from pirhotech",
 			type: type
 		});
 	});
@@ -93,7 +93,7 @@ $(function(){
 	$("#confirm").on("click", function(e){
 		swal({
 			title: "Notification Styles",
-			text: "New Notification from Dashtic",
+			text: "New Notification from pirhotech",
 			type: "warning",
 			showCancelButton: true,
 			confirmButtonText: 'Exit',
