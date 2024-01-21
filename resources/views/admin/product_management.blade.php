@@ -18,7 +18,6 @@
                                         </path>
                                     </svg><span class="breadcrumb-icon">Product Management</span></a></li>
 
-
                         </ol>
                     </div>
                 </div>
@@ -30,7 +29,7 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
                                 <div class="col mb-4">
-                                    <a href="{{route('admin.product.add')}}" class="btn btn-primary"><i class="fe fe-plus"></i>
+                                    <a href="{{route('admin.product.addView')}}" class="btn btn-primary"><i class="fe fe-plus"></i>
                                         Add New Product</a>
                                 </div>
                                 <div class="card">
@@ -109,7 +108,7 @@
                                     <tr>
                                         <td>Mens Jackets</td>
 
-                                        <td class="text-center"><a href="update_product.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        <td class="text-center"><a href="{{route('admin.product.updateView')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                         </td>
 
                                         <td class="text-center">China

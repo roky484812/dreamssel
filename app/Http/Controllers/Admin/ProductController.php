@@ -14,4 +14,8 @@ class ProductController extends Controller
     public function AddProductPage(){
         return view('admin.add_product');
     }
+    
+    public function editProductPage(){
+        return view('admin.edit_product');
+    }
 }

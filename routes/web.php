@@ -65,7 +65,8 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     });
     Route::controller(ProductController::class)->group(function(){
         Route::get('/product', 'ProductPage')->name('admin.productManagement');
-        Route::get('/product/add', 'AddProductPage')->name('admin.product.add');
+        Route::get('/product/add', 'AddProductPage')->name('admin.product.addView');
+        Route::get('/product/update', 'editProductPage')->name('admin.product.updateView');
     });
 });
 Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){

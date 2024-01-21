@@ -13,9 +13,11 @@ class AnnouncementController extends Controller
         $announcements = Announcement::paginate(10);
         return view('admin.announcement', ['announcements'=> $announcements]);
     }
+    
     public function add_announcement_view(){
         return view('admin.add_announcement');
     }
+
     public function add_announcement(Request $req){
         $req->validate([
             'title'=> 'required|max:100',
