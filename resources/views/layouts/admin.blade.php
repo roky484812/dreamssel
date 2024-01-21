@@ -17,6 +17,10 @@
     <!--Favicon -->
     <link rel="icon" href="{{asset('assets/admin/images/brand/favicon.ico')}}" type="image/x-icon" />
 
+    <!-- selection jquery -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
+
     <!-- Bootstrap css -->
     <link id="style" href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
 
@@ -471,6 +475,95 @@
 
     <!-- Custom js-->
     <script src="{{asset('assets/admin/js/custom.js')}}"></script>
+
+    <script src="{{asset('assets/admin/js/vendors/jquery.min.js')}}"></script>
+
+     
+        <!--Othercharts js-->
+        <script src="{{asset('assets/admin/plugins/othercharts/jquery.sparkline.min.js')}}"></script>
+
+        <!-- Circle-progress js-->
+        <script src="{{asset('assets/admin/js/vendors/circle-progress.min.js')}}"></script>
+
+        <!-- Jquery-rating js-->
+        <script src="{{asset('assets/admin/plugins/rating/jquery.rating-stars.js')}}"></script>
+
+        <!-- P-scroll js-->
+        <script src="{{asset('assets/admin/plugins/p-scrollbar/p-scrollbar.js')}}"></script>
+
+        <!--Sidemenu js-->
+        <script src="{{asset('assets/admin/plugins/sidemenu/sidemenu.js')}}"></script>
+
+        <!-- Sticky js -->
+        <script src="{{asset('assets/admin/js/sticky.js')}}"></script>
+
+        <!--Select2 js -->
+        <script src="{{asset('assets/admin/plugins/select2/select2.full.min.js')}}"></script>
+        <script src="{{asset('assets/admin/js/select2.js')}}"></script>
+
+        <!-- Timepicker js -->
+        <script src="{{asset('assets/admin/plugins/time-picker/jquery.timepicker.js')}}"></script>
+        <script src="{{asset('assets/admin/plugins/time-picker/toggles.min.js')}}"></script>
+
+        <!-- Datepicker js -->
+        <script src="{{asset('assets/admin/plugins/date-picker/date-picker.js')}}"></script>
+        <script src="{{asset('assets/admin/plugins/date-picker/jquery-ui.js')}}"></script>
+        <script src="{{asset('assets/admin/plugins/input-mask/jquery.maskedinput.js')}}"></script>
+
+        <!--File-Uploads Js-->
+        <script src="{{asset('assets/admin/plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
+        <script src="{{asset('assets/admin/plugins/fancyuploder/jquery.fileupload.js')}}"></script>
+        <script src="{{asset('assets/admin/plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
+        <script src="{{asset('assets/admin/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
+        <script src="{{asset('assets/admin/plugins/fancyuploder/fancy-uploader.js')}}"></script>
+
+        <!-- File uploads js -->
+        <script src="{{asset('assets/admin/plugins/fileupload/js/dropify.js')}}"></script>
+        <script src="{{asset('assets/admin/js/filupload.js')}}"></script>
+
+        <!-- Multiple select js -->
+        <script src="{{asset('assets/admin/plugins/multipleselect/multiple-select.js')}}"></script>
+        <script src="{{asset('assets/admin/plugins/multipleselect/multi-select.js')}}"></script>
+
+        <!--Sumoselect js-->
+        <script src="{{asset('assets/admin/plugins/sumoselect/jquery.sumoselect.js')}}"></script>
+
+        <!--intlTelInput js-->
+        <script src="{{asset('assets/admin/plugins/intl-tel-input-master/intlTelInput.js')}}"></script>
+        <script src="{{asset('assets/admin/plugins/intl-tel-input-master/country-select.js')}}"></script>
+        <script src="{{asset('assets/admin/plugins/intl-tel-input-master/utils.js')}}"></script>
+
+        <!--jquery transfer js-->
+        <script src="{{asset('assets/admin/plugins/jQuerytransfer/jquery.transfer.js')}}"></script>
+
+        <!--multi js-->
+        <script src="{{asset('assets/admin/plugins/multi/multi.min.js')}}"></script>
+
+        <!-- Form Advanced Element -->
+        <script src="{{asset('assets/admin/js/formelementadvnced.js')}}"></script>
+        <script src="{{asset('assets/admin/js/form-elements.js')}}"></script>
+        <script src="{{asset('assets/admin/js/file-upload.js')}}"></script>
+
+        <!-- WYSIWYG Editor js -->
+        <script src="{{asset('assets/admin/plugins/wysiwyag/jquery.richtext.js')}}"></script>
+        <script src="{{asset('assets/admin/js/form-editor.js')}}"></script>
+
+        <!-- quill js -->
+        <script src="{{asset('assets/admin/plugins/quill/quill.min.js')}}"></script>
+        <script src="{{asset('assets/admin/js/form-editor2.js')}}"></script>
+
+
+        <!-- Color Theme js -->
+        <script src="{{asset('assets/admin/js/themeColors.js')}}"></script>
+
+        <!-- Switcher-Styles js -->
+        <script src="{{asset('assets/admin/js/switcher-styles.js')}}"></script>
+
+        <!-- Custom js-->
+        <script src="{{asset('assets/admin/js/custom.js')}}"></script>
+        <!-- poup add and cancel -->
+
+        <script src="{{asset('assets/admin/popup.js')}}"></script>
 
 
     @yield('custom_js')
