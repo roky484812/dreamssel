@@ -45,7 +45,7 @@
             <div class="col-sm-6 col-md-6">
                 <div class="mb-3">
                     <label class="form-label" for="password">Password</label>
-                    <input type="password" class="form-control  @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required>
+                    <input type="password" class="new-pass form-control  @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required>
                     @error('password')
                         <p class="invalid-feedback">{{$errors->first('password')}}</p>
                     @enderror
@@ -54,7 +54,7 @@
             <div class="col-sm-6 col-md-6">
                 <div class="mb-3">
                     <label class="form-label" for="c_password">Confirm Password</label>
-                    <input type="password" class="form-control  @error('password_confirmation') is-invalid @enderror" id="c_password" name="password_confirmation" placeholder="Confirm Password" required>
+                    <input type="password" class="conf-pass form-control  @error('password_confirmation') is-invalid @enderror" id="c_password" name="password_confirmation" placeholder="Confirm Password" required>
                     @error('password_confirmation')
                         <p class="invalid-feedback">{{$errors->first('password_confirmation')}}</p>
                     @enderror
