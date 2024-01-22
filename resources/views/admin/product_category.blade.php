@@ -111,7 +111,8 @@
 <!-- Category add modal -->
 <div class="modal fade" id="addproduct" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <form method="POST" class="modal-content">
+        <form action="{{route('admin.product.category.add')}}" method="POST" class="modal-content">
+            @csrf
             <div class="modal-header">
                 <h1 class="modal-title fs-5">Add Category</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -119,12 +120,12 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="category" class="form-label">Category Title</label>
-                    <input type="text" name="category" class="form-control" id="category" placeholder="Enter Category Title">
+                    <input type="text" name="category_name" class="form-control" id="category" placeholder="Enter Category Title">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add Category</button>
+                <button type="submit" class="btn btn-primary">Add Category</button>
             </div>
         </form>
     </div>
