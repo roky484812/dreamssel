@@ -294,17 +294,12 @@
                         <ul class="side-menu">
                             <li class="slide">
                                 <a class="side-menu__item @if ($active=='dashboard') active @endif" data-bs-toggle="slide" href="{{route('admin.dashboard')}}">
-
-
-
                                     <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                                         <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                     </svg>
-
-
                                     <span class="side-menu__label">Dashboard</span></a>
 
                             </li>
@@ -323,28 +318,46 @@
                             </li>
 
 
-
-                            <li class="slide">
-                                <a class="side-menu__item @if ($active=='product') active @endif" data-bs-toggle="slide" href="{{route('admin.productManagement')}}">
+                            <li class="slide is-expanded">
+                                <a class="side-menu__item @if ($active=='product' || $active == 'product_add' || $active = 'product_category') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="side-menu__icon">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                     </svg>
-                                    <span class="side-menu__label">Product Management</span>
-                                </a>
+                                    <span class="side-menu__label">Product Management</span><i class="angle fe fe-chevron-right"></i></a>
+                                <ul class="slide-menu" style="display: none;">
+                                    <li class="side-menu-label1">
+                                        <a href="javascript:void(0)">Product</a>
+                                    </li>
+                                    <li>
+                                        <a class="slide-item @if ($active=='product') active @endif" href="{{route('admin.productManagement')}}">
+                                            <span>Search Product</span></a>
+                                        </li>
+                                    <li>
+                                        <a class="slide-item @if ($active=='product_add') active @endif" href="{{route('admin.product.addView')}}">
+                                            <span>Add product</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="slide-item @if ($active == 'product_category') active @endif" href="index3.html">
+                                            <span>Category</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
 
                             <li class="slide">
                                 <a class="side-menu__item @if ($active=='announcement') active @endif" data-bs-toggle="slide" href="{{route('admin.announcement.list')}}">
                                
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="side-menu__icon">
-<path d="M4 13.9999L5.57465 20.2985C5.61893 20.4756 5.64107 20.5642 5.66727 20.6415C5.92317 21.397 6.60352 21.9282 7.39852 21.9933C7.4799 21.9999 7.5712 21.9999 7.75379 21.9999C7.98244 21.9999 8.09677 21.9999 8.19308 21.9906C9.145 21.8982 9.89834 21.1449 9.99066 20.193C10 20.0967 10 19.9823 10 19.7537V5.49991M18.5 13.4999C20.433 13.4999 22 11.9329 22 9.99991C22 8.06691 20.433 6.49991 18.5 6.49991M10.25 5.49991H6.5C4.01472 5.49991 2 7.51463 2 9.99991C2 12.4852 4.01472 14.4999 6.5 14.4999H10.25C12.0164 14.4999 14.1772 15.4468 15.8443 16.3556C16.8168 16.8857 17.3031 17.1508 17.6216 17.1118C17.9169 17.0756 18.1402 16.943 18.3133 16.701C18.5 16.4401 18.5 15.9179 18.5 14.8736V5.1262C18.5 4.08191 18.5 3.55976 18.3133 3.2988C18.1402 3.05681 17.9169 2.92421 17.6216 2.88804C17.3031 2.84903 16.8168 3.11411 15.8443 3.64427C14.1772 4.55302 12.0164 5.49991 10.25 5.49991Z" />
-</svg>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="side-menu__icon">
+                                    <path d="M4 13.9999L5.57465 20.2985C5.61893 20.4756 5.64107 20.5642 5.66727 20.6415C5.92317 21.397 6.60352 21.9282 7.39852 21.9933C7.4799 21.9999 7.5712 21.9999 7.75379 21.9999C7.98244 21.9999 8.09677 21.9999 8.19308 21.9906C9.145 21.8982 9.89834 21.1449 9.99066 20.193C10 20.0967 10 19.9823 10 19.7537V5.49991M18.5 13.4999C20.433 13.4999 22 11.9329 22 9.99991C22 8.06691 20.433 6.49991 18.5 6.49991M10.25 5.49991H6.5C4.01472 5.49991 2 7.51463 2 9.99991C2 12.4852 4.01472 14.4999 6.5 14.4999H10.25C12.0164 14.4999 14.1772 15.4468 15.8443 16.3556C16.8168 16.8857 17.3031 17.1508 17.6216 17.1118C17.9169 17.0756 18.1402 16.943 18.3133 16.701C18.5 16.4401 18.5 15.9179 18.5 14.8736V5.1262C18.5 4.08191 18.5 3.55976 18.3133 3.2988C18.1402 3.05681 17.9169 2.92421 17.6216 2.88804C17.3031 2.84903 16.8168 3.11411 15.8443 3.64427C14.1772 4.55302 12.0164 5.49991 10.25 5.49991Z" />
+                                    </svg>
                                     <span class="side-menu__label">Announcement</span>
                                 </a>
                             </li>
 
                         </ul>
+                        
                         <div class="app-sidebar-help">
                             <div class="dropdown text-center">
                                 <div class="help d-flex">
