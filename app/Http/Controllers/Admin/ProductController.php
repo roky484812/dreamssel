@@ -54,4 +54,16 @@ class ProductController extends Controller
         }
     }
 
+    public function deleteCategory(Request $req){
+        $req->validate([
+            'id'=> 'required|exists:product_categories,id'
+        ]);
+        $delete = Product_category::whereId($req->input('id'))->delete();
+        if($delete){
+            return redirect()->back()->with('success', 'Category deleted successfully.');
+        }else{
+            return redirect()->back()->with('error','Can not delete category. Something went wrong.');
+        }
+    }
+
 }
