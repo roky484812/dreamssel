@@ -42,7 +42,7 @@
                                             <div class="row">
                                                 @foreach ($announcements as $announcement)
                                                     <div class="col-md-6 p-2">
-                                                        <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start active">
+                                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
                                                             <div class="d-flex w-100 justify-content-between">
                                                                 <h5 class="mb-4">{{ $announcement['title'] }}</h5>
                                                                 <small>{{ \Carbon\Carbon::createFromDate($announcement['created_at'])->diffForHumans() }}</small>
@@ -50,9 +50,8 @@
                                                             <div class="d-flex w-100 justify-content-between">
                                                                 <p class="mb-1">{{ $announcement['short_description'] }}</p>
                                                                 <div class="text-right">
-                                                                    <form action="{{route('admin.announcement.updateView', ['announcement_id'=> $announcement['id']])}}" method="GET">
-                                                                        <button class="btn text-warning border btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                                                    </form>
+                                                                        <a href="{{route('admin.announcement.updateView', ['announcement_id'=> $announcement['id']])}}" class="btn text-warning border btn-sm m-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                                    
                                                                     <form action="{{route('admin.announcement.delete')}}" method="POST">
                                                                         @method('DELETE')
                                                                         @csrf
@@ -61,13 +60,13 @@
                                                                     </form>
                                                                 </div>
                                                             </div>
-                                                        </a>
+                                                        </div>
                                                     </div>
                                                 @endforeach
                                                 
                                             </div>
                                         </div>
-                                            {{$announcements->links()}}
+                                        {{$announcements->links()}}
                                     </div>
                                 </div>
                             </div>
