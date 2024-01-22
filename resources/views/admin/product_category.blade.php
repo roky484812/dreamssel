@@ -74,8 +74,12 @@
                                                                 <td>{{$index+1}}</td>
                                                                 <td>{{$category['category_name']}}</td>
                                                                 <td>
-                                                                    <button data-bs-toggle="modal" data-bs-target="#editproduct_{{$category['id']}}" class="btn btn-warning"></button>
-                                                                    <a href="#" class="btn btn-danger"></a>
+                                                                    <button data-bs-toggle="modal" data-bs-target="#editproduct_{{$category['id']}}" class="btn border border-1 text-warning btn-sm mx-1">
+                                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                                    </button>
+                                                                    <a href="#" class="btn border border-1 text-danger btn-sm mx-1">
+                                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                    </a>
                                                                     <div class="modal fade" id="editproduct_{{$category['id']}}" tabindex="-1" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered">
                                                                             <form method="POST" class="modal-content" action="{{route('admin.product.category.update')}}">
