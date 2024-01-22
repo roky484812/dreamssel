@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product_category;
 use Illuminate\Http\Request;
+use Intervention\Image\Colors\Rgb\Channels\Red;
 
 class ProductController extends Controller
 {
@@ -37,4 +38,20 @@ class ProductController extends Controller
             return redirect()->back()->with('error', "Can't create category. Something went wrong.");
         }
     }
+
+    public function editCategory(Request $req){
+        $req->validate([
+            'id'=> 'required|exists:product_categories,id',
+            'category'=> 'required|max:50'
+        ]);
+        $update = Product_category::whereId($req->input('id'))->update([
+            'category_name'=> $req->input('category')
+        ]);
+        if($update){
+            return redirect()->back()->with('success', 'Category updated successfully.');
+        }else{
+            return redirect()->back()->with('error', "Can not update category. Something went wrong.");
+        }
+    }
+
 }

@@ -69,6 +69,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::get('/product/update', 'editProductPage')->name('admin.product.updateView');
         Route::get('/product/category', 'categoryPage')->name('admin.product.categoryView');
         Route::post('/product/category/add', 'addCategory')->name('admin.product.category.add');
+        Route::put('/product/category/update', 'editCategory')->name('admin.product.category.update');
     });
 });
 Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){

@@ -74,11 +74,11 @@
                                                                 <td>{{$index+1}}</td>
                                                                 <td>{{$category['category_name']}}</td>
                                                                 <td>
-                                                                    <button data-bs-toggle="modal" data-bs-target="#editproduct_1" class="btn btn-warning"></button>
+                                                                    <button data-bs-toggle="modal" data-bs-target="#editproduct_{{$category['id']}}" class="btn btn-warning"></button>
                                                                     <a href="#" class="btn btn-danger"></a>
-                                                                    <div class="modal fade" id="editproduct_1" tabindex="-1" aria-hidden="true">
+                                                                    <div class="modal fade" id="editproduct_{{$category['id']}}" tabindex="-1" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered">
-                                                                            <form method="POST" class="modal-content">
+                                                                            <form method="POST" class="modal-content" action="{{route('admin.product.category.update')}}">
                                                                                 @csrf
                                                                                 @method('PUT')
                                                                                 <input type="hidden" name="id" value="{{$category['id']}}">
@@ -87,17 +87,17 @@
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
-                                                                                        <div class="mb-3">
-                                                                                            <label for="category" class="form-label">Category Title</label>
-                                                                                            <input type="text" name="category" value="{{$category['category_name']}}" class="form-control @error('category') is-invalid @enderror" id="category" placeholder="Enter Category Title">
-                                                                                            @error('category')
-                                                                                                <p class="invalid-feedback">{{$message}}</p>
-                                                                                            @enderror
-                                                                                        </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="category" class="form-label">Category Title</label>
+                                                                                        <input type="text" name="category" value="{{$category['category_name']}}" class="form-control @error('category') is-invalid @enderror" id="category" placeholder="Enter Category Title">
+                                                                                        @error('category')
+                                                                                            <p class="invalid-feedback">{{$message}}</p>
+                                                                                        @enderror
+                                                                                    </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                                    <button type="button" class="btn btn-primary">Update Category</button>
+                                                                                    <button type="submit" class="btn btn-primary">Update Category</button>
                                                                                 </div>
                                                                             </form>
                                                                         </div>
