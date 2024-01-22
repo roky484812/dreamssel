@@ -61,39 +61,54 @@
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>data</td>
-                                                        <td>
-                                                            <button data-bs-toggle="modal" data-bs-target="#editproduct_1" class="btn btn-warning"></button>
-                                                            <a href="#" class="btn btn-danger"></a>
-                                                            <div class="modal fade" id="editproduct_1" tabindex="-1" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered">
-                                                                    <form method="POST" class="modal-content">
-                                                                        @csrf
-                                                                        @method('PUT')
-                                                                        <div class="modal-header">
-                                                                            <h1 class="modal-title fs-5">Update Category</h1>
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                                <div class="mb-3">
-                                                                                    <label for="category" class="form-label">Category Title</label>
-                                                                                    <input type="text" name="category" class="form-control" id="category" placeholder="Enter Category Title">
+                                                @if (!count($categories))
+                                                    <tbody>
+                                                        <tr>
+                                                            <td colspan="3" class="text-center text-muted">No data found!</td>
+                                                        </tr>
+                                                    </tbody>
+                                                @else
+                                                    <tbody>
+                                                        @foreach ($categories as $index => $category)
+                                                            <tr>
+                                                                <td>{{$index+1}}</td>
+                                                                <td>{{$category['category_name']}}</td>
+                                                                <td>
+                                                                    <button data-bs-toggle="modal" data-bs-target="#editproduct_1" class="btn btn-warning"></button>
+                                                                    <a href="#" class="btn btn-danger"></a>
+                                                                    <div class="modal fade" id="editproduct_1" tabindex="-1" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered">
+                                                                            <form method="POST" class="modal-content">
+                                                                                @csrf
+                                                                                @method('PUT')
+                                                                                <input type="hidden" name="id" value="{{$category['id']}}">
+                                                                                <div class="modal-header">
+                                                                                    <h1 class="modal-title fs-5">Update Category</h1>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
+                                                                                <div class="modal-body">
+                                                                                        <div class="mb-3">
+                                                                                            <label for="category" class="form-label">Category Title</label>
+                                                                                            <input type="text" name="category" value="{{$category['category_name']}}" class="form-control @error('category') is-invalid @enderror" id="category" placeholder="Enter Category Title">
+                                                                                            @error('category')
+                                                                                                <p class="invalid-feedback">{{$message}}</p>
+                                                                                            @enderror
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                    <button type="button" class="btn btn-primary">Update Category</button>
+                                                                                </div>
+                                                                            </form>
                                                                         </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                            <button type="button" class="btn btn-primary">Update Category</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                @endif
                                             </table>
+                                            {{$categories->links()}}
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +135,10 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="category" class="form-label">Category Title</label>
-                    <input type="text" name="category_name" class="form-control" id="category" placeholder="Enter Category Title">
+                    <input type="text" name="category_name" class="form-control @error('category_name') is-invalid @enderror" id="category" placeholder="Enter Category Title">
+                    @error('category_name')
+                        <p class="invalid-feedback">{{$message}}</p>
+                    @enderror
                 </div>
             </div>
             <div class="modal-footer">

@@ -21,7 +21,8 @@ class ProductController extends Controller
     }
 
     public function categoryPage(){
-        return view('admin.product_category');
+        $category = Product_category::paginate(20);
+        return view('admin.product_category', ['categories'=> $category]);
     }
     
     public function addCategory(Request $req){
