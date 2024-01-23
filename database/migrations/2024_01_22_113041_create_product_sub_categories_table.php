@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('sub_category_name');
+            $table->string('sub_category_name', 50);
             $table->integer('category_id');
         });
     }

@@ -80,4 +80,19 @@ class ProductController extends Controller
 
         return view('admin.product_sub_category', ['subcategories'=> $sub_category_paginate, 'categories'=> $categories]);
     }
+
+    public function addSubcategory(Request $req){
+        $req->validate([
+            'sub_category_name'=> 'required|max:50',
+            'category'=> 'required|exists:product_categories,id'
+        ]);
+        $sub_category = new Product_sub_category();
+        $sub_category->sub_category_name = $req->input('sub_category_name');
+        $sub_category->category_id = $req->input('category');
+        if($sub_category->save()){
+            return redirect()->back()->with('success', 'New Sub-Category created successfully.');
+        }else{
+            return redirect()->back()->with('error', 'Can not create subcataegory.');
+        }
+    }
 }

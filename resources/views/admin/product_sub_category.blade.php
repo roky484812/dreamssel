@@ -74,6 +74,7 @@
                                                             <tr>
                                                                 <td>{{$index+1}}</td>
                                                                 <td>{{$subcategory['sub_category_name']}}</td>
+                                                                <td>{{$subcategory['category_name']}}</td>
                                                                 <td>
                                                                     <button data-bs-toggle="modal" data-bs-target="#editproduct_{{$subcategory['id']}}" class="btn border border-1 text-warning btn-sm mx-1">
                                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -132,7 +133,43 @@
     </div>
 </div>
 
-
+<!-- SubCategory add modal -->
+<div class="modal fade" id="addproduct" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="{{route('admin.product.subcategory.add')}}" method="POST" class="modal-content">
+            @csrf
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Add New Sub Category</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="subcategory" class="form-label">Sub-Category Title</label>
+                    <input type="text" name="sub_category_name" class="form-control @error('sub_category_name') is-invalid @enderror" id="subcategory" placeholder="Enter Sub-Category Title">
+                    @error('sub_category_name')
+                        <p class="invalid-feedback">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select name="category" id="category" class="form-control select2">
+                        <option>Select Category</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category['id']}}">{{$category['category_name']}}</option>
+                        @endforeach
+                    </select>
+                    @error('category')
+                        <p class="invalid-feedback">{{$message}}</p>
+                    @enderror
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Sub-Category</button>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
 @section('custom_js')
     @include('admin.widgets.alert')
