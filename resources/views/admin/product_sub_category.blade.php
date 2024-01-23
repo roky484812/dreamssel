@@ -79,7 +79,7 @@
                                                                     <button data-bs-toggle="modal" data-bs-target="#editproduct_{{$subcategory['id']}}" class="btn border border-1 text-warning btn-sm mx-1">
                                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                                     </button>
-                                                                    <form action="{{route('admin.product.category.delete')}}" class="d-inline-block" method="POST">
+                                                                    <form action="{{route('admin.product.subcategory.delete')}}" class="d-inline-block" method="POST">
                                                                         @csrf
                                                                         @method('DELETE')
                                                                         <input type="hidden" name="id" value="{{$subcategory['id']}}">
