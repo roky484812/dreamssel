@@ -71,6 +71,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::post('/product/category/add', 'addCategory')->name('admin.product.category.add');
         Route::put('/product/category/update', 'editCategory')->name('admin.product.category.update');
         Route::delete('/product/category/delete', 'deleteCategory')->name('admin.product.category.delete');
+        Route::get('/product/subcategroy', 'sub_categoryPage')->name('admin.product.subcategoryView');
     });
 });
 Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){

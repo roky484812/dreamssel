@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product_category;
+use App\Models\Product_sub_category;
 use Illuminate\Http\Request;
 use Intervention\Image\Colors\Rgb\Channels\Red;
 
@@ -66,4 +67,17 @@ class ProductController extends Controller
         }
     }
 
+    public function sub_categoryPage(Request $req){
+        $req->validate([
+            'category_id'=> 'nullable|exists:product_categories,id'
+        ]);
+        $sub_category = Product_sub_category::select('product_sub_categories.*', 'product_categories.category_name')->leftJoin('product_categories', 'product_categories.id', 'product_sub_categories.category_id');
+        if($req->input('category_id')){
+            $sub_category->where('category_id', $req->input('category_id'));
+        }
+        $sub_category_paginate = $sub_category->paginate(20);
+        $categories = Product_category::get();
+
+        return view('admin.product_sub_category', ['subcategories'=> $sub_category_paginate, 'categories'=> $categories]);
+    }
 }
