@@ -95,4 +95,21 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Can not create subcataegory.');
         }
     }
+
+    public function updateSubcategory(Request $req){
+        $req->validate([
+            'id'=> 'required|exists:product_sub_categories,id',
+            'sub_category'=> 'required|max:50',
+            'category_id'=> 'required|exists:product_categories,id'
+        ]);
+        $update = Product_sub_category::whereId($req->input('id'))->update([
+            'sub_category_name'=> $req->input('sub_category'),
+            'category_id'=> $req->input('category_id')
+        ]);
+        if($update){
+            return redirect()->back()->with('success', 'New Sub-Category updated successfully.');
+        }else{
+            return redirect()->back()->with('error', 'Can not update subcataegory.');
+        }
+    }
 }

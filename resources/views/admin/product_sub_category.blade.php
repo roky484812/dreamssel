@@ -89,7 +89,7 @@
                                                                     </form>
                                                                     <div class="modal fade" id="editproduct_{{$subcategory['id']}}" tabindex="-1" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered">
-                                                                            <form method="POST" class="modal-content" action="{{route('admin.product.category.update')}}">
+                                                                            <form method="POST" class="modal-content" action="{{route('admin.product.subcategory.update')}}">
                                                                                 @csrf
                                                                                 @method('PUT')
                                                                                 <input type="hidden" name="id" value="{{$subcategory['id']}}">
@@ -99,9 +99,23 @@
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <div class="mb-3">
-                                                                                        <label for="category" class="form-label">Category Title</label>
-                                                                                        <input type="text" name="category" value="{{$subcategory['sub_category_name']}}" class="form-control @error('category') is-invalid @enderror" id="category" placeholder="Enter Category Title">
-                                                                                        @error('category')
+                                                                                        <label for="sub_category" class="form-label">Sub-Category Title</label>
+                                                                                        <input type="text" name="sub_category" value="{{$subcategory['sub_category_name']}}" class="form-control @error('sub_category') is-invalid @enderror" id="sub_category" placeholder="Enter Category Title">
+                                                                                        @error('sub_category')
+                                                                                            <p class="invalid-feedback">{{$message}}</p>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="category" class="form-label">Category</label>
+                                                                                        <select name="category_id" id="category" class="select2 form-control @error('category_id') is-invalid @enderror">
+                                                                                            <option>Select Category</option>
+                                                                                            @foreach ($categories as $category)
+                                                                                                <option value="{{$category['id']}}" @if ($subcategory['category_id'] == $category['id']) selected @endif>
+                                                                                                    {{$category['category_name']}}
+                                                                                                </option>
+                                                                                            @endforeach
+                                                                                        </select>
+                                                                                        @error('category_id')
                                                                                             <p class="invalid-feedback">{{$message}}</p>
                                                                                         @enderror
                                                                                     </div>
