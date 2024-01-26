@@ -308,7 +308,7 @@
   
       $(document).ready(function() {
         // Initialize Select2
-        $('.select2').select2({
+        $('.tag-management').select2({
             tags: true, // Enable tags
             tokenSeparators: [',', ' '], // Allow comma or space to create tags
         });
@@ -321,7 +321,7 @@
                 var tagValue = $(this).val().trim();
                 if (tagValue !== '') {
                     // Add the tag to the select box
-                    $('.select2').append(new Option(tagValue, tagValue, true, true)).trigger('change');
+                    $('.tag-management').append(new Option(tagValue, tagValue, true, true)).trigger('change');
                     // Clear the input field
                     $(this).val('');
                 }

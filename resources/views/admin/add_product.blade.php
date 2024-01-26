@@ -224,40 +224,12 @@
                                             <div class="add-category">
                                                 <label class="form-label">Select Tag</label>
 
-                                                <!-- category adding popup -->
-                                                <div class="form-group add-close-label" id="add-category-input-3">
-                                                    <input type="text" class="form-control add-select-category"
-                                                        placeholder="Add your Category">
-                                                    <button class="add-button btn-add-3">Add</button>
-                                                    <button class="cancel-button btn-cancel-3">Cancel</button>
-                                                </div>
-                                                <!-- category adding popup end -->
-                                                <svg onclick="openPopup3()" class="add-category-icon"
-                                                    xmlns="http://www.w3.org/2000/svg" height="16" width="14"
-                                                    viewBox="0 0 448 512"
-                                                    fill="#6A983C"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                                    <path
-                                                        d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
-                                                </svg>
                                             </div>
+                                            <input id="tagInput" type="text" class="form-control" >
 
-                                            <select class="form-control select2" data-placeholder="Choose Browser"
+                                            <select class="form-control tag-management select2" data-placeholder="Choose Browser"
                                                 multiple>
-                                                <option value="Firefox">
-                                                    Firefox
-                                                </option>
-                                                <option value="Chrome selected">
-                                                    Chrome
-                                                </option>
-                                                <option value="Safari">
-                                                    Safari
-                                                </option>
-                                                <option selected value="Opera">
-                                                    Opera
-                                                </option>
-                                                <option value="Internet Explorer">
-                                                    Internet Explorer
-                                                </option>
+                                                
                                             </select>
                                         </div>
 

@@ -22,7 +22,7 @@ class AuthController extends Controller
             $route = $this->redirectDash();
             return redirect($route);
         }
-        
+
         return view('login');
     }
 
@@ -77,7 +77,8 @@ class AuthController extends Controller
         }
     }
 
-    public function send_mail($mail, $sub, $title){
+    public function send_mail($mail, $sub, $title): int|string
+    {
         $token = Str::random(32);
         $message = [];
         $message['subject'] = $sub;
@@ -91,7 +92,8 @@ class AuthController extends Controller
         }
     }
 
-    public function email_verify(Request $req){
+    public function email_verify(Request $req): string
+    {
         $temp_user = Temp_user::where('token', $req->input('token'))->first();
         if($temp_user){
             $localDateTime = now()->timezone('Asia/Dhaka')->format('Y-m-d H:i:s');
@@ -109,7 +111,7 @@ class AuthController extends Controller
             }else{
                 return 'Something went wrong.';
             }
-            
+
         }else{
             return "Can't verify your email address. Maybe your token is expired or already been verified.";
         }
