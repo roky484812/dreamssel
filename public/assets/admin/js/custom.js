@@ -306,29 +306,7 @@
       });
 
   
-      $(document).ready(function() {
-        // Initialize Select2
-        $('.tag-management').select2({
-            tags: true, // Enable tags
-            tokenSeparators: [',', ' '], // Allow comma or space to create tags
-        });
-
-        // Handle input field events
-        $('#tagInput').on('keypress', function(event) {
-            if (event.which === 13 || event.which === 32 || event.which === 44) {
-                // Enter, space, or comma pressed
-                event.preventDefault();
-                var tagValue = $(this).val().trim();
-                if (tagValue !== '') {
-                    // Add the tag to the select box
-                    $('.tag-management').append(new Option(tagValue, tagValue, true, true)).trigger('change');
-                    // Clear the input field
-                    $(this).val('');
-                }
-            }
-        });
-    });
-
+     
 
 
    

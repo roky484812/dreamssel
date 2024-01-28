@@ -50408,6 +50408,14 @@ body.dark-mode.body-style1 footer.footer {
     cursor: pointer;
 }
 
+.select2-selection .select2-selection--single
+
+{
+    display: none;
+}
+.generate-full-input{
+    display: none;
+}
 
 
 /*# sourceMappingURL=style.css.map */

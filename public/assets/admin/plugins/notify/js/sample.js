@@ -32,7 +32,7 @@
 
 		 function not1(){
             notif({
-				msg: "<b>Success:</b> Well done Details Submitted Successfully",
+				msg: "<b>Success:</b> Well done Details Generated Successfully",
 				type: "success"
 			});
         }
@@ -69,6 +69,17 @@
 				autohide: false
 			});
         }
+
+        function invalid(){
+          notif({
+      type: "error",
+      msg: "<b>Error: </b>Make sure you have written something in the input field",
+      position: "center",
+      width: 500,
+      height: 60,
+      autohide: false
+    });
+      }
 		function not6(){
 			notif({
 				type: "warning",
