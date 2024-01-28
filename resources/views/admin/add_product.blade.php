@@ -73,13 +73,13 @@
 
                                                 <label class="form-label text-dark">Product Description</label>
 
-                                                <div class="card-body">
+                                                
                                                     <div class="ql-wrapper ql-wrapper-demo bg-light">
                                                         <div id="quillEditor">
 
                                                         </div>
                                                     </div>
-                                                </div>
+                                               
 
                                             </div>
                                         </div>
@@ -93,20 +93,7 @@
                                                 <label class="form-label">Select Category</label>
 
                                                 <!-- category adding popup -->
-                                                <div class="form-group add-close-label" id="add-category-input-1">
-                                                    <input type="text" class="form-control add-select-category"
-                                                        placeholder="Add your Category">
-                                                    <button class=" add-button btn-add-1">Add</button>
-                                                    <button class="cancel-button btn-cancel-1">Cancel</button>
-                                                </div>
-                                                <!-- category adding popup end -->
-                                                <svg onclick="openPopup1()" class="add-category-icon"
-                                                    xmlns="http://www.w3.org/2000/svg" height="16" width="14"
-                                                    viewBox="0 0 448 512"
-                                                    fill="#6A983C"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                                    <path
-                                                        d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
-                                                </svg>
+                                                
                                             </div>
                                             <div class="col-md-12">
                                                 <select class="search_test">
@@ -150,20 +137,7 @@
                                                 <label class="form-label">Select Sub Category</label>
 
                                                 <!-- category adding popup -->
-                                                <div class="form-group add-close-label" id="add-category-input-2">
-                                                    <input type="text" class="form-control add-select-category"
-                                                        placeholder="Add your Category">
-                                                    <button class="add-button btn-add-2">Add</button>
-                                                    <button class="cancel-button btn-cancel-2">Cancel</button>
-                                                </div>
-                                                <!-- category adding popup end -->
-                                                <svg onclick="openPopup2()" class="add-category-icon"
-                                                    xmlns="http://www.w3.org/2000/svg" height="16" width="14"
-                                                    viewBox="0 0 448 512"
-                                                    fill="#6A983C"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                                    <path
-                                                        d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
-                                                </svg>
+                                                
                                             </div>
                                             <div class="col-md-12">
                                                 <select class="search_test">
@@ -219,49 +193,39 @@
                                             </div>
                                         </div>
 
-                                        <div class="mb-0">
+                                        <div class="attribute-input-wrapper mb-3">
 
                                             <div class="add-category">
-                                                <label class="form-label">Select Tag</label>
+                                                <label class="form-label">Product attributes</label>
 
-                                                <!-- category adding popup -->
-                                                <div class="form-group add-close-label" id="add-category-input-3">
-                                                    <input type="text" class="form-control add-select-category"
-                                                        placeholder="Add your Category">
-                                                    <button class="add-button btn-add-3">Add</button>
-                                                    <button class="cancel-button btn-cancel-3">Cancel</button>
-                                                </div>
-                                                <!-- category adding popup end -->
-                                                <svg onclick="openPopup3()" class="add-category-icon"
-                                                    xmlns="http://www.w3.org/2000/svg" height="16" width="14"
-                                                    viewBox="0 0 448 512"
-                                                    fill="#6A983C"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
-                                                    <path
-                                                        d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
-                                                </svg>
                                             </div>
-
-                                            <select class="form-control select2" data-placeholder="Choose Browser"
+                                            
+                                            <select class="form-control tag-management select2" data-placeholder="Select attribute"
                                                 multiple>
-                                                <option value="Firefox">
-                                                    Firefox
-                                                </option>
-                                                <option value="Chrome selected">
-                                                    Chrome
-                                                </option>
-                                                <option value="Safari">
-                                                    Safari
-                                                </option>
-                                                <option selected value="Opera">
-                                                    Opera
-                                                </option>
-                                                <option value="Internet Explorer">
-                                                    Internet Explorer
-                                                </option>
+                                                
+                                                <option value="color">Color</option>
+                                                <option value="size">Size</option>
                                             </select>
+                                            <input id="tagInput" type="text" class="form-control mt-3" placeholder="Type to add your own..." > 
+
                                         </div>
 
-                                        <div class="mb-3 row">
+                                        <button type="button" class="btn btn-primary generate-attr-value-input mb-3">Generate</button>
+
+                                        <!-- Product details input generated -->
+                                       
+
+                                        <div class="attr-value-input">
+
+                                        </div>
+
+                                        <button type="button" class="btn btn-primary generate-full-input mb-3">Generate Variations</button>
+
+                                        <div class="generated-product-details mt-3">
+
+                                        </div>
+
+                                        <div class="mb-3 row mt-6">
                                             <label class="col-md-12 form-label">Select Country</label>
                                             <div class="col-md-12">
                                                 <select name="somename" class="form-control SlectBox"
@@ -324,12 +288,204 @@
             </div>
 @endsection
 @section('custom_js')
-    <!--Select2 js -->
+
+<script src="{{asset('assets/admin/plugins/notify/js/notifIt.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/notify/js/sample.js')}}"></script>
+
+<script>
+
+$(document).ready(function() {
+    // Initialize Select2
+    $('.tag-management').select2({
+        tags: true, // Enable tags
+        tokenSeparators: [',', ' '], // Allow comma or space to create tags
+    });
+
+    attributes = [];
+    var inputArrays = {};
+    var productDetailsDiv = $('.generated-product-details');
+
+    // Handle input field events
+    $('#tagInput').on('keypress', function(event) {
+        if (event.which === 13 || event.which === 32 || event.which === 44) {
+            // Enter, space, or comma pressed
+            event.preventDefault();
+            var tagValue = $(this).val().trim();
+            if (tagValue !== '') {
+                // Add the tag to the select box
+                $('.tag-management').append(new Option(tagValue, tagValue, true, true)).trigger('change');
+                attributes.push(tagValue);
+                console.log(attributes);
+                // Clear the input field
+                $(this).val('');
+            }
+        }
+    });
+
+    // Get the value of the title attribute from the li tags
+    function updateAttributes() {
+        attributes = [];
+        $('.select2-selection__choice').each(function() {
+            var tagValueIs = $(this).attr('title');
+            attributes.push(tagValueIs);
+        });
+        console.log(attributes);
+    }
+
+    // Listen for the tag removal event
+    $('.tag-management').on('select2:unselecting', function (e) {
+        var removedTag = e.params.args.data.text;
+        var index = attributes.indexOf(removedTag);
+        if (index !== -1) {
+            attributes.splice(index, 1);
+        }
+        console.log(attributes);
+    });
+
+    // Listen for initial tag selection
+    $('.tag-management').on('select2:select', function (e) {
+        updateAttributes();
+    });
+
+    // Listen for button click to generate HTML
+    $('.generate-attr-value-input').on('click', function() {
+        generateHTML();
+        generateButton();
+    });
+
+    $('.generate-full-input').on('click', function() {
+        generateFullInputArrays();
+        generateInputField();
+    });
+
+    // Function to generate HTML based on attributes array
+    function generateHTML() {
+        var html = '';
+        for (var i = 0; i < attributes.length; i++) {
+            html += '<div class="mb-0">';
+            html += '    <div class="add-category">';
+            html += '        <label class="form-label">' + attributes[i] + '</label>';
+            html += '    </div>';
+            html += '    <input id="tagInput-attr-value-' + (i + 1) + '" type="text" class="form-control" placeholder="' + attributes[i] + ' Values with Comma (,)">';
+          
+            html += '</div>';
+        }
+        // Append the generated HTML to a container (e.g., body)
+        $('.attr-value-input').append(html);
+    }
+    function generateButton()
+    {
+        if(attributes.length<1)
+        {
+            invalid();
+        }
+        else{
+            not1();
+
+
+            $('.generate-full-input').css('display','block');
+            $('.generate-attr-value-input').css('display','none');
+            $('.attribute-input-wrapper').css('display','none');
+        }
+        
+    }
+    function generateInputField()
+    {
+        if(inputArrays.length<1)
+        {
+            invalid();
+        }
+        else
+        {
+            not1();
+            $('.attr-value-input').css('display','none');
+            $('.generate-full-input').css('display','none');
+
+        }
+    }
+
+    
+
+
+    function generateFullInputArrays() {
+        $('[id^="tagInput-attr-value-"]').each(function() {
+            var inputId = $(this).attr('id');
+            var attributeName = inputId.replace('tagInput-attr-value-', '');
+            var values = $(this).val().split(',').map(function(value) {
+                return value.trim();
+            });
+
+            inputArrays[attributeName] = values;
+        });
+
+        console.log('Full Input Arrays:', inputArrays[1]);
+
+          // Clear previous HTML content
+          productDetailsDiv.empty();
+
+// Generate HTML for each combination
+        generateHTMLForCombinations(inputArrays, Object.keys(inputArrays), 0, []);
+
+    }
+
+
+     // Recursive function to generate HTML for all combinations
+     function generateHTMLForCombinations(inputArrays, keys, index, currentCombination) {
+        if (index === keys.length) {
+            // All keys have been processed, generate HTML for the current combination
+            generateProductDetailsHTML(currentCombination);
+            return;
+        }
+
+        var currentKey = keys[index];
+        var currentArray = inputArrays[currentKey];
+
+        for (var i = 0; i < currentArray.length; i++) {
+            var newCombination = currentCombination.slice();
+            newCombination.push(currentArray[i]);
+            generateHTMLForCombinations(inputArrays, keys, index + 1, newCombination);
+        }
+    }
+
+    // Function to generate HTML for product details
+    function generateProductDetailsHTML(combination) {
+        var productDetailsHTML = '<div class="mb-0">';
+        productDetailsHTML += '    <div class="add-category">';
+        productDetailsHTML += '        <label class="form-label">' + combination + '</label>';
+        productDetailsHTML += '    </div>';
+        productDetailsHTML += '    <div class="row">';
+        productDetailsHTML += '    <div class="col-sm-4">';
+        productDetailsHTML += '    <input id="tagInput" type="number" class="form-control" placeholder="Stock">';
+        productDetailsHTML += '    </div>';
+        productDetailsHTML += '    <div class="col-sm-4">';
+        productDetailsHTML += '    <input id="tagInput" type="number" class="form-control" placeholder="Regular Price">';
+        productDetailsHTML += '    </div>';
+        productDetailsHTML += '    <div class="col-sm-4">';
+        productDetailsHTML += '    <input id="tagInput" type="number" class="form-control" placeholder="Distributor Price">';
+        productDetailsHTML += '    </div>';
+        productDetailsHTML += '    </div>';
+
+    
+
+        productDetailsHTML += '</div>';
+
+        // Append the generated HTML to the 'generated-product-details' div
+        productDetailsDiv.append(productDetailsHTML);
+    }
+});
+                                
+
+</script>
+
+
+
+<!--Select2 js -->
     <script src="{{asset('assets/admin/plugins/select2/select2.full.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/select2.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Include Select2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+    
 
 @endsection
