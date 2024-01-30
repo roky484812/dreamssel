@@ -54,7 +54,11 @@
                                     </div>
                                 </form>
 
-                                <form method="post" class="card">
+                                <form method="post" >
+
+                                <div class="card">
+
+                                
                                     <div class="card-header">
                                         <h3 class="card-title">Product Details</h3>
                                     </div>
@@ -193,37 +197,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="attribute-input-wrapper mb-3">
-
-                                            <div class="add-category">
-                                                <label class="form-label">Product attributes</label>
-
-                                            </div>
-                                            
-                                            <select class="form-control tag-management select2" data-placeholder="Select attribute"
-                                                multiple>
-                                                
-                                                <option value="color">Color</option>
-                                                <option value="size">Size</option>
-                                            </select>
-                                            <input id="tagInput" type="text" class="form-control mt-3" placeholder="Type to add your own..." > 
-
-                                        </div>
-
-                                        <button type="button" class="btn btn-primary generate-attr-value-input mb-3">Generate</button>
-
-                                        <!-- Product details input generated -->
-                                       
-
-                                        <div class="attr-value-input">
-
-                                        </div>
-
-                                        <button type="button" class="btn btn-primary generate-full-input mb-3">Generate Variations</button>
-
-                                        <div class="generated-product-details mt-3">
-
-                                        </div>
+                                        
 
                                         <div class="mb-3 row mt-6">
                                             <label class="col-md-12 form-label">Select Country</label>
@@ -265,15 +239,90 @@
 
 
                                         <div class="card-footer ">
+                                            <div class="row">
+
+                                            <div class=" col-sm-6 mb-3">
+
                                             <a href="sweet-altert.html" class="btn btn-secondary">Save to Draft</a>
+                                            </div>
+                                            <div class=" col-sm-6">
+
                                             <a href="javascript:void(0)" class="btn btn-primary float-end">Publish
                                                 Now</a>
+
+                                            </div>
+                                           
+                                          
+
+                                            </div>
+                                         
                                         </div>
 
 
                                         <!-- popup for adding item -->
 
 
+
+                                    </div>
+                                    </div>
+
+                                    <div class="card">
+
+                                    <div class="card-header">
+                                        <h3 class="card-title">Product attributes</h3>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                   
+
+                                    <div class="attribute-input-wrapper hide-attribute-selection mb-3">
+                                                <label class="form-label">Select attributes from below box</label>
+
+                                                <div class="row">
+                                                    <div class="col-sm-6 mb-3">
+
+                                                    <select class="form-control tag-management select2" data-placeholder="Select attribute"
+                                                multiple>
+                                                
+                                                <option value="color">Color</option>
+                                                <option value="size">Size</option>
+                                            </select>
+                                                    </div>
+
+                                                    <div class="col-sm-6 ">
+
+                                                    <input id="tagInput" type="text" class="form-control" placeholder="Type to add your own..." > 
+                                                    </div>
+                                                </div>
+                                           
+                                            
+
+                                        </div>
+
+                                        <button type="button" class="btn btn-primary hide-attribute-selection generate-attr-value-input mb-3 float-end">Generate</button>
+                                        <button type="button" class="btn btn-danger hide-attribute-selection back-to-attribute-selection mb-3">Back</button>
+
+                                        <!-- Product details input generated -->
+                                       
+
+                                        <div class="attr-value-input">
+
+                                        </div>
+
+                                       
+                                        <div class="generated-product-details mt-3">
+
+                                        </div>
+
+                                        <button type="button" class="btn btn-primary generate-full-input mb-3 mt-3 float-end">Generate Variations</button>
+                                        <button type="button" class="btn btn-danger second-back-attribute back-to-attribute-selection mt-3">back</button>
+
+
+                                        </div>
+
+                                        
+                                    
 
                                     </div>
                                 </form>
@@ -291,191 +340,9 @@
 
 <script src="{{asset('assets/admin/plugins/notify/js/notifIt.js')}}"></script>
 <script src="{{asset('assets/admin/plugins/notify/js/sample.js')}}"></script>
-
-<script>
-
-$(document).ready(function() {
-    // Initialize Select2
-    $('.tag-management').select2({
-        tags: true, // Enable tags
-        tokenSeparators: [',', ' '], // Allow comma or space to create tags
-    });
-
-    attributes = [];
-    var inputArrays = {};
-    var productDetailsDiv = $('.generated-product-details');
-
-    // Handle input field events
-    $('#tagInput').on('keypress', function(event) {
-        if (event.which === 13 || event.which === 32 || event.which === 44) {
-            // Enter, space, or comma pressed
-            event.preventDefault();
-            var tagValue = $(this).val().trim();
-            if (tagValue !== '') {
-                // Add the tag to the select box
-                $('.tag-management').append(new Option(tagValue, tagValue, true, true)).trigger('change');
-                attributes.push(tagValue);
-                console.log(attributes);
-                // Clear the input field
-                $(this).val('');
-            }
-        }
-    });
-
-    // Get the value of the title attribute from the li tags
-    function updateAttributes() {
-        attributes = [];
-        $('.select2-selection__choice').each(function() {
-            var tagValueIs = $(this).attr('title');
-            attributes.push(tagValueIs);
-        });
-        console.log(attributes);
-    }
-
-    // Listen for the tag removal event
-    $('.tag-management').on('select2:unselecting', function (e) {
-        var removedTag = e.params.args.data.text;
-        var index = attributes.indexOf(removedTag);
-        if (index !== -1) {
-            attributes.splice(index, 1);
-        }
-        console.log(attributes);
-    });
-
-    // Listen for initial tag selection
-    $('.tag-management').on('select2:select', function (e) {
-        updateAttributes();
-    });
-
-    // Listen for button click to generate HTML
-    $('.generate-attr-value-input').on('click', function() {
-        generateHTML();
-        generateButton();
-    });
-
-    $('.generate-full-input').on('click', function() {
-        generateFullInputArrays();
-        generateInputField();
-    });
-
-    // Function to generate HTML based on attributes array
-    function generateHTML() {
-        var html = '';
-        for (var i = 0; i < attributes.length; i++) {
-            html += '<div class="mb-0">';
-            html += '    <div class="add-category">';
-            html += '        <label class="form-label">' + attributes[i] + '</label>';
-            html += '    </div>';
-            html += '    <input id="tagInput-attr-value-' + (i + 1) + '" type="text" class="form-control" placeholder="' + attributes[i] + ' Values with Comma (,)">';
-          
-            html += '</div>';
-        }
-        // Append the generated HTML to a container (e.g., body)
-        $('.attr-value-input').append(html);
-    }
-    function generateButton()
-    {
-        if(attributes.length<1)
-        {
-            invalid();
-        }
-        else{
-            not1();
+<script src="{{asset('assets/admin/js/product-variation.js')}}"></script>
 
 
-            $('.generate-full-input').css('display','block');
-            $('.generate-attr-value-input').css('display','none');
-            $('.attribute-input-wrapper').css('display','none');
-        }
-        
-    }
-    function generateInputField()
-    {
-        if(inputArrays.length<1)
-        {
-            invalid();
-        }
-        else
-        {
-            not1();
-            $('.attr-value-input').css('display','none');
-            $('.generate-full-input').css('display','none');
-
-        }
-    }
-
-    
-
-
-    function generateFullInputArrays() {
-        $('[id^="tagInput-attr-value-"]').each(function() {
-            var inputId = $(this).attr('id');
-            var attributeName = inputId.replace('tagInput-attr-value-', '');
-            var values = $(this).val().split(',').map(function(value) {
-                return value.trim();
-            });
-
-            inputArrays[attributeName] = values;
-        });
-
-        console.log('Full Input Arrays:', inputArrays[1]);
-
-          // Clear previous HTML content
-          productDetailsDiv.empty();
-
-// Generate HTML for each combination
-        generateHTMLForCombinations(inputArrays, Object.keys(inputArrays), 0, []);
-
-    }
-
-
-     // Recursive function to generate HTML for all combinations
-     function generateHTMLForCombinations(inputArrays, keys, index, currentCombination) {
-        if (index === keys.length) {
-            // All keys have been processed, generate HTML for the current combination
-            generateProductDetailsHTML(currentCombination);
-            return;
-        }
-
-        var currentKey = keys[index];
-        var currentArray = inputArrays[currentKey];
-
-        for (var i = 0; i < currentArray.length; i++) {
-            var newCombination = currentCombination.slice();
-            newCombination.push(currentArray[i]);
-            generateHTMLForCombinations(inputArrays, keys, index + 1, newCombination);
-        }
-    }
-
-    // Function to generate HTML for product details
-    function generateProductDetailsHTML(combination) {
-        var productDetailsHTML = '<div class="mb-0">';
-        productDetailsHTML += '    <div class="add-category">';
-        productDetailsHTML += '        <label class="form-label">' + combination + '</label>';
-        productDetailsHTML += '    </div>';
-        productDetailsHTML += '    <div class="row">';
-        productDetailsHTML += '    <div class="col-sm-4">';
-        productDetailsHTML += '    <input id="tagInput" type="number" class="form-control" placeholder="Stock">';
-        productDetailsHTML += '    </div>';
-        productDetailsHTML += '    <div class="col-sm-4">';
-        productDetailsHTML += '    <input id="tagInput" type="number" class="form-control" placeholder="Regular Price">';
-        productDetailsHTML += '    </div>';
-        productDetailsHTML += '    <div class="col-sm-4">';
-        productDetailsHTML += '    <input id="tagInput" type="number" class="form-control" placeholder="Distributor Price">';
-        productDetailsHTML += '    </div>';
-        productDetailsHTML += '    </div>';
-
-    
-
-        productDetailsHTML += '</div>';
-
-        // Append the generated HTML to the 'generated-product-details' div
-        productDetailsDiv.append(productDetailsHTML);
-    }
-});
-                                
-
-</script>
 
 
 
