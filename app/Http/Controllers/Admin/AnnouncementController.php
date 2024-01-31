@@ -13,7 +13,7 @@ class AnnouncementController extends Controller
         $announcements = Announcement::paginate(10);
         return view('admin.announcement', ['announcements'=> $announcements]);
     }
-    
+
     public function add_announcement_view(){
         return view('admin.add_announcement');
     }
@@ -34,7 +34,7 @@ class AnnouncementController extends Controller
             return redirect()->back()->with('error', "Can't post new announcement. Something went wrong.");
         }
     }
-    
+
     public function delete_announcement(Request $req){
         $req->validate([
             'announcement_id'=> 'required|exists:announcements,id'
