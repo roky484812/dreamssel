@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\Dashboard as AdminDashboard;
+use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\AuthController;
@@ -67,6 +68,8 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::get('/product', 'ProductPage')->name('admin.productManagement');
         Route::get('/product/add', 'AddProductPage')->name('admin.product.addView');
         Route::get('/product/update', 'editProductPage')->name('admin.product.updateView');
+    });
+    Route::controller(ProductCategoryController::class)->group(function(){
         Route::get('/product/category', 'categoryPage')->name('admin.product.categoryView');
         Route::post('/product/category/add', 'addCategory')->name('admin.product.category.add');
         Route::put('/product/category/update', 'editCategory')->name('admin.product.category.update');

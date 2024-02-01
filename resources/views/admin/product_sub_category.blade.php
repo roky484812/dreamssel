@@ -138,8 +138,7 @@
                                                                                     <option>Select Category</option>
                                                                                     @foreach ($categories as $category)
                                                                                     <option value="{{$category['id']}}"
-                                                                                        @if
-                                                                                        ($subcategory['category_id']==$category['id'])
+                                                                                        @if ($subcategory['category_id']==$category['id'])
                                                                                         selected @endif>
                                                                                         {{$category['category_name']}}
                                                                                     </option>

@@ -49,7 +49,7 @@
                             </div>
                         </div>
                     </form>
-                    <form method="post">
+                    <form method="post" id="product_add">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Product Details</h3>
@@ -67,14 +67,17 @@
                                             <div id="quillEditor">
                                             </div>
                                         </div>
+                                        <textarea name="text" style="display:none" id="hidden-textarea"></textarea>
                                     </div>
                                 </div>
-                                <div class="mb-3 row">
-                                    <div class="add-category">
+                                <div class="form-group mt-3">
+                                    <label for="" class="form-label-text-dark">Product Short Description</label>
+                                    <textarea name="" id="" class="form-control" placeholder="enter product short description"></textarea>
+                                </div>
+                                <div class="row my-4">
+                                    <div class="col-md-4 col-sm-6">
                                         <label class="form-label">Select Category</label>
                                         <!-- category adding popup -->
-                                    </div>
-                                    <div class="col-md-12">
                                         <select class="search_test">
                                             <option class="hemant" selected value="saab">Saab</option>
                                             <option class="hemant" value="opel">Opel</option>
@@ -106,13 +109,9 @@
                                             <option value="mitsubishi">Mitsubishi</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="mb-3 row">
-                                    <div class="add-category">
+                                    <div class="col-md-4 col-sm-6">
                                         <label class="form-label">Select Sub Category</label>
                                         <!-- category adding popup -->
-                                    </div>
-                                    <div class="col-md-12">
                                         <select class="search_test">
                                             <option class="hemant" selected value="saab">Saab</option>
                                             <option class="hemant" value="opel">Opel</option>
@@ -146,52 +145,37 @@
                                             <option value="mitsubishi">Mitsubishi</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="wd-200 mg-b-30">
-                                    <label class="form-label">Select Updating Date</label>
-                                    <div class="input-group">
-                                        <div class="input-group-text">
-                                            <div class="">
-                                                <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="18"
-                                                    viewBox="0 0 24 24" width="18">
-                                                    <path d="M0 0h24v24H0V0z" fill="none" />
-                                                    <path
-                                                        d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 2v3H4V5h16zM4 21V10h16v11H4z" />
-                                                    <path d="M4 5.01h16V8H4z" opacity=".3" />
-                                                </svg>
-                                            </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Select Country</label>
+                                            <select name="somename" class="form-control SlectBox"
+                                                onclick="console.log($(this).val())"
+                                                onchange="console.log('change is firing')">
+                                                <!--placeholder-->
+                                                <option title="China product" value="china">China</option>
+                                                <option value="india">India</option>
+                                                <option value="bangladesh">Bangladesh</option>
+                                            </select>
                                         </div>
-                                        <input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text">
                                     </div>
                                 </div>
-                                <div class="mb-3 row mt-6">
-                                    <label class="col-md-12 form-label">Select Country</label>
-                                    <div class="col-md-12">
-                                        <select name="somename" class="form-control SlectBox"
-                                            onclick="console.log($(this).val())"
-                                            onchange="console.log('change is firing')">
-                                            <!--placeholder-->
-                                            <option title="China product" value="china">China</option>
-                                            <option value="india">India</option>
-                                            <option value="bangladesh">Bangladesh</option>
-                                        </select>
+                                <div class="row">
+                                    <div class="form-group col-md-3 col-sm-6">
+                                        <label class="form-label text-dark">Available Quantity</label>
+                                        <input type="number" class="form-control" placeholder="Number of Product">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-dark">Available Quantity</label>
-                                    <input type="number" class="form-control" placeholder="Number of Product">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-dark">Public Price</label>
-                                    <input type="number" class="form-control" placeholder="Price of product">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-dark">Distributor Price</label>
-                                    <input type="number" class="form-control" placeholder="Price for distributor">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-dark">Discount Price</label>
-                                    <input type="number" class="form-control" placeholder="Price after discount">
+                                    <div class="form-group col-md-3 col-sm-6">
+                                        <label class="form-label text-dark">Public Price</label>
+                                        <input type="number" class="form-control" placeholder="Price of product">
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-6">
+                                        <label class="form-label text-dark">Distributor Price</label>
+                                        <input type="number" class="form-control" placeholder="Price for distributor">
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-6">
+                                        <label class="form-label text-dark">Discount Price</label>
+                                        <input type="number" class="form-control" placeholder="Price after discount">
+                                    </div>
                                 </div>
                                 <div class="card-footer ">
                                     <div class="row">
@@ -241,7 +225,7 @@
                                     class="btn btn-primary generate-full-input mb-3 mt-3 float-end">Generate
                                     Variations</button>
                                 <button type="button"
-                                    class="btn btn-danger second-back-attribute back-to-attribute-selection mt-3">back</button>
+                                    class="btn btn-danger second-back-attribute back-to-attribute-selection mt-3">Back</button>
                             </div>
                         </div>
                     </form>
@@ -263,4 +247,19 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Include Select2 JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+<script>
+    $document.ready(function(){
+
+        var editor = new Quill('#quillEditor', {
+            modules: {
+                toolbar: toolbarOptions
+            },
+            theme: 'snow'
+        });
+
+        $("#product_add").submit(function() {
+            $("#hidden-textarea").val(editor.root.innerHTML);
+        });
+    });
+</script>
 @endsection
