@@ -15,16 +15,17 @@ class User_role_seeder extends Seeder
     {
         $roles = [
             [
-                'id'=> '1',
-                'role'=> 'admin'
-            ],[
-                'id'=> '2',
-                'role'=> 'editor'
-            ],[
-                'id'=> '3',
-                'role'=> 'distributor'
+                'id' => '1',
+                'role' => 'admin'
+            ], [
+                'id' => '2',
+                'role' => 'editor'
+            ], [
+                'id' => '3',
+                'role' => 'distributor'
             ]
         ];
+
         DB::table('user_roles')->insert($roles);
     }
 }

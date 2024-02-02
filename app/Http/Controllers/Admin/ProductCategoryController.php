@@ -111,4 +111,24 @@ class ProductCategoryController extends Controller
             return redirect()->back()->with('error', 'Can not delete subcataegory.');
         }
     }
+
+    public function subcategory_by_category($category_id){
+        // return $category_id;
+        if($category_id){
+
+            $sub_category = Product_sub_category::where('category_id', $category_id)->get();
+            if($sub_category){
+                return response()->json([
+                    'status'=> true,
+                    'sub_categories'=> $sub_category,
+                    'message'=> 'Sub-category fetched successfully.'
+                ]);
+            }else{
+                return response()->json([
+                    'status'=> false,
+                    'message'=> 'Something went wrong.'
+                ], 500);
+            }
+        }
+    }
 }

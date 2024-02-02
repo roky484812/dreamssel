@@ -67,6 +67,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     Route::controller(ProductController::class)->group(function(){
         Route::get('/product', 'ProductPage')->name('admin.productManagement');
         Route::get('/product/add', 'AddProductPage')->name('admin.product.addView');
+        Route::post('/product/add', 'AddProduct')->name('admin.product.add');
         Route::get('/product/update', 'editProductPage')->name('admin.product.updateView');
     });
     Route::controller(ProductCategoryController::class)->group(function(){
@@ -78,6 +79,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::post('/product/subcategory/add', 'addSubcategory')->name('admin.product.subcategory.add');
         Route::put('/product/subcategory/update', 'updateSubcategory')->name('admin.product.subcategory.update');
         Route::delete('/product/subcategory/delete', 'deleteSubcategory')->name('admin.product.subcategory.delete');
+        Route::get('/product/subcategory/{category_id?}', 'subcategory_by_category')->name('admin.product.subcategory.category');
     });
 });
 Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){

@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();            
             $table->string('username')->unique();
             $table->string('email')->unique();
-            $table->integer('role')->default(3);
+            $table->unsignedBigInteger('role')->default(3);
             $table->string('password');
             $table->string('token')->unique();
             $table->timestamps();
+            $table->foreign('role')->references('id')->on('user_roles');
         });
     }
 

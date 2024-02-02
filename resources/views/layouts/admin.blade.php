@@ -9,34 +9,35 @@
     <meta content="pirhotech - Bootstrap Webapp Responsive Dashboard Simple Admin Panel Premium HTML5 Template"
         name="description">
     <meta content="Spruko Technologies Private Limited" name="author">
-    <meta name="keywords" content="admin, admin template, dashboard, admin dashboard, bootstrap 5, responsive, clean, ui, admin panel, ui kit, responsive admin, application, bootstrap 4, flat, bootstrap5, admin dashboard template" />
+    <meta name="keywords"
+        content="admin, admin template, dashboard, admin dashboard, bootstrap 5, responsive, clean, ui, admin panel, ui kit, responsive admin, application, bootstrap 4, flat, bootstrap5, admin dashboard template" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Title -->
-    <title>Dreamssel | {{$title}}</title>
+    <title>Dreamssel | {{ $title }}</title>
 
     <!--Favicon -->
-    <link rel="icon" href="{{asset('assets/admin/images/brand/favicon.ico')}}" type="image/x-icon"/>
+    <link rel="icon" href="{{ asset('assets/admin/images/brand/favicon.ico') }}" type="image/x-icon" />
 
     <!-- selection jquery -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
 
 
     <!-- Bootstrap css -->
-    <link id="style" href="{{asset('assets/admin/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link id="style" href="{{ asset('assets/admin/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
 
     <!-- Style css -->
-    <link href="{{asset('assets/admin/css/style.css')}}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/css/style.css') }}" rel="stylesheet" />
 
     <!-- Plugin css -->
-    <link href="{{asset('assets/admin/css/plugin.css')}}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/css/plugin.css') }}" rel="stylesheet" />
 
     <!-- Animate css -->
-    <link href="{{asset('assets/admin/css/animated.css')}}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/css/animated.css') }}" rel="stylesheet" />
 
     <!---Icons css-->
-    <link href="{{asset('assets/admin/plugins/web-fonts/icons.css')}}" rel="stylesheet" />
-    <link href="{{asset('assets/admin/plugins/web-fonts/font-awesome/font-awesome.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/admin/plugins/web-fonts/plugin.css')}}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/plugins/web-fonts/icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/plugins/web-fonts/font-awesome/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/admin/plugins/web-fonts/plugin.css') }}" rel="stylesheet" />
     @yield('custom_css')
 </head>
 
@@ -45,7 +46,7 @@
     <!---Global-loader-->
 
     <div id="global-loader">
-        <img src="{{asset('assets/admin/images/svgs/loader.svg')}}" alt="loader">
+        <img src="{{ asset('assets/admin/images/svgs/loader.svg') }}" alt="loader">
     </div>
 
     <div class="page">
@@ -58,9 +59,9 @@
                         <div class="dropdown side-nav">
                             <div class="app-sidebar__toggle" data-bs-toggle="sidebar">
                                 <a class="open-toggle" href="javascript:void(0)">
-                                    <svg class="header-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
+                                    <svg class="header-icon" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <line x1="3" y1="12" x2="21" y2="12"></line>
                                         <line x1="3" y1="6" x2="21" y2="6"></line>
                                         <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -77,13 +78,13 @@
                             </div>
                         </div>
                         <a class="header-brand" href="index.html">
-                            <img src="{{asset('assets/admin//images/brand/lineLogo.svg')}}" class="header-brand-img desktop-lgo"
-                                alt="pirhotech logo">
-                            <img src="{{asset('assets/admin//images/brand/Line_logo_white.svg')}}" class="header-brand-img dark-logo"
-                                alt="pirhotech logo">
-                            <img src="{{asset('assets/admin//images/brand/black_single_logo.svg')}}" class="header-brand-img mobile-logo"
-                                alt="pirhotech logo">
-                            <img src="{{asset('assets/admin//images/brand/white_single_logo.svg')}}"
+                            <img src="{{ asset('assets/admin//images/brand/lineLogo.svg') }}"
+                                class="header-brand-img desktop-lgo" alt="pirhotech logo">
+                            <img src="{{ asset('assets/admin//images/brand/Line_logo_white.svg') }}"
+                                class="header-brand-img dark-logo" alt="pirhotech logo">
+                            <img src="{{ asset('assets/admin//images/brand/black_single_logo.svg') }}"
+                                class="header-brand-img mobile-logo" alt="pirhotech logo">
+                            <img src="{{ asset('assets/admin//images/brand/white_single_logo.svg') }}"
                                 class="header-brand-img darkmobile-logo" alt="pirhotech logo">
                         </a>
 
@@ -178,9 +179,9 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow  animated">
                                                 <a href="chat.html" class="dropdown-item d-flex pb-3">
-                                                    <svg class="header-icon me-4" x="1008" y="1248" viewBox="0 0 24 24"
-                                                        height="100%" width="100%" preserveAspectRatio="xMidYMid meet"
-                                                        focusable="false">
+                                                    <svg class="header-icon me-4" x="1008" y="1248"
+                                                        viewBox="0 0 24 24" height="100%" width="100%"
+                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
                                                         <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3" />
                                                         <path
                                                             d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z" />
@@ -202,21 +203,22 @@
                                             <a href="javascript:void(0)" class="nav-link icon leading-none"
                                                 data-bs-toggle="dropdown">
                                                 <span>
-                                                    <img src="{{asset($user->profile_picture)}}" alt="img"
+                                                    <img src="{{ asset($user->profile_picture) }}" alt="img"
                                                         class="avatar avatar-md brround">
                                                 </span>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow animated">
                                                 <div class="text-center">
                                                     <a href="javascript:void(0)"
-                                                        class="dropdown-item text-center user pb-0 font-weight-bold">{{$user->name}}</a>
-                                                    <span class="text-center user-semi-title text-capitalize">{{$user->role_name}}</span>
+                                                        class="dropdown-item text-center user pb-0 font-weight-bold">{{ $user->name }}</a>
+                                                    <span
+                                                        class="text-center user-semi-title text-capitalize">{{ $user->role_name }}</span>
                                                     <div class="dropdown-divider"></div>
                                                 </div>
-                                                <a class="dropdown-item d-flex" href="{{route('admin.profile')}}">
-                                                    <svg class="header-icon me-3" x="1008" y="1248" viewBox="0 0 24 24"
-                                                        height="100%" width="100%" preserveAspectRatio="xMidYMid meet"
-                                                        focusable="false">
+                                                <a class="dropdown-item d-flex" href="{{ route('admin.profile') }}">
+                                                    <svg class="header-icon me-3" x="1008" y="1248"
+                                                        viewBox="0 0 24 24" height="100%" width="100%"
+                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
                                                         <path d="M0 0h24v24H0V0z" fill="none" />
                                                         <path d="M12 16c-2.69 0-5.77 1.28-6 2h12c-.2-.71-3.3-2-6-2z"
                                                             opacity=".3" />
@@ -228,19 +230,19 @@
                                                 </a>
 
                                                 <a class="dropdown-item d-flex" href="chat.html">
-                                                    <svg class="header-icon me-3" x="1008" y="1248" viewBox="0 0 24 24"
-                                                        height="100%" width="100%" preserveAspectRatio="xMidYMid meet"
-                                                        focusable="false">
+                                                    <svg class="header-icon me-3" x="1008" y="1248"
+                                                        viewBox="0 0 24 24" height="100%" width="100%"
+                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
                                                         <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3" />
                                                         <path
                                                             d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z" />
                                                     </svg>
                                                     <div class="mt-1">Messages</div>
                                                 </a>
-                                                <a class="dropdown-item d-flex" href="{{route('admin.logout')}}">
-                                                    <svg class="header-icon me-3" x="1008" y="1248" viewBox="0 0 24 24"
-                                                        height="100%" width="100%" preserveAspectRatio="xMidYMid meet"
-                                                        focusable="false">
+                                                <a class="dropdown-item d-flex" href="{{ route('admin.logout') }}">
+                                                    <svg class="header-icon me-3" x="1008" y="1248"
+                                                        viewBox="0 0 24 24" height="100%" width="100%"
+                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
                                                         <path d="M0 0h24v24H0V0zm0 0h24v24H0V0z" fill="none" />
                                                         <path d="M6 20h12V10H6v10zm2-6h3v-3h2v3h3v2h-3v3h-2v-3H8v-2z"
                                                             opacity=".3" />
@@ -266,24 +268,29 @@
                 <aside class="app-sidebar sidebar-scroll">
                     <div class="main-sidebar-header active">
                         <a class="desktop-logo logo-light active" href="index.html"><img
-                                src="{{asset('assets/admin//images/brand/lineLogo.svg')}}" class="main-logo" alt="logo"></a>
+                                src="{{ asset('assets/admin//images/brand/lineLogo.svg') }}" class="main-logo"
+                                alt="logo"></a>
                         <a class="desktop-logo logo-dark active" href="index.html"><img
-                                src="{{asset('assets/admin//images/brand/Line_logo_white.svg')}}" class="main-logo" alt="logo"></a>
+                                src="{{ asset('assets/admin//images/brand/Line_logo_white.svg') }}" class="main-logo"
+                                alt="logo"></a>
                         <a class="logo-icon mobile-logo icon-light active" href="index.html"><img
-                                src="{{asset('assets/admin//images/brand/black_single_logo.svg')}}" alt="logo"></a>
+                                src="{{ asset('assets/admin//images/brand/black_single_logo.svg') }}"
+                                alt="logo"></a>
                         <a class="logo-icon mobile-logo icon-dark active" href="index.html"><img
-                                src="{{asset('assets/admin//images/brand/white_single_logo.svg')}}" alt="logo"></a>
+                                src="{{ asset('assets/admin//images/brand/white_single_logo.svg') }}"
+                                alt="logo"></a>
                     </div>
                     <div class="main-sidemenu">
                         <div class="app-sidebar__user">
                             <div class="dropdown user-pro-body text-center">
                                 <div class="user-pic">
                                     <img alt="user-img" class="avatar avatar-xl brround mb-1"
-                                        src="{{asset($user->profile_picture)}}">
+                                        src="{{ asset($user->profile_picture) }}">
                                 </div>
                                 <div class="user-info text-center">
-                                    <h5 class=" mb-1 font-weight-bold">{{$user->name}}</h5>
-                                    <span class="text-muted app-sidebar__user-name text-sm text-capitalize">{{$user->role_name}}</span>
+                                    <h5 class=" mb-1 font-weight-bold">{{ $user->name }}</h5>
+                                    <span
+                                        class="text-muted app-sidebar__user-name text-sm text-capitalize">{{ $user->role_name }}</span>
                                 </div>
                             </div>
                         </div>
@@ -293,7 +300,8 @@
                             </svg></div>
                         <ul class="side-menu">
                             <li class="slide">
-                                <a class="side-menu__item @if ($active=='dashboard') active @endif" data-bs-toggle="slide" href="{{route('admin.dashboard')}}">
+                                <a class="side-menu__item @if ($active == 'dashboard') active @endif"
+                                    data-bs-toggle="slide" href="{{ route('admin.dashboard') }}">
                                     <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -305,7 +313,8 @@
                             </li>
 
                             <li class="slide">
-                                <a class="side-menu__item @if ($active=='user') active @endif" data-bs-toggle="slide" href="{{route('admin.userlist')}}">
+                                <a class="side-menu__item @if ($active == 'user') active @endif"
+                                    data-bs-toggle="slide" href="{{ route('admin.userlist') }}">
                                     <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -319,32 +328,44 @@
 
 
                             <li class="slide">
-                                <a class="side-menu__item @if ($active=='product' || $active == 'product_add' || $active == 'product_category' || $active=='product_subcategory') active @endif" data-bs-toggle="slide" href="javascript:void(0)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="side-menu__icon">
+                                <a class="side-menu__item @if (
+                                    $active == 'product' ||
+                                        $active == 'product_add' ||
+                                        $active == 'product_category' ||
+                                        $active == 'product_subcategory') active @endif"
+                                    data-bs-toggle="slide" href="javascript:void(0)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="side-menu__icon">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                                         <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                                     </svg>
-                                    <span class="side-menu__label">Product Management</span><i class="angle fe fe-chevron-right"></i></a>
+                                    <span class="side-menu__label">Product Management</span><i
+                                        class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu" style="display: none;">
                                     <li class="side-menu-label1">
                                         <a href="javascript:void(0)">Product</a>
                                     </li>
                                     <li>
-                                        <a class="slide-item @if ($active=='product') active @endif" href="{{route('admin.productManagement')}}">
+                                        <a class="slide-item @if ($active == 'product') active @endif"
+                                            href="{{ route('admin.productManagement') }}">
                                             <span>Search Product</span></a>
-                                        </li>
+                                    </li>
                                     <li>
-                                        <a class="slide-item @if ($active=='product_add') active @endif" href="{{route('admin.product.addView')}}">
+                                        <a class="slide-item @if ($active == 'product_add') active @endif"
+                                            href="{{ route('admin.product.addView') }}">
                                             <span>Add product</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="slide-item @if ($active == 'product_category') active @endif" href="{{route('admin.product.categoryView')}}">
+                                        <a class="slide-item @if ($active == 'product_category') active @endif"
+                                            href="{{ route('admin.product.categoryView') }}">
                                             <span>Category</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="slide-item @if ($active == 'product_subcategory') active @endif" href="{{route('admin.product.subcategoryView')}}">
+                                        <a class="slide-item @if ($active == 'product_subcategory') active @endif"
+                                            href="{{ route('admin.product.subcategoryView') }}">
                                             <span>Sub-Category</span>
                                         </a>
                                     </li>
@@ -352,10 +373,14 @@
                             </li>
 
                             <li class="slide">
-                                <a class="side-menu__item @if ($active=='announcement') active @endif" data-bs-toggle="slide" href="{{route('admin.announcement.list')}}">
+                                <a class="side-menu__item @if ($active == 'announcement') active @endif"
+                                    data-bs-toggle="slide" href="{{ route('admin.announcement.list') }}">
 
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="side-menu__icon">
-                                    <path d="M4 13.9999L5.57465 20.2985C5.61893 20.4756 5.64107 20.5642 5.66727 20.6415C5.92317 21.397 6.60352 21.9282 7.39852 21.9933C7.4799 21.9999 7.5712 21.9999 7.75379 21.9999C7.98244 21.9999 8.09677 21.9999 8.19308 21.9906C9.145 21.8982 9.89834 21.1449 9.99066 20.193C10 20.0967 10 19.9823 10 19.7537V5.49991M18.5 13.4999C20.433 13.4999 22 11.9329 22 9.99991C22 8.06691 20.433 6.49991 18.5 6.49991M10.25 5.49991H6.5C4.01472 5.49991 2 7.51463 2 9.99991C2 12.4852 4.01472 14.4999 6.5 14.4999H10.25C12.0164 14.4999 14.1772 15.4468 15.8443 16.3556C16.8168 16.8857 17.3031 17.1508 17.6216 17.1118C17.9169 17.0756 18.1402 16.943 18.3133 16.701C18.5 16.4401 18.5 15.9179 18.5 14.8736V5.1262C18.5 4.08191 18.5 3.55976 18.3133 3.2988C18.1402 3.05681 17.9169 2.92421 17.6216 2.88804C17.3031 2.84903 16.8168 3.11411 15.8443 3.64427C14.1772 4.55302 12.0164 5.49991 10.25 5.49991Z" />
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="side-menu__icon">
+                                        <path
+                                            d="M4 13.9999L5.57465 20.2985C5.61893 20.4756 5.64107 20.5642 5.66727 20.6415C5.92317 21.397 6.60352 21.9282 7.39852 21.9933C7.4799 21.9999 7.5712 21.9999 7.75379 21.9999C7.98244 21.9999 8.09677 21.9999 8.19308 21.9906C9.145 21.8982 9.89834 21.1449 9.99066 20.193C10 20.0967 10 19.9823 10 19.7537V5.49991M18.5 13.4999C20.433 13.4999 22 11.9329 22 9.99991C22 8.06691 20.433 6.49991 18.5 6.49991M10.25 5.49991H6.5C4.01472 5.49991 2 7.51463 2 9.99991C2 12.4852 4.01472 14.4999 6.5 14.4999H10.25C12.0164 14.4999 14.1772 15.4468 15.8443 16.3556C16.8168 16.8857 17.3031 17.1508 17.6216 17.1118C17.9169 17.0756 18.1402 16.943 18.3133 16.701C18.5 16.4401 18.5 15.9179 18.5 14.8736V5.1262C18.5 4.08191 18.5 3.55976 18.3133 3.2988C18.1402 3.05681 17.9169 2.92421 17.6216 2.88804C17.3031 2.84903 16.8168 3.11411 15.8443 3.64427C14.1772 4.55302 12.0164 5.49991 10.25 5.49991Z" />
                                     </svg>
                                     <span class="side-menu__label">Announcement</span>
                                 </a>
@@ -366,7 +391,8 @@
                         <div class="app-sidebar-help">
                             <div class="dropdown text-center">
                                 <div class="help d-flex">
-                                    <a href="javascript:void(0)" class="nav-link p-0 help-dropdown" data-bs-toggle="dropdown">
+                                    <a href="javascript:void(0)" class="nav-link p-0 help-dropdown"
+                                        data-bs-toggle="dropdown">
                                         <span class="font-weight-bold">Help Info</span>
                                         <i class="fa fa-angle-down ms-2"></i>
                                     </a>
@@ -379,12 +405,13 @@
                                             <a class="d-block" href="javascript:void(0)">+8801516503109</a>
                                         </div>
 
-                                        <a href="{{route('admin.logout')}}">Logout</a>
+                                        <a href="{{ route('admin.logout') }}">Logout</a>
                                     </div>
                                     <div class="ms-auto">
                                         <a class="nav-link icon p-0" href="javascript:void(0)">
-                                            <svg class="header-icon" x="1008" y="1248" viewBox="0 0 24 24" height="100%"
-                                                width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <svg class="header-icon" x="1008" y="1248" viewBox="0 0 24 24"
+                                                height="100%" width="100%" preserveAspectRatio="xMidYMid meet"
+                                                focusable="false">
                                                 <path opacity=".3"
                                                     d="M12 6.5c-2.49 0-4 2.02-4 4.5v6h8v-6c0-2.48-1.51-4.5-4-4.5z">
                                                 </path>
@@ -398,8 +425,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
-                                width="24" height="24" viewBox="0 0 24 24">
+                        <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg"
+                                fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
                             </svg></div>
                     </div>
@@ -438,114 +465,115 @@
 
     <!-- Back to top -->
     <a href="#top" id="back-to-top">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" class="back-to-top-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"
+            class="back-to-top-icon">
             <path d="M0 0h24v24H0V0z" fill="none" />
             <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z" />
         </svg>
     </a>
 
     <!-- Jquery js-->
-    <script src="{{asset('assets/admin/js/vendors/jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/vendors/jquery.min.js') }}"></script>
 
     <!-- Bootstrap5 js-->
-    <script src="{{asset('assets/admin/plugins/bootstrap/js/popper.min.js')}}"></script>
-    <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/plugins/bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!--Othercharts js-->
-    <script src="{{asset('assets/admin/plugins/othercharts/jquery.sparkline.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/plugins/othercharts/jquery.sparkline.min.js') }}"></script>
 
     <!-- Jquery-rating js-->
-    <script src="{{asset('assets/admin/plugins/rating/jquery.rating-stars.js')}}"></script>
+    <script src="{{ asset('assets/admin/plugins/rating/jquery.rating-stars.js') }}"></script>
 
     <!-- Circle-progress js-->
-    <script src="{{asset('assets/admin/js/vendors/circle-progress.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/vendors/circle-progress.min.js') }}"></script>
 
     <!-- P-scroll js-->
-    <script src="{{asset('assets/admin/plugins/p-scrollbar/p-scrollbar.js')}}"></script>
+    <script src="{{ asset('assets/admin/plugins/p-scrollbar/p-scrollbar.js') }}"></script>
 
     <!--Sidemenu js-->
-    <script src="{{asset('assets/admin/plugins/sidemenu/sidemenu.js')}}"></script>
+    <script src="{{ asset('assets/admin/plugins/sidemenu/sidemenu.js') }}"></script>
 
     <!-- Sticky js -->
-    <script src="{{asset('assets/admin/js/sticky.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/sticky.js') }}"></script>
 
     <!--Moment js-->
-    <script src="{{asset('assets/admin/plugins/moment/moment.js')}}"></script>
+    <script src="{{ asset('assets/admin/plugins/moment/moment.js') }}"></script>
 
     <!-- Daterangepicker js-->
-    <script src="{{asset('assets/admin/plugins/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-    <script src="{{asset('assets/admin/js/daterange.js')}}"></script>
+    <script src="{{ asset('assets/admin/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/daterange.js') }}"></script>
 
     <!-- ECharts js-->
-    <script src="{{asset('assets/admin/plugins/echarts/echarts.js')}}"></script>
+    <script src="{{ asset('assets/admin/plugins/echarts/echarts.js') }}"></script>
 
     <!--Chart js -->
-    <script src="{{asset('assets/admin/plugins/chart/chart.min.js')}}"></script>
+    <script src="{{ asset('assets/admin/plugins/chart/chart.min.js') }}"></script>
 
     <!-- Index js-->
-    <script src="{{asset('assets/admin/js/index4.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/index4.js') }}"></script>
 
     <!-- Color Theme js -->
-    <script src="{{asset('assets/admin/js/themeColors.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/themeColors.js') }}"></script>
 
     <!-- Switcher-Styles js -->
-    <script src="{{asset('assets/admin/js/switcher-styles.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/switcher-styles.js') }}"></script>
 
     <!-- Custom js-->
-    <script src="{{asset('assets/admin/js/custom.js')}}"></script>
+    <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
 
-        <!--Select2 js -->
-        <script src="{{asset('assets/admin/plugins/select2/select2.full.min.js')}}"></script>
-        <script src="{{asset('assets/admin/js/select2.js')}}"></script>
+    <!--Select2 js -->
+    <script src="{{ asset('assets/admin/plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/select2.js') }}"></script>
 
-        <!-- Timepicker js -->
-        <script src="{{asset('assets/admin/plugins/time-picker/jquery.timepicker.js')}}"></script>
-        <script src="{{asset('assets/admin/plugins/time-picker/toggles.min.js')}}"></script>
+    <!-- Timepicker js -->
+    <script src="{{ asset('assets/admin/plugins/time-picker/jquery.timepicker.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/time-picker/toggles.min.js') }}"></script>
 
-        <!-- Datepicker js -->
-        <script src="{{asset('assets/admin/plugins/date-picker/date-picker.js')}}"></script>
-        <script src="{{asset('assets/admin/plugins/date-picker/jquery-ui.js')}}"></script>
-        <script src="{{asset('assets/admin/plugins/input-mask/jquery.maskedinput.js')}}"></script>
+    <!-- Datepicker js -->
+    <script src="{{ asset('assets/admin/plugins/date-picker/date-picker.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/date-picker/jquery-ui.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/input-mask/jquery.maskedinput.js') }}"></script>
 
-        <!--File-Uploads Js-->
-        <script src="{{asset('assets/admin/plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
-        <script src="{{asset('assets/admin/plugins/fancyuploder/jquery.fileupload.js')}}"></script>
-        <script src="{{asset('assets/admin/plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
-        <script src="{{asset('assets/admin/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
-        <script src="{{asset('assets/admin/plugins/fancyuploder/fancy-uploader.js')}}"></script>
+    <!--File-Uploads Js-->
+    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/fancyuploder/fancy-uploader.js') }}"></script>
 
-        <!-- File uploads js -->
-        <script src="{{asset('assets/admin/plugins/fileupload/js/dropify.js')}}"></script>
-        <script src="{{asset('assets/admin/js/filupload.js')}}"></script>
+    <!-- File uploads js -->
+    <script src="{{ asset('assets/admin/plugins/fileupload/js/dropify.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/filupload.js') }}"></script>
 
-        <!-- Multiple select js -->
-        <script src="{{asset('assets/admin/plugins/multipleselect/multiple-select.js')}}"></script>
-        <script src="{{asset('assets/admin/plugins/multipleselect/multi-select.js')}}"></script>
+    <!-- Multiple select js -->
+    <script src="{{ asset('assets/admin/plugins/multipleselect/multiple-select.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/multipleselect/multi-select.js') }}"></script>
 
-        <!--Sumoselect js-->
-        <script src="{{asset('assets/admin/plugins/sumoselect/jquery.sumoselect.js')}}"></script>
+    <!--Sumoselect js-->
+    <script src="{{ asset('assets/admin/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
 
-        <!--jquery transfer js-->
-        <script src="{{asset('assets/admin/plugins/jQuerytransfer/jquery.transfer.js')}}"></script>
+    <!--jquery transfer js-->
+    <script src="{{ asset('assets/admin/plugins/jQuerytransfer/jquery.transfer.js') }}"></script>
 
-        <!--multi js-->
-        <script src="{{asset('assets/admin/plugins/multi/multi.min.js')}}"></script>
+    <!--multi js-->
+    <script src="{{ asset('assets/admin/plugins/multi/multi.min.js') }}"></script>
 
-        <!-- Form Advanced Element -->
-        <script src="{{asset('assets/admin/js/formelementadvnced.js')}}"></script>
-        <script src="{{asset('assets/admin/js/form-elements.js')}}"></script>
-        <script src="{{asset('assets/admin/js/file-upload.js')}}"></script>
+    <!-- Form Advanced Element -->
+    <script src="{{ asset('assets/admin/js/formelementadvnced.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/form-elements.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/file-upload.js') }}"></script>
 
-        <!-- WYSIWYG Editor js -->
-        <script src="{{asset('assets/admin/plugins/wysiwyag/jquery.richtext.js')}}"></script>
-        <script src="{{asset('assets/admin/js/form-editor.js')}}"></script>
+    <!-- WYSIWYG Editor js -->
+    <script src="{{ asset('assets/admin/plugins/wysiwyag/jquery.richtext.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/form-editor.js') }}"></script>
 
-        <!-- quill js -->
-        <script src="{{asset('assets/admin/plugins/quill/quill.min.js')}}"></script>
-        <script src="{{asset('assets/admin/js/form-editor2.js')}}"></script>
+    <!-- quill js -->
+    <script src="{{ asset('assets/admin/plugins/quill/quill.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/form-editor2.js') }}"></script>
 
-        <!-- poup add and cancel -->
-        <script src="{{asset('assets/admin/popup.js')}}"></script>
+    <!-- poup add and cancel -->
+    <script src="{{ asset('assets/admin/popup.js') }}"></script>
 
 
     @yield('custom_js')

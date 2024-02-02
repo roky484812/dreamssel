@@ -15,12 +15,16 @@ class ProductController extends Controller
     }
 
     public function AddProductPage(){
-        return view('admin.add_product');
+        $categories = Product_category::get();
+        return view('admin.add_product', ['categories'=> $categories]);
     }
     
+    public function AddProduct(Request $req){
+        return $req->all();
+    }
+
     public function editProductPage(){
         return view('admin.edit_product');
     }
-
 
 }

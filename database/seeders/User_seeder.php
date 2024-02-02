@@ -25,16 +25,17 @@ class User_seeder extends Seeder
                 'username'=> 'editor',
                 'email'=> 'editor@gmail.com',
                 'password'=> Hash::make('admin'),
-                'role'=> '2'
+                'role'=> '2',
+                'is_active'=> '1'
             ],[
                 'username'=> 'dist',
                 'email'=> 'dist@gmail.com',
                 'password'=> Hash::make('admin'),
-                'role'=> '3'
+                'role'=> '3',
+                'is_active'=> '1'
             ]
-
         ];
-        
+
         DB::table('users')->insert($users);
     }
 }
