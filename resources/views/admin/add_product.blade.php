@@ -91,8 +91,7 @@
                                         <div class="col-md-4 col-sm-6">
                                             <label class="form-label">Select Sub Category</label>
                                             <!-- category adding popup -->
-                                            <select class="search_test" name="sub_category" id="sub_category">
-                                                <option value="">Select Sub-Category</option>
+                                            <select class="select2" name="sub_category" id="sub_category">
                                             </select>
                                         </div>
                                         <div class="col-md-4 col-sm-6">
@@ -221,11 +220,12 @@
                     success: function(response) {
                         console.log(response);
                         if(response.status){
+                            $('#sub_category').empty();
                             response.sub_categories.forEach((sub_category) => {
                                 let options = document.createElement('option');
                                 options.setAttribute('value', sub_category.id);
-                                options.append(sub_category.category);
-                                // $('#sub_category').append();
+                                options.append(sub_category.sub_category_name);
+                                $('#sub_category').append(options);
                                 console.log(options);
                             });
                         }
