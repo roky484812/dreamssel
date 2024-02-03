@@ -97,13 +97,11 @@
                                         <div class="col-md-4 col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-label">Select Country</label>
-                                                <select name="somename" class="form-control SlectBox"
-                                                    onclick="console.log($(this).val())"
-                                                    onchange="console.log('change is firing')">
+                                                <select name="country" class="form-control SlectBox">
                                                     <!--placeholder-->
-                                                    <option title="China product" value="china">China</option>
-                                                    <option value="india">India</option>
-                                                    <option value="bangladesh">Bangladesh</option>
+                                                    <option value="3">China</option>
+                                                    <option value="2">India</option>
+                                                    <option value="1">Bangladesh</option>
                                                 </select>
                                             </div>
                                         </div>

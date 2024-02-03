@@ -72,7 +72,7 @@
                                                         @foreach ($categories as $index => $category)
                                                             <tr>
                                                                 <td>{{$index+1}}</td>
-                                                                <td>{{$category['category_name']}}</td>
+                                                                <td><a href="{{route('admin.product.subcategoryView', ['category_id'=> $category['id']])}}">{{$category['category_name']}}</a></td>
                                                                 <td>
                                                                     <button data-bs-toggle="modal" data-bs-target="#editproduct_{{$category['id']}}" class="btn border border-1 text-warning btn-sm mx-1">
                                                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
