@@ -53,7 +53,13 @@
                             </div>
                         </div>
                         <form method="post" action="{{ route('admin.product.add') }}" id="product_add">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div id="gallery_image">
 
+                                    </div>
+                                </div>
+                            </div>
                             @csrf
                             <div class="card">
                                 <div class="card-header">
@@ -262,11 +268,27 @@
             addRemoveLinks: true,
             acceptedFiles: 'image/jpeg, image/png, image/jpg',
             success: function(file, response){
-                console.log('success');
-                console.log(response);
+                let uploaded_image = response.image_info;
+                let baseUrl = "{!! rtrim(asset(''), '/') !!}";
+                let image_url = baseUrl + uploaded_image.image;
+                let div = document.createElement('div');
+                let image = document.createElement('img');
+                let input = document.createElement('input');
+                input.type = 'hidden';
+                input.val = uploaded_image.id;
+                input.setAttribute('name', 'images[]')
+                div.className = 'single_image border border-3 m-1 d-inline';
+                image.className = 'rounded';
+                image.setAttribute('src', image_url);
+                div.append(input);
+                div.append(image);
+                $('#gallery_image').append(div);
+                console.log(image);
             },
             complete: function(){
                 console.log('hello')
+                $('#images').removeClass('dz-started');
+                $('.dz-preview.dz-processing.dz-image-preview').remove();
             }
         });
     });
@@ -341,4 +363,7 @@
 {{-- <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> --}}
 
 <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+<style>
+
+</style>
 @endsection
