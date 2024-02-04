@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <form method="post" action="{{ route('admin.product.add') }}" id="product_add">
-                            <div class="card">
+                            <div class="card" id="gallery_card" style="display: none;">
                                 <div class="card-body">
                                     <div id="gallery_image">
 
@@ -286,7 +286,9 @@
                 console.log(image);
             },
             complete: function(){
-                console.log('hello')
+                if($('#gallery_card').css("display") == 'none'){
+                    $('#gallery_card').css("display", 'block')
+                }
                 $('#images').removeClass('dz-started');
                 $('.dz-preview.dz-processing.dz-image-preview').remove();
             }
