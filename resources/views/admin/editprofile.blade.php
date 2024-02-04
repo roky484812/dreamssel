@@ -83,7 +83,6 @@
                         'X-CSRF-TOKEN': csrfToken
                     },
                     success: function(response) {
-                        console.log(response.email);
                         if (response.status) {
                             $('#update_email_message').html(response.message)
                             $('#myModal').modal('show');

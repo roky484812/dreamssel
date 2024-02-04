@@ -535,13 +535,6 @@
     <script src="{{ asset('assets/admin/plugins/date-picker/jquery-ui.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/input-mask/jquery.maskedinput.js') }}"></script>
 
-    <!--File-Uploads Js-->
-    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/fancyuploder/fancy-uploader.js') }}"></script>
-
     <!-- File uploads js -->
     <script src="{{ asset('assets/admin/plugins/fileupload/js/dropify.js') }}"></script>
     <script src="{{ asset('assets/admin/js/filupload.js') }}"></script>

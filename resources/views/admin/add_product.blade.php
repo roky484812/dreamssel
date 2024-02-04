@@ -27,10 +27,11 @@
                     </div>
                 </div>
                 <!--End Page header-->
+                
                 <!-- Row -->
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
-                        <form method="post" class="card">
+                        <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">File Upload</h3>
                             </div>
@@ -43,13 +44,16 @@
                                     </div>
                                     <div class="col-lg-6 col-sm-12">
                                         <label class="form-label text-dark" for="">Multiple Image</label>
-                                        <input id="demo" type="file" name="files"
-                                            accept=".jpg, .png, image/jpeg, image/png" multiple>
+                                        {{-- <input id="fandyfile" type="file" name="fandyfile" accept=".jpg, .png, image/jpeg, image/png" > --}}
+                                        <form method="POST" class="dropzone" enctype="multipart/form-data" action="{{route('admin.product.image.temp')}}" id="images">
+                                            @csrf
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                         <form method="post" action="{{ route('admin.product.add') }}" id="product_add">
+
                             @csrf
                             <div class="card">
                                 <div class="card-header">
@@ -192,8 +196,19 @@
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 <!-- Include Select2 JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+
+<!--File-Uploads Js-->
+{{-- <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+<script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+<script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+<script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/admin/plugins/fancyuploder/fancy-uploader.js') }}"></script> --}}
+
+
+{{-- dropzone file --}}
+<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+
 <script>
-    console.log('hello');
     $(document).ready(function() {
         var editor = new Quill('#quillEditor', {
             theme: 'snow'
@@ -224,7 +239,6 @@
                                 options.setAttribute('value', sub_category.id);
                                 options.append(sub_category.sub_category_name);
                                 $('#sub_category').append(options);
-                                console.log(options);
                             });
                         }
                     },
@@ -242,6 +256,89 @@
                 });
             }
         });
+
+        $('#images').dropzone({
+            paramName: 'temp_image',
+            addRemoveLinks: true,
+            acceptedFiles: 'image/jpeg, image/png, image/jpg',
+            success: function(file, response){
+                console.log('success');
+                console.log(response);
+            },
+            complete: function(){
+                console.log('hello')
+            }
+        });
     });
 </script>
+
+
+
+
+{{-- <script type="text/javascript">
+    let csrfToken = $('meta[name="csrf-token"]').attr('content');
+    $(function() {    
+        $('#fandyfile').FancyFileUpload({
+            params : {
+                action : 'fileuploader'
+            },
+            maxfilesize : 1000000,
+            startupload : function(SubmitUpload, e, data) {
+                let imageForm = new FormData($('#image_upload')[0]);
+                console.log($('#image_upload'));
+                $.ajax({
+                    url : '{{route("admin.product.image.temp")}}',
+                    method : 'POST',
+                    dataType : 'json',
+                    data: imageForm,
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success : function(response) {
+                        console.log('success',response)
+                        SubmitUpload();
+                    },
+                    error: function(error){
+                        console.log('error', error);
+                    },
+                    complete: function(){
+                        console.log('hello')
+                    }
+                });
+            },
+            continueupload : function(e, data) {
+                console.log('hello')
+                var ts = Math.round(new Date().getTime() / 1000);
+            },
+            uploadcompleted : function(e, data) {
+                data.ff_info.RemoveFile();
+            }
+        });
+    });
+</script> --}}
+
+{{-- <script>
+    $(document).ready(function(){
+        // Dropzone.options.images = {
+        //     init: function(){
+        //         console.log('working.');
+        //     },
+        //     paramName: 'image',
+        //     addRemoveLinks: true,
+        //     acceptedFiles: 'image/jpeg, image/png, image/jpg',
+        //     success: function(file, response){
+        //         console.log('success');
+        //         console.log(response);
+        //     },
+        //     complete: function(){
+        //         console.log('hello')
+        //     }
+        // }
+    });
+</script> --}}
+@endsection
+@section('custom_css')
+{{-- <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> --}}
+
+<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
 @endsection
