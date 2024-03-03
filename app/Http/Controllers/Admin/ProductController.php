@@ -23,10 +23,20 @@ class ProductController extends Controller
     }
     
     public function AddProduct(Request $req){
+        $req->validate([
+            'title'=> 'required|max:255',
+            'price'=> 'required',
+            'dist_price'=> 'required',
+            'category'=> 'required|exists:product_categories,id',
+            'sub_category'=> 'required|exists:product_sub_categories,id',
+            'attritubes'=> 'nullable|array',
+            ''
+        ]);
         return $req->all();
     }
 
     public function editProductPage(){
+
         return view('admin.edit_product');
     }
 

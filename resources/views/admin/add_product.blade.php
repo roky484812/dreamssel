@@ -193,179 +193,179 @@
     </div>
 @endsection
 @section('custom_js')
-<script src="{{ asset('assets/admin/plugins/notify/js/notifIt.js') }}"></script>
-<script src="{{ asset('assets/admin/plugins/notify/js/sample.js') }}"></script>
-<script src="{{ asset('assets/admin/js/product-variation.js') }}"></script>
-<!--Select2 js -->
-<script src="{{ asset('assets/admin/plugins/select2/select2.full.min.js') }}"></script>
-<script src="{{ asset('assets/admin/js/select2.js') }}"></script>
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-<!-- Include Select2 JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+    <script src="{{ asset('assets/admin/plugins/notify/js/notifIt.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/notify/js/sample.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/product-variation.js') }}"></script>
+    <!--Select2 js -->
+    <script src="{{ asset('assets/admin/plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/select2.js') }}"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+    <!-- Include Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
 
-<!--File-Uploads Js-->
-{{-- <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
-<script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
-<script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
-<script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script> --}}
-{{-- <script src="{{ asset('assets/admin/plugins/fancyuploder/fancy-uploader.js') }}"></script> --}}
+    <!--File-Uploads Js-->
+    {{-- <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/admin/plugins/fancyuploder/fancy-uploader.js') }}"></script> --}}
 
 
-{{-- dropzone file --}}
-<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+    {{-- dropzone file --}}
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        var editor = new Quill('#quillEditor', {
-            theme: 'snow'
-        });
+    <script>
+        $(document).ready(function() {
+            var editor = new Quill('#quillEditor', {
+                theme: 'snow'
+            });
 
-        $("#product_add").submit(function() {
-            // var formdata = new FormData();
-            // var data = object.formEntries(formdata.entries());
-            // if(){
+            $("#product_add").submit(function() {
+                // var formdata = new FormData();
+                // var data = object.formEntries(formdata.entries());
+                // if(){
 
-            // }
-            $("#hidden-textarea").val(editor.root.innerHTML);
-        });
+                // }
+                $("#hidden-textarea").val(editor.root.innerHTML);
+            });
 
-        $('#category').change((e)=>{
-            var category_id = e.target.value;
-            if (category_id) {
-                $.ajax({
-                    url: "{{ route('admin.product.subcategory.category') }}/"+category_id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(response) {
-                        console.log(response);
-                        if(response.status){
-                            $('#sub_category').empty();
-                            response.sub_categories.forEach((sub_category) => {
-                                let options = document.createElement('option');
-                                options.setAttribute('value', sub_category.id);
-                                options.append(sub_category.sub_category_name);
-                                $('#sub_category').append(options);
-                            });
-                        }
-                    },
-                    error: function(error) {
-                        if (error.responseJSON && error.responseJSON.errors) {
-                            // Display email validation error
-                            if (error.responseJSON.errors) {
-                                console.error('Error:', error);
+            $('#category').change((e)=>{
+                var category_id = e.target.value;
+                if (category_id) {
+                    $.ajax({
+                        url: "{{ route('admin.product.subcategory.category') }}/"+category_id,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log(response);
+                            if(response.status){
+                                $('#sub_category').empty();
+                                response.sub_categories.forEach((sub_category) => {
+                                    let options = document.createElement('option');
+                                    options.setAttribute('value', sub_category.id);
+                                    options.append(sub_category.sub_category_name);
+                                    $('#sub_category').append(options);
+                                });
                             }
+                        },
+                        error: function(error) {
+                            if (error.responseJSON && error.responseJSON.errors) {
+                                // Display email validation error
+                                if (error.responseJSON.errors) {
+                                    console.error('Error:', error);
+                                }
+                            }
+                        },
+                        complete: function() {
+                            console.log('finish');
                         }
-                    },
-                    complete: function() {
-                        console.log('finish');
-                    }
-                });
-            }
-        });
-
-        $('#images').dropzone({
-            paramName: 'temp_image',
-            addRemoveLinks: true,
-            acceptedFiles: 'image/jpeg, image/png, image/jpg',
-            success: function(file, response){
-                let uploaded_image = response.image_info;
-                let baseUrl = "{!! rtrim(asset(''), '/') !!}";
-                let image_url = baseUrl + uploaded_image.image;
-                let div = document.createElement('div');
-                let image = document.createElement('img');
-                let input = document.createElement('input');
-                input.type = 'hidden';
-                input.val = uploaded_image.id;
-                input.setAttribute('name', 'images[]')
-                div.className = 'single_image border border-3 m-1 d-inline';
-                image.className = 'rounded';
-                image.setAttribute('src', image_url);
-                div.append(input);
-                div.append(image);
-                $('#gallery_image').append(div);
-                console.log(image);
-            },
-            complete: function(){
-                if($('#gallery_card').css("display") == 'none'){
-                    $('#gallery_card').css("display", 'block')
+                    });
                 }
-                $('#images').removeClass('dz-started');
-                $('.dz-preview.dz-processing.dz-image-preview').remove();
-            }
-        });
-    });
-</script>
+            });
 
-
-
-
-{{-- <script type="text/javascript">
-    let csrfToken = $('meta[name="csrf-token"]').attr('content');
-    $(function() {    
-        $('#fandyfile').FancyFileUpload({
-            params : {
-                action : 'fileuploader'
-            },
-            maxfilesize : 1000000,
-            startupload : function(SubmitUpload, e, data) {
-                let imageForm = new FormData($('#image_upload')[0]);
-                console.log($('#image_upload'));
-                $.ajax({
-                    url : '{{route("admin.product.image.temp")}}',
-                    method : 'POST',
-                    dataType : 'json',
-                    data: imageForm,
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    success : function(response) {
-                        console.log('success',response)
-                        SubmitUpload();
-                    },
-                    error: function(error){
-                        console.log('error', error);
-                    },
-                    complete: function(){
-                        console.log('hello')
+            $('#images').dropzone({
+                paramName: 'temp_image',
+                addRemoveLinks: true,
+                acceptedFiles: 'image/jpeg, image/png, image/jpg',
+                success: function(file, response){
+                    let uploaded_image = response.image_info;
+                    let baseUrl = "{!! rtrim(asset(''), '/') !!}";
+                    let image_url = baseUrl + uploaded_image.image;
+                    let div = document.createElement('div');
+                    let image = document.createElement('img');
+                    let input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.val = uploaded_image.id;
+                    input.setAttribute('name', 'images[]')
+                    div.className = 'single_image border border-3 m-1 d-inline';
+                    image.className = 'rounded';
+                    image.setAttribute('src', image_url);
+                    div.append(input);
+                    div.append(image);
+                    $('#gallery_image').append(div);
+                    console.log(image);
+                },
+                complete: function(){
+                    if($('#gallery_card').css("display") == 'none'){
+                        $('#gallery_card').css("display", 'block')
                     }
-                });
-            },
-            continueupload : function(e, data) {
-                console.log('hello')
-                var ts = Math.round(new Date().getTime() / 1000);
-            },
-            uploadcompleted : function(e, data) {
-                data.ff_info.RemoveFile();
-            }
+                    $('#images').removeClass('dz-started');
+                    $('.dz-preview.dz-processing.dz-image-preview').remove();
+                }
+            });
         });
-    });
-</script> --}}
+    </script>
 
-{{-- <script>
-    $(document).ready(function(){
-        // Dropzone.options.images = {
-        //     init: function(){
-        //         console.log('working.');
-        //     },
-        //     paramName: 'image',
-        //     addRemoveLinks: true,
-        //     acceptedFiles: 'image/jpeg, image/png, image/jpg',
-        //     success: function(file, response){
-        //         console.log('success');
-        //         console.log(response);
-        //     },
-        //     complete: function(){
-        //         console.log('hello')
-        //     }
-        // }
-    });
-</script> --}}
+
+
+
+    {{-- <script type="text/javascript">
+        let csrfToken = $('meta[name="csrf-token"]').attr('content');
+        $(function() {    
+            $('#fandyfile').FancyFileUpload({
+                params : {
+                    action : 'fileuploader'
+                },
+                maxfilesize : 1000000,
+                startupload : function(SubmitUpload, e, data) {
+                    let imageForm = new FormData($('#image_upload')[0]);
+                    console.log($('#image_upload'));
+                    $.ajax({
+                        url : '{{route("admin.product.image.temp")}}',
+                        method : 'POST',
+                        dataType : 'json',
+                        data: imageForm,
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        success : function(response) {
+                            console.log('success',response)
+                            SubmitUpload();
+                        },
+                        error: function(error){
+                            console.log('error', error);
+                        },
+                        complete: function(){
+                            console.log('hello')
+                        }
+                    });
+                },
+                continueupload : function(e, data) {
+                    console.log('hello')
+                    var ts = Math.round(new Date().getTime() / 1000);
+                },
+                uploadcompleted : function(e, data) {
+                    data.ff_info.RemoveFile();
+                }
+            });
+        });
+    </script> --}}
+
+    {{-- <script>
+        $(document).ready(function(){
+            // Dropzone.options.images = {
+            //     init: function(){
+            //         console.log('working.');
+            //     },
+            //     paramName: 'image',
+            //     addRemoveLinks: true,
+            //     acceptedFiles: 'image/jpeg, image/png, image/jpg',
+            //     success: function(file, response){
+            //         console.log('success');
+            //         console.log(response);
+            //     },
+            //     complete: function(){
+            //         console.log('hello')
+            //     }
+            // }
+        });
+    </script> --}}
 @endsection
 @section('custom_css')
-{{-- <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> --}}
+    {{-- <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> --}}
 
-<link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
-<style>
+    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+    <style>
 
-</style>
+    </style>
 @endsection

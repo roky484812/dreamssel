@@ -259,7 +259,7 @@ $(document).ready(function () {
             $('#attr_name').append(attr_input);
         });
     }
-
+    var row_index = 0;
     // Function to generate HTML for product details
     function generateProductDetailsHTML(combination) {
         var productDetailsHTML = '<div class="mb-0">';
@@ -270,15 +270,17 @@ $(document).ready(function () {
         productDetailsHTML += '    <div class="row">';
         productDetailsHTML += '    <div class="col-sm-4">';
         productDetailsHTML +=
-            '    <input id="tagInput" name="stock" type="number" class="form-control mb-1" placeholder="Stock">';
+            `    <input id="tagInput" name="combination[${row_index}][stock]" type="number" class="form-control mb-1" placeholder="Stock">`;
+        productDetailsHTML += "    </div>";
+        productDetailsHTML += `    <input type='hidden' name="combination[${row_index}][combination_value]" value='${combination}'>`;
+
+        productDetailsHTML += '    <div class="col-sm-4">';
+        productDetailsHTML +=
+            `    <input id="tagInput" name="combination[${row_index}][price]" type="number" class="form-control mb-1" placeholder="Regular Price">`;
         productDetailsHTML += "    </div>";
         productDetailsHTML += '    <div class="col-sm-4">';
         productDetailsHTML +=
-            '    <input id="tagInput" name="price" type="number" class="form-control mb-1" placeholder="Regular Price">';
-        productDetailsHTML += "    </div>";
-        productDetailsHTML += '    <div class="col-sm-4">';
-        productDetailsHTML +=
-            '    <input id="tagInput" name="dist_price" type="number" class="form-control mb-1" placeholder="Distributor Price">';
+            `    <input id="tagInput" name="combination[${row_index}][dist_price]" type="number" class="form-control mb-1" placeholder="Distributor Price">`;
         productDetailsHTML += "    </div>";
         productDetailsHTML += "    </div>";
 
@@ -286,6 +288,7 @@ $(document).ready(function () {
 
         // Append the generated HTML to the 'generated-product-details' div
         productDetailsDiv.append(productDetailsHTML);
+        row_index++;
         
     }
 });
