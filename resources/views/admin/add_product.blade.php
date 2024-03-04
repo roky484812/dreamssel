@@ -31,55 +31,59 @@
                 <!-- Row -->
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">File Upload</h3>
-                            </div>
-                            <div class=" card-body">
-                                <div class="row">
-                                    <div class="col-lg-6 col-sm-12">
-                                        <label class="form-label text-dark" for="">Thumbnail</label>
-                                        <input type="file" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
-                                            data-height="180" />
-                                    </div>
-                                    <div class="col-lg-6 col-sm-12">
-                                        <label class="form-label text-dark" for="">Multiple Image</label>
-                                        {{-- <input id="fandyfile" type="file" name="fandyfile" accept=".jpg, .png, image/jpeg, image/png" > --}}
-                                        <form method="POST" class="dropzone" enctype="multipart/form-data" action="{{route('admin.product.image.temp')}}" id="images">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <form method="post" action="{{ route('admin.product.add') }}" id="product_add">
-                            <div class="card" id="gallery_card" style="display: none;">
-                                <div class="card-body">
-                                    <div id="gallery_image">
-
-                                    </div>
-                                </div>
-                            </div>
+                        <form method="post" action="{{ route('admin.product.add') }}" id="product_add" enctype="multipart/form-data">
                             @csrf
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">File Upload</h3>
+                                </div>
+                                <div class=" card-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-sm-12">
+                                            <label class="form-label text-dark" for="">Thumbnail *</label>
+                                            <input type="file" class="dropify" accept=".jpg, .png, image/jpeg, image/png" name="thumbnail" />
+                                            @error('thumbnail')
+                                                <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-lg-6 col-sm-12">
+                                            <label class="form-label text-dark" for="">Multiple Image</label>
+                                            <div id="multiple_image"></div>
+                                            @error('images.*')
+                                            <p class="text-danger">{{$message}}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Product Details</h3>
                                 </div>
                                 <div class="card-body ">
                                     <div class="form-group">
-                                        <label class="form-label text-dark">Product Title</label>
-                                        <input type="text" name="title" class="form-control"
-                                            placeholder="I tell a teil of a tail">
+                                        <label class="form-label text-dark">Product Title *</label>
+                                        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="I tell a teil of a tail">
+                                        @error('title')
+                                        <span class="invalid-feedback" role="alert">
+                                            {{ $message }}
+                                        </span>
+                                        @enderror
                                     </div>
-                                    <!-- TODO:Here i need to implement the description form -->
+
                                     <div class="row ">
                                         <div class="col-md-12">
-                                            <label class="form-label text-dark">Product Description</label>
+                                            <label class="form-label text-dark">Product Description *</label>
                                             <div class="ql-wrapper ql-wrapper-demo bg-light">
                                                 <div id="quillEditor">
                                                 </div>
                                             </div>
-                                            <textarea name="description" style="display:none" id="hidden-textarea"></textarea>
+                                            <textarea name="description" style="display:none" id="hidden-textarea" class="@error('description') is-invalid @enderror"></textarea>
+                                            @error('description')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group mt-3">
@@ -88,58 +92,83 @@
                                     </div>
                                     <div class="row my-4">
                                         <div class="col-md-4 col-sm-6">
-                                            <label class="form-label">Select Category</label>
+                                            <label class="form-label">Select Category *</label>
                                             <!-- category adding popup -->
-                                            <select class="search_test" id="category" name="category">
+                                            <select class="select2 @error('category') is-invalid @enderror" id="category" name="category">
                                                 <option value="">Select Category</option>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category['id'] }}">{{ $category['category_name'] }}
+                                                    <option value="{{ $category['id'] }}">
+                                                        {{ $category['category_name'] }}
                                                     </option>
                                                 @endforeach
                                             </select>
+                                            @error('category')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="col-md-4 col-sm-6">
-                                            <label class="form-label">Select Sub Category</label>
+                                            <label class="form-label">Select Sub Category *</label>
                                             <!-- category adding popup -->
-                                            <select class="select2" name="sub_category" id="sub_category">
+                                            <select class="select2 @error('sub_category') is-invalid @enderror" name="sub_category" id="sub_category">
                                             </select>
+                                            @error('sub_category')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="col-md-4 col-sm-6">
                                             <div class="form-group">
-                                                <label class="form-label">Select Country</label>
-                                                <select name="country" class="form-control SlectBox">
+                                                <label class="form-label">Select Country *</label>
+                                                <select name="country" class="form-control SlectBox @error('country')
+                                                    is-invalid
+                                                @enderror">
                                                     <!--placeholder-->
                                                     <option value="3">China</option>
                                                     <option value="2">India</option>
                                                     <option value="1">Bangladesh</option>
                                                 </select>
+                                                @error('country')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        {{ $message }}
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-3 col-sm-6">
                                             <label class="form-label text-dark">Available Quantity</label>
-                                            <input type="number" class="form-control" name="sku"
-                                                placeholder="Number of Product">
+                                            <input type="number" class="form-control" name="sku" placeholder="Number of Product">
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
-                                            <label class="form-label text-dark">Public Price</label>
-                                            <input type="number" class="form-control" name="price"
-                                                placeholder="Price of product">
+                                            <label class="form-label text-dark">Public Price *</label>
+                                            <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" placeholder="Price of product">
+                                            @error('price')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
-                                            <label class="form-label text-dark">Distributor Price</label>
-                                            <input type="number" class="form-control" name="dist_price"
-                                                placeholder="Price for distributor">
+                                            <label class="form-label text-dark">Distributor Price *</label>
+                                            <input type="number" class="form-control @error('dist_price') is-invalid @enderror" name="dist_price" placeholder="Price for distributor">
+                                            @error('dist_price')
+                                                <span class="invalid-feedback" role="alert">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="card-footer ">
                                         <div class="row">
                                             <div class=" col-sm-6 mb-3">
-                                                <button type="button" id="draft" class="btn btn-secondary">Save to Draft</button>
+                                                <button type="submit" name="status" value="0" id="draft" class="btn btn-secondary">Save to Draft</button>
                                             </div>
                                             <div class=" col-sm-6">
-                                                <button type="submit" id="save" class="btn btn-primary float-end" > Publish Now</button>
+                                                <button type="submit" id="save" name="status" value="1" class="btn btn-primary float-end" > Publish Now</button>
                                             </div>
                                         </div>
                                     </div>
@@ -155,9 +184,9 @@
                                         <label class="form-label">Select attributes from below box</label>
                                         <div class="row">
                                             <div class="col-sm-6 mb-3">
-                                                <select class="form-control tag-management select2" data-placeholder="Select attribute" multiple>
-                                                    <option value="color">Color</option>
-                                                    <option value="size">Size</option>
+                                                <select class="form-control tag-management select2" name="attritubes[]" data-placeholder="Select attribute" multiple>
+                                                    <option value="Color">Color</option>
+                                                    <option value="Size">Size</option>
                                                 </select>
                                                 <div id="attr_name"></div>
                                             </div>
@@ -210,15 +239,25 @@
     <script src="{{ asset('assets/admin/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script> --}}
     {{-- <script src="{{ asset('assets/admin/plugins/fancyuploder/fancy-uploader.js') }}"></script> --}}
 
-
-    {{-- dropzone file --}}
-    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+    <script src="{{ asset('assets\admin\plugins\image-uploader\dist\image-uploader.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {
             var editor = new Quill('#quillEditor', {
                 theme: 'snow'
             });
+            $('#multiple_image').imageUploader({
+                extensions: ['.jpg','.jpeg','.png',],
+                maxFiles: 5
+            });
+            $('#single_image').imageUploader({
+                label: 'Drag & drop your image here or click to browse for single image',
+                extensions: ['.jpg', '.jpeg', '.png'],
+                preview: '#preview',
+                imagesInputName: 'thumbnail',
+                maxFiles: 1 // Changed to allow only one file
+            });
+
 
             $("#product_add").submit(function() {
                 // var formdata = new FormData();
@@ -260,37 +299,6 @@
                             console.log('finish');
                         }
                     });
-                }
-            });
-
-            $('#images').dropzone({
-                paramName: 'temp_image',
-                addRemoveLinks: true,
-                acceptedFiles: 'image/jpeg, image/png, image/jpg',
-                success: function(file, response){
-                    let uploaded_image = response.image_info;
-                    let baseUrl = "{!! rtrim(asset(''), '/') !!}";
-                    let image_url = baseUrl + uploaded_image.image;
-                    let div = document.createElement('div');
-                    let image = document.createElement('img');
-                    let input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.val = uploaded_image.id;
-                    input.setAttribute('name', 'images[]')
-                    div.className = 'single_image border border-3 m-1 d-inline';
-                    image.className = 'rounded';
-                    image.setAttribute('src', image_url);
-                    div.append(input);
-                    div.append(image);
-                    $('#gallery_image').append(div);
-                    console.log(image);
-                },
-                complete: function(){
-                    if($('#gallery_card').css("display") == 'none'){
-                        $('#gallery_card').css("display", 'block')
-                    }
-                    $('#images').removeClass('dz-started');
-                    $('.dz-preview.dz-processing.dz-image-preview').remove();
                 }
             });
         });
@@ -362,10 +370,5 @@
     </script> --}}
 @endsection
 @section('custom_css')
-    {{-- <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" /> --}}
-
-    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
-    <style>
-
-    </style>
+    <link rel="stylesheet" href="{{ asset('assets\admin\plugins\image-uploader\dist\image-uploader.min.css') }}">
 @endsection

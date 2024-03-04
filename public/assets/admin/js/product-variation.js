@@ -250,11 +250,10 @@ $(document).ready(function () {
     }
 
     function genAttrName(){
-        console.log(attributes);
         attributes.forEach((attribute) => {
             var attr_input = document.createElement('input');
             attr_input.type = 'hidden';
-            attr_input.name = 'attritubes[]';
+            // attr_input.name = 'attritubes[]';
             attr_input.setAttribute('value', attribute);
             $('#attr_name').append(attr_input);
         });

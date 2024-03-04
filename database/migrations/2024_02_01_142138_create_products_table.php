@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('title');
             $table->integer('price');
             $table->integer('distributor_price');
-            $table->string('product_code')->default(uniqid())->unique();
+            $table->string('product_code')->nullable()->unique();
             $table->string('thumbnail_image');
-            $table->bigInteger('view_count');
+            $table->bigInteger('view_count')->nullable();
             $table->unsignedBigInteger('country_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('sub_category_id');
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->string('short_description')->nullable();
             $table->string('description')->nullable();
             $table->boolean('is_variational')->default(false);
