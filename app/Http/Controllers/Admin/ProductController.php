@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Product_attribute;
+use App\Models\Product_attribute_value;
 use App\Models\Product_category;
+use App\Models\Product_combination;
 use App\Models\product_gallery;
 use App\Models\Product_sub_category;
 use App\Models\Temp_image;
@@ -28,7 +31,7 @@ class ProductController extends Controller
     }
     
     public function AddProduct(Request $req){
-        return $req->all();
+        // return $req->all();
         $req->validate([
             'title'=> 'required|max:255',
             'price'=> 'required',
@@ -39,6 +42,7 @@ class ProductController extends Controller
             'images.*'=> 'nullable|image|mimes:png,jpg,jpeg',
             'thumbnail'=> 'required|image|mimes:png,jpg,jpeg',
             'combination'=> 'nullable|array',
+            'short_description'=> 'nullable|max:255',
             'combination.*.*'=> 'required',
             'country'=> 'required|exists:product_countries,id',
             'status'=> 'required|in:0,1'
@@ -52,6 +56,9 @@ class ProductController extends Controller
         $product->sub_category_id = $req->input('sub_category');
         $product->short_description = $req->input('short_description');
         $product->description = $req->input('description');
+        if($req->input('sku')){
+            $product->sku = $req->input('sku');
+        }
         $product->product_code = time();
         if($req->input('combination')){
             $product->is_variational = true;
@@ -80,6 +87,41 @@ class ProductController extends Controller
             }
         }
 
+        if($req->input('combination')){
+            foreach($req->input('attributes') as $attribute){
+                $product_attribute = new Product_attribute();
+                $product_attribute->name = $attribute;
+                $product_attribute->product_id = $product->id;
+                // $product_attribute->product_id = 1; //for test
+                $product_attribute->save(); // Save the attribute first
+                $attribute_value = $req->input($attribute);
+                $attribute_value_array = explode(',',$attribute_value);
+                foreach($attribute_value_array as $value){
+                    $product_attribute_value = new Product_attribute_value();
+                    $product_attribute_value->value = $value;
+                    $product_attribute_value->attribute_id = $product_attribute->id; // Use saved attribute's id
+                    $product_attribute_value->save();
+                }
+            }
+
+            foreach($req->input('combination') as $combination){
+                $product_combination = new Product_combination();
+                $product_combination->product_id = $product->id;
+                // $product_combination->product_id = 1; //for test
+                $product_combination->combination_string = $combination['combination_value'];
+                $product_combination_array = explode(',', $combination['combination_value']);
+                $combination_string = implode($product_combination_array);
+                $stringParts = str_split($combination_string);
+                sort($stringParts);
+                $combination_unique = implode($stringParts);
+                $product_combination->combination_unique = $combination_unique;
+                $product_combination->price = $combination['price'];
+                $product_combination->distributor_price = $combination['dist_price'];
+                $product_combination->sku = $combination['stock'];
+                $product_combination->save();
+            }
+        }
+        return ['saved'];
     }
 
     public function saveImage($image, $path){

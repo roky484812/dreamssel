@@ -125,7 +125,7 @@ $(document).ready(function () {
             html +=
                 '    <input id="tagInput-attr-value-' +
                 (i + 1) +
-                '" type="text" name="'+attributes[i]+'[]" class="form-control attribute-value" placeholder="' +
+                '" type="text" name="'+attributes[i]+'" class="form-control attribute-value" placeholder="' +
                 attributes[i] +
                 ' Values with Comma (,)">';
 
@@ -143,7 +143,6 @@ $(document).ready(function () {
             $(".generate-full-input").css("display", "block");
             $(".hide-attribute-selection").css("display", "none");
             $(".second-back-attribute").css("display", "block");
-            genAttrName();
         }
     }
     function generateInputField() {
@@ -249,15 +248,6 @@ $(document).ready(function () {
         console.log('No input field with class "attribute-value" is filled.');
     }
 
-    function genAttrName(){
-        attributes.forEach((attribute) => {
-            var attr_input = document.createElement('input');
-            attr_input.type = 'hidden';
-            // attr_input.name = 'attritubes[]';
-            attr_input.setAttribute('value', attribute);
-            $('#attr_name').append(attr_input);
-        });
-    }
     var row_index = 0;
     // Function to generate HTML for product details
     function generateProductDetailsHTML(combination) {

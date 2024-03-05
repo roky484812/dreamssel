@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->integer('price');
             $table->integer('distributor_price');
+            $table->integer('sku')->nullable();
             $table->string('product_code')->nullable()->unique();
             $table->string('thumbnail_image');
             $table->bigInteger('view_count')->nullable();
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sub_category_id');
             $table->unsignedBigInteger('author_id')->nullable();
             $table->string('short_description')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->boolean('is_variational')->default(false);
             $table->boolean('status')->default(false);
             $table->timestamps();

@@ -184,7 +184,7 @@
                                         <label class="form-label">Select attributes from below box</label>
                                         <div class="row">
                                             <div class="col-sm-6 mb-3">
-                                                <select class="form-control tag-management select2" name="attritubes[]" data-placeholder="Select attribute" multiple>
+                                                <select class="form-control tag-management select2" name="attributes[]" data-placeholder="Select attribute" multiple>
                                                     <option value="Color">Color</option>
                                                     <option value="Size">Size</option>
                                                 </select>
