@@ -25,7 +25,7 @@
 
                 <!-- Row -->
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-12">
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
                                 <div class="col mb-4">
@@ -33,25 +33,25 @@
                                         Add New Product</a>
                                 </div>
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title"> Filter </h3>
-                                    </div>
+                               
                                     <div class="card-body">
-                                        <div class="mb-3">
-                                            <label class="form-label">Categories</label>
+
+                                        <div class="row">
+                                        <div class="mb-3 col-md-4">
+                                           
                                             <select name="beast" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                <option value="0">--Select--</option>
+                                                <option value="0">--Categories--</option>
                                                 <option value="1">Foot wear</option>
                                                 <option value="2">Top wear</option>
                                                 <option value="3">Bootom wear</option>
                                                 <option value="4">Men's Groming</option>
                                                 <option value="5">Accessories</option>
-                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 333.75px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-select-beast-container"><span class="select2-selection__rendered" id="select2-select-beast-container" title="--Select--">--Select--</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                            </select>
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Sub Categories</label>
+                                        <div class="mb-3 col-md-4">
+                                          
                                             <select name="beast" id="select-beast1" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                <option value="0">--Select--</option>
+                                                <option value="0">--Sub Categories--</option>
                                                 <option value="1">Western wear</option>
                                                 <option value="2">Foot wear</option>
                                                 <option value="3">Top wear</option>
@@ -59,38 +59,40 @@
                                                 <option value="5">Beuty Groming</option>
                                                 <option value="6">Accessories</option>
                                                 <option value="7">jewellery</option>
-                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 333.75px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-select-beast1-container"><span class="select2-selection__rendered" id="select2-select-beast1-container" title="--Select--">--Select--</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                            </select>
                                         </div>
 
 
-                                        <div class="mb-3">
-                                            <label class="form-label">Country</label>
+                                        <div class="mb-3 col-md-4">
+                                        
                                             <select name="beast" id="select-beast1" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                <option value="0">--Select--</option>
+                                                <option value="0">--Country--</option>
                                                 <option value="1">China</option>
                                                 <option value="2">India</option>
                                                 <option value="3">Bangladesh</option>
 
-                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 333.75px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-select-beast1-container"><span class="select2-selection__rendered" id="select2-select-beast1-container" title="--Select--">--Select--</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                            </select>
                                         </div>
 
 
+                                    </div>
 
-                                        <a class="btn btn-primary btn-block" href="javascript:void(0)">Search</a>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search by product title">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary br-tr-7 br-br-7">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9">
-                        <div class="input-group">
-                            <input type="text" class="form-control br-tl-7 br-bl-7" placeholder="">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary br-tr-7 br-br-7">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="col-lg-12">
+                        
                         <div class="card mt-5 store">
                             <div class="table-responsive">
                                 <table class="table card-table table-vcenter text-nowrap">
