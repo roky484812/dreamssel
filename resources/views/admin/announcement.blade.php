@@ -63,7 +63,11 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
-                                                
+                                                @if (!count($announcements))
+                                                    <div class="col-12">
+                                                        <h3 class="text-muted text-center my-5 py-5">Not Found!</h3>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                         {{$announcements->links()}}

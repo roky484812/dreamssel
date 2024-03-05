@@ -39,7 +39,7 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label class="form-label">Categories</label>
-                                            <select name="beast" id="select-beast" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                            <select name="beast" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
                                                 <option value="0">--Select--</option>
                                                 <option value="1">Foot wear</option>
                                                 <option value="2">Top wear</option>
@@ -94,58 +94,52 @@
                         <div class="card mt-5 store">
                             <div class="table-responsive">
                                 <table class="table card-table table-vcenter text-nowrap">
-                                    <tbody><tr>
-                                        <th>Product Name</th>
-                                        <th class="text-center">Edit/Del</th>
-                                        <th class="text-center">Variant</th>
-                                        <th class="text-center">Stock</th>
-                                        <th class="text-center">Discount</th>
-                                        <th class="text-center">Distributor Price</th>
-                                        <th class="text-end"><strong>Public Price</strong></th>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th>Product Name</th>
+                                            <th class="text-center">Edit/Del</th>
+                                            <th class="text-center">Variant</th>
+                                            <th class="text-center">Stock</th>
+                                            <th class="text-center">Discount</th>
+                                            <th class="text-center">Distributor Price</th>
+                                            <th class="text-end"><strong>Public Price</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
+                                    @foreach ($products as $product)
+                                        
+                                        <tr>
+                                            <td>{{ $product->title }}</td>
 
-                                    <tr>
-                                        <td>Mens Jackets</td>
+                                            <td class="text-center"><a href="{{route('admin.product.updateView', $product->id)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            </td>
 
-                                        <td class="text-center"><a href="{{route('admin.product.updateView')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        </td>
+                                            <td class="text-center">{{ $product->country_name }}
+                                            </td>
+                                            <td class="text-center">{{ $product->sku }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ round((($product->price - $product->distributor_price) / $product->price) * 100) }}%
+                                            </td>                                        
+                                            <td class="text-center">{{ $product->distributor_price }}
+                                            </td>
 
-                                        <td class="text-center">China
-                                        </td>
-                                        <td class="text-center">500
-                                        </td>
-                                        <td class="text-center">50%
-
-                                        </td>
-                                        <td class="text-center">400
-                                        </td>
-
-                                        <td class="text-end">
-                                            <strong>500</strong>
-                                        </td>
-                                    </tr>
-
+                                            <td class="text-end">
+                                                <strong>{{ $product->price }}</strong>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    @if (!count($products))
+                                        <tr>
+                                            <td colspan="7" class="text-center text-muted">Product Not Found!</td>
+                                        </tr>
+                                    @endif
 
                                 </tbody></table>
                             </div>
-                            <div class="d-flex p-4 border-top">
-                                <ul class="pagination mb-0">
-                                    <li class="disabled page-item"><a href="javascript:void(0)" class="page-link">‹</a></li>
-                                    <li class="active page-item"><a href="javascript:void(0)" class="page-link">1</a></li>
-                                    <li class="page-item"><a href="javascript:void(0)" class="page-link">2</a>
-                                    </li>
-                                    <li class="page-item"><a href="javascript:void(0)" class="page-link">3</a>
-                                    </li>
-                                    <li class="page-item"><a href="javascript:void(0)" class="page-link">4</a>
-                                    </li>
-                                    <li class="page-item"><a href="javascript:void(0)" class="page-link">5</a>
-                                    </li>
-                                    <li class="page-item"><a href="javascript:void(0)" class="page-link">›</a>
-                                    </li>
-                                    <li class="page-item"><a href="javascript:void(0)" class="page-link">»</a>
-                                    </li>
-                                </ul>
+                            <div class="p-4 border-top">
+                                {{$products->links()}}
                             </div>
                         </div>
                     </div>

@@ -222,6 +222,7 @@
     </div>
 @endsection
 @section('custom_js')
+    @include('admin.widgets.alert')
     <script src="{{ asset('assets/admin/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/notify/js/sample.js') }}"></script>
     <script src="{{ asset('assets/admin/js/product-variation.js') }}"></script>

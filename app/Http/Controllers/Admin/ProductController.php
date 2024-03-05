@@ -22,7 +22,11 @@ use Intervention\Image\ImageManager;
 class ProductController extends Controller
 {
     public function ProductPage(){
-        return view('admin.product_management');
+        $products = Product::select('products.*', 'product_countries.name as country_name')
+        ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->paginate(20);
+        // return $products;
+        return view('admin.product_management', ['products'=> $products]);
     }
 
     public function AddProductPage(){
@@ -88,6 +92,7 @@ class ProductController extends Controller
         }
 
         if($req->input('combination')){
+            //save product attritubes
             foreach($req->input('attributes') as $attribute){
                 $product_attribute = new Product_attribute();
                 $product_attribute->name = $attribute;
@@ -104,6 +109,7 @@ class ProductController extends Controller
                 }
             }
 
+            //save product combinations
             foreach($req->input('combination') as $combination){
                 $product_combination = new Product_combination();
                 $product_combination->product_id = $product->id;
@@ -113,7 +119,7 @@ class ProductController extends Controller
                 $combination_string = implode($product_combination_array);
                 $stringParts = str_split($combination_string);
                 sort($stringParts);
-                $combination_unique = implode($stringParts);
+                $combination_unique = implode($stringParts); //string sort and make single product unique combination string
                 $product_combination->combination_unique = $combination_unique;
                 $product_combination->price = $combination['price'];
                 $product_combination->distributor_price = $combination['dist_price'];
@@ -121,7 +127,7 @@ class ProductController extends Controller
                 $product_combination->save();
             }
         }
-        return ['saved'];
+        return redirect()->back()->with('success', 'New Product added successfully.');
     }
 
     public function saveImage($image, $path){
@@ -139,7 +145,7 @@ class ProductController extends Controller
         return $image_path;
     }
 
-    public function editProductPage(){
+    public function editProductPage($id){
 
         return view('admin.edit_product');
     }

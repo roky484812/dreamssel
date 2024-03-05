@@ -68,7 +68,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::get('/product', 'ProductPage')->name('admin.productManagement');
         Route::get('/product/add', 'AddProductPage')->name('admin.product.addView');
         Route::post('/product/add', 'AddProduct')->name('admin.product.add');
-        Route::get('/product/update', 'editProductPage')->name('admin.product.updateView');
+        Route::get('/product/update/{id}', 'editProductPage')->name('admin.product.updateView');
         Route::post('/product/imaage/temp', 'productTempImage')->name('admin.product.image.temp');
     });
     Route::controller(ProductCategoryController::class)->group(function(){
