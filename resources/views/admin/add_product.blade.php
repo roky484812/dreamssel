@@ -251,14 +251,6 @@
                 extensions: ['.jpg','.jpeg','.png',],
                 maxFiles: 5
             });
-            $('#single_image').imageUploader({
-                label: 'Drag & drop your image here or click to browse for single image',
-                extensions: ['.jpg', '.jpeg', '.png'],
-                preview: '#preview',
-                imagesInputName: 'thumbnail',
-                maxFiles: 1 // Changed to allow only one file
-            });
-
 
             $("#product_add").submit(function() {
                 // var formdata = new FormData();

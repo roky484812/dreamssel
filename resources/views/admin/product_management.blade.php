@@ -35,57 +35,39 @@
                                 <div class="card">
                                
                                     <div class="card-body">
-
-                                        <div class="row">
-                                        <div class="mb-3 col-md-4">
-                                           
-                                            <select name="beast" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                <option value="0">--Categories--</option>
-                                                <option value="1">Foot wear</option>
-                                                <option value="2">Top wear</option>
-                                                <option value="3">Bootom wear</option>
-                                                <option value="4">Men's Groming</option>
-                                                <option value="5">Accessories</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3 col-md-4">
-                                          
-                                            <select name="beast" id="select-beast1" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                <option value="0">--Sub Categories--</option>
-                                                <option value="1">Western wear</option>
-                                                <option value="2">Foot wear</option>
-                                                <option value="3">Top wear</option>
-                                                <option value="4">Bootom wear</option>
-                                                <option value="5">Beuty Groming</option>
-                                                <option value="6">Accessories</option>
-                                                <option value="7">jewellery</option>
-                                            </select>
-                                        </div>
-
-
-                                        <div class="mb-3 col-md-4">
-                                        
-                                            <select name="beast" id="select-beast1" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                                <option value="0">--Country--</option>
-                                                <option value="1">China</option>
-                                                <option value="2">India</option>
-                                                <option value="3">Bangladesh</option>
-
-                                            </select>
-                                        </div>
-
-
-                                    </div>
-
-                                    <div class="input-group">
-                                        <input type="text" class="form-control br-tl-7 br-bl-7" placeholder="Search by product title">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-primary br-tr-7 br-br-7">
-                                                <i class="fa fa-search" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                       
+                                        <form action="{{ route('admin.productManagement') }}" method="get">
+                                            <div class="row">
+                                                <div class="mb-3 col-md-4">
+                                                    <select id="category" name="category" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                                        <option value="">--Categories--</option>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}" {{ $selected['category'] == $category->id ? 'selected' : '' }}>{{ $category->category_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3 col-md-4">
+                                                    <select id="sub_category" name="sub_category" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                                        <option value="">--Sub Categories--</option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3 col-md-4">
+                                                    <select name="country" id="select-beast1" class="form-control form-select select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                                        <option value="">--Country--</option>
+                                                        @foreach ($countries as $country)
+                                                            <option value="{{ $country->id }}" {{ $selected['country'] == $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="input-group">
+                                                <input type="text" value="{{ $selected['search'] }}" class="form-control br-tl-7 br-bl-7" name="search" placeholder="Search by product title">
+                                                <div class="btn-group">
+                                                    <button type="submit" class="btn btn-primary br-tr-7 br-br-7">
+                                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -101,6 +83,7 @@
                                             <th>Product Name</th>
                                             <th class="text-center">Edit/Del</th>
                                             <th class="text-center">Variant</th>
+                                            <th class="text-center">Category</th>
                                             <th class="text-center">Stock</th>
                                             <th class="text-center">Discount</th>
                                             <th class="text-center">Distributor Price</th>
@@ -113,12 +96,23 @@
                                         
                                         <tr>
                                             <td>{{ $product->title }}</td>
-
-                                            <td class="text-center"><a href="{{route('admin.product.updateView', $product->id)}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            <td class="text-center">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-light btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="{{route('admin.product.updateView', $product->id)}}" class="dropdown-item">Edit</a>
+                                                        </li>
+                                                        <li><button class="dropdown-item del-product">Delete</bu></li>
+                                                    </ul>
+                                                </div>
                                             </td>
 
                                             <td class="text-center">{{ $product->country_name }}
                                             </td>
+                                            <td class="text-center">{{ $product->category_name }} ({{ $product->sub_category_name }})
                                             <td class="text-center">{{ $product->sku }}
                                             </td>
                                             <td class="text-center">
@@ -151,4 +145,53 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('custom_js')
+    <script>
+        function sub_category_fetch (e, id=null){
+            var category_id = id ? id : $(this).val();
+            if (category_id) {
+                $.ajax({
+                    url: "{{ route('admin.product.subcategory.category') }}/"+category_id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if(response.status){
+                            $('#sub_category').empty();
+                            let options = '<option value="">--Sub Categories--</option>'
+                            response.sub_categories.forEach((sub_category) => {
+                                @if ($selected['sub_category'])
+                                    options += `<option value="${sub_category.id}" ${ {{ $selected['sub_category'] }} == sub_category.id? 'selected': '' }>${sub_category.sub_category_name}</option>`;
+                                @else
+                                    options += `<option value="${sub_category.id}">${sub_category.sub_category_name}</option>`;
+                                @endif
+                            });
+                            $('#sub_category').append(options);
+                        }
+                    },
+                    error: function(error) {
+                        if (error.responseJSON && error.responseJSON.errors) {
+                            // Display email validation error
+                            if (error.responseJSON.errors) {
+                                console.error('Error:', error);
+                            }
+                        }
+                    },
+                    complete: function() {
+                        console.log('finish');
+                    }
+                });
+            }else{
+                $('#sub_category').empty();
+                let options = '<option value="">--Sub Categories--</option>'
+                $('#sub_category').append(options);
+            }
+        }
+        $('#category').change(sub_category_fetch);
+        @if ($selected['category']) 
+            sub_category_fetch('', {{ $selected['category'] }});
+        @endif
+    </script>
 @endsection

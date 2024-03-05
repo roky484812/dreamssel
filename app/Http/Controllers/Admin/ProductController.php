@@ -8,6 +8,7 @@ use App\Models\Product_attribute;
 use App\Models\Product_attribute_value;
 use App\Models\Product_category;
 use App\Models\Product_combination;
+use App\Models\Product_country;
 use App\Models\product_gallery;
 use App\Models\Product_sub_category;
 use App\Models\Temp_image;
@@ -21,12 +22,50 @@ use Intervention\Image\ImageManager;
 
 class ProductController extends Controller
 {
-    public function ProductPage(){
-        $products = Product::select('products.*', 'product_countries.name as country_name')
+    public function ProductPage(Request $req){
+        $req->validate([
+            'category'=> 'nullable|exists:product_categories,id',
+            'sub_category'=> 'nullable|exists:product_sub_categories,id',
+            'country'=> 'nullable|exists:product_countries,id'
+        ]);
+        $product_fetch = Product::select('products.*', 'product_countries.name as country_name', 'product_categories.category_name', 'product_sub_categories.sub_category_name')
         ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
-        ->paginate(20);
-        // return $products;
-        return view('admin.product_management', ['products'=> $products]);
+        ->leftjoin('product_categories', 'product_categories.id', 'products.category_id')
+        ->leftjoin('product_sub_categories', 'product_sub_categories.id', 'products.sub_category_id')
+        ->orderBy('products.id', 'desc');
+        
+        if($req->input('category')){
+            $product_fetch->where('products.category_id', $req->input('category'));
+        }
+        
+        if($req->input('sub_category')){
+            $product_fetch->where('products.sub_category_id', $req->input('sub_category'));
+        }
+
+        if($req->input('search')){
+            $product_fetch->where('products.title', 'like', '%'.$req->input('search').'%');
+        }
+
+        if($req->input('country')){
+            $product_fetch->where('products.country_id', $req->input('country'));
+        }
+
+        $countries = Product_country::get();
+        $categories = Product_category::get();
+        $sub_categories = Product_sub_category::get();
+        $products = $product_fetch->paginate(20);
+        return view('admin.product_management', [
+            'products'=> $products,
+            'countries'=> $countries,
+            'categories'=> $categories,
+            'sub_categories'=> $sub_categories,
+            'selected'=> [
+                'category'=> $req->input('category'),
+                'sub_category'=> $req->input('sub_category'),
+                'country'=> $req->input('country'),
+                'search'=> $req->input('search')
+            ]
+        ]);
     }
 
     public function AddProductPage(){
