@@ -50419,5 +50419,36 @@ body.dark-mode.body-style1 footer.footer {
 .second-back-attribute{
     display: none;
 }
+.all_imgages{
+    border: 1px solid rgba(0, 0, 0, .125);
+    padding: 10px;
+    border-radius: 5px
 
+}
+.edit-item{
+    position: relative;
+    width: max-content;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+.edit-item img{
+    width: 100px;
+}
+.delete-icon{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    align-items: center;
+    align-items: center;
+text-align: center;
+display: none;
+justify-content: center;
+}
+.edit-item:hover .delete-icon{
+    display: flex;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */

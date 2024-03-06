@@ -74,6 +74,8 @@ class ProductController extends Controller
         return view('admin.add_product', ['categories'=> $categories, 'countries'=> $countries]);
     }
     
+    
+    
     public function AddProduct(Request $req){
         $req->validate([
             'title'=> 'required|max:255',
@@ -189,7 +191,9 @@ class ProductController extends Controller
 
     public function editProductPage($id){
 
-        return view('admin.edit_product');
+        $categories = Product_category::get();
+        return view('admin.edit_product', ['categories'=> $categories]);
+        
     }
 
     public function productTempImage(Request $req){

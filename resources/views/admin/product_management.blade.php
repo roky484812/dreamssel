@@ -1,5 +1,8 @@
 @extends('layouts.admin', ['title'=> 'Product Management', 'active'=> 'product'])
+
 @section('content')
+
+
     <div class="app-content main-content">
         <div class="side-app">
             <div class="container-fluid main-container">
@@ -76,7 +79,7 @@
                     <div class="col-lg-12">
                         
                         <div class="card mt-5 store">
-                            <div class="table-responsive">
+                            <div class="table-responsive min_height">
                                 <table class="table card-table table-vcenter text-nowrap">
                                     <thead>
                                         <tr>
@@ -197,4 +200,12 @@
             sub_category_fetch('', {{ $selected['category'] }});
         @endif
     </script>
+@endsection
+
+@section('custom_css')
+<style>
+    .min_height{
+        min-height: 200px;
+    }
+</style>
 @endsection
