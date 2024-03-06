@@ -144,112 +144,31 @@
                     <div class="col-xl-4 col-md-12 col-lg-5">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Best Employees</h3>
-                                <div class="card-options ">
-                                    <div class="btn-group mb-0">
-                                        <a class="option-dots" data-bs-toggle="dropdown" aria-expanded="false"
-                                            href="javascript:void(0)"><i class="fa fa-ellipsis-v"></i></a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0)"> Download
-                                                Print</a>
-                                            <a class="dropdown-item" href="javascript:void(0)">Last Week</a>
-                                            <a class="dropdown-item" href="javascript:void(0)">Last Month</a>
-                                            <a class="dropdown-item" href="javascript:void(0)">Yearly</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="javascript:void(0)"><i
-                                                    class="fa fa-cog me-2"></i> Settings</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h3 class="card-title">Old Five Editor</h3>
                             </div>
                             <div class="card-body p-3">
                                 <div class="table-responsive">
                                     <table class="table transaction-table mb-0 text-nowrap">
                                         <tbody>
+                                            @foreach ($editors as $editor) 
                                             <tr>
                                                 <td class="d-sm-flex">
                                                     <img class="w-7 h-7 rounded shadow me-3"
-                                                        src="../assets/images/users/1.jpg" alt="media1">
+                                                        src="{{ asset($editor->profile_picture) }}" alt="media1">
                                                     <div class="mt-1">
-                                                        <h6 class="mb-1 font-weight-semibold">John Wisely</h6>
-                                                        <small class="text-muted">Angular Developer</small>
+                                                        <h6 class="mb-1 font-weight-semibold">{{ $editor->name }}</h6>
+                                                        <small class="text-muted text-capitalize">{{ $editor->role }}</small>
                                                     </div>
                                                 </td>
+                                                @if (auth()->user()->role == 1)
                                                 <td class="text-end">
-                                                    <a class="btn btn-white"
-                                                        href="javascript:void(0)">Profile</a>
+                                                    <a class="btn btn-white" href="{{route('admin.user.view', ['user_id'=>$editor['id']])}}">
+                                                        Profile
+                                                    </a>
                                                 </td>
+                                                @endif
                                             </tr>
-                                            <tr>
-                                                <td class="d-sm-flex">
-                                                    <img class="w-7 h-7 rounded shadow me-3"
-                                                        src="../assets/images/users/4.jpg" alt="media1">
-                                                    <div class="mt-1">
-                                                        <h6 class="mb-1 font-weight-semibold">Nicki Fanning</h6>
-                                                        <small class="text-muted">Php Developer</small>
-                                                    </div>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a class="btn btn-white"
-                                                        href="javascript:void(0)">Profile</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="d-sm-flex">
-                                                    <img class="w-7 h-7 rounded shadow me-3"
-                                                        src="../assets/images/users/5.jpg" alt="media1">
-                                                    <div class="mt-1">
-                                                        <h6 class="mb-1 font-weight-semibold">Lula Malone</h6>
-                                                        <small class="text-muted">Ui Designer</small>
-                                                    </div>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a class="btn btn-white"
-                                                        href="javascript:void(0)">Profile</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="d-sm-flex">
-                                                    <img class="w-7 h-7 rounded shadow me-3"
-                                                        src="../assets/images/users/2.jpg" alt="media1">
-                                                    <div class="mt-1">
-                                                        <h6 class="mb-1 font-weight-semibold">Rina Summa</h6>
-                                                        <small class="text-muted">Java Developer</small>
-                                                    </div>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a class="btn btn-white"
-                                                        href="javascript:void(0)">Profile</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="d-sm-flex">
-                                                    <img class="w-7 h-7 rounded shadow me-3"
-                                                        src="../assets/images/users/10.jpg" alt="media1">
-                                                    <div class="mt-1">
-                                                        <h6 class="mb-1 font-weight-semibold">Yadira Acklin</h6>
-                                                        <small class="text-muted">Web Developer</small>
-                                                    </div>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a class="btn btn-white"
-                                                        href="javascript:void(0)">Profile</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="d-sm-flex">
-                                                    <img class="w-7 h-7 rounded shadow me-3"
-                                                        src="../assets/images/users/12.jpg" alt="media1">
-                                                    <div class="mt-1">
-                                                        <h6 class="mb-1 font-weight-semibold">Joanna Latta</h6>
-                                                        <small class="text-muted">Angular Developer</small>
-                                                    </div>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a class="btn btn-white"
-                                                        href="javascript:void(0)">Profile</a>
-                                                </td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

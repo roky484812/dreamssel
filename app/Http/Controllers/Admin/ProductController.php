@@ -74,7 +74,6 @@ class ProductController extends Controller
     }
     
     public function AddProduct(Request $req){
-        // return $req->all();
         $req->validate([
             'title'=> 'required|max:255',
             'price'=> 'required',
@@ -86,7 +85,6 @@ class ProductController extends Controller
             'thumbnail'=> 'required|image|mimes:png,jpg,jpeg',
             'combination'=> 'nullable|array',
             'short_description'=> 'nullable|max:255',
-            'combination.*.*'=> 'required',
             'country'=> 'required|exists:product_countries,id',
             'status'=> 'required|in:0,1'
         ]);
@@ -148,6 +146,7 @@ class ProductController extends Controller
                 }
             }
 
+            $sku = 0;
             //save product combinations
             foreach($req->input('combination') as $combination){
                 $product_combination = new Product_combination();
@@ -163,8 +162,11 @@ class ProductController extends Controller
                 $product_combination->price = $combination['price'];
                 $product_combination->distributor_price = $combination['dist_price'];
                 $product_combination->sku = $combination['stock'];
+                $sku += $combination['stock'];
                 $product_combination->save();
             }
+            $product->sku = $sku;
+            $product->save();
         }
         return redirect()->back()->with('success', 'New Product added successfully.');
     }
