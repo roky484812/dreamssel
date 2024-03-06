@@ -10,26 +10,36 @@ use Illuminate\Support\Facades\Hash;
 
 class UserListController extends Controller
 {
-    public function userList(){
-        $users = User::select('users.id', 'users.name', 'users.username', 'users.email', 'users.profile_picture', 'users.is_active', 'user_roles.role as role_name')
+    public function userList(Request $req){
+        $req->validate([
+            'type'=> 'nullable|in:name,email',
+            'search'=> 'nullable|string'
+        ]);
+        $userFetch = User::select('users.id', 'users.name', 'users.username', 'users.email', 'users.profile_picture', 'users.is_active', 'user_roles.role as role_name')
             ->leftJoin('user_roles', 'user_roles.id', 'users.role')
             ->where('users.role', '!=', '1')
-            ->with('profileMeta') // Eager load the profileMeta relationship
-            ->paginate(12);
-    
+            ->with('profileMeta');
+
+        if($req->input('search')){
+            $userFetch->where('users.'.$req->input('type'), 'like', '%'.$req->input('search').'%');
+        }
+        $users = $userFetch->paginate(12);
         $users->each(function ($user) {
             $userMeta = $user->profileMeta->pluck('value', 'key')->toArray();
-            
             $keys = ['phone', 'address', 'city', 'post_code'];
-
             foreach ($keys as $key) {
                 $user->setAttribute('user_meta.' . $key, $userMeta[$key] ?? '');
             }
             unset($user->profileMeta);
         });
-    
         // Pass the users data to the view
-        return view('admin.userList', ['users_data'=> $users]);
+        return view('admin.userList', [
+            'users_data'=> $users,
+            'input'=> [
+                'type'=> $req->input('type'),
+                'search'=> $req->input('search')
+            ]
+        ]);
     }
     
 
@@ -65,6 +75,7 @@ class UserListController extends Controller
     }
 
     public function updateUser(Request $req){
+        // return $req->all();
         $req->validate([
             'user_id'=> 'required',
             'fullname'=> 'max:100',
@@ -135,7 +146,7 @@ class UserListController extends Controller
             }
             return redirect()->route('admin.userlist')->with('success', 'User updated successfully.');
         } catch (\Throwable $th) {
-            return redirect()->route('admin.userlist')->with('error', 'Can not update user. Something went wrong.');
+            return redirect()->route('admin.userlist')->with('error', $th->getMessage());
             // throw $th;
         }
     }

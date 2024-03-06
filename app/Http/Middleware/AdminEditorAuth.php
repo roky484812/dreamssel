@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EditorAuth
+class AdminEditorAuth
 {
     /**
      * Handle an incoming request.
@@ -15,13 +15,14 @@ class EditorAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth()->user() && Auth()->user()->role == 2){
+        if(Auth()->user() && Auth()->user()->role == 1 || Auth()->user()->role == 2){
             if(Auth()->user()->is_active == 0){
                 Auth()->logout();
                 return redirect('/login')->with('error', 'You are not an active user. Please contact to dreamssel.');
             }
             return $next($request);
         }
+        
         return redirect('/login');
     }
 }

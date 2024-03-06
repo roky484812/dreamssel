@@ -18,7 +18,7 @@ class DistributorAuth
         if(Auth()->user() && Auth()->user()->role == 3){
             if(Auth()->user()->is_active == 0){
                 Auth()->logout();
-                return redirect('/login')->with('error', 'You are not a active user. Please contact to dreamssel.');
+                return redirect('/login')->with('error', 'You are not an active user. Please contact to dreamssel.');
             }
             return $next($request);
         }

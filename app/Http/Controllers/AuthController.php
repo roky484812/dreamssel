@@ -190,10 +190,8 @@ class AuthController extends Controller
 
     public function redirectDash(){
         $redirect = '';
-        if(Auth::user() && Auth::user()->role == 1){
+        if(Auth::user() && Auth::user()->role == 1 ||  Auth::user()->role == 2){
             $redirect = route('admin.dashboard');
-        }else if(Auth::user() && Auth::user()->role == 2){
-            $redirect = route('editor.dashboard');
         }else{
             $redirect = route('dist.dashboard');
         }

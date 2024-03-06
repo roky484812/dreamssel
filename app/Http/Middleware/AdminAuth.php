@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Routing\Router;
 
 class AdminAuth
 {
@@ -18,10 +19,11 @@ class AdminAuth
         if(Auth()->user() && Auth()->user()->role == 1){
             if(Auth()->user()->is_active == 0){
                 Auth()->logout();
-                return redirect('/login')->with('error', 'You are not a active user. Please contact to dreamssel.');
+                return redirect('/login')->with('error', 'You are not an active user. Please contact to dreamssel.');
             }
             return $next($request);
         }
+        
         return redirect('/login');
     }
 }

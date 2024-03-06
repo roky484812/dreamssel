@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         //add user authentications
         'type.admin' => \App\Http\Middleware\AdminAuth::class,
         'type.editor' => \App\Http\Middleware\EditorAuth::class,
-        'type.distributor' => \App\Http\Middleware\DistributorAuth::class
+        'type.distributor' => \App\Http\Middleware\DistributorAuth::class,
+        'type.adminEditor' => \App\Http\Middleware\AdminEditorAuth::class
     ];
 }

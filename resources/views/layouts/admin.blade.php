@@ -301,7 +301,11 @@
                         <ul class="side-menu">
                             <li class="slide">
                                 <a class="side-menu__item @if ($active == 'dashboard') active @endif"
-                                    data-bs-toggle="slide" href="{{ route('admin.dashboard') }}">
+                                    data-bs-toggle="slide" href="@if (auth()->user()->role == 1)
+                                        {{ route('admin.dashboard') }}
+                                    @else
+                                        {{ route('editor.dashboard') }}
+                                    @endif">
                                     <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -311,7 +315,7 @@
                                     <span class="side-menu__label">Dashboard</span></a>
 
                             </li>
-
+                            @if(auth()->user()->role == 1)
                             <li class="slide">
                                 <a class="side-menu__item @if ($active == 'user') active @endif"
                                     data-bs-toggle="slide" href="{{ route('admin.userlist') }}">
@@ -325,7 +329,7 @@
                                     <span class="side-menu__label">User Management</span></a>
 
                             </li>
-
+                            @endif
 
                             <li class="slide">
                                 <a class="side-menu__item @if (

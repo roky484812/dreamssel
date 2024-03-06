@@ -282,14 +282,10 @@
                         },
                         error: function(error) {
                             if (error.responseJSON && error.responseJSON.errors) {
-                                // Display email validation error
                                 if (error.responseJSON.errors) {
                                     console.error('Error:', error);
                                 }
                             }
-                        },
-                        complete: function() {
-                            console.log('finish');
                         }
                     });
                 }

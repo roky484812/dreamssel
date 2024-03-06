@@ -27,7 +27,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], function(){
+Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], function(){
     Route::controller(AuthController::class)->group(function(){
         Route::get('/logout', 'logout')->name('admin.logout');
         Route::post('profile/update/delete', 'delete_profile')->name('admin.profile.delete');
@@ -45,16 +45,6 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     Route::controller(AdminController::class)->group(function(){
         Route::get('/profile', 'profile')->name('admin.profile');
         Route::get('/profile/update', 'edit_profile')->name('admin.profile.edit');
-    });
-    Route::controller(UserListController::class)->group(function(){
-        Route::get('/user', 'userList')->name('admin.userlist');
-        Route::get('/user/add', 'addUserView')->name('admin.adduserView');
-        Route::post('/user/add', 'addUser')->name('admin.adduser');
-        Route::get('/user/update/{user_id}', 'updateUserView')->name('admin.updateuserView');
-        Route::get('/user/view/{user_id}', 'viewUser')->name('admin.user.view');
-        Route::put('/user/update', 'updateUser')->name('admin.user.update');
-        Route::get('/user/status/{user_id}', 'user_status')->name('admin.user.status');
-        Route::get('/user/delete/{user_id}', 'user_delete')->name('admin.user.delete');
     });
     Route::controller(AnnouncementController::class)->group(function(){
         Route::get('/announcement', 'announcementList')->name('admin.announcement.list');
@@ -81,6 +71,19 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::put('/product/subcategory/update', 'updateSubcategory')->name('admin.product.subcategory.update');
         Route::delete('/product/subcategory/delete', 'deleteSubcategory')->name('admin.product.subcategory.delete');
         Route::get('/product/subcategory/{category_id?}', 'subcategory_by_category')->name('admin.product.subcategory.category');
+    });
+});
+
+Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], function(){
+    Route::controller(UserListController::class)->group(function(){
+        Route::get('/user', 'userList')->name('admin.userlist');
+        Route::get('/user/add', 'addUserView')->name('admin.adduserView');
+        Route::post('/user/add', 'addUser')->name('admin.adduser');
+        Route::get('/user/update/{user_id}', 'updateUserView')->name('admin.updateuserView');
+        Route::get('/user/view/{user_id}', 'viewUser')->name('admin.user.view');
+        Route::put('/user/update', 'updateUser')->name('admin.user.update');
+        Route::get('/user/status/{user_id}', 'user_status')->name('admin.user.status');
+        Route::get('/user/delete/{user_id}', 'user_delete')->name('admin.user.delete');
     });
 });
 Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){
