@@ -122,13 +122,11 @@
                                         <div class="col-md-4 col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-label">Select Country *</label>
-                                                <select name="country" class="form-control SlectBox @error('country')
-                                                    is-invalid
-                                                @enderror">
+                                                <select name="country" class="form-control select2 @error('country') is-invalid  @enderror">
                                                     <!--placeholder-->
-                                                    <option value="3">China</option>
-                                                    <option value="2">India</option>
-                                                    <option value="1">Bangladesh</option>
+                                                    @foreach ($countries as $country)
+                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('country')
                                                     <span class="invalid-feedback" role="alert">

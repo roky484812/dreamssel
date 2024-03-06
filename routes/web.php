@@ -30,7 +30,7 @@ Route::get('/', function () {
 Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], function(){
     Route::controller(AuthController::class)->group(function(){
         Route::get('/logout', 'logout')->name('admin.logout');
-        Route::post('profile/update/delete', 'delete_profile')->name('admin.profile.delete');
+        Route::post('/profile/update/delete', 'delete_profile')->name('admin.profile.delete');
     });
     Route::controller(EditProfileController::class)->group(function(){
         Route::post('/profile/update/password', 'change_password')->name('admin.change_password');

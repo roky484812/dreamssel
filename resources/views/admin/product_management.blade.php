@@ -95,7 +95,10 @@
                                     @foreach ($products as $product)
                                         
                                         <tr>
-                                            <td>{{ $product->title }}</td>
+                                            <td>
+                                                <img src="{{ $product->thumbnail_image }}" class="w-7 h-7 shadow me-3 rounded">
+                                                <span class="me-3">{{ \Illuminate\Support\Str::limit($product->title, 40, $end='...') }}</span>
+                                            </td>
                                             <td class="text-center">
                                                 <div class="dropdown">
                                                     <button class="btn btn-light btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -69,8 +69,9 @@ class ProductController extends Controller
     }
 
     public function AddProductPage(){
-        $categories = Product_category::get();
-        return view('admin.add_product', ['categories'=> $categories]);
+        $countries = Product_country::orderBy('id', 'desc')->get();
+        $categories = Product_category::orderBy('id', 'desc')->get();
+        return view('admin.add_product', ['categories'=> $categories, 'countries'=> $countries]);
     }
     
     public function AddProduct(Request $req){

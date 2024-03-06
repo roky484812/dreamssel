@@ -144,31 +144,34 @@
                     <div class="col-xl-4 col-md-12 col-lg-5">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Old Five Editor</h3>
+                                <h3 class="card-title">Recently Added Distributors</h3>
                             </div>
                             <div class="card-body p-3">
                                 <div class="table-responsive">
                                     <table class="table transaction-table mb-0 text-nowrap">
                                         <tbody>
-                                            @foreach ($editors as $editor) 
+                                            @foreach ($distributors as $distributor) 
                                             <tr>
                                                 <td class="d-sm-flex">
                                                     <img class="w-7 h-7 rounded shadow me-3"
-                                                        src="{{ asset($editor->profile_picture) }}" alt="media1">
+                                                        src="{{ asset($distributor->profile_picture) }}" alt="media1">
                                                     <div class="mt-1">
-                                                        <h6 class="mb-1 font-weight-semibold">{{ $editor->name }}</h6>
-                                                        <small class="text-muted text-capitalize">{{ $editor->role }}</small>
+                                                        <h6 class="mb-1 font-weight-semibold">{{ $distributor->name }}</h6>
+                                                        <small class="text-muted text-capitalize">{{ $distributor->role }}</small>
                                                     </div>
                                                 </td>
                                                 @if (auth()->user()->role == 1)
                                                 <td class="text-end">
-                                                    <a class="btn btn-white" href="{{route('admin.user.view', ['user_id'=>$editor['id']])}}">
+                                                    <a class="btn btn-white" href="{{route('admin.user.view', ['user_id'=>$distributor['id']])}}">
                                                         Profile
                                                     </a>
                                                 </td>
                                                 @endif
                                             </tr>
                                             @endforeach
+                                            @if (!count($distributors))
+                                                <h4 class="text-muted text-center mt-5">Not Found!</h4>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -252,117 +255,69 @@
                     <div class="col-xl-8 col-lg-7">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Application Status</h3>
-                            </div>
-                            <div class="p-5">
-                                <div class="row d-sm-flex d-block">
-                                    <div class="col my-2">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                    </div>
-                                    <div class="col my-2">
-                                        <input type="text" class="form-control" placeholder="Date">
-                                    </div>
-                                    <div class="col my-2">
-                                        <input type="text" class="form-control" placeholder="Reason">
-                                    </div>
-                                    <div class="col my-2">
-                                        <a class="btn btn-primary btn-block"
-                                            href="javascript:void(0)">Search</a>
-                                    </div>
-                                </div>
+                                <h3 class="card-title">Most Clicked Product</h3>
                             </div>
                             <div class="card-body table-responsive p-0 mx-313 scroll-3">
                                 <table
                                     class="table card-table table-vcenter text-nowrap table-borderedless border-0 inde4-table">
                                     <thead>
                                         <tr>
-                                            <th>Code</th>
-                                            <th>Date</th>
-                                            <th>Employee</th>
-                                            <th>Leave</th>
-                                            <th>Period</th>
-                                            <th>Reason</th>
-                                            <th>Status</th>
+                                            <th>Title</th>
+                                            <th>Edit/Del</th>
+                                            <th>Varient</th>
+                                            <th>Category</th>
+                                            <th>Stock</th>
+                                            <th>Dist Discount</th>
+                                            <th>Dist Price</th>
+                                            <th>Price</th>
+                                            <th>Clicked</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($popular_products as $i=>$p_product) 
                                         <tr>
-                                            <td>2548</td>
-                                            <td>3rd Feb 2019</td>
-                                            <td>Emp-2312</td>
-                                            <td>PL</td>
-                                            <td>1 Day</td>
-                                            <td>Sick</td>
-                                            <td><span class="badge bg-success rounded-pill">Approved</span></td>
+                                            <td>
+                                                <img src="{{ $p_product->thumbnail_image }}" class="w-7 h-7 shadow me-3 rounded">
+                                                {{  $p_product->title }}
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-light btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="{{route('admin.product.updateView', $p_product->id)}}" class="dropdown-item">Edit</a>
+                                                        </li>
+                                                        <li><button class="dropdown-item del-product">Delete</bu></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td class="text-center">{{ $p_product->country_name }}
+                                            </td>
+                                            <td class="text-center">{{ $p_product->category_name }} ({{ $p_product->sub_category_name }})
+                                            <td class="text-center">{{ $p_product->sku }}
+                                            </td>
+                                            <td class="text-center">
+                                                {{ round((($p_product->price - $p_product->distributor_price) / $p_product->price) * 100) }}%
+                                            </td>                                        
+                                            <td class="text-center">{{ $p_product->distributor_price }}
+                                            </td>
+
+                                            <td class="text-center">
+                                                <strong>{{ $p_product->price }}</strong>
+                                            </td>
+
+                                            <td class="text-end">
+                                                <strong>{{ $p_product->view_count }}</strong>
+                                            </td>
                                         </tr>
-                                        <tr>
-                                            <td>4536</td>
-                                            <td>23rd Mar 2019</td>
-                                            <td>Emp-6754</td>
-                                            <td>PL</td>
-                                            <td>1 Day</td>
-                                            <td>Hospital</td>
-                                            <td><span class="badge bg-success rounded-pill">Approved</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2567</td>
-                                            <td>4th Feb 2019</td>
-                                            <td>Emp-1432</td>
-                                            <td>PL</td>
-                                            <td>1 Day</td>
-                                            <td>Outside</td>
-                                            <td><span class="badge bg-primary rounded-pill">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>7654</td>
-                                            <td>13th Mar 2019</td>
-                                            <td>Emp-1254</td>
-                                            <td>PL</td>
-                                            <td>1 Day</td>
-                                            <td>Normal</td>
-                                            <td><span class="badge bg-danger rounded-pill">Rejected</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>8754</td>
-                                            <td>28th Feb 2019</td>
-                                            <td>Emp-8765</td>
-                                            <td>PL</td>
-                                            <td>1 Day</td>
-                                            <td>Sick</td>
-                                            <td><span class="badge bg-success rounded-pill">Approved</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>1232</td>
-                                            <td>23rd Apr 2019</td>
-                                            <td>Emp-7643</td>
-                                            <td>PL</td>
-                                            <td>1 Day</td>
-                                            <td>Other Work</td>
-                                            <td><span class="badge bg-danger rounded-pill">Rejected</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>8765</td>
-                                            <td>16th Feb 2019</td>
-                                            <td>Emp-2431</td>
-                                            <td>PL</td>
-                                            <td>1 Day</td>
-                                            <td>Sick</td>
-                                            <td><span class="badge bg-primary rounded-pill">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>7654</td>
-                                            <td>23rd Mar 2019</td>
-                                            <td>Emp-5643</td>
-                                            <td>PL</td>
-                                            <td>1 Day</td>
-                                            <td>Outside</td>
-                                            <td><span class="badge bg-danger rounded-pill">Rejected</span></td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                             <div class="card-footer text-center">
-                                <a class="btn-link" href="javascript:void(0)">View All</a>
+                                <a class="btn-link" href="{{ route('admin.productManagement') }}">View All</a>
                             </div>
                         </div>
                     </div>
