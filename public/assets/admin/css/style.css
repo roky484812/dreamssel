@@ -50428,7 +50428,6 @@ body.dark-mode.body-style1 footer.footer {
 .edit-item{
     position: relative;
     width: max-content;
-    display: flex;
     justify-content: space-evenly;
 
 }
@@ -50441,12 +50440,19 @@ body.dark-mode.body-style1 footer.footer {
     position: absolute;
     align-items: center;
     align-items: center;
-text-align: center;
-display: none;
-justify-content: center;
+    text-align: center;
+    visibility: none;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    transition: 0.3s;
+}
+.edit-item .delete-icon i{
+    font-size: 25px;
 }
 .edit-item:hover .delete-icon{
-    display: flex;
+    opacity: 1;
+    visibility: visible;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
     cursor: pointer;

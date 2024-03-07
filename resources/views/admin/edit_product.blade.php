@@ -34,6 +34,7 @@
                         <form method="post" action="{{ route('admin.product.add') }}" id="product_add"
                             enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="id" value="{{ $product->id }}">
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">File Upload</h3>
@@ -41,7 +42,7 @@
                                 <div class=" card-body">
                                     <div class="row">
                                         <div class="col-lg-6 col-sm-12">
-                                            <label class="form-label text-dark" for="">Thumbnail *</label>
+                                            <label class="form-label text-dark" for="">Thumbnail</label>
                                             <input type="file" class="dropify" accept=".jpg, .png, image/jpeg, image/png"
                                                 name="thumbnail" />
                                             @error('thumbnail')
@@ -57,15 +58,15 @@
                                         </div>
                                         <div class="col-lg-12 col-sm-12">
                                             <label class="form-label text-dark" for="">Manage Image</label>
-                                            <div class="all_imgages">
-                                                <div class="edit-item">
+                                            <div class="all_imgages d-flex">
+                                                @foreach ($product->product_galleries as $product_gallery)
+                                                <div class="edit-item del-image m-1" data-image_id="{{ $product_gallery->id }}">
                                                     <div class="delete-icon">
-
                                                         <i class="fa fa-trash"></i>
                                                     </div>
-                                                    <img src="{{ asset('/assets/admin/images/brand/logo.png') }}"
-                                                        alt="">
+                                                    <img src="{{ asset($product_gallery->image) }}" alt="">
                                                 </div>
+                                                @endforeach
 
                                             </div>
                                             @error('images.*')
@@ -82,7 +83,7 @@
                                 <div class="card-body ">
                                     <div class="form-group">
                                         <label class="form-label text-dark">Product Title *</label>
-                                        <input type="text" name="title"
+                                        <input type="text" name="title" value="{{ $product->title }}" 
                                             class="form-control @error('title') is-invalid @enderror"
                                             placeholder="I tell a teil of a tail">
                                         @error('title')
@@ -96,8 +97,7 @@
                                         <div class="col-md-12">
                                             <label class="form-label text-dark">Product Description *</label>
                                             <div class="ql-wrapper ql-wrapper-demo bg-light">
-                                                <div id="quillEditor">
-                                                </div>
+                                                <div id="quillEditor">{!! $product->description !!}</div>
                                             </div>
                                             <textarea name="description" style="display:none" id="hidden-textarea"
                                                 class="@error('description') is-invalid @enderror"></textarea>
@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="form-group mt-3">
                                         <label for="" class="form-label-text-dark">Product Short Description</label>
-                                        <textarea name="short_description" class="form-control" placeholder="enter product short description"></textarea>
+                                        <textarea name="short_description" class="form-control" placeholder="enter product short description">{{ $product->short_description }}</textarea>
                                     </div>
                                     <div class="row my-4">
                                         <div class="col-md-4 col-sm-6">
@@ -120,7 +120,7 @@
                                                 name="category">
                                                 <option value="">Select Category</option>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category['id'] }}">
+                                                    <option value="{{ $category['id'] }}" @if ($category->id == $product->category_id) selected @endif>
                                                         {{ $category['category_name'] }}
                                                     </option>
                                                 @endforeach
@@ -146,14 +146,11 @@
                                         <div class="col-md-4 col-sm-6">
                                             <div class="form-group">
                                                 <label class="form-label">Select Country *</label>
-                                                <select name="country"
-                                                    class="form-control SlectBox @error('country')
-                                                    is-invalid
-                                                @enderror">
+                                                <select name="country" class="form-control select2 @error('country') is-invalid  @enderror">
                                                     <!--placeholder-->
-                                                    <option value="3">China</option>
-                                                    <option value="2">India</option>
-                                                    <option value="1">Bangladesh</option>
+                                                    @foreach ($countries as $country)
+                                                    <option value="{{ $country->id }}" {{ $country->id == $product->country_id ? 'selected': '' }}>{{ $country->name }}</option>
+                                                    @endforeach
                                                 </select>
                                                 @error('country')
                                                     <span class="invalid-feedback" role="alert">
@@ -166,12 +163,12 @@
                                     <div class="row">
                                         <div class="form-group col-md-3 col-sm-6">
                                             <label class="form-label text-dark">Available Quantity</label>
-                                            <input type="number" class="form-control" name="sku"
+                                            <input type="number" class="form-control" value="{{ $product->sku }}" name="sku"
                                                 placeholder="Number of Product">
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <label class="form-label text-dark">Public Price *</label>
-                                            <input type="number"
+                                            <input type="number" value="{{ $product->price }}"
                                                 class="form-control @error('price') is-invalid @enderror" name="price"
                                                 placeholder="Price of product">
                                             @error('price')
@@ -182,7 +179,7 @@
                                         </div>
                                         <div class="form-group col-md-3 col-sm-6">
                                             <label class="form-label text-dark">Distributor Price *</label>
-                                            <input type="number"
+                                            <input type="number" value="{{ $product->distributor_price }}"
                                                 class="form-control @error('dist_price') is-invalid @enderror"
                                                 name="dist_price" placeholder="Price for distributor">
                                             @error('dist_price')
@@ -217,31 +214,36 @@
                                     <!-- Product details input generated -->
 
                                     <div class="generated-product-details mt-3">
-                                        <div class="mb-0">
-                                            <div class="add-category">
-                                                <label class="form-label"> combination </label>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <input id="tagInput" name="combination[${row_index}][stock]"
-                                                        type="number" class="form-control mb-1" placeholder="Stock">
-                                                </div>
-                                                <input type='hidden' name="combination[${row_index}][combination_value]"
-                                                    value='${combination}'>
-
-                                                <div class="col-sm-4">
-                                                    <input id="tagInput" name="combination[${row_index}][price]"
-                                                        type="number" class="form-control mb-1"
-                                                        placeholder="Regular Price">
-                                                </div>
-                                                <div class="col-sm-4">
-                                                    <input id="tagInput" name="combination[${row_index}][dist_price]"
-                                                        type="number" class="form-control mb-1"
-                                                        placeholder="Distributor Price">
-                                                </div>
-                                            </div>
-
-                                        </div>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Combination</th>
+                                                    <th>Stock</th>
+                                                    <th>Price</th>
+                                                    <th>Distributor Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach ($product->product_combinations as $index => $combination)
+                                            <tr>
+                                                <td>
+                                                    {{ $combination->combination_string }}
+                                                    <input type='hidden' name="combination[{{ $index }}][combination_value]" value='{{ $combination->combination_string }}'>
+                                                    <input type="hidden" name="combination[{{ $index }}][id]" value="{{ $combination->id }}">
+                                                </td>
+                                                <td>
+                                                    <input id="tagInput" name="combination[{{ $index }}][stock]"  type="number" class="form-control w-100" placeholder="Stock" value="{{ $combination->sku }}">
+                                                </td>
+                                                <td>
+                                                    <input id="tagInput" name="combination[{{ $index }}][price]" type="number" class="form-control w-100" value="{{ $combination->price }}" placeholder="Regular Price">
+                                                </td>
+                                                <td>
+                                                    <input id="tagInput" name="combination[{{ $index }}][dist_price]" type="number" class="form-control w-100" value="{{ $combination->distributor_price }}" placeholder="Distributor Price">
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
 
                                 </div>
@@ -276,9 +278,11 @@
 
     <script src="{{ asset('assets\admin\plugins\image-uploader\dist\image-uploader.min.js') }}"></script>
 
+    
     <script>
         $(document).ready(function() {
             var editor = new Quill('#quillEditor', {
+                value: '{{ $product->description }}',
                 theme: 'snow'
             });
             $('#multiple_image').imageUploader({
@@ -295,36 +299,77 @@
                 $("#hidden-textarea").val(editor.root.innerHTML);
             });
 
-            $('#category').change((e) => {
-                var category_id = e.target.value;
-                if (category_id) {
-                    $.ajax({
-                        url: "{{ route('admin.product.subcategory.category') }}/" + category_id,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(response) {
-                            console.log(response);
-                            if (response.status) {
-                                $('#sub_category').empty();
-                                response.sub_categories.forEach((sub_category) => {
-                                    let options = document.createElement('option');
-                                    options.setAttribute('value', sub_category.id);
-                                    options.append(sub_category.sub_category_name);
-                                    $('#sub_category').append(options);
-                                });
-                            }
-                        },
-                        error: function(error) {
-                            if (error.responseJSON && error.responseJSON.errors) {
-                                if (error.responseJSON.errors) {
-                                    console.error('Error:', error);
-                                }
+            $(document).on('click', '.del-image', function(){
+                var id = $(this).data('image_id');
+                let current_elemenet = $(this);
+                current_elemenet.addClass('opacity-25');
+                let csrfToken = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    url: "{{ route('admin.product.deleteImage') }}/"+id,
+                    type: "delete",
+                    headers: {
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(data) {
+                        if(data.status){
+                            swal("Success!", data.message, "success");
+                            current_elemenet.remove();
+                        }else{
+                            current_elemenet.removeClass('opacity-25');
+                            swal("Error!", data.message, "error");
+                        }
+                    }
+                });
+            })
+            
+        });
+    </script>
+
+    <script>
+        function sub_category_fetch (e, id=null){
+            var category_id = id ? id : $(this).val();
+            if (category_id) {
+                $.ajax({
+                    url: "{{ route('admin.product.subcategory.category') }}/"+category_id,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if(response.status){
+                            $('#sub_category').empty();
+                            let options = '<option value="">--Sub Categories--</option>'
+                            response.sub_categories.forEach((sub_category) => {
+                                @if ($product->sub_category_id)
+                                    options += `<option value="${sub_category.id}" ${ {{ $product->sub_category_id }} == sub_category.id? 'selected': '' }>${sub_category.sub_category_name}</option>`;
+                                @else
+                                    options += `<option value="${sub_category.id}">${sub_category.sub_category_name}</option>`;
+                                @endif
+                            });
+                            $('#sub_category').append(options);
+                        }
+                    },
+                    error: function(error) {
+                        if (error.responseJSON && error.responseJSON.errors) {
+                            // Display email validation error
+                            if (error.responseJSON.errors) {
+                                console.error('Error:', error);
                             }
                         }
-                    });
-                }
-            });
-        });
+                    },
+                    complete: function() {
+                        console.log('finish');
+                    }
+                });
+            }else{
+                $('#sub_category').empty();
+                let options = '<option value="">--Sub Categories--</option>'
+                $('#sub_category').append(options);
+            }
+        }
+        $('#category').change(sub_category_fetch);
+        @if ($product->category_id) 
+            sub_category_fetch('', {{ $product->category_id }});
+        @endif
     </script>
 
 

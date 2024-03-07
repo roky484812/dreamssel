@@ -12,6 +12,7 @@ use App\Models\Product_country;
 use App\Models\product_gallery;
 use App\Models\Product_sub_category;
 use App\Models\Temp_image;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -73,7 +74,6 @@ class ProductController extends Controller
         $categories = Product_category::orderBy('id', 'desc')->get();
         return view('admin.add_product', ['categories'=> $categories, 'countries'=> $countries]);
     }
-    
     
     
     public function AddProduct(Request $req){
@@ -190,10 +190,56 @@ class ProductController extends Controller
     }
 
     public function editProductPage($id){
-
+        $product = Product::whereId($id)
+        ->with('product_galleries')
+        ->with('product_combinations')
+        ->first();
         $categories = Product_category::get();
-        return view('admin.edit_product', ['categories'=> $categories]);
-        
+        $countries = Product_country::orderBy('id', 'desc')->get();
+        return view('admin.edit_product', ['categories'=> $categories, 'product'=> $product, 'countries'=> $countries]);
+    }
+
+    public function editProduct(Request $req){
+
+    }
+
+    public function deleteProductImage($id){
+        if($id){
+            $product_image = Product_gallery::whereId($id)->first();
+            $image_path = public_path().$product_image->image;
+            if(File::exists($image_path)){
+                try{
+                    if(unlink($image_path)){
+                        Product_gallery::whereId($id)->delete();
+                        return response()->json([
+                            'status'=> true,
+                            'message'=> 'Successfully deleted product image'
+                        ]);
+                    }else{
+                        return response()->json([
+                          'status'=> false,
+                          'message'=> 'Failed to delete product image'
+                        ]);
+                    }
+                }catch(Exception $e) {
+                    return response()->json([
+                     'status'=> false,
+                     'message'=> $e->getMessage()
+                    ]);
+                }
+            }else{
+                return response()->json([
+                    'status'=> false,
+                    'message'=> 'Image not found'
+                ]);
+            }
+            return $product_image;
+        }else{
+            return response()->json([
+                'status'=> false,
+                'message'=> 'Please provide image identifier'
+            ]);
+        }
     }
 
     public function productTempImage(Request $req){

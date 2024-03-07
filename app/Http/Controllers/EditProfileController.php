@@ -35,6 +35,7 @@ class EditProfileController extends Controller
     }
 
     public function change_profile_picture(Request $req){
+        
         $req->validate([
             'profile_picture'=> 'image|mimes:jpeg,jpg,png'
         ],[
@@ -52,7 +53,14 @@ class EditProfileController extends Controller
             // read image from file system
             $image = $manager->read($profile_picture);
             $image->cover(300, 300);
-            $image->save($profile_picture_dest, 50);    
+            $image->save($profile_picture_dest, 50);
+            if(Auth::user()->profile_picture != 'images/profile_pictures/default.jpg'){
+                try{
+                    unlink(public_path().Auth::user()->profile_picture);
+                }catch(Exception $e){
+                    return back()->with('error', $e->getMessage());
+                }
+            }
             User::whereId($user->id)->update([
                 'profile_picture'=> $profile_picture_path
             ]);
