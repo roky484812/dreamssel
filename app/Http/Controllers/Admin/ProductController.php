@@ -200,9 +200,102 @@ class ProductController extends Controller
     }
 
     public function editProduct(Request $req){
+        $req->validate([
+            'id'=> 'required|exists:products,id',
+            'title'=> 'required|max:255',
+            'price'=> 'required',
+            'dist_price'=> 'required',
+            'category'=> 'required|exists:product_categories,id',
+            'sub_category'=> 'required|exists:product_sub_categories,id',
+            'images.*'=> 'nullable|image|mimes:png,jpg,jpeg',
+            'thumbnail'=> 'nullable|image|mimes:png,jpg,jpeg',
+            'combination'=> 'nullable|array',
+            'short_description'=> 'nullable|max:255',
+            'country'=> 'required|exists:product_countries,id',
+            'status'=> 'required|in:0,1'
+        ]);
 
+        $product = Product::whereId($req->id)->first();
+        $product->title = $req->input('title');
+        $product->price = $req->input('price');
+        $product->distributor_price = $req->input('dist_price');
+        $product->category_id = $req->input('category');
+        $product->country_id = $req->input('country');
+        $product->sub_category_id = $req->input('sub_category');
+        $product->short_description = $req->input('short_description');
+        $product->description = $req->input('description');
+        if($req->input('sku')){
+            $product->sku = $req->input('sku');
+        }
+        $product->save();
+        $sku = 0;
+        if($req->input('combination')){
+            foreach($req->input('combination') as $combination){
+                $sku += $combination['stock'];
+                Product_combination::whereId($combination['id'])->update([
+                    'price' => $combination['price'],
+                    'distributor_price' => $combination['dist_price'],
+                    'sku' => $combination['stock']
+                ]);
+            }
+            $product->sku = $sku;
+            $product->save();
+        }
+        $product->status = $req->input('status');
+        if($req->hasFile('thumbnail')){
+            $prev_image = public_path().$product->thumbnail;
+            $delete_image = $this->deleteImage($prev_image);
+            if($delete_image['status']){
+                $image = $req->file('thumbnail');
+                $path = '/images/product/thumbnail/';
+                $image_path = $this->saveImage($image, $path);
+                $product->thumbnail_image = $image_path;
+                $product->save();
+            }else{
+                return redirect()->back()->with('error', $delete_image['message']);
+            }
+        }
+        if($req->hasFile('images')){
+            foreach($req->file('images') as $image){
+                if($image->isValid()){
+                    $path = '/images/product/gallery/';
+                    $image_path = $this->saveImage($image, $path);
+                    $gallery = new product_gallery();
+                    $gallery->image = $image_path;
+                    $gallery->product_id = $product->id;
+                    $gallery->save();
+                }
+            }
+        }
+        return redirect()->back()->with('success', 'Product update successfully');
     }
-
+    public function deleteImage($image_path){
+        if(File::exists($image_path)){
+            try{
+                if(unlink($image_path)){
+                    return [
+                        'status'=> true,
+                        'message'=> 'Successfully deleted product image'
+                    ];
+                }else{
+                    return [
+                      'status'=> false,
+                      'message'=> 'Failed to delete product image'
+                    ];
+                }
+            }catch(Exception $e) {
+                return [
+                 'status'=> false,
+                 'message'=> $e->getMessage()
+                ];
+            }
+        }else{
+            return [
+                'status'=> false,
+                'message'=> 'Image not found'
+            ];
+        }
+    }
     public function deleteProductImage($id){
         if($id){
             $product_image = Product_gallery::whereId($id)->first();

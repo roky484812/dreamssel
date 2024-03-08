@@ -31,8 +31,7 @@
                 <!-- Row -->
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
-                        <form method="post" action="{{ route('admin.product.add') }}" id="product_add"
-                            enctype="multipart/form-data">
+                        <form method="post" action="{{ route('admin.product.update') }}" id="product_add" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="id" value="{{ $product->id }}">
                             <div class="card">

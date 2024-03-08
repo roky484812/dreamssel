@@ -59,6 +59,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], f
         Route::get('/product/add', 'AddProductPage')->name('admin.product.addView');
         Route::post('/product/add', 'AddProduct')->name('admin.product.add');
         Route::get('/product/update/{id}', 'editProductPage')->name('admin.product.updateView');
+        Route::post('/product/update', 'editProduct')->name('admin.product.update');
         Route::delete('/product/image/{id?}', 'deleteProductImage')->name('admin.product.deleteImage');
         Route::post('/product/imaage/temp', 'productTempImage')->name('admin.product.image.temp');
     });
