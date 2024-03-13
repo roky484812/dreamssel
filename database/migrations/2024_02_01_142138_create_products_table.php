@@ -32,7 +32,7 @@ return new class extends Migration
 
             $table->foreign('category_id')->references('id')->on('product_categories');
             $table->foreign('sub_category_id')->references('id')->on('product_sub_categories');
-            $table->foreign('author_id')->references('id')->on('users');
+            $table->foreign('author_id')->references('id')->on('users')->onDelete(null);
             $table->foreign('country_id')->references('id')->on('product_countries');
         });
     }

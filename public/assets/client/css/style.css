@@ -1,0 +1,267 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+:root
+{
+    --primaryColor: #6A983C;
+}
+
+
+/* mid content start */
+.midContent
+{
+    padding: 50px;
+    display: flex;
+}
+.sideBar
+{
+    width: 20%;
+    position: relative;
+}
+.productsBox
+{
+    width: 80%;
+}
+.productCategories
+{
+    margin-right: 10px;
+}
+/* sidebar  */
+.sideBar h3
+{
+    font-size: 26px;
+    margin-bottom: 25px;
+}
+.sideBar ul
+{
+    list-style: none;
+    padding-left: 0 !important;
+}
+.sideBar ul li
+{
+    padding: 10px 0;
+    font-size: 18px;
+}
+.sideBar ul li ul
+{
+    margin-left: 20px;
+}
+.sideBar ul li a 
+{
+    color: var(--primaryColor);
+}
+
+
+
+.sideBarCloseBtn
+{
+    background-color: transparent;
+    color: #000;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+}
+.sideBarCloseBtn:hover
+{
+    background-color: rgba(0, 0, 0, .1);
+}
+/* for blur overlay effect to sidebar */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 5; /* Ensure the overlay is below the sidebar */
+    display: none; /* Initially hidden */
+}
+
+.sideBar.active + .overlay {
+    display: block; /* Show overlay when sidebar is active */
+}
+/* end */
+.switchPhoneMenu
+{
+    position: absolute ;
+    top: 10px ;
+    left: 0 ;
+    display: none;
+}
+
+/* for category menu */
+.drawer-body li .dropDownIcon {
+    margin-left: 15px;
+    display: inline-block;
+    transition: transform 0.5s ease-in-out;
+  }
+  .angleDown {
+    display: inline-block;
+    transition: transform 0.5s ease-in-out;
+    transform: rotate(90deg);
+  }
+  .subCategoryMenu {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .subCategoryMenu.active {
+    max-height: 800px;
+    opacity: 1;
+  }
+  
+  .subCategoryItem .dropDownIcon {
+    margin-left: 15px;
+    display: inline-block;
+    transition: transform 0.5s ease-in-out;
+  }
+/* for top carousel */
+.topCarouselItem
+{
+    width: 100%; 
+    aspect-ratio: 1/.35;
+    overflow: hidden;
+    background-color: #D1D1D1;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+.topCarouselItem img
+{
+    height: auto;
+    width: 100%;
+}
+.owl-dots
+{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+}
+.topCarousel.owl-nav
+{
+    display: none;
+}
+/* Active dot color */
+.topCarousel .owl-dot.active span{
+    background: var(--primaryColor) !important;   
+}
+
+/* Dot color on hover */
+.topCarousel .owl-dot:hover span{
+    background: var(--primaryColor) !important;
+}
+
+/* responsive start here */
+@media screen and (max-width: 1050px)
+{
+    .sideBar ul li
+    {
+        font-size: 15px;
+    }
+}
+@media screen and (max-width: 995px)
+{
+    .sideBar button span
+    {
+        padding: 0;
+    }
+    
+}
+@media screen and (max-width: 970px)
+{
+    .sideBar
+    {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        height: 100%;
+        width: 40%;
+        background-color: #fff;
+        z-index: 10;
+        overflow: scroll;
+        box-shadow: 0 1px 5px #D1D1D1;
+        padding: 50px 0 20px 50px;
+        /* display: none; */
+        transition: 0.6s ease;
+        transition-property: left;
+    }
+    .sideBar.active
+    {
+        left: 0;
+    }
+    .sideBarCloseBtn
+    {
+        display: block;
+    }
+    .bestSellMenu, .trendingProMenu {
+        margin-top: 80px;
+    }
+    .sideBar button span
+    {
+        padding: 0 5px;
+    }
+    .productsBox 
+    {
+        width: 100%;
+    }
+    .midContent 
+    {
+        padding: 35px;
+    }
+    .sideBar ul li
+    {
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 700px)
+{
+    .sideBar
+    {
+        width: 60%;
+    }
+    .midContent 
+    {
+        padding: 25px;
+    }
+}
+@media screen and (max-width: 500px)
+{
+    .sideBar
+    {
+        width: 70%;
+    }
+    .midContent
+    {
+        padding: 20px;
+    }
+    .productCategories
+    {
+        margin-top: 20px;
+    }
+}
+@media screen and (max-width: 450px)
+{
+    .midContent
+    {
+        padding: 5px;
+        margin-top: 20px;
+    }
+}
+@media screen and (max-width: 400px)
+{
+    .sideBar
+    {
+        width: 80%;
+        padding: 50px 0 20px 30px;
+    }
+}

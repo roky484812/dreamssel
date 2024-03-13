@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\Dashboard as AdminDashboard;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Client\ProductController as ClientProductController;
 use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Distributor\Dashboard as DistDashboard;
@@ -22,10 +23,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], function(){
     Route::controller(AuthController::class)->group(function(){
@@ -60,6 +57,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], f
         Route::post('/product/add', 'AddProduct')->name('admin.product.add');
         Route::get('/product/update/{id}', 'editProductPage')->name('admin.product.updateView');
         Route::post('/product/update', 'editProduct')->name('admin.product.update');
+        Route::get('/product/delete/{id}', 'deleteProduct')->name('admin.product.delete');
         Route::delete('/product/image/{id?}', 'deleteProductImage')->name('admin.product.deleteImage');
         Route::post('/product/imaage/temp', 'productTempImage')->name('admin.product.image.temp');
     });
@@ -88,14 +86,11 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::get('/user/delete/{user_id}', 'user_delete')->name('admin.user.delete');
     });
 });
-Route::group(['prefix'=> 'editor', 'middleware'=> ['web', 'type.editor']], function(){
-    Route::controller(AuthController::class)->group(function(){
-        Route::get('/logout', 'logout')->name('editor.logout');
-    });
-    Route::controller(EditorDashboard::class)->group(function(){
-        Route::get('/dashboard', 'index')->name('editor.dashboard');
-    });
+
+Route::controller(ClientProductController::class)->group(function(){
+    Route::get('/', 'index')->name('client.product');
 });
+
 Route::group(['middleware'=> ['web', 'type.distributor']], function(){
     Route::controller(AuthController::class)->group(function(){
         Route::get('/logout', 'logout')->name('dist.logout');

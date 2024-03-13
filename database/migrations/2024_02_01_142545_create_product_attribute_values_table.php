@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('value', 20);
             $table->unsignedBigInteger('attribute_id');
-            $table->foreign('attribute_id')->references('id')->on('product_attributes');
+            $table->foreign('attribute_id')->references('id')->on('product_attributes')->onDelete('cascade');
         });
     }
 

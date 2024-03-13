@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product_category;
 use App\Models\Product_sub_category;
+use Exception;
 use Illuminate\Http\Request;
 
 class ProductCategoryController extends Controller
@@ -46,11 +47,15 @@ class ProductCategoryController extends Controller
         $req->validate([
             'id'=> 'required|exists:product_categories,id'
         ]);
-        $delete = Product_category::whereId($req->input('id'))->delete();
-        if($delete){
-            return redirect()->back()->with('success', 'Category deleted successfully.');
-        }else{
-            return redirect()->back()->with('error','Can not delete category. Something went wrong.');
+        try{
+            $delete = Product_category::whereId($req->input('id'))->delete();
+            if($delete){
+                return redirect()->back()->with('success', 'Category deleted successfully.');
+            }else{
+                return redirect()->back()->with('error','Can not delete category. Something went wrong.');
+            }
+        }catch(Exception $e){
+            return redirect()->back()->with('error', 'Category cannot be deleted. There are some products in this category available');
         }
     }
 

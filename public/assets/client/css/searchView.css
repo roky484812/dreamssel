@@ -1,0 +1,531 @@
+.svCardBox
+{
+  width: 80%;
+}
+.svCard
+{
+    display: flex;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 15px;
+    width: 80%;
+    justify-content: space-between;
+    margin: 15px auto;
+}
+.svDesWraper
+{
+  display: flex;
+  align-items: center;
+}
+.svProductDetails
+{
+    display: flex;
+    flex-direction: column;
+}
+.svProductDetails .productAttributeItem
+{
+  display: flex;
+}
+.descriptionTitle
+{
+  width: 25%;
+}
+.descriptionBox
+{
+  width: 75%;
+}
+.svDesSection
+{
+  margin-left: 60px;
+}
+.svImgSection
+{
+    width: 200px;
+    height: 200px;
+}
+.svImgSection img
+{
+    height: 100%;
+    border-radius: 8px;
+    aspect-ratio: 1;
+}
+.descriptionBox p .regional-tag 
+{
+  background-color: #f9d8d8;
+  padding: 0 10px 0 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 0 2px;
+  color: #151515;
+}
+
+/* from prodetails */
+.descriptionBox 
+{
+  padding-left: 30px;
+}
+.descriptionTitle p 
+{
+  margin: 10px 0;
+  color: #A9A9A9;
+}
+.desPriceBox .price
+{
+  color: var(--primaryColor);
+}
+.descriptionBox p 
+{
+  margin: 10px 0;
+  color: #151515;
+}
+.quantityForm
+{
+  background-color: #f9f9f9;
+  border: 1px solid #A9A9A9;
+  padding: 5px;
+  border-radius: 10px;
+  display: flex;
+}
+.pscBtn
+{
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  padding: 5px 10px;
+    
+}
+.quanInputBox
+{
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 50px;
+  padding: 0px 8px;
+  border-right: 2px solid #A9A9A9;
+  box-sizing: border-box;
+}
+.svPriceSection
+{
+  margin-left: 10px;
+}
+.svPriceSection .desBuyBtn .buy-now-button
+{
+  height: 45px;
+  width: 120px;
+  font-size: 18px;
+}
+.svPriceSection .desQuantity
+{
+  margin-top: 25px;
+}
+.svPriceSection .desBuyBtn
+{
+  margin-top: 15px;
+}
+/* for filter */
+.filterBox .Categories ul li
+{
+  margin: px 0;
+}
+.filterBox .Categories ul li a
+{
+  text-decoration: none;
+  color: #151515;
+  display: flex;
+  justify-content: space-between;
+}
+.filterBox .Categories ul li a span
+{
+  color: var(--primaryColor);
+  width: max-content;
+  background-color: #F4F8EC;
+  padding: 0 7px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+.brands
+{
+  margin-top: 20px;
+}
+.brands h3
+{
+  margin-bottom: 10px;
+}
+
+ /************ for check box style********** */
+
+
+/* Hide the default checkbox */
+.filterCheckBox {
+  display: none;
+}
+
+/* Style the custom checkboxes */
+.filterCheckBox + label {
+  position: relative;
+  padding-left: 35px; /* Adjust according to the size of the tick mark */
+  margin: 4px 0;
+  cursor: pointer;
+}
+
+/* Style the custom checkmark */
+.filterCheckBox + label:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  border: 2px solid #D1D1D1; /* Default border color */
+  background-color: #fff; /* Default background color */
+  display: block;
+  width: 20px; /* Adjust the width of the checkbox */
+  height: 20px; /* Adjust the height of the checkbox */
+  border-radius: 4px;
+}
+
+/* Style the custom checkmark when the checkbox is checked */
+.filterCheckBox:checked + label:before {
+  background-color: #6A983C; /* Background color when checked */
+  border-color: #46760A; /* Border color when checked */
+}
+
+/* Style the custom checkmark parts */
+.filterCheckBox + label:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translate(35%, -55%) rotate(45deg);
+  width: 5px;
+  height: 10px;
+  border-bottom: 2px solid #fff; /* Tick mark color */
+  border-right: 2px solid #fff; /* Tick mark color */
+  display: none;
+  width: 7px; /* Adjust the width of the checkmark */
+  height: 14px; /* Adjust the height of the checkmark */
+}
+
+/* Style the custom checkmark parts */
+.filterCheckBox:checked + label:after {
+  display: block;
+}
+
+                     /* price range css start */
+
+.priceRange
+{
+  margin-top: 25px;
+}
+.priceRange .slider
+{
+  margin-top: 25px;
+}                    
+.price-input {
+  width: 100%;
+  display: flex;
+  margin: 30px 0 35px;
+}
+.price-input .field {
+  width: 100%;
+  height: 40px;
+  align-items: center;
+}
+.price-input .field span
+{
+  font-weight: 600;
+}
+.field input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  font-size: 19px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid #A9A9A9;
+  -moz-appearance: textfield;
+  background-color: #F9F9F9;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.price-input .separator {
+  width: 130px;
+  display: flex;
+  font-size: 19px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+  color: #A9A9A9;
+}
+.slider {
+  height: 5px;
+  position: relative;
+  background: #ddd;
+  border-radius: 5px;
+}
+.slider .progress {
+  height: 100%;
+  left: 25%;
+  right: 25%;
+  position: absolute;
+  border-radius: 5px;
+  background: #6A983C;
+}
+.range-input {
+  position: relative;
+}
+.range-input input {
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  top: -5px;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #D1D1D1;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+input[type="range"]::-moz-range-thumb {
+  height: 17px;
+  width: 17px;
+  border: none;
+  border-radius: 50%;
+  background: #6A983C;
+  pointer-events: auto;
+  -moz-appearance: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+
+/* price range css end  */
+
+/* Aplly button css start */
+
+.applyBtn
+{
+  width: 60px;
+  height: 40px;
+  border: #46760A solid 2px;
+  border-radius: 8px;
+  background-color: var(--primaryColor);
+  color: #F9F9F9;
+  font-weight: bold;
+  font-size: 14px;
+  transition-duration: .5s;
+}
+.applyBtn:hover
+{
+  background-color: #F9F9F9;
+  color: var(--primaryColor);
+  transition-duration: .5s;
+}
+.resetBtn
+{
+  background-color: transparent;
+  border: none;
+  color: #A9A9A9;
+  margin-left: 40px;
+  font-weight: 700;
+}
+
+/* from bottom features products */
+.our-feature-product-header h1 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.box-pointer {
+  height: 40px;
+  width: 20px;
+  border-radius: 4px;
+  background-color: var(--primaryColor);
+}
+.header-category {
+  display: flex;
+  justify-content: left;
+  margin-top: 50px;
+}
+.header-category-title {
+  margin-left: 10px;
+}
+.header-category-title h6 {
+  margin-top: 15%;
+  color: var(--primaryColor);
+  text-align: center;
+}
+
+/* responsive start here */
+@media screen and (max-width: 1050px)
+{
+  .svCard
+  {
+    width: 90%;
+  }
+  .svPriceSection .pscBtn
+  {
+    padding: 5px;
+  }
+}
+@media screen and (max-width: 970px)
+{
+  .filterBox
+  {
+    padding-right: 30px;
+  }
+  .svCardBox
+  {
+    width: 100%;
+  }
+  .svCard
+  {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 635px)
+{
+  .svDesSection h3
+  {
+    font-size: 18px;
+  }
+  .svDesSection p
+  {
+    font-size: 14px;
+  }
+  .svProductDetails .productAttributeItem
+  {
+    font-size: 13px;
+  }
+  .svPriceSection .pscBtn
+  {
+    font-size: 12px;
+  }
+  .svPriceSection .desBuyBtn .buy-now-button {
+    height: 40px;
+    width: 100px;
+    font-size: 16px;
+  }
+  .svDesSection {
+    margin-left: 20px;
+  }
+  .svProductDetails .descriptionTitle p {
+    margin: 5px 0;
+  }
+  .svProductDetails .descriptionBox p {
+    margin: 5px 0;
+  }
+  .svProDesPriceBox .quanInputBox 
+  {
+    width: 40px;
+    padding: 0 4px;
+  }
+}
+@media screen and (max-width: 550px)
+{
+  .svImgSection {
+    width: 150px;
+    height: 150px;
+  }
+}
+@media screen and (max-width: 500px)
+{
+  .filterBox .Categories
+  {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 490px)
+{
+  .svDesSection h3
+  {
+    font-size: 16px;
+  }
+  .svProductDetails .productAttributeItem
+  {
+    font-size: 12px;
+  }
+  .svPriceSection .pscBtn
+  {
+    font-size: 10px;
+  }
+  .svPriceSection .desBuyBtn .buy-now-button {
+    height: 30px;
+    width: 80px;
+    font-size: 14px;
+  }
+  .svDesSection {
+    margin-left: 15px;
+  }
+  .svProductDetails .descriptionTitle p {
+    margin: 2px 0;
+  }
+  .svProductDetails .descriptionBox p {
+    margin: 2px 0;
+  }
+  .svProDesPriceBox .quanInputBox 
+  {
+    width: 30px;
+    padding: 0 2px;
+  }
+  .svProDesPriceBox .quantityForm
+  {
+    padding: 2px;
+  }
+  .svImgSection {
+    width: 120px;
+    height: 120px;
+  }
+}
+@media screen and (max-width: 400px)
+{
+  .svPriceSection
+  {
+    display: none;
+  }
+  .svDesSection h3
+  {
+    font-size: 18px;
+  }
+  .svProductDetails .productAttributeItem
+  {
+    font-size: 13px;
+  }
+  .svDesSection {
+    margin-left: 25px;
+  }
+  .svProductDetails .descriptionTitle p {
+    margin: 4px 0;
+  }
+  .svProductDetails .descriptionBox p {
+    margin: 4px 0;
+  }
+}
+@media screen and (max-width: 350px)
+{
+  .svDesSection h3
+  {
+    font-size: 16px;
+  }
+  .svProductDetails .productAttributeItem
+  {
+    font-size: 11px;
+  }
+  .svDesSection {
+    margin-left: 15px;
+  }
+  .svProductDetails .descriptionTitle p {
+    margin: 2px 0;
+  }
+  .svProductDetails .descriptionBox p {
+    margin: 2px 0;
+  }
+}

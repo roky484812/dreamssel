@@ -1,0 +1,119 @@
+.bottomFeatureProducts
+{
+    padding: 0 50px;
+}
+.our-feature-product-header h1 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  .box-pointer {
+    height: 40px;
+    width: 20px;
+    border-radius: 4px;
+    background-color: var(--primaryColor);
+  }
+  .header-category {
+    display: flex;
+    justify-content: left;
+    margin-top: 50px;
+  }
+  .header-category-title {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+  }
+  .header-category-title h6 {
+    color: var(--primaryColor);
+    text-align: center;
+  }
+  .new-arival-products {
+    display: flex;
+    justify-content: space-between;
+    aspect-ratio: 1/0.65;
+  }
+  .new-arival-products .left-large {
+    width: 49%;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .new-arival-products .left-large a img {
+    width: 100%;
+    height: 100%;
+  }
+  .new-arival-products .right-wrapper {
+    width: 49%;
+    height: 100%;
+  }
+  .new-arival-products .right-wrapper .right-top {
+    width: 100%;
+    height: 49%;
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+  }
+  .new-arival-products .right-wrapper .right-top a img {
+    width: 100%;
+    height: 100%;
+  }
+  .new-arival-products .right-wrapper .right-bottom-wrapper {
+    display: flex;
+    justify-content: space-between;
+    height: 49%;
+    width: 100%;
+    margin-top: 2.5%;
+  }
+  
+  .new-arival-products .right-bottom-wrapper .right-bottom-left {
+    height: 100%;
+    width: 49%;
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+  }
+  .new-arival-products .right-bottom-wrapper .right-bottom-left a img {
+    width: 100%;
+    height: 100%;
+  }
+  .new-arival-products .right-bottom-wrapper .right-bottom-right {
+    height: 100%;
+    width: 49%;
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+  }
+  .new-arival-products .right-bottom-wrapper .right-bottom-right a img {
+    width: 100%;
+    height: 100%;
+  }
+
+@media screen and (max-width: 970px)
+{
+    .bottomFeatureProducts
+    {
+        padding: 0 35px;
+    }
+}
+@media screen and (max-width: 700px)
+{
+    .bottomFeatureProducts
+    {
+        padding: 0 25px;
+    }
+}
+@media screen and (max-width: 500px)
+{
+    .bottomFeatureProducts
+    {
+        padding: 0 20px;
+    }
+}
+@media screen and (max-width: 450px)
+{
+    .bottomFeatureProducts
+    {
+        padding: 0 5px;
+    }
+}

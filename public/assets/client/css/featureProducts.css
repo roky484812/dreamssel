@@ -1,0 +1,184 @@
+/* feature products */
+:root
+{
+    --primaryColor: #6A983C;
+}
+.featureProduct
+{
+    display: flex;
+    padding: 50px;
+}
+.featureBox1, .featureBox2
+{
+    width: 50%;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    background-color: #f4f8ec;
+    aspect-ratio: 1/.55;
+}
+
+.featureBox1
+{
+
+    margin-right: 10px;
+}
+.featureBox2
+{
+    margin-left: 10px;
+}
+.featureProduct img
+{
+    height: 100%;
+    width: 100%;
+}
+.featureContent1,.featureContent2 
+{
+    padding: 25px;
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.fetureBtn
+{
+    background-color: transparent;
+    border: none;
+    padding: 9px 15px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 17px;
+    color: #F9F9F9;
+    text-shadow: 1px 1px #000000;
+    
+}
+
+.fetureBtn:hover span
+{
+    display: inline-block;
+    transform: translateX(20%);
+    transition: transform .4s ease;
+}
+
+.featureContentText1,.featureContentText2
+{
+    display: none;
+}
+.featureBox1:hover  .featureContentText1
+{
+    display: block;
+}
+.featureBox1:hover .featureContent1
+{
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.featureBox2:hover  .featureContentText2
+{
+    display: block;
+}
+.featureBox2:hover .featureContent2
+{
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.featureBox2Mbl
+{
+    display: none;
+}
+.featureProductMbl
+{
+    padding: 25px;
+    margin-bottom: 25px;
+    display: none;
+}
+/* responsive start */
+@media screen and (max-width: 970px)
+{
+    .featureProduct
+    {
+        padding: 35px;
+    }
+}
+@media screen and (max-width: 750px)
+{
+    .fetureBtn
+    {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+    .featureProduct h1 
+    {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 700px)
+{
+    .featureProduct
+    {
+        padding: 25px;
+    }
+    .featureBox1, .featureBox2
+    {
+        width: 100%;  
+    }
+    .featureBox2
+    {
+        display: none;
+    }
+    .featureProductMbl
+    {
+        display: block;
+    }
+    .featureBox2Mbl
+    {
+        display: block;
+    }
+    .featureProduct
+    {
+        flex-wrap: wrap;
+    }
+    .featureBox1 
+    {
+        margin-right: 0px;
+        margin-bottom: 15px;
+    }
+    .featureBox2 
+    {
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+    .fetureBtn
+    {
+        padding: 9px 15px;
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 500px)
+{
+    .fetureBtn
+    {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+    .featureProduct
+    {
+        padding: 20px;
+    }
+    .featureProductMbl
+    {
+        padding: 20px;
+    }
+}
+@media screen and (max-width: 450px)
+{
+    .featureProduct
+    {
+        padding: 5px;
+    }
+    .featureProductMbl
+    {
+        padding: 5px;
+    }
+}

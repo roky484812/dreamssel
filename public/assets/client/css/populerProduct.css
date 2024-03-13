@@ -1,0 +1,92 @@
+:root
+{
+    --primaryColor: #6A983C;
+}
+.populerProductBox
+{
+    margin: 50px 0;
+    padding: 0 50px;
+}
+.populerItem
+{
+    margin-bottom: 25px;
+}
+.populerItem .wrapper
+{
+    margin: auto;
+}
+.populerProductHead
+{
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0;
+}
+.populerProductHead button
+{
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+}
+.populerProductHead button span
+{
+    color: var(--primaryColor);
+}
+.PopulerProducts
+{
+    width: 100%;
+}
+.PopulerProducts
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.PopulerProducts .owl-dot
+{
+    border: 1px solid var(--primaryColor) !important;
+    height: 15px !important;
+    width: 15px !important;
+    border-radius: 50% !important;
+    margin: 0 5px !important;
+}
+.PopulerProducts .owl-dot.active
+{
+    background-color: var(--primaryColor) !important;
+}
+.PopulerProducts .owl-dots
+{
+    text-align: center !important;
+}
+.PopulerProducts.owl-carousel .owl-dots.disabled, 
+.PopulerProducts.owl-carousel .owl-nav.disabled {
+    display: none !important;
+}
+
+@media screen and (max-width: 970px)
+{
+    .populerProductBox
+    {
+        padding: 0 35px;
+    }
+}
+@media screen and (max-width: 700px)
+{
+    .populerProductBox
+    {
+        padding: 0 25px;
+    }
+}
+@media screen and (max-width: 500px)
+{
+    .populerProductBox
+    {
+        padding: 0 20px;
+    }
+}
+@media screen and (max-width: 450px)
+{
+    .populerProductBox
+    {
+        padding: 0 5px;
+    }
+}

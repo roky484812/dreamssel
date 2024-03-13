@@ -111,7 +111,7 @@
                                                         <li>
                                                             <a href="{{route('admin.product.updateView', $product->id)}}" class="dropdown-item">Edit</a>
                                                         </li>
-                                                        <li><button class="dropdown-item del-product">Delete</bu></li>
+                                                        <li><a href="{{ route('admin.product.delete', $product->id) }}" class="dropdown-item del-product">Delete</a></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -122,7 +122,13 @@
                                             <td class="text-center">{{ $product->sku }}
                                             </td>
                                             <td class="text-center">
-                                                {{ round((($product->price - $product->distributor_price) / $product->price) * 100) }}%
+                                                @php
+                                                    try {
+                                                        echo round((($product->price - $product->distributor_price) / $product->price) * 100);
+                                                    } catch (\Throwable $th) {
+                                                        echo 0;
+                                                    }
+                                                @endphp %
                                             </td>                                        
                                             <td class="text-center">{{ $product->distributor_price }}
                                             </td>

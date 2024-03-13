@@ -180,7 +180,7 @@ class ProductController extends Controller
         }
         $manager = new ImageManager(new Driver());
         $ext = $image->getClientOriginalExtension();
-        $image_name = time().'.'.$ext;
+        $image_name = time().uniqid().'.'.$ext;
         $image_path = $path.$image_name;
         $image_dest = public_path().$image_path;
         $image = $manager->read($image);
@@ -243,8 +243,9 @@ class ProductController extends Controller
         }
         $product->status = $req->input('status');
         if($req->hasFile('thumbnail')){
-            $prev_image = public_path().$product->thumbnail;
+            $prev_image = public_path().$product->thumbnail_image;
             $delete_image = $this->deleteImage($prev_image);
+            // return $delete_image;
             if($delete_image['status']){
                 $image = $req->file('thumbnail');
                 $path = '/images/product/thumbnail/';
@@ -268,6 +269,24 @@ class ProductController extends Controller
             }
         }
         return redirect()->back()->with('success', 'Product update successfully');
+    }
+    public function deleteProduct($id){
+        if($id){
+            $product = Product::whereId($id)->first();
+            unlink(public_path().$product->thumbnail_image);
+            $product_galleries = product_gallery::where('product_id', $id)->get();
+            foreach($product_galleries as $gallery){
+                unlink(public_path().$gallery->image);
+            }
+            $delete = Product::whereId($id)->delete();
+            if($delete){
+                return redirect()->back()->with('success', 'Product deleted successfully.');
+            }else{
+                return redirect()->back()->with('error', 'Failed to delete product');
+            }
+        }else{
+            return redirect()->back()->with('error', 'Must provide a product id');
+        }
     }
     public function deleteImage($image_path){
         if(File::exists($image_path)){

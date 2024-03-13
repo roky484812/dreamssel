@@ -1,0 +1,98 @@
+.customerSays
+{
+  padding: 20px 50px;
+}
+
+.quote-card {
+    border: 1px solid #D1D1D1;
+    padding: 40px;
+    margin: 10px;
+    text-align: center;
+    position: relative;
+    border-radius: 10px;
+  }
+  .quote-card p
+  {
+    margin: 30px 0;
+    font-weight: bold;
+    color: #A9A9A9;
+  }
+  .quote-card h3
+  {
+    font-size: 22px;
+  }
+  .quote-card img
+  {
+    height: 70px ;
+    width: 70px !important;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30px;
+    left: 43%;
+  }
+  .customerSays .owl-item
+  {
+    padding: 30px 0 !important;
+  }
+
+  /* Customize the navigation buttons */
+.customerSays .owl-prev,
+.customerSays .owl-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px; /* Set the width */
+  height: 60px; /* Set the height */
+  background-color: #151515 !important; /* Change background color */
+  color: #fff !important; /* Change text color */
+
+  text-align: center;
+  line-height: 40px;
+
+}
+
+.customerSays .owl-prev {
+  border-top-right-radius: 30%;
+  border-bottom-right-radius: 30%;
+  left: 10px; /* Adjust the left position */
+}
+
+.customerSays .owl-next {
+  border-top-left-radius: 30%;
+  border-bottom-left-radius: 30%;
+  right: 10px; /* Adjust the right position */
+}
+.customerSays .owl-nav i
+{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 970px)
+{
+    .customerSays
+    {
+        padding: 0 35px;
+    }
+}
+@media screen and (max-width: 700px)
+{
+    .customerSays
+    {
+        padding: 0 25px;
+    }
+}
+@media screen and (max-width: 500px)
+{
+    .customerSays
+    {
+        padding: 0 20px;
+    }
+}
+@media screen and (max-width: 450px)
+{
+    .customerSays
+    {
+        padding: 0 5px;
+    }
+}
