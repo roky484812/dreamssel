@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Product_category;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Pagination\Paginator as PaginationPaginator;
@@ -32,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
                 $user = (object)$userData;
                 $view->with('user', $user);
             }
+            $categories = Product_category::get();
+            $view->with('_categories', $categories);
         });
         PaginationPaginator::useBootstrapFive();
     }

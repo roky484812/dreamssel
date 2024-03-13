@@ -15,41 +15,23 @@
     <div class="productCategories">
         <h3>Categories</h3>
         <ul class="drawerCategoryMenu" id="drawerCategoryMenu">
+            @foreach ($categories as $category)   
             <li class="subCategoryItem">
                 <a href="#">
-                    Man's Fashion
+                    {{ $category->category_name }}
+                    @if (count($category->sub_category))  
                     <div class="dropDownIcon">
                         <i class="fa-solid fa-angle-right angleRight"></i>
                     </div>
                     <ul class="subCategoryMenu">
-                        <li>
-                <a href="">Shirt</a></li>
-                <li><a href="">Pant</a></li>
-                <li><a href="">T-shirt</a></li>
-                </ul>
+                        @foreach ($category->sub_category as $sub_category)
+                        <li><a href="">{{ $sub_category->sub_category_name }}</a></li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </a>
             </li>
-            <li class="subCategoryItem">
-                <a href="#">
-                    Woman's Fashion
-                    <div class="dropDownIcon">
-                        <i class="fa-solid fa-angle-right angleRight"></i>
-                    </div>
-                    <ul class="subCategoryMenu">
-                        <li>
-                <a href="">sharee</a></li>
-                <li><a href="">three pice</a></li>
-                <li><a href="">borkha</a></li>
-                </ul>
-                </a>
-            </li>
-            <li><a href="">Electronics</a></li>
-            <li><a href="">Home & lifestyle</a></li>
-            <li><a href="">Sports & Outdoors</a></li>
-            <li><a href="">Medicine</a></li>
-            <li><a href="">Baby's & Toy</a></li>
-            <li><a href="">Gloceries & Pets</a></li>
-            <li><a href="">Health & Beauty</a></li>
+            @endforeach
         </ul>
     </div>
 </div>

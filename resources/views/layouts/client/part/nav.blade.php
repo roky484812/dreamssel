@@ -15,10 +15,9 @@
                         </button>
                         <div class="searchBoxDropdown" aria-labelledby="dropdownMenuButton">
                             <ul>
-                                <li><a href="">Sharee</a></li>
-                                <li><a href="">Borkha</a></li>
-                                <li><a href="">Shirt</a></li>
-                                <li><a href="">Pant</a></li>
+                                @foreach ($_categories as $category)
+                                <li><a href="">{{ $category->category_name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

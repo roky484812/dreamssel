@@ -10,4 +10,7 @@ class Product_category extends Model
     use HasFactory;
     
     public $timestamps = false;
+    public function sub_category(){
+        return $this->hasMany(Product_sub_category::class, 'category_id');
+    }
 }
