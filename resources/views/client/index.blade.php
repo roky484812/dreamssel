@@ -48,13 +48,22 @@
                             <h3 class="product-title">{{ $product->title }}</h3>
                             <div class="rate-buy-now-wrapper">
                                 <div class="price-wrapper">
-                                    <h2 class="price">1.48 ৳</h2>
+                                    @if(auth()->user())
+                                    <h2 class="price">{{ $product->distributor_price }} ৳</h2>
                                     <div class="closePriceAndCategory">
-                                        <del class="crossed-price">180</del>
+                                        <del class="crossed-price">{{ $product->price }}</del>
                                         <div class="regional-tag">
-                                            <p>IND</p>
+                                            <p>{{ $product->country_code }}</p>
                                         </div>
                                     </div>
+                                    @else
+                                    <h2 class="price">{{ $product->price }} ৳</h2>
+                                    <div class="closePriceAndCategory">
+                                        <div class="regional-tag">
+                                            <p>{{ $product->country_code }}</p>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                                 <button class="buy-now-button">Buy now</button>
                             </div>
@@ -104,26 +113,46 @@
         </div>
         <div class="PopulerProducts owl-carousel">
             <!-- product card start -->
+            @foreach ($popular_products as $popular_product)
             <div class="populerItem ">
                 <div class="wrapper">
                     <div class="pic-wrapper">
                         <div class="negative-percentage">
-                            <p>-36%</p>
+                            <p>
+                                @php
+                                try {
+                                    echo round((($popular_product->price - $popular_product->distributor_price) / $popular_product->price) * 100);
+                                } catch (\Throwable $th) {
+                                    echo 0;
+                                }
+                            @endphp %
+                            </p>
                         </div>
                         <div class="product-pic">
-                            <img src="{{ asset('assets/client/images/product3.svg') }}" alt="" />
+                            <img src="{{ asset($popular_product->thumbnail_image) }}" alt="" />
                         </div>
                     </div>
                     <div class="title-price-wrapper">
-                        <h3 class="product-title">Product Title</h3>
+                        <h3 class="product-title">{{ $popular_product->title }}</h3>
                         <div class="rate-buy-now-wrapper">
                             <div class="price-wrapper">
-                                <h2 class="price">1.48 ৳</h2>
-                                <div class="closePriceAndCategory">
-                                    <del class="crossed-price">180</del>
-                                    <div class="regional-tag">
-                                        <p>IND</p>
+                                <div class="price-wrapper">
+                                    @if(auth()->user())
+                                    <h2 class="price">{{ $popular_product->distributor_price }} ৳</h2>
+                                    <div class="closePriceAndCategory">
+                                        <del class="crossed-price">{{ $popular_product->price }}</del>
+                                        <div class="regional-tag">
+                                            <p>{{ $popular_product->country_code }}</p>
+                                        </div>
                                     </div>
+                                    @else
+                                    <h2 class="price">{{ $popular_product->price }} ৳</h2>
+                                    <div class="closePriceAndCategory">
+                                        <div class="regional-tag">
+                                            <p>{{ $popular_product->country_code }}</p>
+                                        </div>
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
                             <button class="buy-now-button">Buy now</button>
@@ -131,141 +160,8 @@
                     </div>
                 </div>
             </div>
-            <div class="populerItem ">
-                <div class="wrapper">
-                    <div class="pic-wrapper">
-                        <div class="negative-percentage">
-                            <p>-36%</p>
-                        </div>
-                        <div class="product-pic">
-                            <img src="{{ asset('assets/client/images/product3.svg') }}" alt="" />
-                        </div>
-                    </div>
-                    <div class="title-price-wrapper">
-                        <h3 class="product-title">Product Title</h3>
-                        <div class="rate-buy-now-wrapper">
-                            <div class="price-wrapper">
-                                <h2 class="price">1.48 ৳</h2>
-                                <div class="closePriceAndCategory">
-                                    <del class="crossed-price">180</del>
-                                    <div class="regional-tag">
-                                        <p>IND</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="buy-now-button">Buy now</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="populerItem ">
-                <div class="wrapper">
-                    <div class="pic-wrapper">
-                        <div class="negative-percentage">
-                            <p>-36%</p>
-                        </div>
-                        <div class="product-pic">
-                            <img src="{{ asset('assets/client/images/product3.svg') }}" alt="" />
-                        </div>
-                    </div>
-                    <div class="title-price-wrapper">
-                        <h3 class="product-title">Product Title</h3>
-                        <div class="rate-buy-now-wrapper">
-                            <div class="price-wrapper">
-                                <h2 class="price">1.48 ৳</h2>
-                                <div class="closePriceAndCategory">
-                                    <del class="crossed-price">180</del>
-                                    <div class="regional-tag">
-                                        <p>IND</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="buy-now-button">Buy now</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="populerItem">
-                <div class="wrapper">
-                    <div class="pic-wrapper">
-                        <div class="negative-percentage">
-                            <p>-36%</p>
-                        </div>
-                        <div class="product-pic">
-                            <img src="{{ asset('assets/client/images/img.jpeg') }}" alt="" />
-                        </div>
-                    </div>
-                    <div class="title-price-wrapper">
-                        <h3 class="product-title">Product Title</h3>
-                        <div class="rate-buy-now-wrapper">
-                            <div class="price-wrapper">
-                                <h2 class="price">1.48 ৳</h2>
-                                <div class="closePriceAndCategory">
-                                    <del class="crossed-price">180</del>
-                                    <div class="regional-tag">
-                                        <p>IND</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="buy-now-button">Buy now</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="populerItem ">
-                <div class="wrapper">
-                    <div class="pic-wrapper">
-                        <div class="negative-percentage">
-                            <p>-36%</p>
-                        </div>
-                        <div class="product-pic">
-                            <img src="{{ asset('assets/client/images/img.jpeg') }}" alt="" />
-                        </div>
-                    </div>
-                    <div class="title-price-wrapper">
-                        <h3 class="product-title">Product Title</h3>
-                        <div class="rate-buy-now-wrapper">
-                            <div class="price-wrapper">
-                                <h2 class="price">1.48 ৳</h2>
-                                <div class="closePriceAndCategory">
-                                    <del class="crossed-price">180</del>
-                                    <div class="regional-tag">
-                                        <p>IND</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="buy-now-button">Buy now</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="populerItem">
-                <div class="wrapper">
-                    <div class="pic-wrapper">
-                        <div class="negative-percentage">
-                            <p>-36%</p>
-                        </div>
-                        <div class="product-pic">
-                            <img src="{{ asset('assets/client/images/img.jpeg') }}" alt="" />
-                        </div>
-                    </div>
-                    <div class="title-price-wrapper">
-                        <h3 class="product-title">Product Title</h3>
-                        <div class="rate-buy-now-wrapper">
-                            <div class="price-wrapper">
-                                <h2 class="price">1.48 ৳</h2>
-                                <div class="closePriceAndCategory">
-                                    <del class="crossed-price">180</del>
-                                    <div class="regional-tag">
-                                        <p>IND</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="buy-now-button">Buy now</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+            {{-- product card end --}}
         </div>
     </div>
     <!-- fature box for mobile device -->
