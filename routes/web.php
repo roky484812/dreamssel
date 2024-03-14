@@ -88,7 +88,9 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
 });
 
 Route::controller(ClientProductController::class)->group(function(){
-    Route::get('/', 'index')->name('client.product');
+    Route::get('/', 'index')->name('client.index');
+    Route::get('/product/combinations', 'product_combinations')->name('client.product.combination');
+    Route::get('/product/{id}', 'product_view')->name('client.product.view');
 });
 
 Route::group(['middleware'=> ['web', 'type.distributor']], function(){

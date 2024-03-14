@@ -1,8 +1,8 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container navContainer">
-            <a class="navbar-brand" href="#">
-            <img class="brand-logo lineLogo" src="{{ asset('assets/client/images/lineLogo.svg') }}" alt="logo" />
+            <a class="navbar-brand" href="{{ route('client.index') }}">
+                <img class="brand-logo lineLogo" src="{{ asset('assets/client/images/lineLogo.svg') }}" alt="logo" />
             </a>
             <div class="searchBar">
                 <form class="searchForm" role="search">
@@ -65,10 +65,9 @@
                         </button>
                         <div class="searchBoxDropdown" aria-labelledby="dropdownMenuButton">
                             <ul>
-                                <li><a href="">Sharee</a></li>
-                                <li><a href="">Borkha</a></li>
-                                <li><a href="">Shirt</a></li>
-                                <li><a href="">Pant</a></li>
+                                @foreach ($_categories as $category)
+                                <li><a href="">{{ $category->category_name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

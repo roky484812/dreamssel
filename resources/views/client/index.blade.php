@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="title-price-wrapper">
-                            <h3 class="product-title">{{ $product->title }}</h3>
+                            <a href="{{ route('client.product.view', $product->id) }}" class="text-decoration-none product-title h3">{{ $product->title }}</a>
                             <div class="rate-buy-now-wrapper">
                                 <div class="price-wrapper">
                                     @if(auth()->user())

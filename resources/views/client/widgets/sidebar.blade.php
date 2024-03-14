@@ -17,7 +17,7 @@
         <ul class="drawerCategoryMenu" id="drawerCategoryMenu">
             @foreach ($categories as $category)   
             <li class="subCategoryItem">
-                <a href="#">
+                <a href="javascript:void(0)">
                     {{ $category->category_name }}
                     @if (count($category->sub_category))  
                     <div class="dropDownIcon">
