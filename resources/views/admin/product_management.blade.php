@@ -99,7 +99,7 @@
                                         
                                         <tr>
                                             <td>
-                                                <img src="{{ $product->thumbnail_image }}" class="w-7 h-7 shadow me-3 rounded">
+                                                <img src="{{ asset($product->thumbnail_image) }}" class="w-7 h-7 shadow me-3 rounded">
                                                 <span class="me-3">{{ \Illuminate\Support\Str::limit($product->title, 40, $end='...') }}</span>
                                             </td>
                                             <td class="text-center">

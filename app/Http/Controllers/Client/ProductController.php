@@ -22,8 +22,8 @@ class ProductController extends Controller
         $categories = Product_category::with('sub_category')->get();
         $popular_products = Product::where('status', 1)
         ->limit(8)->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
-        ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'product_countries.name as country_name', 'product_countries.code as country_code')
-        ->orderBy('products.view_count')
+        ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'product_countries.name as country_name', 'product_countries.code as country_code', 'products.view_count')
+        ->orderBy('products.view_count', 'desc')
         ->get();
         return view('client.index', [
             'products'=> $products,
@@ -43,7 +43,7 @@ class ProductController extends Controller
         ->limit(8)->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
         ->leftjoin('product_categories', 'product_categories.id', 'products.category_id')
         ->leftjoin('product_sub_categories', 'product_sub_categories.id', 'products.sub_category_id')
-        ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'products.sku', 'products.product_code', 'products.short_description', 'products.description', 'products.is_variational', 'products.created_at', 'product_countries.name as country_name', 'product_countries.code as country_code', 'product_categories.category_name', 'product_sub_categories.sub_category_name')
+        ->select('products.id', 'products.category_id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'products.sku', 'products.product_code', 'products.short_description', 'products.description', 'products.is_variational', 'products.created_at', 'product_countries.name as country_name', 'product_countries.code as country_code', 'product_categories.category_name', 'product_sub_categories.sub_category_name')
         ->first();
         $product_attributes = [];
         $product_galleries = [];
@@ -53,7 +53,13 @@ class ProductController extends Controller
         }
         
         $carbon = new Carbon();
-        return view('client.product_view', ['product'=> $product_fetch, 'product_attributes'=> $product_attributes, 'product_galleries'=> $product_galleries, 'carbon' => $carbon]);
+
+        $related_products = Product::where('products.category_id', $product_fetch->category_id)->limit(8)
+        ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->select('products.*', 'product_countries.code as country_code')
+        ->get();
+        
+        return view('client.product_view', ['product'=> $product_fetch, 'product_attributes'=> $product_attributes, 'product_galleries'=> $product_galleries, 'carbon' => $carbon, 'related_products'=> $related_products]);
     }
 
     public function product_combinations(Request $req){

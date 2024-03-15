@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="title-price-wrapper">
-                            <a href="{{ route('client.product.view', $product->id) }}" class="text-decoration-none product-title h3">{{ $product->title }}</a>
+                            <a href="{{ route('client.product.view', $product->id) }}" class="text-decoration-none product-title h3">{!! Str::limit ($product->title, 25) !!}</a>
                             <div class="rate-buy-now-wrapper">
                                 <div class="price-wrapper">
                                     @if(auth()->user())
@@ -119,7 +119,7 @@
                     <div class="pic-wrapper">
                         <div class="negative-percentage">
                             <p>
-                                @php
+                            @php
                                 try {
                                     echo round((($popular_product->price - $popular_product->distributor_price) / $popular_product->price) * 100);
                                 } catch (\Throwable $th) {
@@ -133,7 +133,7 @@
                         </div>
                     </div>
                     <div class="title-price-wrapper">
-                        <h3 class="product-title">{{ $popular_product->title }}</h3>
+                        <a href="{{ route('client.product.view', $popular_product->id) }}" class="text-decoration-none product-title h3">{{ $popular_product->title }}</a>
                         <div class="rate-buy-now-wrapper">
                             <div class="price-wrapper">
                                 <div class="price-wrapper">

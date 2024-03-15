@@ -243,8 +243,10 @@ class ProductController extends Controller
         }
         $product->status = $req->input('status');
         if($req->hasFile('thumbnail')){
-            $prev_image = public_path().$product->thumbnail_image;
-            $delete_image = $this->deleteImage($prev_image);
+            if($product->thumbnail_image != 'images/product/thumbnail/default.jpg'){
+                $prev_image = public_path().$product->thumbnail_image;
+                $delete_image = $this->deleteImage($prev_image);
+            }
             // return $delete_image;
             if($delete_image['status']){
                 $image = $req->file('thumbnail');
@@ -273,7 +275,9 @@ class ProductController extends Controller
     public function deleteProduct($id){
         if($id){
             $product = Product::whereId($id)->first();
-            unlink(public_path().$product->thumbnail_image);
+            if($product->thumbnail_image != 'images/product/thumbnail/default.jpg'){
+                unlink(public_path().$product->thumbnail_image);
+            }
             $product_galleries = product_gallery::where('product_id', $id)->get();
             foreach($product_galleries as $gallery){
                 unlink(public_path().$gallery->image);

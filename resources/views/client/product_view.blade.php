@@ -152,28 +152,46 @@
 
         <div class="PopulerProducts owl-carousel">
             <!-- product card start -->
+            @foreach ($related_products as $related_product)
             <div class="populerItem ">
                 <div class="wrapper">
                     <div class="pic-wrapper">
                         <div class="negative-percentage">
-                            <p>-36%</p>
+                            <p>
+                                @php
+                                    try {
+                                        echo round((($related_product->price - $related_product->distributor_price) / $related_product->price) * 100);
+                                    } catch (\Throwable $th) {
+                                        echo 0;
+                                    }
+                                @endphp %
+                            </p>
                         </div>
                         <div class="product-pic">
-                            <img src="{{ asset('assets/client/images/img.jpeg') }}" alt="" />
+                            <img src="{{ asset($related_product->thumbnail_image) }}" alt="" />
                         </div>
                     </div>
                     <div class="title-price-wrapper">
-                        <h3 class="product-title">Product Title</h3>
+                        <a href="{{ route('client.product.view', $related_product->id) }}" class="text-decoration-none product-title h3">{{ $related_product->title }}</a>
 
                         <div class="rate-buy-now-wrapper">
                             <div class="price-wrapper">
-                                <h2 class="price">1.48 ৳</h2>
+                                @if(auth()->user())
+                                <h2 class="price">{{ $related_product->distributor_price }} ৳</h2>
                                 <div class="closePriceAndCategory">
-                                    <del class="crossed-price">180</del>
+                                    <del class="crossed-price">{{ $related_product->price }}</del>
                                     <div class="regional-tag">
-                                        <p>IND</p>
+                                        <p>{{ $related_product->country_code }}</p>
                                     </div>
                                 </div>
+                                @else
+                                <h2 class="price">{{ $related_product->price }} ৳</h2>
+                                <div class="closePriceAndCategory">
+                                    <div class="regional-tag">
+                                        <p>{{ $related_product->country_code }}</p>
+                                    </div>
+                                </div>
+                                @endif
                             </div>
 
                             <button class="buy-now-button">Buy now</button>
@@ -181,7 +199,7 @@
                     </div>
                 </div>
             </div>
-
+            @endforeach
         </div>
     </div>
 @endsection
