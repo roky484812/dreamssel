@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <!-- drop down end -->
-                    <input id="search" class="searchBox" value="{{ $search_product }}" name="search" type="search" placeholder="Search products, categories..."
+                    <input id="search" class="searchBox" value="@if(isset($search_product)){{ $search_product }}@endif" name="search" type="search" placeholder="Search products, categories..."
                         aria-label="Search" />
                     <button class="SearchBtn" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <!-- drop down end -->
-                    <input class="searchBox" value="{{ $search_product }}" type="search" name="search" placeholder="Search products, categories..." aria-label="Search" />
+                    <input class="searchBox" value="@if(isset($search_product)){{ $search_product }}@endif" type="search" name="search" placeholder="Search products, categories..." aria-label="Search" />
                     <button class="SearchBtn" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
