@@ -5,7 +5,7 @@
                 <img class="brand-logo lineLogo" src="{{ asset('assets/client/images/lineLogo.svg') }}" alt="logo" />
             </a>
             <div class="searchBar">
-                <form class="searchForm" role="search">
+                <form class="searchForm" role="search" action="{{ route('client.product.search_page') }}">
                     <!-- drop down -->
                     <!-- comment -->
                     <div class="dropdown">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <!-- drop down end -->
-                    <input id="search" class="searchBox" type="search" placeholder="Search products, categories..."
+                    <input id="search" class="searchBox" value="{{ $search_product }}" name="search" type="search" placeholder="Search products, categories..."
                         aria-label="Search" />
                     <button class="SearchBtn" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -56,7 +56,7 @@
                 </button>
             </div>
             <div class="searchBar">
-                <form class="searchForm" role="search">
+                <form class="searchForm" role="search" action="{{ route('client.product.search_page') }}">
                     <!-- drop down -->
                     <div class="dropdown">
                         <button class="catagoryBtnSearchBar catagoryBtn" type="button">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <!-- drop down end -->
-                    <input class="searchBox" type="search" placeholder="Search products, categories..." aria-label="Search" />
+                    <input class="searchBox" value="{{ $search_product }}" type="search" name="search" placeholder="Search products, categories..." aria-label="Search" />
                     <button class="SearchBtn" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i>
                     </button>

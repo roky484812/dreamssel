@@ -156,6 +156,11 @@
     background: var(--primaryColor) !important;   
 }
 
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
 /* Dot color on hover */
 .topCarousel .owl-dot:hover span{
     background: var(--primaryColor) !important;

@@ -160,6 +160,7 @@
 @endsection
 
 @section('custom_js')
+    @include('admin.widgets.alert')
     <script>
         function sub_category_fetch (e, id=null){
             var category_id = id ? id : $(this).val();

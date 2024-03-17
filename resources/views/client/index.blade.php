@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="title-price-wrapper">
-                            <a href="{{ route('client.product.view', $product->id) }}" class="text-decoration-none product-title h3">{!! Str::limit ($product->title, 25) !!}</a>
+                            <a href="{{ route('client.product.view', $product->id) }}" class="text-decoration-none product-title h3">{{ Str::limit ($product->title, 35) }}</a>
                             <div class="rate-buy-now-wrapper">
                                 <div class="price-wrapper">
                                     @if(auth()->user())
@@ -133,7 +133,7 @@
                         </div>
                     </div>
                     <div class="title-price-wrapper">
-                        <a href="{{ route('client.product.view', $popular_product->id) }}" class="text-decoration-none product-title h3">{{ $popular_product->title }}</a>
+                        <a href="{{ route('client.product.view', $popular_product->id) }}" class="text-decoration-none product-title h3">{{ Str::limit($popular_product->title, 40) }}</a>
                         <div class="rate-buy-now-wrapper">
                             <div class="price-wrapper">
                                 <div class="price-wrapper">

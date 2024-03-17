@@ -277,7 +277,7 @@
                                         @foreach ($popular_products as $i=>$p_product) 
                                         <tr>
                                             <td>
-                                                <img src="{{ $p_product->thumbnail_image }}" class="w-7 h-7 shadow me-3 rounded">
+                                                <img src="{{ asset($p_product->thumbnail_image) }}" class="w-7 h-7 shadow me-3 rounded">
                                                 {{  $p_product->title }}
                                             </td>
                                             <td>

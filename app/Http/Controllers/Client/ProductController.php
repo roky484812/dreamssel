@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Product_attribute;
 use App\Models\Product_category;
 use App\Models\Product_combination;
+use App\Models\Product_sub_category;
 use App\Models\Product_gallery;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,21 +41,23 @@ class ProductController extends Controller
         $product->view_count = $product->view_count + 1;
         $product->save();
         $product_fetch = Product::where(['status'=> 1, 'products.id'=> $id])
-        ->limit(8)->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
         ->leftjoin('product_categories', 'product_categories.id', 'products.category_id')
         ->leftjoin('product_sub_categories', 'product_sub_categories.id', 'products.sub_category_id')
         ->select('products.id', 'products.category_id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'products.sku', 'products.product_code', 'products.short_description', 'products.description', 'products.is_variational', 'products.created_at', 'product_countries.name as country_name', 'product_countries.code as country_code', 'product_categories.category_name', 'product_sub_categories.sub_category_name')
         ->first();
         $product_attributes = [];
         $product_galleries = [];
+        
         if($product_fetch->is_variational){
             $product_attributes = Product_attribute::where('product_id', $id)->with('attribute_values')->get();
-            $product_galleries = Product_gallery::where('product_id', $id)->get();
         }
+        $product_galleries = Product_gallery::where('product_id', $id)->get();
         
         $carbon = new Carbon();
 
-        $related_products = Product::where('products.category_id', $product_fetch->category_id)->limit(8)
+        $related_products = Product::where('products.status', 1)
+        ->where('products.category_id', $product_fetch->category_id)->limit(8)
         ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
         ->select('products.*', 'product_countries.code as country_code')
         ->get();
@@ -91,5 +94,44 @@ class ProductController extends Controller
                 'message'=> 'Failed to fetch product combinations.'
             ]);
         }
+    }
+
+    public function product_search_page(Request $req){
+        return view('client.product_search', ['search_product'=> $req->input('search')]);
+    }
+
+    public function product_subcategory_filter(Request $req){
+        $category_id = (array) $req->input('category_id');
+        $sub_category = Product_sub_category::whereIn('category_id', $category_id)->get();
+
+        return response()->json([
+            'status'=> true,
+            'data'=> $sub_category,
+            'message'=> 'Sub-category fetched successfully.'
+        ]);
+    }
+
+    public function search_products(Request $req){
+        $products = Product::where('products.status', 1)->whereBetween('products.price', [$req->input('min_price'), $req->input('max_price')])
+        ->leftjoin('product_categories', 'product_categories.id', 'products.category_id')
+        ->leftjoin('product_countries', 'product_countries.id', 'products.country_id');
+        if($req->input('search')){
+            $products->where('products.title', 'like', '%'.$req->input('search').'%');
+        }
+
+        if($req->input('category_id')){
+            $products->whereIn('products.category_id', $req->input('category_id'));
+        }
+        
+        if($req->input('sub_category_id')){
+            $products->whereIn('products.sub_category_id', $req->input('sub_category_id'));
+        }
+        $products_fetch = $products->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.sku', 'products.thumbnail_image', 'products.created_at', 'product_categories.category_name', 'product_countries.code as country_code')->latest()->paginate(20);
+
+        return response()->json([
+            'status' => true,
+            'data' => $products_fetch,
+            'message'=> 'Successfully searched.'
+        ]);
     }
 }

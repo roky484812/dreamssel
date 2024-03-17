@@ -18,7 +18,8 @@ class UserListController extends Controller
         $userFetch = User::select('users.id', 'users.name', 'users.username', 'users.email', 'users.profile_picture', 'users.is_active', 'user_roles.role as role_name')
             ->leftJoin('user_roles', 'user_roles.id', 'users.role')
             ->where('users.role', '!=', '1')
-            ->with('profileMeta');
+            ->with('profileMeta')
+            ->latest();
 
         if($req->input('search')){
             $userFetch->where('users.'.$req->input('type'), 'like', '%'.$req->input('search').'%');

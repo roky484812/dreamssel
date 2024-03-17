@@ -172,7 +172,7 @@
                         </div>
                     </div>
                     <div class="title-price-wrapper">
-                        <a href="{{ route('client.product.view', $related_product->id) }}" class="text-decoration-none product-title h3">{{ $related_product->title }}</a>
+                        <a href="{{ route('client.product.view', $related_product->id) }}" class="text-decoration-none product-title h3">{{ Str::limit($related_product->title, 40) }}</a>
 
                         <div class="rate-buy-now-wrapper">
                             <div class="price-wrapper">

@@ -33,7 +33,7 @@ class ProductController extends Controller
         ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
         ->leftjoin('product_categories', 'product_categories.id', 'products.category_id')
         ->leftjoin('product_sub_categories', 'product_sub_categories.id', 'products.sub_category_id')
-        ->orderBy('products.id', 'desc');
+        ->latest();
         
         if($req->input('category')){
             $product_fetch->where('products.category_id', $req->input('category'));

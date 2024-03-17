@@ -13,7 +13,7 @@ class Dashboard extends Controller
         $distributors = User::leftjoin('user_roles', 'user_roles.id', 'users.role')
         ->where('users.role', 3)
         ->where('is_active', 1)
-        ->limit(5)->orderBy('id', 'asc')
+        ->limit(5)->latest()
         ->select('users.*', 'user_roles.role')->get();
 
         $popular_products = Product::select('products.*', 'product_countries.name as country_name', 'product_categories.category_name', 'product_sub_categories.sub_category_name')
