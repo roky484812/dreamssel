@@ -97,7 +97,12 @@ class ProductController extends Controller
     }
 
     public function product_search_page(Request $req){
-        return view('client.product_search', ['search_product'=> $req->input('search')]);
+        $popular_products = Product::where('status', 1)
+        ->limit(8)->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'product_countries.name as country_name', 'product_countries.code as country_code', 'products.view_count')
+        ->orderBy('products.view_count', 'desc')
+        ->get();
+        return view('client.product_search', ['search_product'=> $req->input('search'), 'popular_products' => $popular_products]);
     }
 
     public function product_subcategory_filter(Request $req){
