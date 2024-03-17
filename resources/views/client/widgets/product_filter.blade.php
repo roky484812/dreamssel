@@ -145,7 +145,6 @@
                     dataType: 'json',
                     data: objectData,
                     success: function(response) {
-                        console.log('response: ', response);
                         var products = '';
                         response.data.data.forEach((product)=>{
                             products +=`
@@ -227,6 +226,7 @@
                         });
                         if(products.length > 0){
                             $('#data').html(products);
+                            $('html,body').scrollTop(0);
                         }else{
                             $('#data').html('<h4 class="text-muted text-center">No Product!</h4>');
                         }
