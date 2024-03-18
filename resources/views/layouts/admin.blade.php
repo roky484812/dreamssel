@@ -77,7 +77,7 @@
                                 </a>
                             </div>
                         </div>
-                        <a class="header-brand" href="index.html">
+                        <a class="header-brand" href="{{ route('admin.dashboard') }}">
                             <img src="{{ asset('assets/admin//images/brand/lineLogo.svg') }}"
                                 class="header-brand-img desktop-lgo" alt="pirhotech logo">
                             <img src="{{ asset('assets/admin//images/brand/Line_logo_white.svg') }}"
@@ -267,16 +267,16 @@
             <div class="sticky">
                 <aside class="app-sidebar sidebar-scroll">
                     <div class="main-sidebar-header active">
-                        <a class="desktop-logo logo-light active" href="index.html"><img
+                        <a class="desktop-logo logo-light active" href="{{ route('admin.dashboard') }}"><img
                                 src="{{ asset('assets/admin//images/brand/lineLogo.svg') }}" class="main-logo"
                                 alt="logo"></a>
-                        <a class="desktop-logo logo-dark active" href="index.html"><img
+                        <a class="desktop-logo logo-dark active" href="{{ route('admin.dashboard') }}"><img
                                 src="{{ asset('assets/admin//images/brand/Line_logo_white.svg') }}" class="main-logo"
                                 alt="logo"></a>
-                        <a class="logo-icon mobile-logo icon-light active" href="index.html"><img
+                        <a class="logo-icon mobile-logo icon-light active" href="{{ route('admin.dashboard') }}"><img
                                 src="{{ asset('assets/admin//images/brand/black_single_logo.svg') }}"
                                 alt="logo"></a>
-                        <a class="logo-icon mobile-logo icon-dark active" href="index.html"><img
+                        <a class="logo-icon mobile-logo icon-dark active" href="{{ route('admin.dashboard') }}"><img
                                 src="{{ asset('assets/admin//images/brand/white_single_logo.svg') }}"
                                 alt="logo"></a>
                     </div>

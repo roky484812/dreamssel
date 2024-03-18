@@ -289,7 +289,9 @@
                                                         <li>
                                                             <a href="{{route('admin.product.updateView', $p_product->id)}}" class="dropdown-item">Edit</a>
                                                         </li>
-                                                        <li><button class="dropdown-item del-product">Delete</bu></li>
+                                                        <li>
+                                                            <a href="{{ route('admin.product.delete', $p_product->id) }}" class="dropdown-item del-product">Delete</a>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -299,7 +301,14 @@
                                             <td class="text-center">{{ $p_product->sku }}
                                             </td>
                                             <td class="text-center">
-                                                {{ round((($p_product->price - $p_product->distributor_price) / $p_product->price) * 100) }}%
+                                                @php
+                                                try {
+                                                    echo round((($p_product->price - $p_product->distributor_price) / $p_product->price) * 100);
+                                                } catch (\Throwable $th) {
+                                                    echo 0;
+                                                }
+                                                @endphp
+                                                 %
                                             </td>                                        
                                             <td class="text-center">{{ $p_product->distributor_price }}
                                             </td>
