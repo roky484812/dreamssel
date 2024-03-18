@@ -21,7 +21,7 @@
             <p>Whatsapp: 01712-345678</p>
             <p>address@gmail.com</p>
             <p>or</p>
-            <a class="footerLogin" href="#">login</a>
+            <a class="footerLogin" href="{{ route('login') }}">login</a>
         </div>
         <div class="pirhotechAdd">
             <h3>Developed By</h3>
@@ -30,8 +30,8 @@
     </div>
     <div class="footerCopyRight">
         <p>
-            Copyright &copy 2023 <a href="javascript:void(0);" class="text-success">Dreamssel</a>. Developed with <span
-                class="fa fa-heart text-danger"></span> by <a class="text-success" href="https://www.pirhotech.com"> PiRhoTech
+            Copyright &copy 2023 <a href="javascript:void(0);" class="text-success text-decoration-none">Dreamssel</a>. Developed with <span
+                class="fa fa-heart text-danger"></span> by <a class="text-success text-decoration-none" href="https://www.pirhotech.com"> PiRhoTech
             </a> All rights reserved.
         </p>
     </div>

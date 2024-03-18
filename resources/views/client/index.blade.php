@@ -1,4 +1,4 @@
-@extends('layouts.client.client')
+@extends('layouts.client.client', ['title' => 'Dreamssel Collection'])
 @section('content')
     <!-- mid content -->
     <div class="midContent">

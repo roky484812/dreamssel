@@ -138,7 +138,7 @@
                         objectData[key] = value;
                     }
                 }
-
+                $('#data').addClass('disabled');
                 $.ajax({
                     url: "{{ route('client.product.search') }}"+"?page="+page,
                     type: 'GET',
@@ -249,6 +249,9 @@
                         }else{
                             $('#link').empty();
                         }
+                    },
+                    complete: function(){
+                        $('#data').removeClass('disabled');
                     }
                 });
             }
@@ -267,6 +270,8 @@
             });
             @if ($search_product)
                 searchProducts();
+            @else
+                $('#data').html('<h4 class="text-muted text-center">No Product!</h4>');
             @endif
         });
     </script>
