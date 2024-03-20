@@ -62,8 +62,6 @@
         </div>
         <div class="drawer-body">
             <div class="shop-access-wrapper nav-shop-access-hidden">
-                <a href="#"><i class="fa-regular fa-heart"></i></a>
-                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
                 <a href="#"><i class="fa-regular fa-user"></i></a>
             </div>
             <div class="header-devider"></div>
@@ -100,6 +98,9 @@
                 <li class="nav-item">
                     <a class="drawer-nav-link" href="{{ route('client.shopping_products') }}">Shop Now</a>
                 </li>
+                <li class="nav-item">
+                    <a class="drawer-nav-link" href="{{ route('client.announcement.list') }}">Annoucements</a>
+                </li>
                 <div class="header-devider"></div>
                 <li class="nav-item">
                     <a class="drawer-nav-link" href="{{ route('login') }}">Login</a>
@@ -117,7 +118,7 @@
                 <p class="status-offer">
                     Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
                 </p>
-                <a class="shop-now-link" href="{{ route('client.shopping_products') }}">ShopNow</a>
+                <a class="shop-now-link" href="">ShopNow</a>
             </div>
         </div>
 
@@ -136,13 +137,14 @@
 
                     <div class="menus">
                         <a href="{{ route('client.index') }}">Home</a>
-                        <a href="{{ route('client.shopping_products') }}">Shop now</a>
+                        <a href="#">Shop now</a>
                         <a href="#">About</a>
+                        <a href="{{ route('client.announcement.list') }}">Announcements</a>
                         @if (!Auth::check())
                             <a class="" href="{{ route('login') }}">Login</a>
                         @else
                             <a class="" href="{{ route('admin.logout') }}">Log Out</a>
-                            @if (Auth::user()->role == 2)
+                            @if (Auth::user()->role == 1 || Auth::user()->role == 2)
                                 <a class="" href="{{ route('admin.dashboard') }}">Admin Panel</a>
                             @endif
                         @endif
@@ -159,11 +161,6 @@
                         </div>
                     </form>
                     <div class="shop-access-wrapper shop-access-hidden">
-                        <a href="#"><i class="fa-regular fa-heart"></i></a>
-                        <a href="#">
-                            <i class="fa-solid fa-cart-shopping"></i>
-
-                        </a>
                         <a href="#"><i class="fa-regular fa-user"></i></a>
                     </div>
                 </div>
@@ -210,10 +207,13 @@
                     <div class="col">
                         <h6>Account</h6>
                         <ul class="list-unstyled">
-                            <li><a href="#">My Account</a></li>
+                            @if (auth()->user())
+                            <li><a href="{{ route('login') }}">My Account</a></li>
+                            @else
+                            <li><a href="{{ route('login') }}">My Account</a></li>
+                            @endif
                             <li><a href="{{ route('login') }}">Login / Register</a></li>
-                            <li><a href="#">Cart</a></li>
-                            <li><a href="#">Shop</a></li>
+                            <li><a href="{{ route('client.shopping_products') }}">Shop</a></li>
                         </ul>
                     </div>
                     <div class="col">

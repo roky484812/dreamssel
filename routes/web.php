@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnnouncementController;
+use App\Http\Controllers\Client\AnnouncementController as ClientAnnouncementController;
 use App\Http\Controllers\Admin\Dashboard as AdminDashboard;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
@@ -96,6 +97,10 @@ Route::controller(ClientProductController::class)->group(function(){
     Route::get('/product/shop', 'shopping_products')->name('client.shopping_products');
     Route::get('/product/subcategory/{id}', 'product_of_subcategory')->name('client.product.subcategory');
     Route::get('/product/{id}', 'product_view')->name('client.product.view');
+});
+
+Route::controller(ClientAnnouncementController::class)->group(function(){
+    Route::get('/accouncement', 'announcementList')->name('client.announcement.list');
 });
 
 Route::group(['middleware'=> ['web', 'type.distributor']], function(){
