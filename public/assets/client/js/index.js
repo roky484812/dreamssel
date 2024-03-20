@@ -1,119 +1,102 @@
-$(document).ready(function(){
-  $(".quoteCarousel").owlCarousel({
-    loop:true,
-    responsiveClass:true,
-    nav: true, // Enable navigation buttons
-    navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"], // Custom navigation icons if needed
-    dots: false,
-    responsive:{
-      0:{
-        items:1
-      },
-      600:{
-        items:2
-      },
-      1000:{
-        items:3
-      }
-    }
-  });
+$(document).ready(function () {
+    $(".topCarousel").owlCarousel({
+        items: 1,
+        loop: true,
+        responsiveClass: true,
+        nav: false,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        autoplayHoverPause: true,
+    });
 
-  $(".PopulerProducts").owlCarousel({
-    loop:true,
-    responsiveClass:true,
-    nav: false,
-    dots: true,
-    autoplay: true, 
-    autoplayTimeout: 3000,
-    autoplayHoverPause: true,
-    responsive:{
-      0:{
-        items:2
-      },
-      520:{
-        items:3
-      },
-      1000:{
-        items:4
-      },
-      1400:{
-        items:5
-      },
-      1700:{
-        items:6
-      }
-    }
-  });
+    $(".flashSaleCarousel").owlCarousel({
+        loop: true,
+        responsiveClass: true,
+        nav: true,
+        navText: [
+            "<i class='fa-solid fa-arrow-left'></i>",
+            "<i class='fa-solid fa-arrow-right'></i>",
+        ],
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 2,
+            },
+            767: {
+                items: 3,
+            },
+            1400: {
+                items: 4,
+            },
+        },
+    });
 
-  // top carousel
-
-  $(".topCarousel").owlCarousel({
-    items: 1,
-    loop: true,
-    responsiveClass: true,
-    nav: false,
-    dots: true,
-    autoplay: true,
-    autoplayTimeout: 2000,
-    autoplayHoverPause: true,
-  });
-
+    $(".categoryCarouselBox").owlCarousel({
+        loop: true,
+        responsiveClass: true,
+        nav: true,
+        navText: [
+            "<i class='fa-solid fa-arrow-left'></i>",
+            "<i class='fa-solid fa-arrow-right'></i>",
+        ],
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 2,
+            },
+            400: {
+                items: 3,
+            },
+            768: {
+                items: 4,
+            },
+            1000: {
+                items: 5,
+            },
+            1200: {
+                items: 6,
+            },
+        },
+    });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const categoryDropDown = document.getElementById("categoryDropDown");
+    const subCategoryItems = document.querySelectorAll(".subCategoryItem");
 
-
-
-function toggleSideMenuBar() {
-  var sideMenuBar = document.querySelector('.sideBar');
-  // sideMenuBar.style.display = (sideMenuBar.style.display === 'none' || sideMenuBar.style.display === '') ? 'block' : 'none';
-
-  if (sideMenuBar.classList.contains('active')) {
-    sideMenuBar.classList.remove('active');
-  } else {
-    sideMenuBar.classList.add('active');
-  }
-}
-
-//search filter showing 
-
-// search box category dropdown start here
-document.addEventListener('DOMContentLoaded', function () {
-  const DropDownBtns = document.querySelectorAll('.catagoryBtnSearchBar');
-  const searchBoxDropdowns = document.querySelectorAll('.searchBoxDropdown');
-  const dropDownIcons = document.querySelectorAll('.dropDownIcon');
-
-  DropDownBtns.forEach(function (btn, index) {
-    btn.addEventListener('click', function (event) {
-      searchBoxDropdowns[index].classList.toggle('active');
-      dropDownIcons[index].classList.toggle('angleUp');
-      event.stopPropagation();
+    categoryDropDown.addEventListener("click", function (event) {
+        const categoryDropDownMenu = document.querySelector(
+            "#drawerCategoryMenu"
+        );
+        const dropDownIcon = document.querySelector("#dropDownIcon");
+        categoryDropDownMenu.classList.toggle("active");
+        dropDownIcon.classList.toggle("angleDown");
+        event.stopPropagation();
     });
-  });
 
-  document.addEventListener('click', function (event) {
-    DropDownBtns.forEach(function (btn, index) {
-      const target = event.target;
-      const isClickInside = btn.contains(target) || searchBoxDropdowns[index].contains(target);
-      if (!isClickInside) {
-        searchBoxDropdowns[index].classList.remove('active');
-        dropDownIcons[index].classList.remove('angleUp');
-      }
+    subCategoryItems.forEach(function (item) {
+        item.addEventListener("click", function (event) {
+            const subCategoryMenu = item.querySelector(".subCategoryMenu");
+            const dropDownIcon = item.querySelector(".dropDownIcon");
+            subCategoryMenu.classList.toggle("active");
+            dropDownIcon.classList.toggle("angleDown");
+            event.stopPropagation();
+        });
     });
-  });
 });
-// end here
 
-// for category menu
-document.addEventListener('DOMContentLoaded', function () {
-  const subCategoryItems = document.querySelectorAll('.subCategoryItem');
+(function ($) {
+    "use strict";
 
-  subCategoryItems.forEach(function(item) {
-    item.addEventListener('click', function (event) {
-      const subCategoryMenu = item.querySelector('.subCategoryMenu');
-      const dropDownIcon = item.querySelector('.dropDownIcon');
-      subCategoryMenu.classList.toggle('active');
-      dropDownIcon.classList.toggle('angleDown');
-      event.stopPropagation();
+    // ______________ Page Loading
+    $(window).on("load", function (e) {
+        $("#global-loader").fadeOut("slow");
     });
-  });
-});
+})(jQuery);

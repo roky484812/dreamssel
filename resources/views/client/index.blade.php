@@ -1,36 +1,98 @@
-@extends('layouts.client.client', ['title' => 'Dreamssel Collection'])
+@extends('layouts.client.index', ['title' => 'Dreamssel Collection'])
+
 @section('content')
-    <!-- mid content -->
-    <div class="midContent">
-        @include('client.widgets.sidebar')
-        <div class="productsBox">
+    <div class="container">
+        <div class="topCarouselCategoryBox">
+            <div class="categoryMenuBox">
+                <ul>
+                    @foreach ($_categories as $category)
+                        <li>
+
+                            {{-- {{ route('your.route.name', ['category_id' => $category->id]) }} --}}
+                            {{-- Route handler for category --}}
+                            <a href="javascript:void(0)">
+                                {{ $category->category_name }}
+                                @if (count($category->sub_category))
+                                    <span><i class="fa-solid fa-angle-right"></i></span>
+                                @endif
+                            </a>
+                            <ul>
+                                @foreach ($category->sub_category as $sub_category)
+                                    <li><a>{{ $sub_category->sub_category_name }}</a></li>
+                                @endforeach
+
+                                {{-- {{ route('your.route.name', ['subcategory_id' => $subcategory->id]) }} --}}
+                            </ul>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
             <div class="carouselBox">
                 <div class="topCarousel owl-carousel owl-theme">
-                    <div class="topCarouselItem"><img src="{{ asset('assets/client/images/product2.png') }}" alt=""></div>
-                    <div class="topCarouselItem"><img src="{{ asset('assets/client/images/product2.png') }}" alt=""></div>
-                    <div class="topCarouselItem"><img src="{{ asset('assets/client/images/product2.png') }}" alt=""></div>
-                    <div class="topCarouselItem"><img src="{{ asset('assets/client/images/product2.png') }}" alt=""></div>
-                    <div class="topCarouselItem"><img src="{{ asset('assets/client/images/product2.png') }}" alt=""></div>
+                    <div class="topCarouselItem">
+                        <img src="{{ asset('assets/client_old/images/product2.png') }}" alt="">
+                    </div>
                 </div>
             </div>
-            <!-- heading -->
+        </div>
+    </div>
+
+
+    <!-- banner section -->
+
+    <!-- new banner-->
+    @if(isset($featured_image))
+    <div class="container">
+        <div class="bottomBannerBox">
+            <div class="bannerBox ">
+               
+                    
+                
+                    <img src="{{$featured_image->image}}" alt="" />
+
+                
+                <div class="bannerContent">
+                    <div class="bannerContentText">
+                        <button class="bannerBtn">
+                            অর্ডার করুন
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <!-- explore our product -->
+    <div class="container">
+        <div class="headerSection">
             <div class="header-category">
                 <div class="box-pointer"></div>
                 <div class="header-category-title">
                     <h6>Our Product's</h6>
                 </div>
             </div>
-            <div class="our-feature-product-header">
-                <h1>Explore Our Products</h1>
+            <div class="flashSaleHeader">
+                <div class="header">
+                    <h1>Explore Our Products</h1>
+                </div>
             </div>
-            <div class="allProducts row g-3">
-                <!-- card design -->
-                @foreach ($products as $product)
-                <div class="productItem col-md-3 col-sm-4 col-xsm-6">
-                    <div class="wrapper">
-                        <div class="pic-wrapper">
-                            <div class="negative-percentage">
-                                @if (auth()->user()) 
+        </div>
+
+        <div class="ourProductBox">
+            <div class="product-list-wrapper">
+                <div class="row g-2">
+                    @foreach ($products as $product)
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-card">
+                            <div class="card-product-image">
+                                <a href="{{ route('client.product.view', $product->id) }}"
+                                    class="product-card-link">
+                                    <img src="{{ $product->thumbnail_image }}" alt="Product image" />
+                                </a>
+                                <div class="card-discount">
+                                    @if (auth()->user()) 
                                     <p>                                                
                                     @php
                                         try {
@@ -40,175 +102,61 @@
                                         }
                                     @endphp %
                                     </p>
-                                @endif
-                            </div>
-                            <div class="product-pic">
-                                <img src="{{ asset($product->thumbnail_image) }}" alt="" />
-                            </div>
-                        </div>
-                        <div class="title-price-wrapper">
-                            <a href="{{ route('client.product.view', $product->id) }}" class="text-decoration-none product-title h3">{{ Str::limit ($product->title, 35) }}</a>
-                            <div class="rate-buy-now-wrapper">
-                                <div class="price-wrapper">
-                                    @if(auth()->user())
-                                    <h2 class="price">{{ $product->distributor_price }} ৳</h2>
-                                    <div class="closePriceAndCategory">
-                                        <del class="crossed-price">{{ $product->price }}</del>
-                                        <div class="regional-tag">
-                                            <p>{{ $product->country_code }}</p>
-                                        </div>
-                                    </div>
-                                    @else
-                                    <h2 class="price">{{ $product->price }} ৳</h2>
-                                    <div class="closePriceAndCategory">
-                                        <div class="regional-tag">
-                                            <p>{{ $product->country_code }}</p>
-                                        </div>
-                                    </div>
                                     @endif
                                 </div>
-                                <button class="buy-now-button">Buy now</button>
+                                <div class="card-add-to-wishlist">
+                                    <span class="badge text-bg-dark">{{ $product->country_code }}</span>
+                                </div>
                             </div>
+                            <div class="card-product-name">
+                                <p>{{ \Illuminate\Support\Str::limit($product->title, 40, $end = '...') }}</p>
+                            </div>
+                            <div class="card-price">
+                                @if (auth()->user())
+                                <p>&#2547; {{ $product->distributor_price }} </p>
+                                <span><del>&#2547; {{ $product->price }}</del></span>
+                                @else
+                                <p>&#2547; {{ $product->price }} </p>
+                                @endif
+                            </div>
+
+                            <a href="#" class="card-buy-now text-decoration-none" type="button">
+                                <p>অর্ডার করুন</p>
+                            </a>
                         </div>
+
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
-                <!-- card end -->
-                @if (!count($products))
-                    <h4 class="text-muted text-center">No Product!</h4>
-                @endif
             </div>
+        </div>
+        <div class="viewAllBtnSection">
+            <button class="viewAllProductBtn">View All Products</button>
         </div>
     </div>
-    <div class="featureProduct">
-        <div class="featureBox1">
-            <img src="{{ asset('assets/client/images/1.svg') }}" alt="" />
-            <div class="featureContent1">
-                <div class="featureContentText1">
-                    <button class="fetureBtn">
-                    Read More <span><i class="fa-solid fa-arrow-right"></i></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="featureBox2">
-            <img src="{{ asset('assets/client/images/2.svg') }}" alt="" />
-            <div class="featureContent2">
-                <div class="featureContentText2">
-                    <button class="fetureBtn">
-                    Read More <span><i class="fa-solid fa-arrow-right"></i></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+
     @include('client.widgets.popular_products')
-    <!-- fature box for mobile device -->
-    <div class="featureProduct featureProductMbl">
-        <div class="featureBox2 featureBox2Mbl">
-            <img src="{{ asset('assets/client/images/2.svg') }}" alt="" />
-            <div class="featureContent2">
-                <div class="featureContentText2">
-                    <button class="fetureBtn">
-                    Read More <span><i class="fa-solid fa-arrow-right"></i></span>
-                    </button>
-                </div>
+
+    <!-- advartisement section -->
+
+    <div class="container">
+        <div class="addvartiseBox">
+            <div class="addvartiseItem">
+                <div class="addvartiseIcon"><i class="fa-solid fa-truck"></i></div>
+                <h4>Free and Fast Delivery</h4>
+                <p>Free Delivery for all order over 10000</p>
             </div>
-        </div>
-    </div>
-    <!-- features product section from farhan -->
-    <div class="bottomFeatureProducts">
-        <div class="header-category">
-            <div class="box-pointer"></div>
-            <div class="header-category-title">
-                <h6>Feature's</h6>
+
+            <div class="addvartiseItem">
+                <div class="addvartiseIcon"><i class="fa-solid fa-headset"></i></div>
+                <h4>24/7 Customer Service</h4>
+                <p>Friendly 24/7 Customer Support</p>
             </div>
-        </div>
-        <div class="our-feature-product-header">
-            <h1>Feature Products</h1>
-        </div>
-        <div class="new-arival-products">
-            <div class="left-large">
-                <a href="">
-                <img src="{{ asset('assets/client/images/left-large.svg') }}" alt="" />
-                </a>
-            </div>
-            <div class="right-wrapper">
-                <div class="right-top">
-                    <a href="">
-                    <img src="{{ asset('assets/client/images/right-top.svg') }}" alt="" />
-                    </a>
-                </div>
-                <div class="right-bottom-wrapper">
-                    <div class="right-bottom-left">
-                        <a href="">
-                        <img src="{{ asset('assets/client/images/right-bottom-left.svg') }}" alt="" />
-                        </a>
-                    </div>
-                    <div class="right-bottom-right">
-                        <a href="">
-                        <img src="{{ asset('assets/client/images/right-bottom-right.svg') }}" alt="" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end -->
-    <!-- cutomer says section here -->
-    <div class="customerSays">
-        <div class="saysHead">
-            <div class="header-category">
-                <div class="box-pointer"></div>
-                <div class="header-category-title">
-                    <h6>Customer's</h6>
-                </div>
-            </div>
-            <div class="our-feature-product-header">
-                <h1>Our Customer Says</h1>
-            </div>
-        </div>
-        <!-- carousel -->
-        <div class="owl-carousel quoteCarousel">
-            <div class="quote-card">
-                <h3>
-                    "Mela kicui likha thakbe dreamssel somporke. customer ra likhbe j
-                    eta ekta valo site melai valo site. apnara sobai product kinen."
-                </h3>
-                <p>Md Nuruzzaman Emon</p>
-                <img src="{{ asset('assets/client/images/emon.jpg') }}" alt="" />
-            </div>
-            <div class="quote-card">
-                <h3>
-                    "Mela kicui likha thakbe dreamssel somporke. customer ra likhbe j
-                    eta ekta valo site melai valo site. apnara sobai product kinen."
-                </h3>
-                <p>Md Nuruzzaman Emon</p>
-                <img src="{{ asset('assets/client/images/emon.jpg') }}" alt="" />
-            </div>
-            <div class="quote-card">
-                <h3>
-                    "Mela kicui likha thakbe dreamssel somporke. customer ra likhbe j
-                    eta ekta valo site melai valo site. apnara sobai product kinen."
-                </h3>
-                <p>Md Nuruzzaman Emon</p>
-                <img src="{{ asset('assets/client/images/emon.jpg') }}" alt="" />
-            </div>
-            <div class="quote-card">
-                <h3>
-                    "Mela kicui likha thakbe dreamssel somporke. customer ra likhbe j
-                    eta ekta valo site melai valo site. apnara sobai product kinen."
-                </h3>
-                <p>Md Nuruzzaman Emon</p>
-                <img src="{{ asset('assets/client/images/emon.jpg') }}" alt="" />
-            </div>
-            <div class="quote-card">
-                <h3>
-                    "Mela kicui likha thakbe dreamssel somporke. customer ra likhbe j
-                    eta ekta valo site melai valo site. apnara sobai product kinen."
-                </h3>
-                <p>Md Nuruzzaman Emon</p>
-                <img src="{{ asset('assets/client/images/emon.jpg') }}" alt="" />
+
+            <div class="addvartiseItem">
+                <div class="addvartiseIcon"><i class="fa-solid fa-shield-heart"></i></div>
+                <h4>Money Back Guarantee</h4>
+                <p>We return money within 30 days</p>
             </div>
         </div>
     </div>

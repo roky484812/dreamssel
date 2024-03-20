@@ -1,144 +1,113 @@
-@extends('layouts.client.client', ['title'=> 'Dreamssel | '.$product->title])
+@extends('layouts.client.index', ['title' => 'Dreamssel Collection'])
 @section('content')
-    <!-- breadcrumb start here -->
-    <div class="container breadcrumbContainer">
+    <div class="container" id="single_product">
         <div class="path-bar">
             <div class="full-path">
-                <p class="inactive-path">Home /</p>
+                <p class="inactive-path">Products /</p>
                 <span class="active-path">{{ $product->title }}</span>
             </div>
         </div>
-    </div>
 
-    <div class="productView" id="single_product">
-        <div class="product-images">
-            <div class="secondary-images">
-            @foreach ($product_galleries as $product_gallery)
-            <div class="image"><img src="{{ asset($product_gallery->image) }}" alt="" /></div>
-            @endforeach
-            </div>
-            <div class="primary-image">
-            <img src="{{ asset($product->thumbnail_image) }}" alt="" />
-            </div>
-        </div>
-
-        <div class="productDetails ">
-            <div class="productDescription">
-                <h1>{{ $product->title }}</h1>
-                <p>{{ $product->short_description }}</p>
-            </div>
-            <div class="proDesTable">
-                <div class="proDesTableLeft">
-                    <div class="productAttributeItem">
-                        <div class="descriptionTitle">
-                            <p>Category:</p>
+        <div class="viewProduct">
+            <div class="product-images">
+                @if (count($product_galleries))
+                <div class="secondary-images">
+                    @foreach ($product_galleries as $product_gallery)
+                        <div class="image">
+                            <img onclick="swapImages('{{ $product_gallery->image }}','{{ $product->thumbnail_image }}')" src="{{ asset($product_gallery->image) }}" alt="Product gallery images" />
                         </div>
-                        <div class="descriptionBox">
-                            <p>{{ $product->category_name }}</p>
-                        </div>
-                    </div>
-                    <div class="productAttributeItem">
-                        <div class="descriptionTitle">
-                            <p>Sub Category:</p>
-                        </div>
-                        <div class="descriptionBox">
-                            <p>{{ $product->sub_category_name }}</p>
-                        </div>
-                    </div>
-                    <div class="productAttributeItem">
-                        <div class="descriptionTitle">
-                            <p>Stock:</p>
-                        </div>
-                        <div class="descriptionBox">
-                            <p id="sku">
-                                @if ($product->sku)
-                                InStock ({{ $product->sku }})
-                                @else
-                                OutOfStock ({{ $product->sku }})
-                                @endif
-                            </p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-                <form id="product_attr" class="proDesTableRight">
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <div class="productAttributeItem">
-                        <div class="descriptionTitle">
-                            <p>Date:</p>
-                        </div>
-                        <div class="descriptionBox">
-                            <p>{{ $carbon->parse($product->created_at)->format('d-m-Y') }}</p>
-                        </div>
+                @endif
+                <div class="primary-image">
+                    <img id="big-image" src="{{ asset($product->thumbnail_image) }}" alt="Product images " />
+                </div>
+            </div>
+            <div class="product-details">
+                <form id="product_attr">
+                    <input type="hidden" value="{{ $product->id }}" name="product_id">
+                    @csrf
+                    <div class="product-name">
+                        <h4>{{ $product->title }}</h4>
                     </div>
-                    <div class="productAttributeItem">
-                        <div class="descriptionTitle">
-                            <p>Country:</p>
-                        </div>
-                        <div class="descriptionBox">
-                            <p><span class="regional-tag">{{ $product->country_name }}</span></p>
-                        </div>
+                    <div class="review-stock-wrapper" id="sku">
+                        @if ($product->sku > '0')
+                            <div class="in-stock">
+                                <p>In Stock</p>
+                            </div>
+                        @else
+                            <div class="out-stock">
+                                <p>Stock Out</p>
+                            </div>
+                        @endif
                     </div>
+
+                    <div class="price" id="price">
+                        @if(auth()->user())
+                            <h3>&#2547; {{ $product->distributor_price }}</h3>
+                            <h6><del>(&#2547; {{ $product->price }})</del></h6>
+                        @else
+                            <h3>&#2547; {{ $product->price }}</h3>
+                        @endif
+                    </div>
+                    <div class="product-dessriptions">
+                        <p>
+                            {{ $product->short_description }}
+                        </p>
+                    </div>
+                    <div class="header-devider"></div>
                     @foreach ($product_attributes as $i => $product_attribute)
-                    <input type="hidden" name="attributes[{{ $i }}]" value="{{ $product_attribute->name }}">
-                    <div class="productAttributeItem">
-                        <div class="descriptionTitle">
-                            <p>{{ $product_attribute->name }}:</p>
-                        </div>
-                        <div class="descriptionBox">
+                    <div class="size-radio">
+                        <input type="hidden" name="attributes[{{ $i }}]" value="{{ $product_attribute->name }}">
+                        <p>{{ $product_attribute->name }}:</p>
+                        <div class="size-radio-button">
                             @foreach ($product_attribute->attribute_values as $attribute_value)
-                            <input class="sizeRadioBtn product_attr_val" type="radio" id="{{ $attribute_value->value }}" name="{{ $product_attribute->name }}" value="{{ $attribute_value->value }}">
-                            <label class="sizeLabel" for="{{ $attribute_value->value }}"> <span>{{ $attribute_value->value }}</span></label>
+                            <label class="square-radio">
+                                <input class="color-value product_attr_val" type="radio" name="{{ $product_attribute->name }}" value="{{ $attribute_value->value }}" />
+                                <span class="checkmark"></span>
+                                <span class="label-text">{{ $attribute_value->value }}</span>
+                            </label>
                             @endforeach
                         </div>
                     </div>
                     @endforeach
+                    
+
+                    <a href="#" class="text-decoration-none">
+                        <div class="add-to-cart cart-phn-whatsapp" type="button">
+                            অর্ডার করুন
+                        </div>
+                    </a>
+
+                    <a href="tel:01752922241" class="text-decoration-none">
+                        <div class="add-to-cart cart-phn-whatsapp" type="button">
+                            <i class="bi bi-telephone-fill"></i>
+                            <p>01752922241</p>
+                        </div>
+                    </a>
+
+                    <a href="https://wa.me/8801752922241" target="_blank" class="text-decoration-none">
+                        <div class="add-to-cart cart-phn-whatsapp" type="button">
+                            <i class="bi bi-whatsapp"></i>
+                            <p>01752922241</p>
+                        </div>
+                    </a>
 
                 </form>
-            </div>
-            <div class="proDesPriceBox">
-                @if (auth()->user())
-                <div class="desPriceBox">
-                    <h2 class="price" id="distributor_price">{{ $product->distributor_price }} BDT</h2>
-                    <div class="closePriceAndCategory">
-                        <del class="crossed-price" id="price">{{ $product->price }}</del>
-                    </div>
+                <div class="header-devider mb-2 mt-3"></div>
+                <div class="desc">
+                    <p>{!! $product->description !!}</p>
                 </div>
-                @else
-                <div class="desPriceBox">
-                    <h2 class="price" id="price">{{ $product->price }} BDT</h2>
-                </div>
-                @endif
-                <div class="desQuantity">
-                    <form class="quantityForm" role="search">
-
-                        <input class="quanInputBox" type="text" placeholder="1..">
-                        <!-- drop down -->
-                        <div class="quantityDropdown">
-                            <button class="pscBtn" type="button">
-                                PSC <span><i class="fa-solid fa-angle-down"></i></span>
-                            </button>
-
-                        </div>
-                        <!-- drop down end -->
-
-                    </form>
-                </div>
-                <div class="desBuyBtn">
-                    <button class="buy-now-button">
-                        Buy now
-                    </button>
-                </div>
-
-
-            </div>
-            <div class="full_description">
-                <h4 class="mb-2">Full Description</h4>
-                <p>{!! $product->description !!}</p>
             </div>
         </div>
     </div>
+    <!-- product-details end -->
+
+
+    {{-- Related product start --}}
     @include('client.widgets.related_products')
 @endsection
+
 @push('scripts')
     <script>
         $(document).ready(function(){
@@ -155,17 +124,31 @@
                         if(response.status){
                             var stock = '';
                             if(response.data.sku){
-                                stock = `InStock: (${response.data.sku})`;
+                                stock = `
+                                    <div class="in-stock">
+                                        <p>In Stock</p>
+                                    </div>
+                                `;
                             }else{
-                                stock = `OutOfStock: (${response.data.sku})`;
+                                stock = `
+                                    <div class="out-stock">
+                                        <p>Stock Out</p>
+                                    </div>
+                                `;
                             }
                             $('#sku').html(stock);
 
                             @if (auth()->user())
+                            
                                 $('#distributor_price').html(`${response.data.distributor_price} BDT`);
-                                $('#price').html(response.data.price);
+                                $('#price').html(`
+                                    <h3>&#2547; ${response.data.distributor_price}</h3>
+                                    <h6>
+                                        <del>(&#2547; ${response.data.price})</del>
+                                    </h6>
+                                `);
                             @else
-                                $('#price').html(`${response.data.price} BDT`);
+                                $('#price').html(`<h3>&#2547; ${response.data.price}</h3>`);
                             @endif
 
                         }
@@ -179,5 +162,14 @@
                 });
             });
         });
+        function swapImages(smallImage, bigImage) {
+            var bigImageElement = document.getElementById('big-image');
+            var thumbnailElement = event.target;
+
+            // Swap src attributes
+            var temp = bigImageElement.src;
+            bigImageElement.src = thumbnailElement.src;
+            thumbnailElement.src = temp;
+        }
     </script>
 @endpush

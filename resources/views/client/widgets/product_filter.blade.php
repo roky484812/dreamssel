@@ -1,17 +1,4 @@
 <form id="product_filter" class="sideBar filterBox">
-    <!-- language change button -->
-    <div class="switchPhoneMenu">
-        <div class="switch">
-            <input id="language-toggle-Mbl" class="check-toggle check-toggle-round-flat" type="checkbox" />
-            <label for="language-toggle-Mbl"></label>
-            <span class="on">BN</span>
-            <span class="off">EN</span>
-        </div>
-    </div>
-    <!-- end -->
-    <button class="sideBarCloseBtn" onclick="toggleSideMenuBar()">
-    <i class="fa-solid fa-xmark"></i>
-    </button>
     <div class="search mb-3">
         <h4 class="mb-2">Search</h4>
         <input type="text" name="search" value="{{ $search_product }}" id="search_filter" class="form-control" placeholder="Search Product">
@@ -49,15 +36,11 @@
                 <input type="number" class="input-max" value="7500">
             </div>
         </div>
-        <div class="applyBtnBox">
-            <button class="applyBtn">Apply</button>
-            <button class="resetBtn">Reset</button>
-        </div>
     </div>
 </form>
 <div class="overlay"></div>
 @push('scripts')
-    <script src="{{ asset('assets/client/js/priceRange.js') }}"></script>
+    <script src="{{ asset('assets/client_old/js/priceRange.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/moment/moment.js') }}"></script>
     <script>
         $(document).ready(function() {
@@ -147,82 +130,45 @@
                     success: function(response) {
                         var products = '';
                         response.data.data.forEach((product)=>{
+                            console.log(product);
+                            
                             products +=`
-                            <div class="svCard">
-                                <div class="svDesWraper">
-                                    <div class="svImgSection">
-                                        <img src="${product.thumbnail_image}" alt="pic">
-                                    </div>
-                                    <div class="svDesSection">
-                                        ${'<a href="' + "{{ route('client.product.view', '') }}/" + product.id + '" class="h3 text-decoration-none">' + str_limit(product.title, 50) + '</a>'}
-                                        <div class="svProductDetails">
-                                            <div class="productAttributeItem">
-                                                <div class="descriptionTitle">
-                                                    <p>Category:</p>
-                                                </div>
-                                                <div class="descriptionBox">
-                                                    <p>${product.category_name}</p>
-                                                </div>
-                                            </div>
-                                            <div class="productAttributeItem">
-                                                <div class="descriptionTitle">
-                                                    <p>Stock:</p>
-                                                </div>
-                                                <div class="descriptionBox">
-                                                    <p>${product.sku ? 'InStock ('+product.sku+')' : 'OutOfStock'}</p>
-                                                </div>
-                                            </div>
-                                            <div class="productAttributeItem">
-                                                <div class="descriptionTitle">
-                                                    <p>Date:</p>
-                                                </div>
-                                                <div class="descriptionBox">
-                                                    <p>${moment(product.crated_at).format('DD-MM-YYYY')}</p>
-                                                </div>
-                                            </div>
-                                            <div class="productAttributeItem">
-                                                <div class="descriptionTitle">
-                                                    <p>Country:</p>
-                                                </div>
-                                                <div class="descriptionBox">
-                                                    <p><span class="regional-tag">${product.country_code}</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="svPriceSection">
-                                    <div class="svProDesPriceBox">
-                                        <div class="desPriceBox">
-                                            @if (auth()->user())
-                                                <h2 class="price">${product.distributor_price}</h2>
-                                                <div class="closePriceAndCategory">
-                                                    <del class="crossed-price">${product.price}</del>
-                                                </div>
-                                            @else
-                                                <h2 class="price">${product.price} BDT</h2>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="product-card">
+                                    <div class="card-product-image">
+                                        <a href="{{ route('client.product.view', '') }}/${product.id}"
+                                            class="product-card-link">
+                                            <img src="${product.thumbnail_image}" alt="Product image"/>
+                                        </a>
+                                        <div class="card-discount">
+                                            @if (auth()->user()) 
+                                            <p> 
+                                                ${Math.round(((product.price - product.distributor_price) / product.price) * 100) %}
+                                            </p>
                                             @endif
                                         </div>
-                                        <div class="desQuantity">
-                                            <form class="quantityForm" role="search">
-                                                <input class="quanInputBox" type="text" placeholder="1..">
-                                                <!-- drop down -->
-                                                <div class="quantityDropdown">
-                                                    <button class="pscBtn" type="button">
-                                                    PSC <span><i class="fa-solid fa-angle-down"></i></span>
-                                                    </button>
-                                                </div>
-                                                <!-- drop down end -->
-                                            </form>
-                                        </div>
-                                        <div class="desBuyBtn">
-                                            <button class="buy-now-button">
-                                                Buy now
-                                            </button>
+                                        <div class="card-add-to-wishlist">
+                                            <span class="badge text-bg-dark">${ product.country_code }</span>
                                         </div>
                                     </div>
+                                    <div class="card-product-name">
+                                        ${str_limit(product.title, 40)}
+                                    </div>
+                                    <div class="card-price">
+                                        @if (auth()->user())
+                                            <p>&#2547; {{ $related_product->distributor_price }} </p>
+                                            <span><del>&#2547; ${ product.price }</del></span>
+                                        @else
+                                            <p>&#2547; ${ product.price } </p>
+                                        @endif
+                                    </div>
+            
+                                    <a href="#" class="card-buy-now text-decoration-none" type="button">
+                                        <p>অর্ডার করুন</p>
+                                    </a>
                                 </div>
-                            </div>`;
+                            </div>
+                            `;
                         });
                         if(products.length > 0){
                             $('#data').html(products);

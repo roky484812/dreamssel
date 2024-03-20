@@ -75,7 +75,6 @@ class ProductController extends Controller
         return view('admin.add_product', ['categories'=> $categories, 'countries'=> $countries]);
     }
     
-    
     public function AddProduct(Request $req){
         $req->validate([
             'title'=> 'required|max:255',
@@ -194,6 +193,7 @@ class ProductController extends Controller
         ->with('product_galleries')
         ->with('product_combinations')
         ->first();
+        return $product;
         $categories = Product_category::get();
         $countries = Product_country::orderBy('id', 'desc')->get();
         return view('admin.edit_product', ['categories'=> $categories, 'product'=> $product, 'countries'=> $countries]);
@@ -272,6 +272,7 @@ class ProductController extends Controller
         }
         return redirect()->back()->with('success', 'Product update successfully');
     }
+
     public function deleteProduct($id){
         if($id){
             $product = Product::whereId($id)->first();
@@ -292,6 +293,7 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Must provide a product id');
         }
     }
+
     public function deleteImage($image_path){
         if(File::exists($image_path)){
             try{
@@ -319,6 +321,7 @@ class ProductController extends Controller
             ];
         }
     }
+
     public function deleteProductImage($id){
         if($id){
             $product_image = Product_gallery::whereId($id)->first();

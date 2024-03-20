@@ -1,0 +1,10 @@
+#searchInput {
+  width: 100%;
+  padding: 10px;
+}
+
+.search-container {
+  position: absolute;
+  z-index: 99;
+  width: 600px;
+}

@@ -1,0 +1,15 @@
+.full-widh-wrapper{
+    width: 100%;
+}
+.red-to-signup{
+    display: flex;
+    justify-content: start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+
+}
+.red-to-signup p{
+    margin-bottom: 0;
+    align-items: center;
+}

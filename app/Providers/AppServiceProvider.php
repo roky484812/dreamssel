@@ -26,7 +26,9 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             if(Auth::check()){
-                $user = User::select('users.*', 'user_roles.role as role_name')->leftjoin('user_roles', 'user_roles.id', 'users.role')->where('users.id', Auth::user()->id)->first();
+                $user = User::select('users.*', 'user_roles.role as role_name')
+                ->leftjoin('user_roles', 'user_roles.id', 'users.role')
+                ->where('users.id', Auth::user()->id)->first();
                 $view->with('user', $user);
             }else{
                 $userData = ['role_name'=> null, 'name'=> null, 'profile_picture'=> null];

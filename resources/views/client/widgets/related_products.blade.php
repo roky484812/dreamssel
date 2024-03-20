@@ -1,67 +1,61 @@
-<!-- Related product section -->
-<div class="populerProductBox">
-    <div class="header-category">
-        <div class="box-pointer"></div>
-        <div class="header-category-title">
-            <h6>Related's</h6>
-        </div>
-    </div>
-
-    <div class="our-feature-product-header">
-        <h1>Related Products</h1>
-    </div>
-
-    <div class="PopulerProducts owl-carousel">
-        <!-- product card start -->
-        @foreach ($related_products as $related_product)
-        <div class="populerItem ">
-            <div class="wrapper">
-                <div class="pic-wrapper">
-                    <div class="negative-percentage">
-                        @if (auth()->user()) 
-                        <p>
-                            @php
-                                try {
-                                    echo round((($related_product->price - $related_product->distributor_price) / $related_product->price) * 100);
-                                } catch (\Throwable $th) {
-                                    echo 0;
-                                }
-                            @endphp %
-                        </p>
-                        @endif
-                    </div>
-                    <div class="product-pic">
-                        <img src="{{ asset($related_product->thumbnail_image) }}" alt="" />
-                    </div>
+    <div class="related-product-wrapper">
+        <div class="container">
+            <div class="section-devider">
+                <div class="front-box"></div>
+                <p>Related</p>
+            </div>
+            <div class="flashSaleHeader flashSaleHeaderTimer">
+                <div class="header">
+                    <h4>Related Products</h4>
                 </div>
-                <div class="title-price-wrapper">
-                    <a href="{{ route('client.product.view', $related_product->id) }}" class="text-decoration-none product-title h3">{{ Str::limit($related_product->title, 40) }}</a>
+            </div>
 
-                    <div class="rate-buy-now-wrapper">
-                        <div class="price-wrapper">
-                            @if(auth()->user())
-                            <h2 class="price">{{ $related_product->distributor_price }} ৳</h2>
-                            <div class="closePriceAndCategory">
-                                <del class="crossed-price">{{ $related_product->price }}</del>
-                                <div class="regional-tag">
-                                    <p>{{ $related_product->country_code }}</p>
+            <div class="product-list-wrapper">
+                <div class="row g-2">
+                    @foreach ($related_products as $related_product)
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="product-card">
+                                <div class="card-product-image">
+                                    <a href="{{ route('client.product.view', $related_product->id) }}"
+                                        class="product-card-link">
+                                        <img src="{{ asset($related_product->thumbnail_image) }}" alt="Product image" />
+                                    </a>
+                                    <div class="card-discount">
+                                        @if (auth()->user()) 
+                                        <p>                                                
+                                        @php
+                                            try {
+                                                echo round((($related_product->price - $related_product->distributor_price) / $related_product->price) * 100);
+                                            } catch (\Throwable $th) {
+                                                echo 0;
+                                            }
+                                        @endphp %
+                                        </p>
+                                        @endif
+                                    </div>
+                                    <div class="card-add-to-wishlist">
+                                        <span class="badge text-bg-dark">{{ $related_product->country_code }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            @else
-                            <h2 class="price">{{ $related_product->price }} ৳</h2>
-                            <div class="closePriceAndCategory">
-                                <div class="regional-tag">
-                                    <p>{{ $related_product->country_code }}</p>
+                                <div class="card-product-name">
+                                    <p>{{ \Illuminate\Support\Str::limit($related_product->title, 40, $end = '...') }}</p>
                                 </div>
+                                <div class="card-price">
+                                    @if (auth()->user())
+                                        <p>&#2547; {{ $related_product->distributor_price }} </p>
+                                        <span><del>&#2547; {{ $related_product->price }}</del></span>
+                                    @else
+                                        <p>&#2547; {{ $related_product->price }} </p>
+                                    @endif
+                                </div>
+        
+                                <a href="#" class="card-buy-now text-decoration-none" type="button">
+                                    <p>অর্ডার করুন</p>
+                                </a>
                             </div>
-                            @endif
                         </div>
-
-                        <button class="buy-now-button">Buy now</button>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-        @endforeach
     </div>
-</div>

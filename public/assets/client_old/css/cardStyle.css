@@ -1,0 +1,501 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+:root
+{
+    --primaryColor: #6A983C;
+}
+.wrapper {
+    font-family: 'Poppins', sans-serif;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid #D1D1D1;
+}
+.populerItem .wrapper
+{
+    margin: 0 10px !important;
+}
+
+.wrapper:hover {
+    cursor: pointer;
+    box-shadow: 0 1px 5px #D1D1D1;
+}
+
+.pic-wrapper {
+
+    width: 100%;
+    height: auto;
+    background-color: #F9F9F9;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.negative-percentage {
+    width: max-content;
+    margin: 0px 0 0 0px;
+    background-color: var(--primaryColor);
+    padding: 0 5px 0 5px;
+    position: absolute;
+    z-index: 1;
+    border-bottom-right-radius: 12px;
+}
+
+.negative-percentage p {
+    display: inline;
+    color: #fff;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.product-pic {
+    width: auto;
+    transform: scale(1);
+    transition: transform .5s ease, height 0.2s ease;
+}
+
+
+.product-pic img {
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 100%;
+}
+
+.product-pic:hover {
+    transform: scale(1.05);
+    transition: transform .5s ease, height 0.2s ease;
+}
+
+.product-title {
+    font-family: 'Poppins', sans-serif;
+    color: #151515;
+    font-weight: 600;
+    font-size: 18px;
+    height: 44px;
+    overflow: hidden;
+}
+
+
+
+.regional-tag {
+    width: max-content;
+    height: max-content;
+    margin: 0 0 0 12px;
+    background-color: #f9d8d8;
+    padding: 0 5px 0 5px;
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.regional-tag p {
+    display: inline;
+    color: #670000;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+.rate-buy-now-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.buy-now-button {
+    width: 80px;
+    height: 32px;
+    border: #46760A solid 2px;
+    border-radius: 8px;
+    background-color: var(--primaryColor);
+    color: #F9F9F9;
+    font-weight: bold;
+    font-size: 14px;
+    transition-duration: .5s;
+    -webkit-transition-duration: .5s;
+    -o-transition-duration: .5s;
+
+}
+
+.buy-now-button:hover {
+    background-color: #F9F9F9;
+    color: var(--primaryColor);
+    transition-duration: .5s;
+    -webkit-transition-duration: .5s;
+    -o-transition-duration: .5s;
+}
+
+.crossed-price {
+    display: inline;
+    color: #A9A9A9;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+/* farhan end */
+.price
+{
+    font-size: 18px;
+    font-weight: bold;
+}
+.closePriceAndCategory
+{
+    display: flex;
+    justify-content: space-between;
+}
+.allProducts
+{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 30px auto 0px auto;
+}
+.stock
+{
+    width: max-content;
+    margin:0 12px 0 12px;
+    background-color: #F4F8EC;
+    padding: 0 10px 0 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    border-radius: 5px;
+}
+.stock p {
+    display: inline;
+    color: var(--primaryColor);
+    font-weight: 600;
+}
+.title-price-wrapper
+{
+    padding: 0 10px 10px 10px;
+}
+/* responsive start */
+/* 412 */
+@media screen and (max-width: 650px)
+{
+    
+    .product-title 
+    {
+        font-weight: 500;
+        font-size: 14px;
+        height: 35px;
+        overflow: hidden;
+    }
+    .price
+    {
+        font-size: 15px;
+    }
+    .crossed-price
+    {
+        font-size: 13px;
+    }
+    .regional-tag
+    {
+        height: 17px;
+        padding: 2px 2px;
+    }
+    .regional-tag p
+    {
+        font-size: 11px;
+        display: block;
+    }
+    .buy-now-button
+    {
+        width: 55px;
+        height: 27px;
+        border: #46760A solid 1px;
+        border-radius: 6px;
+        font-size: 11px;
+    }
+    .negative-percentage
+    {
+        padding: 0px 4px 0 4px;
+    }
+    .negative-percentage p
+    {
+        font-size: 13px;
+    }
+    .stock
+    {
+        margin: 5px 0 0 5px;
+        padding: 0px 5px 0 5px;
+    }
+    .stock p
+    {
+        font-size: 13px;
+    }
+}
+/* 365 */
+@media screen and (max-width: 577px)
+{
+    .title-price-wrapper
+    {
+        padding: 5px;
+    }
+    .product-title 
+    {
+        font-weight: 500;
+        font-size: 14px;
+        height: 35px;
+        overflow: hidden;
+    }
+    .price
+    {
+        font-size: 15px;
+    }
+    .crossed-price
+    {
+        font-size: 13px;
+    }
+    .regional-tag
+    {
+        height: 17px;
+        padding: 2px 2px;
+    }
+    .regional-tag p
+    {
+        font-size: 11px;
+        display: block;
+    }
+    .buy-now-button
+    {
+        width: 55px;
+        height: 27px;
+        border: #46760A solid 1px;
+        border-radius: 6px;
+        font-size: 11px;
+    }
+    .negative-percentage
+    {
+        padding: 0px 4px 0 4px;
+    }
+    .negative-percentage p
+    {
+        font-size: 13px;
+    }
+    .stock
+    {
+        margin: 5px 0 0 5px;
+        padding: 0px 5px 0 5px;
+    }
+    .stock p
+    {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 517px)
+{
+    
+    .product-title 
+    {
+        font-weight: 500;
+        font-size: 14px;
+        height: 35px;
+        overflow: hidden;
+    }
+    .price
+    {
+        font-size: 15px;
+    }
+    .crossed-price
+    {
+        font-size: 13px;
+    }
+    .regional-tag
+    {
+        height: 17px;
+        padding: 2px 2px;
+    }
+    .regional-tag p
+    {
+        font-size: 11px;
+        display: block;
+    }
+    .buy-now-button
+    {
+        width: 55px;
+        height: 27px;
+        border: #46760A solid 1px;
+        border-radius: 6px;
+        font-size: 11px;
+    }
+    .negative-percentage
+    {
+        padding: 0px 4px 0 4px;
+    }
+    .negative-percentage p
+    {
+        font-size: 13px;
+    }
+    .stock
+    {
+        margin: 5px 0 0 5px;
+        padding: 0px 5px 0 5px;
+    }
+    .stock p
+    {
+        font-size: 13px;
+    }
+}
+
+
+
+@media screen and (max-width: 365px)
+{
+    
+    .title-price-wrapper
+    {
+        padding: 5px;
+    }
+    .product-title 
+    {
+        font-weight: 500;
+        font-size: 14px;
+        height: 35px;
+        overflow: hidden;
+    }
+    .price
+    {
+        font-size: 15px;
+    }
+    .crossed-price
+    {
+        font-size: 13px;
+    }
+    .regional-tag
+    {
+        height: 17px;
+        padding: 2px 2px;
+    }
+    .regional-tag p
+    {
+        font-size: 11px;
+        display: block;
+    }
+    .buy-now-button
+    {
+        width: 55px;
+        height: 27px;
+        border: #46760A solid 1px;
+        border-radius: 6px;
+        font-size: 11px;
+    }
+    .negative-percentage
+    {
+        padding: 0px 4px 0 4px;
+    }
+    .negative-percentage p
+    {
+        font-size: 13px;
+    }
+    .stock
+    {
+        margin: 5px 0 0 5px;
+        padding: 0px 5px 0 5px;
+    }
+    .stock p
+    {
+        font-size: 13px;
+    }
+}
+
+/* for populer product */
+/* @media screen and (max-width: 700px)
+{
+    .PopulerProducts .wrapper
+    {
+        width: 155px;
+    }
+    .PopulerProducts .pic-wrapper
+    {
+        height: 155px;
+    }
+    .PopulerProducts .product-pic
+    {
+        height: 155px;
+    }
+    .PopulerProducts.product-title 
+    {
+        font-weight: 500;
+        font-size: 14px;
+        height: 35px;
+        overflow: hidden;
+    }
+    .PopulerProducts .price
+    {
+        font-size: 15px;
+    }
+    .PopulerProducts .crossed-price
+    {
+        font-size: 13px;
+    }
+    .PopulerProducts .regional-tag
+    {
+        height: 17px;
+        padding: 2px 2px;
+    }
+    .PopulerProducts .regional-tag p
+    {
+        font-size: 11px;
+        display: block;
+    }
+    .PopulerProducts .buy-now-button
+    {
+        width: 55px;
+        height: 27px;
+        border: #46760A solid 1px;
+        border-radius: 6px;
+        font-size: 11px;
+    }
+    .PopulerProducts .negative-percentage
+    {
+        padding: 0px 5px 0 5px;
+    }
+    .PopulerProducts .negative-percentage p
+    {
+        font-size: 13px;
+    }
+    .PopulerProducts .stock
+    {
+        margin: 5px 0 0 5px;
+        padding: 0px 5px 0 5px;
+    }
+    .PopulerProducts .stock p
+    {
+        font-size: 13px;
+    }
+} */
+@media (max-width: 576px)
+{
+    .col-xsm-6 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+}
+
+/* @media screen and (max-width: 420px)
+{
+    .PopulerProducts .wrapper
+    {
+        width: 126px;
+    }
+    .PopulerProducts .pic-wrapper
+    {
+        height: 125px;
+    }
+    .PopulerProducts .product-pic
+    {
+        height: 125px;
+    }
+} */
