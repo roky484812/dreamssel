@@ -9,6 +9,7 @@ use App\Models\Product_category;
 use App\Models\Product_combination;
 use App\Models\Product_sub_category;
 use App\Models\Product_gallery;
+use App\Models\Carousal_gallery;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -26,10 +27,12 @@ class ProductController extends Controller
         ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'product_countries.name as country_name', 'product_countries.code as country_code', 'products.view_count')
         ->orderBy('products.view_count', 'desc')
         ->get();
+        $carousels = Carousal_gallery::limit(10)->latest()->get();
         return view('client.index', [
             'products'=> $products,
             'categories'=> $categories,
-            'popular_products'=> $popular_products
+            'popular_products'=> $popular_products,
+            'carousels'=> $carousels
         ]);
     }
 

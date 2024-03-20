@@ -6,6 +6,7 @@ use App\Http\Controllers\Client\AnnouncementController as ClientAnnouncementCont
 use App\Http\Controllers\Admin\Dashboard as AdminDashboard;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
 use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\AuthController;
@@ -72,6 +73,11 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], f
         Route::put('/product/subcategory/update', 'updateSubcategory')->name('admin.product.subcategory.update');
         Route::delete('/product/subcategory/delete', 'deleteSubcategory')->name('admin.product.subcategory.delete');
         Route::get('/product/subcategory/{category_id?}', 'subcategory_by_category')->name('admin.product.subcategory.category');
+    });
+    Route::controller(ResourceController::class)->group(function(){
+        Route::get('/resources/carousal', 'index')->name('admin.resource.carousal');
+        Route::post('/resources/carousal/add', 'CarouselImageUploader')->name('admin.resource.carousal.add');
+        Route::delete('/resources/carousal/delete/{id}', 'deleteCarouselImage')->name('admin.carousel.deleteImage');
     });
 });
 

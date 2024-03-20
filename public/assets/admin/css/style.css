@@ -50427,12 +50427,12 @@ body.dark-mode.body-style1 footer.footer {
 }
 .edit-item{
     position: relative;
-    width: max-content;
+    /* width: max-content; */
     justify-content: space-evenly;
 
 }
 .edit-item img{
-    width: 100px;
+    /* width: 100px; */
 }
 .delete-icon{
     width: 100%;

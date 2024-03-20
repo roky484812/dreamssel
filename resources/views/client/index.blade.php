@@ -29,9 +29,11 @@
             </div>
             <div class="carouselBox">
                 <div class="topCarousel owl-carousel owl-theme">
+                    @foreach ($carousels as $carousel)
                     <div class="topCarouselItem">
-                        <img src="{{ asset('assets/client_old/images/product2.png') }}" alt="">
+                        <img src="{{ asset($carousel->image) }}" alt="">
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
