@@ -139,4 +139,19 @@ class ProductController extends Controller
             'message'=> 'Successfully searched.'
         ]);
     }
+
+    public function shopping_products(){
+        $products = Product::where('status', 1)
+        ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'product_countries.name as country_name', 'product_countries.code as country_code')
+        ->paginate(16);
+        return view('client.shop', ['products'=> $products]);
+    }
+
+    public function product_of_subcategory($id){
+        $products = Product::where([
+            'products.status'=> 1,
+            'products.sub_category_id'=> $id
+        ])->paginate(16);
+    }
 }

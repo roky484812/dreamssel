@@ -89,7 +89,7 @@
                             <div class="card-product-image">
                                 <a href="{{ route('client.product.view', $product->id) }}"
                                     class="product-card-link">
-                                    <img src="{{ $product->thumbnail_image }}" alt="Product image" />
+                                    <img src="{{ asset($product->thumbnail_image) }}" alt="Product image" />
                                 </a>
                                 <div class="card-discount">
                                     @if (auth()->user()) 

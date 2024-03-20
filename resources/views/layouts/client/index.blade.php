@@ -98,7 +98,7 @@
                     <a class="drawer-nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="drawer-nav-link" href="#">Shop Now</a>
+                    <a class="drawer-nav-link" href="{{ route('client.shopping_products') }}">Shop Now</a>
                 </li>
                 <div class="header-devider"></div>
                 <li class="nav-item">
@@ -136,7 +136,7 @@
 
                     <div class="menus">
                         <a href="{{ route('client.index') }}">Home</a>
-                        <a href="#">Shop now</a>
+                        <a href="{{ route('client.shopping_products') }}">Shop now</a>
                         <a href="#">About</a>
                         @if (!Auth::check())
                             <a class="" href="{{ route('login') }}">Login</a>

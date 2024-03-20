@@ -14,7 +14,7 @@
                 <div class="secondary-images">
                     @foreach ($product_galleries as $product_gallery)
                         <div class="image">
-                            <img onclick="swapImages('{{ $product_gallery->image }}','{{ $product->thumbnail_image }}')" src="{{ asset($product_gallery->image) }}" alt="Product gallery images" />
+                            <img onclick="swapImages('{{ asset($product_gallery->image) }}','{{ asset($product->thumbnail_image) }}')" src="{{ asset($product_gallery->image) }}" alt="Product gallery images" />
                         </div>
                     @endforeach
                 </div>
