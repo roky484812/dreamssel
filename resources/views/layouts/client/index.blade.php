@@ -118,7 +118,7 @@
                 <p class="status-offer">
                     Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
                 </p>
-                <a class="shop-now-link" href="">ShopNow</a>
+                <a class="shop-now-link" href="{{ route('client.shopping_products') }}">ShopNow</a>
             </div>
         </div>
 
@@ -137,7 +137,7 @@
 
                     <div class="menus">
                         <a href="{{ route('client.index') }}">Home</a>
-                        <a href="#">Shop now</a>
+                        <a href="{{ route('client.shopping_products') }}">Shop now</a>
                         <a href="#">About</a>
                         <a href="{{ route('client.announcement.list') }}">Announcements</a>
                         @if (!Auth::check())

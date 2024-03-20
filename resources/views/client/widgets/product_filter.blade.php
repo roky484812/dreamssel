@@ -143,7 +143,7 @@
                                         <div class="card-discount">
                                             @if (auth()->user()) 
                                             <p> 
-                                                ${Math.round(((product.price - product.distributor_price) / product.price) * 100) %}
+                                                ${Math.round(((product.price - product.distributor_price) / product.price) * 100)+'%'}
                                             </p>
                                             @endif
                                         </div>
@@ -156,7 +156,7 @@
                                     </div>
                                     <div class="card-price">
                                         @if (auth()->user())
-                                            <p>&#2547; {{ $related_product->distributor_price }} </p>
+                                            <p>&#2547; ${ product.distributor_price } </p>
                                             <span><del>&#2547; ${ product.price }</del></span>
                                         @else
                                             <p>&#2547; ${ product.price } </p>
