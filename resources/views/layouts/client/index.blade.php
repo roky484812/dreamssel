@@ -117,7 +117,7 @@
                 <p class="status-offer">
                     Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
                 </p>
-                <a class="shop-now-link" href="">ShopNow</a>
+                <a class="shop-now-link" href="{{ route('client.shopping_products') }}">ShopNow</a>
             </div>
         </div>
 

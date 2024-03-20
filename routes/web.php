@@ -94,6 +94,7 @@ Route::controller(ClientProductController::class)->group(function(){
     Route::get('/search', 'product_search_page')->name('client.product.search_page');
     Route::get('/product/search', 'search_products')->name('client.product.search');
     Route::get('/product/shop', 'shopping_products')->name('client.shopping_products');
+    Route::get('/product/subcategory/{id}', 'product_of_subcategory')->name('client.product.subcategory');
     Route::get('/product/{id}', 'product_view')->name('client.product.view');
 });
 

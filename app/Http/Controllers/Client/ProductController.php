@@ -152,6 +152,11 @@ class ProductController extends Controller
         $products = Product::where([
             'products.status'=> 1,
             'products.sub_category_id'=> $id
-        ])->paginate(16);
+        ])->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'product_countries.name as country_name', 'product_countries.code as country_code')
+        ->paginate(16);
+        $category = Product_sub_category::rightjoin('product_categories', 'product_categories.id', 'product_sub_categories.category_id')
+        ->where('product_sub_categories.id', $id)->first();
+        return view('client.subcategory_product', ['products'=> $products, 'category'=> $category]);
     }
 }

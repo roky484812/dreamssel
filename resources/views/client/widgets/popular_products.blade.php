@@ -62,7 +62,7 @@
             </div>
         </div>
     </div>
-    <div class="viewAllBtnSection">
+    {{-- <div class="viewAllBtnSection">
         <button class="viewAllProductBtn">View All Products</button>
-    </div>
+    </div> --}}
 </div>

@@ -18,7 +18,7 @@
                             </a>
                             <ul>
                                 @foreach ($category->sub_category as $sub_category)
-                                    <li><a>{{ $sub_category->sub_category_name }}</a></li>
+                                    <li><a href="{{ route('client.product.subcategory', $sub_category->id) }}">{{ $sub_category->sub_category_name }}</a></li>
                                 @endforeach
 
                                 {{-- {{ route('your.route.name', ['subcategory_id' => $subcategory->id]) }} --}}
@@ -44,13 +44,10 @@
     @if(isset($featured_image))
     <div class="container">
         <div class="bottomBannerBox">
-            <div class="bannerBox ">
-               
-                    
+            <div class="bannerBox ">                
                 
-                    <img src="{{$featured_image->image}}" alt="" />
+                <img src="{{$featured_image->image}}" alt="" />
 
-                
                 <div class="bannerContent">
                     <div class="bannerContentText">
                         <button class="bannerBtn">
@@ -131,7 +128,9 @@
             </div>
         </div>
         <div class="viewAllBtnSection">
-            <button class="viewAllProductBtn">View All Products</button>
+            <a href="{{ route('client.shopping_products') }}">
+                <button class="viewAllProductBtn">View All Products</button>
+            </a>
         </div>
     </div>
 
