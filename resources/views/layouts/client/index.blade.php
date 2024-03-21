@@ -97,7 +97,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="drawer-nav-link" href="#">About</a>
+                    <a class="drawer-nav-link" href="{{ route('about') }}">About</a>
                 </li>
                 <li class="nav-item">
                     <a class="drawer-nav-link" href="{{ route('client.shopping_products') }}">Shop Now</a>
@@ -142,7 +142,7 @@
                     <div class="menus">
                         <a href="{{ route('client.index') }}">Home</a>
                         <a href="{{ route('client.shopping_products') }}">Shop now</a>
-                        <a href="#">About</a>
+                        <a href="{{ route('about') }}">About</a>
                         <a href="{{ route('client.announcement.list') }}">Announcements</a>
                         @if (!Auth::check())
                             <a class="" href="{{ route('login') }}">Login</a>

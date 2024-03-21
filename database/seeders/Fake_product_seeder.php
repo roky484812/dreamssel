@@ -26,7 +26,7 @@ class Fake_product_seeder extends Seeder
             $product->category_id = $faker->numberBetween(1, 3);
             $product->sub_category_id = $faker->numberBetween(1, 3);
             $product->country_id = $faker->numberBetween(1, 3);
-            $product->author_id = $faker->numberBetween(304,403);
+            $product->author_id = $faker->numberBetween(1,100);
             $product->product_code = $faker->unique->randomNumber(5, true);
             $product->status = $faker->randomElement([1, 0]);
             $product->save();

@@ -351,7 +351,6 @@ class ProductController extends Controller
                     'message'=> 'Image not found'
                 ]);
             }
-            return $product_image;
         }else{
             return response()->json([
                 'status'=> false,

@@ -1,0 +1,42 @@
+:root {
+    --primary-1-color: #ffffff;
+    --primary-2-color: #363738;
+    --primary-3-color: #000000;
+  
+    --secondary-1-color: #db4444;
+    --secondary-2-color: #f5f5f5;
+    --secondary-3-color: #fefaf1;
+    --text-light-color: #fafafa;
+    --text-gray-color: #7d8184;
+    --text-dark-color: #000000;
+    --box-border-color: #0000004D;
+  }
+.thankingHeading
+{
+    text-align: center;
+    margin: 50px 0;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 50px 20px;
+}
+.thankingHeading h1
+{
+    color: var(--secondary-1-color);
+}
+.thankingHeading p span
+{
+    color: var(--secondary-1-color);
+}
+.tankingBtnBox
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+.tankingBtnBox button
+{
+    height: auto;
+    padding: 4px 6px;
+    margin-top: 10px;
+}

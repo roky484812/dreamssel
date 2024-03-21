@@ -405,22 +405,17 @@
     background-color: var(--secondary-1-color);
     border-color: var(--secondary-1-color);
   }
-  .page-link:focus{
-    box-shadow:none !important;
-    color: var(--secondary-1-color);
-  }
-  .page-link:hover {
-    color: var(--secondary-1-color);
-  }
-  .disabled {
-    pointer-events: none;
-    opacity: 0.4;
-  }
-  .card-product-name a{
-    text-decoration: none;
-    color: #000000;
-    display: inline-block;
-  }
+.page-link:focus{
+  box-shadow:none !important;
+  color: var(--secondary-1-color);
+}
+.page-link:hover {
+  color: var(--secondary-1-color);
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
 /* responsive start here */
 @media screen and (max-width: 768px)
 {

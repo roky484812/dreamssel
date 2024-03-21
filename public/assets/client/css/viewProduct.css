@@ -180,9 +180,9 @@ body {
 .square-radio {
   position: relative;
   display: inline-block;
-  min-width: 32px;
   padding-inline: 5px;
-  min-height: 32px;
+  min-width: 32px;
+  height: 32px;
   border: 1px solid var(--text-gray-color);
   border-radius: 4px;
   margin-right: 10px;
@@ -263,8 +263,8 @@ body {
 .quantity button {
   position: relative;
   display: inline-block;
-  width: 32px;
-  height: 32px;
+  width: 45px;
+
   border-radius: 4px;
   background-color: var(--secondary-1-color);
   font-size: 24px;
@@ -279,6 +279,7 @@ body {
   background-color: var(--secondary-2-color);
   color: var(--text-dark-color);
   border-right: 1px solid var(--text-gray-color);
+  padding: 3px;
 }
 .quantity input {
   margin-top: 0;
@@ -290,7 +291,7 @@ body {
 }
 .buy-now-button {
   width: max-content;
-  height: 32px;
+
   border-radius: 4px;
   background-color: var(--secondary-1-color);
   font-size: 20px;
@@ -300,6 +301,7 @@ body {
   color: var(--text-light-color);
   border: none;
   margin-right: 10px;
+  padding: 5px;
 }
 .fav-icon {
   position: relative;
@@ -340,7 +342,7 @@ body {
 .commonBtn
 {
   width: max-content;
-  height: 32px;
+
   border-radius: 4px;
   background-color: var(--secondary-1-color);
   font-size: 20px;
@@ -348,6 +350,7 @@ body {
   color: var(--text-light-color);
   border: none;
   margin-right: 10px;
+  padding: 5px;
 }
 .reviewItem
 {

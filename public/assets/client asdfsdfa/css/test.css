@@ -1,0 +1,31 @@
+:root {
+  --primary-1-color: #ffffff;
+  --primary-2-color: #363738;
+  --primary-3-color: #000000;
+
+  --secondary-1-color: #db4444;
+  --secondary-2-color: #f5f5f5;
+  --secondary-3-color: #fefaf1;
+  --text-light-color: #fafafa;
+  --text-gray-color: #7d8184;
+  --text-dark-color: #000000;
+}
+.signup-img-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.left-img {
+  width: 48%;
+}
+.signup {
+  width: 45%;
+}
+.left-img img {
+  width: 100%;
+  height: auto;
+}
+.sign-up-wrapper {
+  width: 100%;
+}

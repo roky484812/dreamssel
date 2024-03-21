@@ -28,6 +28,8 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->boolean('is_variational')->default(false);
             $table->boolean('status')->default(false);
+            $table->integer('rating')->nullable();
+            $table->integer('rating_count')->default(0);
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('product_categories');

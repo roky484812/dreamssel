@@ -352,8 +352,12 @@ body {
     .menus-brand-logo-wrapper {
         width: 100%;
     }
+    .topSearchForm
+    {
+        width: 100%;
+    }
     .search-input-field {
-        width: 80%;
+        width: 90%;
     }
     .brand-logo-line {
         display: flex;

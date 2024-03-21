@@ -372,22 +372,37 @@
                                 </ul>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item @if ($active == 'carousal') active @endif"
-                                    data-bs-toggle="slide" href="javascript:void(0)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" class="side-menu__icon">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                                    <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                        <polyline points="13 2 13 9 20 9"></polyline>
                                     </svg>
                                     <span class="side-menu__label">Resources</span><i
                                         class="angle fe fe-chevron-right"></i></a>
-                                <ul class="slide-menu" style="display: none;">
-                                    <li>
-                                        <a class="slide-item @if ($active == 'carousal') active @endif"
-                                            href="{{ route('admin.resource.carousal') }}">
-                                            <span>Carousal Images</span>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1">
+                                        <a href="javascript:void(0)"></a>Submenus
+                                    </li>
+                                    <li class="sub-slide">
+                                        <a class="sub-side-menu__item slide-item" href="{{route('admin.carousel.view')}}">
+                                            <span class="sub-side-menu__label">Top Carousel</span>
                                         </a>
+                                    </li>
+                                    <li class="sub-slide">
+                                        <a class="sub-side-menu__item slide-item" data-bs-toggle="sub-slide"
+                                            href="{{route('admin.feature.view')}}">
+                                            <span class="sub-side-menu__label">Feature Imaged</span>
+                                        </a>
+
+                                    </li>
+                                    <li class="sub-slide">
+                                        <a class="sub-side-menu__item slide-item" data-bs-toggle="sub-slide"
+                                            href="{{route('admin.newAraival.view')}}">
+                                            <span class="sub-side-menu__label">New Arrival</span>
+                                        </a>
+
                                     </li>
                                 </ul>
                             </li>

@@ -9,7 +9,7 @@ use App\Models\Product_category;
 use App\Models\Product_combination;
 use App\Models\Product_sub_category;
 use App\Models\Product_gallery;
-use App\Models\Carousal_gallery;
+use App\Models\Carousel_gallery;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -32,7 +32,7 @@ class ProductController extends Controller
         ->limit(8)->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
         ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'product_countries.name as country_name', 'product_countries.code as country_code', 'products.view_count')
         ->get();
-        $carousels = Carousal_gallery::limit(5)->latest()->get();
+        $carousels = Carousel_gallery::limit(5)->latest()->get();
         return view('client.index', [
             'products'=> $products,
             'categories'=> $categories,
@@ -41,6 +41,7 @@ class ProductController extends Controller
             'discount_products'=> $discount_products
         ]);
     }
+
 
     public function getTime($time){
         return Carbon::parse($time)->format('d-m-Y');

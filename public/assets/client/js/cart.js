@@ -71,21 +71,5 @@ $('#apply-coupon').click(function () {
 
 // Custom increase and decrease functionality for quantity inputs
 $('.product-quantity .quantity-button').click(function () {
-  var input = $(this).siblings('input[type="number"]');
-  var oldValue = parseInt(input.val());
-  var newValue;
-
-  if ($(this).hasClass('decrease')) {
-    newValue = oldValue - 1;
-  } else {
-    newValue = oldValue + 1;
-  }
-
-  if (newValue < parseInt(input.attr('min'))) {
-    newValue = parseInt(input.attr('min'));
-  } else if (newValue > parseInt(input.attr('max'))) {
-    newValue = parseInt(input.attr('max'));
-  }
-
-  input.val(newValue).change();
+    // No code here to change input value
 });

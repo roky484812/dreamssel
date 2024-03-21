@@ -4,12 +4,15 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Client\AnnouncementController as ClientAnnouncementController;
 use App\Http\Controllers\Admin\Dashboard as AdminDashboard;
+use App\Http\Controllers\Admin\LandingImageController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
+use App\Http\Controllers\Client\HomePageController as ClientHomePageController;
 use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Client\StaticPageController;
 use App\Http\Controllers\Distributor\Dashboard as DistDashboard;
 use App\Http\Controllers\Editor\Dashboard as EditorDashboard;
 use App\Http\Controllers\EditProfileController;
@@ -27,6 +30,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], function(){
+    Route::controller(LandingImageController::class)->group(function () {
+        Route::get('carousel/upload/view', 'carouselBladeViewer')->name('admin.carousel.view');
+        Route::get('featured/upload/view', 'featuredBladeViewer')->name('admin.feature.view');
+        Route::get('new-araival/upload/view', 'newAraivalBladeViewer')->name('admin.newAraival.view');
+        Route::post('/carousel/upload/images', 'CarouselImageUploader')->name('admin.carousel.images.upload');
+        Route::post('/featured/upload/images', 'featuredImageUploader')->name('admin.featured.image.upload');
+        Route::post('/new-araival/upload/images', 'newAraivalImageUploader')->name('admin.new_araival.image.upload');
+        Route::delete('/carousel/image/{id?}', 'deleteCarouselImage')->name('admin.carousel.deleteImage');
+        Route::delete('/featured/image/{id?}', 'deleteFeaturedImage')->name('admin.featured.deleteImage');
+        Route::delete('/new_araival/image/{id?}', 'deleteNewAraivalImage')->name('admin.new_araival.deleteImage');
+    });
     Route::controller(AuthController::class)->group(function(){
         Route::get('/logout', 'logout')->name('admin.logout');
         Route::post('/profile/update/delete', 'delete_profile')->name('admin.profile.delete');
@@ -74,11 +88,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], f
         Route::delete('/product/subcategory/delete', 'deleteSubcategory')->name('admin.product.subcategory.delete');
         Route::get('/product/subcategory/{category_id?}', 'subcategory_by_category')->name('admin.product.subcategory.category');
     });
-    Route::controller(ResourceController::class)->group(function(){
-        Route::get('/resources/carousal', 'index')->name('admin.resource.carousal');
-        Route::post('/resources/carousal/add', 'CarouselImageUploader')->name('admin.resource.carousal.add');
-        Route::delete('/resources/carousal/delete/{id}', 'deleteCarouselImage')->name('admin.carousel.deleteImage');
-    });
+
 });
 
 Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], function(){
@@ -94,21 +104,54 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
     });
 });
 
-Route::controller(ClientProductController::class)->group(function(){
-    Route::get('/', 'index')->name('client.index');
-    Route::get('/product/combinations', 'product_combinations')->name('client.product.combination');
-    Route::get('/product/sub_category_filter', 'product_subcategory_filter')->name('client.product.sub_category_filter');
-    Route::get('/search', 'product_search_page')->name('client.product.search_page');
-    Route::get('/product/search', 'search_products')->name('client.product.search');
-    Route::get('/product/shop', 'shopping_products')->name('client.shopping_products');
-    Route::get('/product/subcategory/{id}', 'product_of_subcategory')->name('client.product.subcategory');
-    Route::get('/product/{id}', 'product_view')->name('client.product.view');
+// Route::controller(ClientProductController::class)->group(function(){
+//     Route::get('/', 'index')->name('client.index');
+//     Route::get('/product/combinations', 'product_combinations')->name('client.product.combination');
+//     Route::get('/product/sub_category_filter', 'product_subcategory_filter')->name('client.product.sub_category_filter');
+//     Route::get('/search', 'product_search_page')->name('client.product.search_page');
+//     Route::get('/product/search', 'search_products')->name('client.product.search');
+//     Route::get('/product/shop', 'shopping_products')->name('client.shopping_products');
+//     Route::get('/product/subcategory/{id}', 'product_of_subcategory')->name('client.product.subcategory');
+//     Route::get('/product/{id}', 'product_view')->name('client.product.view');
+// });
+
+
+Route::controller(ClientHomePageController::class)->group(function () {
+    Route::get('/about', 'aboutViewer')->name('home.abouts');
+    Route::get('/', 'homeViewer')->name('home');
+    Route::get('/thankyou', 'thankyouViewer')->name('home.thankyou');
+    Route::get('/cart', 'cartViewer')->name('home.cart');
+    Route::get('/signUp-page', 'signUpViewer')->name('home.signUpPage');
+    Route::get('/signIn-page', 'signInViewer')->name('home.signInPage');
+    Route::get('/account-page', 'accountViewer')->name('home.accountPage');
+    Route::get('/otpv', 'emailOTPViewer')->name('home.otpv');
+    Route::get('/product-viewer/{id}/', 'productViewer')->name('home.productPage');
+    Route::get('/shop-viewer', 'shopViewer')->name('home.shopPage');
+    Route::get('/fav-viewer', 'viewFromFavList')->name('home.favPage');
+    Route::get('/add/fav-list/{product_id}/', 'addToFavList')->name('home.addToFavList');
+
+    Route::get('/sub-category/view/{category_name}/{sub_category_id}/{sub_category_name}', 'viewFromSubCategory')->name('home.subCategoryView');
+    Route::delete('/remove-from-fav/{fav_list_id}/', 'removeFromFavList')->name('removeFromFav');
+
+    Route::get('/place-order/view/{product_id}/', 'placeOrderViewer')->name('home.placeOrderView');
+    Route::get('/place-order/view/{product_id}/{color_code}/{size_value}', 'placeOrderViewer')->name('home.placeOrderViewFromViewProduct');
+    Route::get('/place-orders/view/', 'placeOrderViewerFromCart')->name('home.placeOrdersView');
+    Route::post('/place-order', 'placeOrder')->name('home.placeOrder');
+    Route::post('/place-orders', 'placeOrders')->name('home.placeOrders');
+    Route::get('/pending/order', 'pendingOrderView')->name('home.pendingOrder');
+    Route::get('/cancelled/order', 'cancelledOrderView')->name('home.cancelledOrder');
+    Route::get('/confirmed/order', 'confirmedOrderView')->name('home.confirmedOrder');
+    Route::post('/send/review', 'reviewInput')->name('home.sendReview');
+    Route::get('/search/result', 'search')->name('home.searchView');
+    Route::post('/update/cart/quantity', 'updateCartQuantity')->name('home.updateCartQuantity');
+    Route::get('/product/combination', 'product_combinations')->name('client.product.combination');
 });
 
 Route::controller(ClientAnnouncementController::class)->group(function(){
     Route::get('/accouncement', 'announcementList')->name('client.announcement.list');
     Route::get('/accouncement/{id}', 'announcement_view')->name('client.announcement.view');
 });
+
 
 Route::group(['middleware'=> ['web', 'type.distributor']], function(){
     Route::controller(AuthController::class)->group(function(){
