@@ -107,6 +107,7 @@ Route::controller(ClientProductController::class)->group(function(){
 
 Route::controller(ClientAnnouncementController::class)->group(function(){
     Route::get('/accouncement', 'announcementList')->name('client.announcement.list');
+    Route::get('/accouncement/{id}', 'announcement_view')->name('client.announcement.view');
 });
 
 Route::group(['middleware'=> ['web', 'type.distributor']], function(){

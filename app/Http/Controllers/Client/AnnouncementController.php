@@ -12,4 +12,8 @@ class AnnouncementController extends Controller
         $announcements = Announcement::latest()->paginate(20);
         return view('client.announcement', ['announcements'=> $announcements]);
     }
+    public function announcement_view($id){
+        $announcement = Announcement::whereId($id)->first();
+        return view('client.announcement_view', ['announcement'=> $announcement]);
+    }
 }

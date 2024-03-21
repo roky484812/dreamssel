@@ -72,8 +72,7 @@
     <script src="{{ asset('assets/admin/plugins/image-uploader/dist/image-uploader.min.js') }}"></script>
     <script>
         $('#multiple_image').imageUploader({
-            extensions: ['.jpg', '.jpeg', '.png', ],
-            maxFiles: 5
+            extensions: ['.jpg', '.jpeg', '.png', ]
         });
         $(document).on('click', '.del-image', function(){
                 var id = $(this).data('image_id');

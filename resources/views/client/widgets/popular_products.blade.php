@@ -14,8 +14,9 @@
     </div>
     <div class="carouselSection">
         <div class="product-list-wrapper">
+            @if (count($popular_products))
             <div class="flashSaleCarousel owl-carousel owl-theme">
-
+                
                 @foreach ($popular_products as $popular_product)
                     <div class="product-card">
                         <div class="card-product-image">
@@ -60,6 +61,11 @@
                 @endforeach
 
             </div>
+            @else
+            <div>
+                <h3 class="text-center text-muted">No Products!</h3>
+            </div>
+            @endif
         </div>
     </div>
     {{-- <div class="viewAllBtnSection">
