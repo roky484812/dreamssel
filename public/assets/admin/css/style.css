@@ -50457,4 +50457,8 @@ body.dark-mode.body-style1 footer.footer {
     background-color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
 /*# sourceMappingURL=style.css.map */

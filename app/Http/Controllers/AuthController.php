@@ -22,7 +22,6 @@ class AuthController extends Controller
             $route = $this->redirectDash();
             return redirect($route);
         }
-
         return view('login');
     }
 
@@ -193,7 +192,7 @@ class AuthController extends Controller
         if(Auth::user() && Auth::user()->role == 1 ||  Auth::user()->role == 2){
             $redirect = route('admin.dashboard');
         }else{
-            $redirect = route('dist.dashboard');
+            $redirect = route('client.index');
         }
         return $redirect;
     }

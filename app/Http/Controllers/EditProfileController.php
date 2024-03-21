@@ -175,4 +175,29 @@ class EditProfileController extends Controller
             return redirect()->back()->with('error', 'OTP did not matched.');
         }
     }
+
+    public function user_meta($user_id){
+        $user_metas = profile_meta::where('user_id', $user_id)->get();
+        $user = [];
+        foreach($user_metas as $user_meta){
+            $user[$user_meta['key']] = $user_meta['value'];
+        }
+        if(empty($user['post_code'])){
+            $user['post_code'] = '';
+        }
+        if(empty($user['address'])){
+            $user['address'] = '';
+        }
+        if(empty($user['city'])){
+            $user['city'] = '';
+        }
+        if(empty($user['phone'])){
+            $user['phone'] = '';
+        }
+        return $user;
+    }
+    public function edit_distributor_profile(){
+        $user_meta = (object)$this->user_meta(Auth::user()->id);
+        return view('client.profile', compact('user_meta'));
+    }
 }

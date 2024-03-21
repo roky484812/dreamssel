@@ -62,7 +62,11 @@
         </div>
         <div class="drawer-body">
             <div class="shop-access-wrapper nav-shop-access-hidden">
-                <a href="#"><i class="fa-regular fa-user"></i></a>
+                @if (Auth::check() && Auth::user()->role == 3)
+                <a href="{{ route('dist.edit_profile') }}"><i class="fa-regular fa-user"></i></a>
+                @else
+                <a href="{{ route('login') }}"><i class="fa-regular fa-user"></i></a>
+                @endif
             </div>
             <div class="header-devider"></div>
             <ul class="nav flex-column">
@@ -143,10 +147,7 @@
                         @if (!Auth::check())
                             <a class="" href="{{ route('login') }}">Login</a>
                         @else
-                            <a class="" href="{{ route('admin.logout') }}">Log Out</a>
-                            @if (Auth::user()->role == 1 || Auth::user()->role == 2)
-                                <a class="" href="{{ route('admin.dashboard') }}">Admin Panel</a>
-                            @endif
+                            <a class="" href="{{ route('dist.logout') }}">Log Out</a>
                         @endif
 
                     </div>
@@ -161,7 +162,11 @@
                         </div>
                     </form>
                     <div class="shop-access-wrapper shop-access-hidden">
-                        <a href="#"><i class="fa-regular fa-user"></i></a>
+                        @if (Auth::check() && Auth::user()->role == 3)
+                        <a href="{{ route('dist.edit_profile') }}"><i class="fa-regular fa-user"></i></a>
+                        @else
+                        <a href="{{ route('login') }}"><i class="fa-regular fa-user"></i></a>
+                        @endif
                     </div>
                 </div>
             </nav>

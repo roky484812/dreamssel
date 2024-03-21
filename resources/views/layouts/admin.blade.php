@@ -331,7 +331,8 @@
                                     $active == 'product' ||
                                         $active == 'product_add' ||
                                         $active == 'product_category' ||
-                                        $active == 'product_subcategory') active @endif"
+                                        $active == 'product_subcategory' ||
+                                        $active == 'product_update') active @endif"
                                     data-bs-toggle="slide" href="javascript:void(0)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -371,11 +372,7 @@
                                 </ul>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item @if (
-                                    $active == 'carousal' ||
-                                        $active == 'product_add' ||
-                                        $active == 'product_category' ||
-                                        $active == 'product_subcategory') active @endif"
+                                <a class="side-menu__item @if ($active == 'carousal') active @endif"
                                     data-bs-toggle="slide" href="javascript:void(0)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -387,7 +384,7 @@
                                         class="angle fe fe-chevron-right"></i></a>
                                 <ul class="slide-menu" style="display: none;">
                                     <li>
-                                        <a class="slide-item @if ($active == 'product') active @endif"
+                                        <a class="slide-item @if ($active == 'carousal') active @endif"
                                             href="{{ route('admin.resource.carousal') }}">
                                             <span>Carousal Images</span>
                                         </a>

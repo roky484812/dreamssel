@@ -27,7 +27,7 @@ class ProductController extends Controller
         ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'product_countries.name as country_name', 'product_countries.code as country_code', 'products.view_count')
         ->orderBy('products.view_count', 'desc')
         ->get();
-        $carousels = Carousal_gallery::limit(10)->latest()->get();
+        $carousels = Carousal_gallery::limit(5)->latest()->get();
         return view('client.index', [
             'products'=> $products,
             'categories'=> $categories,

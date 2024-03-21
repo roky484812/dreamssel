@@ -39,12 +39,15 @@
                         @include('admin.resources.modals.add_carousal')
                     </div>
                 </div>
+                <div class="col-lg-12 my-3">
+                    <small class="text-danger fst-italic"><span class="fw-bold">Note:</span> Only latest five image will show in site carousal. 1000px X 350px is recommended.</small>
+                </div>
                 <div class="col-lg-12">
                     <div class="row">
-                        @foreach ($carousels as $carousel)   
-                        <div class="col-lg-3 col-md-4 col-sm-6 edit-item del-image m-1" data-image_id="{{ $carousel->id }}">
+                        @foreach ($carousels as $carousel)
+                        <div class="col-lg-3 col-md-4 col-sm-6 edit-item del-image" data-image_id="{{ $carousel->id }}">
                             <div class="card">
-                                <div >
+                                <div>
                                     <div class="delete-icon">
                                         <i class="fa fa-trash"></i>
                                     </div>
@@ -54,6 +57,9 @@
                         </div>
                         @endforeach
                     </div>
+                </div>
+                <div class="col-lg-12 my-3">
+                    {{ $carousels->links() }}
                 </div>
             </div>
             <!-- End Row -->

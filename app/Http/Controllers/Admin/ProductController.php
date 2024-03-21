@@ -193,7 +193,6 @@ class ProductController extends Controller
         ->with('product_galleries')
         ->with('product_combinations')
         ->first();
-        return $product;
         $categories = Product_category::get();
         $countries = Product_country::orderBy('id', 'desc')->get();
         return view('admin.edit_product', ['categories'=> $categories, 'product'=> $product, 'countries'=> $countries]);

@@ -116,6 +116,9 @@ Route::group(['middleware'=> ['web', 'type.distributor']], function(){
     Route::controller(DistDashboard::class)->group(function(){
         Route::get('/dashboard', 'index')->name('dist.dashboard');
     });
+    Route::controller(EditProfileController::class)->group(function(){
+        Route::get('/profile', 'edit_distributor_profile')->name('dist.edit_profile');
+    });
 });
 
 Route::controller(AuthController::class)->group(function(){
