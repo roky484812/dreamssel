@@ -1,45 +1,4 @@
-function canvasDoughnut3() {
 
-	document.querySelector(".chart-container").innerHTML = '<canvas class="canvasDoughnut3" height="200" width="200"></canvas>';
-	if ($('.canvasDoughnut3').length){
-
-		var chart_doughnut_settings = {
-			type: 'doughnut',
-			tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-			data: {
-				labels: [
-					"Application",
-					"Shortlisted",
-					"Rejected",
-					"On Hold",
-					"Finalised"
-				],
-				datasets: [{
-					data: [68, 55, 45, 34, 27],
-					backgroundColor: [ myVarVal, '#f72d66','#2dce89', '#45aaf2','#ecb403','#ff5b51'],
-					hoverBackgroundColor: [ myVarVal, '#f72d66','#2dce89', '#45aaf2','#ecb403','#ff5b51']
-				}]
-			},
-			options: {
-				plugins: {
-				  legend: {
-					display: false,
-				  }
-				},
-				cutout: "70%",
-				responsive: true,
-			},
-		}
-
-		$('.canvasDoughnut3').each(function(){
-
-			var chart_element = $(this);
-			var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
-
-		});
-	}
-	/*-----canvasDoughnut-----*/
-}
 
 function projectTracked() {
   

@@ -152,7 +152,9 @@
                                         </div>
                                     </div>
                                     <div class="card-product-name">
-                                        ${str_limit(product.title, 40)}
+                                        <a href="{{ route('client.product.view', '') }}/${product.id}">
+                                            ${str_limit(product.title, 40)}
+                                        </a>
                                     </div>
                                     <div class="card-price">
                                         @if (auth()->user())

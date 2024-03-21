@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="card-product-name">
-                                <p>{{ \Illuminate\Support\Str::limit($product->title, 40, $end = '...') }}</p>
+                                <a href="{{ route('client.product.view', $product->id) }}">{{ \Illuminate\Support\Str::limit($product->title, 40, $end = '...') }}</a>
                             </div>
                             <div class="card-price">
                                 @if (auth()->user())

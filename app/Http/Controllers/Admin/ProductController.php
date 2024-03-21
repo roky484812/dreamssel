@@ -9,7 +9,7 @@ use App\Models\Product_attribute_value;
 use App\Models\Product_category;
 use App\Models\Product_combination;
 use App\Models\Product_country;
-use App\Models\product_gallery;
+use App\Models\Product_gallery;
 use App\Models\Product_sub_category;
 use App\Models\Temp_image;
 use Exception;
@@ -122,7 +122,7 @@ class ProductController extends Controller
                 if($image->isValid()){
                     $path = '/images/product/gallery/';
                     $image_path = $this->saveImage($image, $path);
-                    $gallery = new product_gallery();
+                    $gallery = new Product_gallery();
                     $gallery->image = $image_path;
                     $gallery->product_id = $product->id;
                     $gallery->save();
@@ -262,7 +262,7 @@ class ProductController extends Controller
                 if($image->isValid()){
                     $path = '/images/product/gallery/';
                     $image_path = $this->saveImage($image, $path);
-                    $gallery = new product_gallery();
+                    $gallery = new Product_gallery();
                     $gallery->image = $image_path;
                     $gallery->product_id = $product->id;
                     $gallery->save();
@@ -278,7 +278,7 @@ class ProductController extends Controller
             if($product->thumbnail_image != 'images/product/thumbnail/default.jpg'){
                 unlink(public_path().$product->thumbnail_image);
             }
-            $product_galleries = product_gallery::where('product_id', $id)->get();
+            $product_galleries = Product_gallery::where('product_id', $id)->get();
             foreach($product_galleries as $gallery){
                 unlink(public_path().$gallery->image);
             }

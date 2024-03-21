@@ -87,8 +87,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="product-card">
                                 <div class="card-product-image">
-                                    <a href="{{ route('client.product.view', $product->id) }}"
-                                        class="product-card-link">
+                                    <a href="{{ route('client.product.view', $product->id) }}" class="product-card-link">
                                         <img src="{{ asset($product->thumbnail_image) }}" alt="Product image" />
                                     </a>
                                     <div class="card-discount">
@@ -109,7 +108,7 @@
                                     </div>
                                 </div>
                                 <div class="card-product-name">
-                                    <p>{{ \Illuminate\Support\Str::limit($product->title, 40, $end = '...') }}</p>
+                                    <a href="{{ route('client.product.view', $product->id) }}">{{ \Illuminate\Support\Str::limit($product->title, 40, $end = '...') }}</a>
                                 </div>
                                 <div class="card-price">
                                     @if (auth()->user())

@@ -28,6 +28,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(profile_meta::class, 'user_id');
     }
+
+    public function products(){
+        return $this->hasMany(Product::class,'author_id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
