@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product_category;
 use App\Models\Product_sub_category;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -17,29 +20,62 @@ class ProductCategoryController extends Controller
     
     public function addCategory(Request $req){
         $req->validate([
-            'category_name'=> 'required|max:50'
+            'category_name'=> 'required|max:50',
+            'image'=> 'required|image|mimes:png,jpg,jpeg'
         ]);
         $category = new Product_category();
         $category->category_name = $req->input('category_name');
+        $path = '/images/product/category/';
+        $image = $req->file('image');
+        $image_path = $this->saveImage($image, $path);
+        $category->image = $image_path;
         if($category->save()){
             return redirect()->back()->with('success', 'New category successfully created.');
         }else{
             return redirect()->back()->with('error', "Can't create category. Something went wrong.");
         }
     }
+    public function saveImage($image, $path){
+        if (!File::exists(public_path($path))) {
+            File::makeDirectory(public_path($path), 0755, true); // Create the directory recursively
+        }
+        $manager = new ImageManager(new Driver());
+        $ext = $image->getClientOriginalExtension();
+        $image_name = time().uniqid().'.'.$ext;
+        $image_path = $path.$image_name;
+        $image_dest = public_path().$image_path;
+        $image = $manager->read($image);
+        $image->cover(80, 80);
+        $image->save($image_dest, 50);
+        return $image_path;
+    }
 
     public function editCategory(Request $req){
         $req->validate([
             'id'=> 'required|exists:product_categories,id',
-            'category'=> 'required|max:50'
+            'category'=> 'required|max:50',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg'
         ]);
-        $update = Product_category::whereId($req->input('id'))->update([
-            'category_name'=> $req->input('category')
-        ]);
-        if($update){
-            return redirect()->back()->with('success', 'Category updated successfully.');
+
+        $product_category = Product_category::whereId($req->input('id'))->first();
+        $product_category->category_name = $req->input('category');
+        $error = '';
+        if($req->hasFile('image')){
+            try{
+                unlink(public_path().$product_category->image);
+            }catch(Exception $e){
+                $error = $e->getMessage();
+            }
+            $path = '/images/product/category/';
+            $image = $req->file('image');
+            $image_path = $this->saveImage($image, $path);
+            $product_category->image = $image_path;
+        }
+
+        if($product_category->save()){
+            return redirect()->back()->with('success', 'Category updated successfully. '.$error);
         }else{
-            return redirect()->back()->with('error', "Can not update category. Something went wrong.");
+            return redirect()->back()->with('error', "Can not update category. Something went wrong. ".$error);
         }
     }
 
@@ -48,6 +84,8 @@ class ProductCategoryController extends Controller
             'id'=> 'required|exists:product_categories,id'
         ]);
         try{
+            $product_category = Product_category::whereId($req->input('id'))->first();
+            unlink(public_path().$product_category->image);
             $delete = Product_category::whereId($req->input('id'))->delete();
             if($delete){
                 return redirect()->back()->with('success', 'Category deleted successfully.');
@@ -55,7 +93,7 @@ class ProductCategoryController extends Controller
                 return redirect()->back()->with('error','Can not delete category. Something went wrong.');
             }
         }catch(Exception $e){
-            return redirect()->back()->with('error', 'Category cannot be deleted. There are some products in this category available');
+            return redirect()->back()->with('error', 'Category cannot be deleted. There are some products in this category available or failed to delete image.');
         }
     }
 

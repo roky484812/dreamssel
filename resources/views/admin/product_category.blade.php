@@ -57,6 +57,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Serial</th>
+                                                        <th>Image</th>
                                                         <th>Product Category Name</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -72,6 +73,7 @@
                                                         @foreach ($categories as $index => $category)
                                                             <tr>
                                                                 <td>{{$index+1}}</td>
+                                                                <td><img src="{{ asset($category->image) }}" alt=""></td>
                                                                 <td><a href="{{route('admin.product.subcategoryView', ['category_id'=> $category['id']])}}">{{$category['category_name']}}</a></td>
                                                                 <td>
                                                                     <button data-bs-toggle="modal" data-bs-target="#editproduct_{{$category['id']}}" class="btn border border-1 text-warning btn-sm mx-1">
@@ -87,7 +89,7 @@
                                                                     </form>
                                                                     <div class="modal fade" id="editproduct_{{$category['id']}}" tabindex="-1" aria-hidden="true">
                                                                         <div class="modal-dialog modal-dialog-centered">
-                                                                            <form method="POST" class="modal-content" action="{{route('admin.product.category.update')}}">
+                                                                            <form method="POST" class="modal-content" enctype="multipart/form-data" action="{{route('admin.product.category.update')}}">
                                                                                 @csrf
                                                                                 @method('PUT')
                                                                                 <input type="hidden" name="id" value="{{$category['id']}}">
@@ -100,6 +102,13 @@
                                                                                         <label for="category" class="form-label">Category Title</label>
                                                                                         <input type="text" name="category" value="{{$category['category_name']}}" class="form-control @error('category') is-invalid @enderror" id="category" placeholder="Enter Category Title">
                                                                                         @error('category')
+                                                                                            <p class="invalid-feedback">{{$message}}</p>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="image">Category Image</label>
+                                                                                        <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
+                                                                                        @error('image')
                                                                                             <p class="invalid-feedback">{{$message}}</p>
                                                                                         @enderror
                                                                                     </div>
@@ -135,7 +144,7 @@
 <!-- Category add modal -->
 <div class="modal fade" id="addproduct" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <form action="{{route('admin.product.category.add')}}" method="POST" class="modal-content">
+        <form action="{{route('admin.product.category.add')}}" enctype="multipart/form-data" method="POST" class="modal-content">
             @csrf
             <div class="modal-header">
                 <h1 class="modal-title fs-5">Add Category</h1>
@@ -146,6 +155,13 @@
                     <label for="category" class="form-label">Category Title</label>
                     <input type="text" name="category_name" class="form-control @error('category_name') is-invalid @enderror" id="category" placeholder="Enter Category Title">
                     @error('category_name')
+                        <p class="invalid-feedback">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="image">Category Image</label>
+                    <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
+                    @error('image')
                         <p class="invalid-feedback">{{$message}}</p>
                     @enderror
                 </div>
