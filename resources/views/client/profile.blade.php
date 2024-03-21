@@ -19,13 +19,7 @@
             <ul class="ul-section">
                 Manage My Account
                 <li class="ac-nav-item">
-                    <a class="" href="#">My Profile</a>
-                </li>
-                <li class="ac-nav-item">
-                    <a class="" href="#logo">My Address Book</a>
-                </li>
-                <li class="ac-nav-item">
-                    <a class="" href="#">Payment Options</a>
+                    <a class="" href="javascript:void(0)">My Profile</a>
                 </li>
             </ul>
             <ul class="ul-section">
@@ -41,7 +35,7 @@
                 </li>
             </ul>
         </div>
-        <form class="edit-profile-wrapper"  method="POST">
+        <form class="edit-profile-wrapper" action="{{ route('dist.update_profile') }}" method="POST">
             @csrf
             <div class="your-profile-text">
                 <h5>Edit Your Profile</h5>
@@ -49,8 +43,8 @@
             <div class="ac-full-width-wrapper">
                 <p>Full Name</p>
                 <div class="inputfield-wrapper">
-                    <input class="inputfield @error('fname') is-invalid @enderror" name="fullname" type="text" placeholder="Enter Fullname" value="{{ $user->name }}" />
-                    @error('fname')
+                    <input class="inputfield @error('fullname') is-invalid @enderror" name="fullname" type="text" placeholder="Enter Fullname" value="{{ $user->name }}" />
+                    @error('fullname')
                     <div class="invalid-feedback">
                         {{$message}}
                     </div>
@@ -74,12 +68,17 @@
                     <p>Phone</p>
                     <div class="inputfield-wrapper">
                         <input
-                            class="inputfield"
+                            class="inputfield @error('phone') is-invalid @enderror"
                             type="text"
                             name="phone"
                             placeholder="Enter Phone Number"
                             value="{{ $user_meta->phone }}"
                             />
+                            @error('phone')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
                     </div>
                 </div>
             </div>
@@ -87,12 +86,17 @@
                 <p>Address</p>
                 <div class="inputfield-full-width-wrapper">
                     <input
-                        class="full-inputfield"
+                        class="full-inputfield @error('address') is-invalid @enderror"
                         type="text"
                         name="address"
                         placeholder="Mirpur 10 Round,Dhaka,1216,"
                         value="{{ $user_meta->address }}"
                         />
+                        @error('address')
+                        <div class="invalid-feedback">
+                            {{$message}}
+                        </div>
+                        @enderror
                 </div>
             </div>
             <div class="ac-input-field-wrapper">
@@ -100,11 +104,16 @@
                     <p>City</p>
                     <div class="inputfield-wrapper">
                         <input
-                            class="inputfield"
+                            class="inputfield @error('city') is-invalid @enderror"
                             type="text"
                             placeholder="Enter city name"
                             name="city"
                             value="{{ $user_meta->city }}"/>
+                            @error('city')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
                     </div>
                 </div>
 
@@ -112,12 +121,17 @@
                     <p>Post Code</p>
                     <div class="inputfield-wrapper">
                         <input
-                            class="inputfield"
+                            class="inputfield @error('post_code') is-invalid @enderror"
                             type="text"
-                            name="phone"
+                            name="post_code"
                             placeholder="Enter Postal Code"
                             value="{{ $user_meta->post_code }}"
                             />
+                            @error('post_code')
+                            <div class="invalid-feedback">
+                                {{$message}}
+                            </div>
+                            @enderror
                     </div>
                 </div>
             </div>

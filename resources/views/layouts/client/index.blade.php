@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @yield('meta')
-    <title>Bd Inclusive | {{ $title }}</title>
+    <title>Dreamssel Collection | {{ $title }}</title>
     <link rel="shortcut icon" href="{{ asset('assets/admin/images/brand/fav-icon.jpg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- font-family -->

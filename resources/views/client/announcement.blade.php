@@ -1,4 +1,4 @@
-@extends('layouts.client.index', ['title' => 'Dreamssel | Announcements'])
+@extends('layouts.client.index', ['title' => 'Announcements'])
 @section('content')
     <div class="container">
         <div class="headerSection">

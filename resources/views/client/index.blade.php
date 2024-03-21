@@ -1,4 +1,4 @@
-@extends('layouts.client.index', ['title' => 'Dreamssel Collection'])
+@extends('layouts.client.index', ['title' => 'Home'])
 
 @section('content')
     <div class="container">

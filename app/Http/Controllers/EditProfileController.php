@@ -125,7 +125,7 @@ class EditProfileController extends Controller
             }
             return redirect()->back()->with('success', 'You have successfuly updated your profile informations.');
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Something went wrong.');
+            return redirect()->back()->with('error', $th->getMessage());
         }
     }
 
@@ -199,5 +199,71 @@ class EditProfileController extends Controller
     public function edit_distributor_profile(){
         $user_meta = (object)$this->user_meta(Auth::user()->id);
         return view('client.profile', compact('user_meta'));
+    }
+    public function update_distributor_profile(Request $req){
+        $req->validate([
+            'fullname'=> 'string|min:3|max:100',
+            'phone'=> 'nullable|min:10',
+            'address'=> 'nullable|max:100',
+            'city'=> 'nullable|max:50',
+            'post_code'=> 'nullable|min:4|max:6',
+            'password'=> 'nullable|min:5|max:32|confirmed'
+        ]);
+        try {
+            $user_id = Auth::user()->id;
+            $user = User::whereId($user_id)->first();
+            if($req->input('current_password')){
+                if(!Hash::check($req->input('current_password'), $user->password)){
+                    return back()->with('error', 'Current password is incorrect');
+                }
+                $user->password = Hash::make($req->input('password'));
+            }
+            $user->name = $req->input('fullname');
+            $user->save();
+            if($req->input('phone')){
+                profile_meta::updateOrCreate(
+                    [
+                        'user_id'=> $user_id,
+                        'key'=> 'phone'
+                    ],[
+                        'value'=> $req->input('phone')
+                    ]
+                );
+            }
+            if($req->input('address')){
+                profile_meta::updateOrCreate(
+                    [
+                        'user_id'=> $user_id,
+                        'key'=> 'address'
+                    ],[
+                        'value'=> $req->input('address')
+                    ]
+                );
+            }
+            if($req->input('city')){
+                profile_meta::updateOrCreate(
+                    [
+                        'user_id'=> $user_id,
+                        'key'=> 'city'
+                    ],[
+                        'value'=> $req->input('city')
+                    ]
+                );
+            }
+
+            if($req->input('post_code')){
+                profile_meta::updateOrCreate(
+                    [
+                        'user_id'=> $user_id,
+                        'key'=> 'post_code'
+                    ],[
+                        'value'=> $req->input('post_code')
+                    ]
+                );
+            }
+            return redirect()->back()->with('success', 'You have successfuly updated your profile informations.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 }

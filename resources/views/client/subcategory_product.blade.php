@@ -1,4 +1,4 @@
-@extends('layouts.client.index', ['title' => 'Dreamssel Collection'])
+@extends('layouts.client.index', ['title' => $category->category_name.' | '.$category->sub_category_name])
 @section('content')
     <div class="container mb-5">
         <div class="headerSection">

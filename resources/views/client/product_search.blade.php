@@ -1,4 +1,4 @@
-@extends('layouts.client.index', ['title' => 'Dreamssel | Search | '.$search_product])
+@extends('layouts.client.index', ['title' => 'Search | '.$search_product])
 @section('content')
     <!-- mid content -->
     <div class="container mt-3">

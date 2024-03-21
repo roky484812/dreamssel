@@ -1,4 +1,4 @@
-@extends('layouts.client.index', ['title' => 'Dreamssel Collection'])
+@extends('layouts.client.index', ['title' => $product->title])
 @section('content')
     <div class="container" id="single_product">
         <div class="path-bar">

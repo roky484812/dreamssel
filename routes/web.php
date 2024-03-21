@@ -118,6 +118,7 @@ Route::group(['middleware'=> ['web', 'type.distributor']], function(){
     });
     Route::controller(EditProfileController::class)->group(function(){
         Route::get('/profile', 'edit_distributor_profile')->name('dist.edit_profile');
+        Route::post('/profile/update', 'update_distributor_profile')->name('dist.update_profile');
     });
 });
 
