@@ -36,7 +36,7 @@ class Dashboard extends Controller
         ->leftjoin('product_sub_categories', 'product_sub_categories.id', 'products.sub_category_id')
         ->limit(5)->get();
 
-        $editors = User::where('role', 2)->get();
+        $editors = User::where('role', 2)->latest()->get();
 
         return view('admin.dashboard', [
             'distributors' => $distributors,

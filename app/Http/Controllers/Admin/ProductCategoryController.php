@@ -106,14 +106,18 @@ class ProductCategoryController extends Controller
     }
 
     public function deleteSubcategory(Request $req){
-        $req->validate([
-            'id'=> 'required|exists:product_sub_categories,id'
-        ]);
-        $delete = Product_sub_category::whereId($req->input('id'))->delete();
-        if($delete){
-            return redirect()->back()->with('success', 'New Sub-Category deleted successfully.');
-        }else{
-            return redirect()->back()->with('error', 'Can not delete subcataegory.');
+        try{
+            $req->validate([
+                'id'=> 'required|exists:product_sub_categories,id'
+            ]);
+            $delete = Product_sub_category::whereId($req->input('id'))->delete();
+            if($delete){
+                return redirect()->back()->with('success', 'New Sub-Category deleted successfully.');
+            }else{
+                return redirect()->back()->with('error', 'Can not delete subcataegory.');
+            }
+        }catch(Exception $e){
+            return redirect()->back()->with('error', 'Failed to delete subcategory. Because this subcategory has some product.');
         }
     }
 

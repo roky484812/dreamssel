@@ -315,7 +315,7 @@
                                             <tr>
                                                 <th class="border-bottom-0">Name</th>
                                                 <th class="text-center">Occupation</th>
-                                                <th class="text-center">Projects</th>
+                                                <th class="text-center">Products</th>
                                                 <th></th>
                                             </tr>
                                         </thead>

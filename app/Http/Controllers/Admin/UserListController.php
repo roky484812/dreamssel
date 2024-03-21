@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\profile_meta;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 
 class UserListController extends Controller
@@ -167,11 +168,15 @@ class UserListController extends Controller
     }
 
     function user_delete($user_id){
-        $delete_user = User::whereId($user_id)->delete();
-        if($delete_user){
-            return redirect()->back()->with('success', 'An user delete successfully.');
-        }else{
-            return redirect()->back()->with('error', "Can't delete user right now.");
+        try{
+            $delete_user = User::whereId($user_id)->delete();
+            if($delete_user){
+                return redirect()->back()->with('success', 'An user delete successfully.');
+            }else{
+                return redirect()->back()->with('error', "Can't delete user right now.");
+            }
+        }catch(Exception $e){
+            return redirect()->back()->with('error', 'Failed to delete user. This user has some data.');
         }
     }
 

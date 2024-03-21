@@ -27,12 +27,18 @@ class ProductController extends Controller
         ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'product_countries.name as country_name', 'product_countries.code as country_code', 'products.view_count')
         ->orderBy('products.view_count', 'desc')
         ->get();
+
+        $discount_products = Product::orderByRaw('(price - distributor_price) / price DESC')
+        ->limit(8)->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.thumbnail_image', 'product_countries.name as country_name', 'product_countries.code as country_code', 'products.view_count')
+        ->get();
         $carousels = Carousal_gallery::limit(5)->latest()->get();
         return view('client.index', [
             'products'=> $products,
             'categories'=> $categories,
             'popular_products'=> $popular_products,
-            'carousels'=> $carousels
+            'carousels'=> $carousels,
+            'discount_products'=> $discount_products
         ]);
     }
 

@@ -142,7 +142,9 @@
     </div>
 
     @include('client.widgets.popular_products')
-
+    @if (Auth::check())
+        @include('client.widgets.discounts_product')
+    @endif
     <!-- advartisement section -->
 
     <div class="container">
