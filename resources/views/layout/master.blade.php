@@ -148,6 +148,7 @@
                     <div class="menus">
                         <a href="{{ route('home') }}">Home</a>
                         <a href="{{ route('home.abouts') }}">About</a>
+                        <a href="{{ route('client.announcement.list') }}">Announcement</a>
                         @if (!Auth::check())
                             <a class="" href="{{ route('home.signUpPage') }}">Sign Up</a>
                         @else

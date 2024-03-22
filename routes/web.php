@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Client\AnnouncementController as ClientAnnouncementController;
 use App\Http\Controllers\Admin\Dashboard as AdminDashboard;
+use App\Http\Controllers\Admin\FlashSaleController;
 use App\Http\Controllers\Admin\LandingImageController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\UserListController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Client\StaticPageController;
 use App\Http\Controllers\Distributor\Dashboard as DistDashboard;
+use App\Http\Controllers\Client\CartController as ClientCartController;
 use App\Http\Controllers\Editor\Dashboard as EditorDashboard;
 use App\Http\Controllers\EditProfileController;
 use Illuminate\Support\Facades\Route;
@@ -88,6 +90,11 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], f
         Route::delete('/product/subcategory/delete', 'deleteSubcategory')->name('admin.product.subcategory.delete');
         Route::get('/product/subcategory/{category_id?}', 'subcategory_by_category')->name('admin.product.subcategory.category');
     });
+    Route::controller(FlashSaleController::class)->group(function(){
+        Route::get('product/flash_sale', 'index')->name('admin.product.flashSale.index');
+        Route::get('product/flash_sale/remove/{id}', 'removeFlashSale')->name('admin.product.flashSale.remove');
+        Route::get('product/flash_sale/add/{id}', 'addFlashSale')->name('admin.product.flashSale.add');
+    });
 
 });
 
@@ -102,6 +109,12 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.admin']], functio
         Route::get('/user/status/{user_id}', 'user_status')->name('admin.user.status');
         Route::get('/user/delete/{user_id}', 'user_delete')->name('admin.user.delete');
     });
+});
+
+Route::controller(ClientCartController::class)->group(function () {
+    Route::post('/add-to-cart-v/{product_id}/', 'addToCartFromViewPage')->name('addToCartFromViewPage');
+    Route::get('/add-to-cart-v/{product_id}/', 'addToCart')->name('addToCart');
+    Route::delete('/remove-from-cart/{product_cart_id}/', 'removeFromCart')->name('removeFromCart');
 });
 
 // Route::controller(ClientProductController::class)->group(function(){

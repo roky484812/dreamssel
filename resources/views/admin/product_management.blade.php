@@ -112,6 +112,8 @@
                                                             <a href="{{route('admin.product.updateView', $product->id)}}" class="dropdown-item">Edit</a>
                                                         </li>
                                                         <li><a href="{{ route('admin.product.delete', $product->id) }}" class="dropdown-item del-product">Delete</a></li>
+                                                        <li><a href="{{ route('admin.product.flashSale.add', $product->id) }}" class="dropdown-item del-product">Add to Flash Sale</a></li>
+
                                                     </ul>
                                                 </div>
                                             </td>

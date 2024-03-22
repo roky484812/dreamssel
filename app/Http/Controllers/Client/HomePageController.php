@@ -18,6 +18,7 @@ use App\Models\Carousel_gallery;
 use App\Models\Fav_product_list;
 use App\Models\Product_category;
 use App\Http\Controllers\Controller;
+use App\Models\Flash_sale;
 use App\Models\Product_attribute;
 use App\Models\Product_sub_category;
 use Illuminate\Support\Facades\Auth;
@@ -36,9 +37,15 @@ class HomePageController extends Controller
         $carousel_gallery = Carousel_gallery::all();
         $featured_image = Featured_image::first();
         $new_araival = New_araival::first();
+        $flash_items = Flash_sale::leftJoin('products', 'products.id', 'flash_sales.product_id')
+        ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->where('products.status', 1)
+        ->orderBy('flash_sales.created_at')
+        ->select('products.*', 'flash_sales.id as flash_sale_id', 'product_countries.code as country_code')
+        ->get();
 
 
-        return view('client.home', ['categories' => $categories, 'subcategories' => $subcategories, 'products' => $products, 'carousel_gallery' => $carousel_gallery, 'featured_image' => $featured_image, 'new_araival' => $new_araival]);
+        return view('client.home', ['categories' => $categories, 'subcategories' => $subcategories, 'products' => $products, 'carousel_gallery' => $carousel_gallery, 'featured_image' => $featured_image, 'new_araival' => $new_araival, 'flash_items'=> $flash_items]);
     }
 
     public function thankyouViewer()

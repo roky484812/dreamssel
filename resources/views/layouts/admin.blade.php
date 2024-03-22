@@ -332,6 +332,7 @@
                                         $active == 'product_add' ||
                                         $active == 'product_category' ||
                                         $active == 'product_subcategory' ||
+                                        $active == 'flashSale' ||
                                         $active == 'product_update') active @endif"
                                     data-bs-toggle="slide" href="javascript:void(0)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -350,6 +351,11 @@
                                         <a class="slide-item @if ($active == 'product') active @endif"
                                             href="{{ route('admin.productManagement') }}">
                                             <span>Search Product</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="slide-item @if ($active == 'flashSale') active @endif"
+                                            href="{{ route('admin.product.flashSale.index') }}">
+                                            <span>Flash Sale</span></a>
                                     </li>
                                     <li>
                                         <a class="slide-item @if ($active == 'product_add') active @endif"

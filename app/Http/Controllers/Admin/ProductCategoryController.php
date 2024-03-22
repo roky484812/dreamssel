@@ -64,7 +64,7 @@ class ProductCategoryController extends Controller
             try{
                 unlink(public_path().$product_category->image);
             }catch(Exception $e){
-                $error = $e->getMessage();
+                $error = 'Also Failed to delete image.';
             }
             $path = '/images/product/category/';
             $image = $req->file('image');
