@@ -24,25 +24,25 @@
                                 <div class="under-countdown row">
                                     <div class="col-xl-3 col-sm-6 mt-3">
                                         <div class="countdown">
-                                            <span id="days-countdown" class="countdown"> 35</span>
+                                            <span id="days-countdown" class="countdown"> 00</span>
                                             <span class="">Days</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-sm-6 mt-3">
                                         <div class="countdown">
-                                            <span id="hours-countdown" class="countdown">17</span>
+                                            <span id="hours-countdown" class="countdown">00</span>
                                             <span class="">Hours</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-sm-6 mt-3">
                                         <div class="countdown">
-                                            <span id="minutes-countdown" class="countdown">50</span>
+                                            <span id="minutes-countdown" class="countdown">00</span>
                                             <span class="">Minutes</span>
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-sm-6 mt-3">
                                         <div class="countdown">
-                                            <span id="seconds-countdown" class="countdown">39</span>
+                                            <span id="seconds-countdown" class="countdown">00</span>
                                             <span class="">Seconds</span>
                                         </div>
                                     </div>
@@ -129,6 +129,12 @@
                 $('#hours-countdown').text(hours);
                 $('#minutes-countdown').text(minutes);
                 $('#seconds-countdown').text(seconds);
+                if(days<=0 && hours <= 0 && days <= 0 && seconds <= 0){
+                    $('#days-countdown').text(0);
+                    $('#hours-countdown').text(0);
+                    $('#minutes-countdown').text(0);
+                    $('#seconds-countdown').text(0);
+                }
             }
 
             // Initial call to update the countdown
