@@ -50,7 +50,7 @@
 
     <!-- flash sale section -->
 
-    <div class="container">
+    <div class="container" id="flash_sale">
         <div class="headerSection">
             <div class="header-category">
                 <div class="box-pointer"></div>
@@ -65,22 +65,22 @@
                 <div class="timer">
                     <div class="day">
                         <p>Days</p>
-                        <h1>03</h1>
+                        <h1 id="days-countdown">03</h1>
                     </div>
                     <span>:</span>
                     <div class="hours">
                         <p>Hours</p>
-                        <h1>23</h1>
+                        <h1 id="hours-countdown">23</h1>
                     </div>
                     <span>:</span>
                     <div class="minutes">
                         <p>Minutes</p>
-                        <h1>59</h1>
+                        <h1 id="minutes-countdown">59</h1>
                     </div>
                     <span>:</span>
                     <div class="seconds">
                         <p>Seconds</p>
-                        <h1>50</h1>
+                        <h1 id="seconds-countdown">50</h1>
                     </div>
                 </div>
             </div>
@@ -624,6 +624,42 @@
             });
 
 
+        });
+    </script>
+    <script src="{{ asset('assets/admin/plugins/moment/moment.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/countdown/moment-timezone-with-data.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/countdown/moment-timezone.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Set the end time for the countdown (assuming endTime is fetched from the backend)
+            var endTime = moment("{{ $endTime }}");
+            
+            // Function to update the countdown display
+            function updateCountdown() {
+                var currentTime = moment();
+                var timeDiff = moment.duration(endTime.diff(currentTime));
+                
+                // Calculate days, hours, minutes, and seconds
+                var days = Math.floor(timeDiff.asDays());
+                var hours = timeDiff.hours();
+                var minutes = timeDiff.minutes();
+                var seconds = timeDiff.seconds();
+    
+                // Update the HTML elements with the countdown values
+                $('#days-countdown').text(days);
+                $('#hours-countdown').text(hours);
+                $('#minutes-countdown').text(days);
+                $('#seconds-countdown').text(seconds);
+                if(days<=0 && hours <= 0 && days <= 0 && seconds <= 0){
+                    $('#flash_sale').addClass('d-none');
+                }
+            }
+    
+            // Initial call to update the countdown
+            updateCountdown();
+    
+            // Update the countdown every second
+            setInterval(updateCountdown, 1000);
         });
     </script>
 @endsection

@@ -39,6 +39,3 @@
     </div>
 </form>
 <div class="overlay"></div>
-@push('scripts')
-
-@endpush

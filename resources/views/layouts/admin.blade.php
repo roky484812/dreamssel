@@ -16,7 +16,7 @@
     <title>Dreamssel | {{ $title }}</title>
 
     <!--Favicon -->
-    <link rel="icon" href="{{ asset('assets/admin/images/brand/favicon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('assets/admin/images/brand/white_single_logo.svg') }}" type="image/x-icon" />
 
     <!-- selection jquery -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
@@ -378,6 +378,46 @@
                                 </ul>
                             </li>
                             <li class="slide">
+                                <a class="side-menu__item @if ($active == 'pending_order' || $active == 'cancelled_order' || $active == 'confirmed_order') active @endif""
+                                    data-bs-toggle="slide" href="javascript:void(0)">
+                                    <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"
+                                            ry="2"></rect>
+                                        <line x1="3" y1="9" x2="21" y2="9"></line>
+                                        <line x1="9" y1="21" x2="9" y2="9"></line>
+                                    </svg>
+                                    <span class="side-menu__label">Order Management</span><i
+                                        class="angle fe fe-chevron-right"></i></a>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1">
+                                        <a href="javascript:void(0)"></a>Submenus
+                                    </li>
+                                    <li class="sub-slide">
+                                        <a href="{{ route('admin.order.pending') }}"
+                                            class="sub-side-menu__item slide-item @if ($active == 'pending_order') active @endif"
+                                            href="javascript:void(0)">
+                                            <span class="sub-side-menu__label">Pending order</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-slide">
+                                        <a href="{{ route('admin.order.cancelled') }}"
+                                            class="sub-side-menu__item slide-item @if ($active == 'cancelled_order') active @endif"
+                                            data-bs-toggle="sub-slide" href="javascript:void(0)">
+                                            <span class="sub-side-menu__label">Cancelled Order</span>
+                                        </a>
+                                    </li>
+                                    <li class="sub-slide">
+                                        <a href="{{ route('admin.order.confirmed') }}"
+                                            class="sub-side-menu__item slide-item @if ($active == 'confirmed_order') active @endif"
+                                            data-bs-toggle="sub-slide" href="javascript:void(0)">
+                                            <span class="sub-side-menu__label">Confirmed Order</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="slide">
                                 <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
                                     <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -414,8 +454,7 @@
                             </li>
 
                             <li class="slide">
-                                <a class="side-menu__item @if ($active == 'announcement') active @endif"
-                                    data-bs-toggle="slide" href="{{ route('admin.announcement.list') }}">
+                                <a class="side-menu__item @if ($active == 'announcement') active @endif" data-bs-toggle="slide" href="{{ route('admin.announcement.list') }}">
 
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2"
@@ -426,8 +465,35 @@
                                     <span class="side-menu__label">Announcement</span>
                                 </a>
                             </li>
-
+                            <li class="slide">
+                                <a class="side-menu__item @if ($active == 'timer' ) active @endif"
+                                    data-bs-toggle="slide" href="javascript:void(0)">
+                                    <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"
+                                            ry="2"></rect>
+                                        <line x1="3" y1="9" x2="21" y2="9"></line>
+                                        <line x1="9" y1="21" x2="9" y2="9"></line>
+                                    </svg>
+                                    <span class="side-menu__label">Setting</span><i
+                                        class="angle fe fe-chevron-right"></i></a>
+                                <ul class="slide-menu">
+                                    <li class="side-menu-label1">
+                                        <a href="javascript:void(0)"></a>Submenus
+                                    </li>
+                                    <li class="sub-slide">
+                                        <a href="{{ route('admin.flash.sale.counter') }}"
+                                            class="sub-side-menu__item slide-item @if ($active == 'timer') active @endif"
+                                            href="javascript:void(0)">
+                                            <span class="sub-side-menu__label">Flash Sale Timer</span>
+                                        </a>
+                                    </li>
+                                   
+                                </ul>
+                            </li>
                         </ul>
+
 
                         <div class="app-sidebar-help">
                             <div class="dropdown text-center">

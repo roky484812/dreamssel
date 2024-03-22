@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\FlashSaleController;
 use App\Http\Controllers\Admin\LandingImageController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ResourceController;
 use App\Http\Controllers\Client\ProductController as ClientProductController;
 use App\Http\Controllers\Client\HomePageController as ClientHomePageController;
@@ -44,6 +45,13 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], f
         Route::delete('/featured/image/{id?}', 'deleteFeaturedImage')->name('admin.featured.deleteImage');
         Route::delete('/new_araival/image/{id?}', 'deleteNewAraivalImage')->name('admin.new_araival.deleteImage');
     });
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/order/pending', 'pendingOrder')->name('admin.order.pending');
+        Route::get('/order/confirmed', 'confirmedOrder')->name('admin.order.confirmed');
+        Route::get('/order/cancelled', 'cancelledOrder')->name('admin.order.cancelled');
+        Route::post('/order/confirm/{order_id}', 'order_confirm')->name('admin.order.confrim');
+        Route::post('/order/cancel/{order_id}', 'order_cancel')->name('admin.order.cancel');
+    });
     Route::controller(AuthController::class)->group(function(){
         Route::get('/logout', 'logout')->name('admin.logout');
         Route::post('/profile/update/delete', 'delete_profile')->name('admin.profile.delete');
@@ -61,6 +69,8 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], f
     Route::controller(AdminController::class)->group(function(){
         Route::get('/profile', 'profile')->name('admin.profile');
         Route::get('/profile/update', 'edit_profile')->name('admin.profile.edit');
+        Route::get('/flash/sale/counter', 'flash_sale_timer')->name('admin.flash.sale.counter');
+        Route::post('/set/countdown', 'setEndTime')->name('admin.flash.sale.set.endtime');
     });
     Route::controller(AnnouncementController::class)->group(function(){
         Route::get('/announcement', 'announcementList')->name('admin.announcement.list');

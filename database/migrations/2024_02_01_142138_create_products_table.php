@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('distributor_price');
             $table->integer('sku')->nullable();
             $table->string('product_code')->nullable()->unique();
-            $table->string('thumbnail_image')->default('images/product/thumbnail/default.jpg');
+            $table->string('thumbnail_image')->default('/images/product/thumbnail/default.jpg');
             $table->bigInteger('view_count')->nullable();
             $table->unsignedBigInteger('country_id');
             $table->unsignedBigInteger('category_id');

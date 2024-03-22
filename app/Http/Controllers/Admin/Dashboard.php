@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Announcement;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class Dashboard extends Controller
@@ -25,6 +26,7 @@ class Dashboard extends Controller
 
         $total_product = Product::count();
         $total_draft_product = Product::where('status', 0)->count();
+        $total_released_product = Product::where('status', 1)->count();
 
         $total_user = User::where('role', 3)->count();
         $total_announcement = Announcement::count();
@@ -38,6 +40,12 @@ class Dashboard extends Controller
 
         $editors = User::where('role', 2)->latest()->get();
 
+        $products = Product::orderByDesc("view_count")->limit(5)->get();
+        $totalViewCount = Product::sum('view_count');
+        $total_orders = Order::count();
+        $confirmed_orders = Order::where('status', '2')->count();
+        $cancelled_orders = Order::where('status', '3')->count();
+
         return view('admin.dashboard', [
             'distributors' => $distributors,
             'popular_products' => $popular_products,
@@ -46,7 +54,13 @@ class Dashboard extends Controller
             'total_user' => $total_user,
             'total_announcement' => $total_announcement,
             'top_discounted_products'=> $top_discounted_products,
-            'editors'=> $editors
+            'editors'=> $editors,
+            'total_released_product'=> $total_released_product,
+            'totalViewCount'=> $totalViewCount,
+            'total_orders'=> $total_orders,
+            'confirmed_orders'=> $confirmed_orders,
+            'cancelled_orders'=> $cancelled_orders,
+            'products'=> $products
         ]);
     }
 }

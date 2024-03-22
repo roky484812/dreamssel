@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @yield('meta')
-    <title>Bd Inclusive | {{ $title }}</title>
-    <link rel="shortcut icon" href="{{ asset('assets/admin/images/brand/fav-icon.jpg') }}" type="image/x-icon">
+    <title>Dreamssel | {{ $title }}</title>
+    <link rel="shortcut icon" href="{{ asset('assets/admin/images/brand/white_single_logo.svg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- font-family -->
     <link
@@ -53,10 +53,10 @@
     <div class="drawer">
         <div class="drawer-header">
             <a href="{{ route('home') }}" class="drawer-brand-logo-line">
-                <img src="{{ asset('assets/client/images/line-logo.svg') }}" alt="Logo">
+                <img src="{{ asset('assets/admin/images/brand/lineLogo.svg') }}" alt="Logo">
             </a>
             <a href="{{ route('home') }}" class="drawer-brand-logo-single">
-                <img src="{{ asset('assets/client/images/single-logo.svg') }}" alt="Logo">
+                <img src="{{ asset('assets/admin/images/brand/black_single_logo.svg') }}" alt="Logo">
             </a>
             <button class="btn-close" aria-label="Close"></button>
         </div>
@@ -130,7 +130,7 @@
                         {{ $_announcement->title }}
                     </a>
                 </p>
-                <a class="shop-now-link" href="">ShopNow</a>
+                <a class="shop-now-link" href="{{ route('home.shopPage') }}">ShopNow</a>
             </div>
         </div>
 
@@ -141,10 +141,10 @@
                         <i class="fas fa-bars"></i>
                     </div>
                     <a href="{{ route('home') }}" class="brand-logo-line">
-                        <img src="{{ asset('assets/client/images/line-logo.svg') }}" alt="Logo">
+                        <img src="{{ asset('assets/admin/images/brand/lineLogo.svg') }}" alt="Logo">
                     </a>
                     <a href="{{ route('home') }}" class="brand-logo-single">
-                        <img src="{{ asset('assets/client/images/single-logo.svg') }}" alt="Logo">
+                        <img src="{{ asset('assets/admin/images/brand/black_single_logo.svg') }}" alt="Logo">
                     </a>
 
                     <div class="menus">
@@ -199,7 +199,7 @@
                     <div class="col">
                         <div class="footer-logo">
                             <div class="footer-brand-logo-single">
-                                <img src="{{ asset('assets/client/images/single-logo.svg') }}" alt="Logo">
+                                <img src="{{ asset('assets/admin/images/brand/black_single_logo.svg') }}" alt="Logo">
                             </div>
                         </div>
                         <div class="subscribe">

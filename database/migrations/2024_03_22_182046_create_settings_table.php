@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('rating');
-            $table->unsignedBigInteger('product_id');
-            $table->string('review');
-
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->string('key');
+            $table->string('value');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('settings');
     }
 };

@@ -28,7 +28,12 @@
                 <div class="row">
                     @if ($fav_product_lists->count() > 0)
                         @foreach ($fav_product_lists as $fav_product_list)
-                            <?php $product = Product::whereId($fav_product_list->product_id)->first(); ?>
+                            <?php 
+                            $product = Product::where('products.id',$fav_product_list->product_id)
+                            ->leftJoin('product_countries', 'product_countries.id', 'products.country_id')
+                            ->select('products.*', 'product_countries.code as country_code')
+                            ->first(); 
+                             ?>
                             <div class="col-md-3 col-sm-4 col-xsm-6">
 
                                 <div class="product-card">
@@ -51,17 +56,10 @@
                                         @endif
                                         </div>
                                         <div class="card-add-to-wishlist">
-                                            @if (auth()->user())
-                                                <a href="" class="addToFavBtn"
-                                                    data-product-fav-id="{{ $product->id }}">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </a>
-                                            @else
-                                                <a href="{{ route('home.signInPage') }}"
-                                                    data-product-fav-id="{{ $product->id }}">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </a>
-                                            @endif
+                                            <a href="" class="remove-product"
+                                                data-fav-list-id="{{ $fav_product_list->id }}">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                            </a>
                                         </div>
                                         <div class="position-absolute bottom-0 end-0">
                                             <span class="badge text-bg-dark">{{ $product->country_code }}</span>

@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
     // Get radio buttons
     var insideDhakaRadio = document.getElementById("insideDhaka");
@@ -20,29 +22,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Get shipping cost element
     var shippingCost = document.getElementById("cart-shipping");
-    var subTotal = $(this).data("subtotal");
-    var shippingCostInput = document.getElementById("shipping");
+    var subTotal = parseInt(document.getElementById("cart-subtotal").getAttribute("data-subtotal"));
     var cartTotal = document.getElementById("cart-total");
+
+    // Set initial value of cartTotal to subTotal
+    cartTotal.textContent = subTotal;
+
     // Add event listeners to radio buttons
     insideDhakaRadio.addEventListener("change", function () {
         if (insideDhakaRadio.checked) {
             shippingCost.textContent = "60";
-            // Parse shipping cost as an integer
-            // Parse subtotal as an integer
-
-            cartTotal.textContent = parseInt(subTotal) + 60;
+            var total = subTotal + 60;
+            cartTotal.textContent = total;
         }
     });
 
     outsideDhakaRadio.addEventListener("change", function () {
         if (outsideDhakaRadio.checked) {
             shippingCost.textContent = "120";
-            var shippingCost = parseInt(this.value); // Parse shipping cost as an integer
-            // Parse subtotal as an integer
-
-            cartTotal.textContent = subTotal + shippingCost;
+            var total = subTotal + 120;
+            cartTotal.textContent = total;
         }
     });
-
-    // Assuming shippingCost is an input field where users can enter shipping cost
 });
+
+
+

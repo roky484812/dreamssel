@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product_combination;
 use App\Models\profile_meta;
 use PhpParser\Node\Expr\AssignOp\ShiftLeft;
+use App\Models\Setting;
 
 class HomePageController extends Controller
 {
@@ -44,9 +45,10 @@ class HomePageController extends Controller
         ->orderBy('flash_sales.created_at')
         ->select('products.*', 'flash_sales.id as flash_sale_id', 'product_countries.code as country_code')
         ->get();
+        $endTime = Setting::where('key', 'countdown_timer_end_time')->value('value');
 
 
-        return view('client.home', ['categories' => $categories, 'subcategories' => $subcategories, 'products' => $products, 'carousel_gallery' => $carousel_gallery, 'featured_image' => $featured_image, 'new_araival' => $new_araival, 'flash_items'=> $flash_items]);
+        return view('client.home', ['endTime'=> $endTime, 'categories' => $categories, 'subcategories' => $subcategories, 'products' => $products, 'carousel_gallery' => $carousel_gallery, 'featured_image' => $featured_image, 'new_araival' => $new_araival, 'flash_items'=> $flash_items]);
     }
     public function flash_products(){
         $categories = Product_category::all();
@@ -91,7 +93,7 @@ class HomePageController extends Controller
         if($req->input('sub_category_id')){
             $products->whereIn('products.sub_category_id', $req->input('sub_category_id'));
         }
-        $products_fetch = $products->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.sku', 'products.thumbnail_image', 'products.created_at', 'product_categories.category_name', 'product_countries.code as country_code', 'products.rating_count', 'products.rating')->latest()->paginate(20);
+        $products_fetch = $products->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.sku', 'products.thumbnail_image', 'products.created_at', 'product_categories.category_name', 'product_countries.code as country_code', 'products.rating_count', 'products.rating')->latest()->paginate(18);
 
         return response()->json([
             'status' => true,

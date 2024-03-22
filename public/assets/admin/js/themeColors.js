@@ -275,9 +275,6 @@ function names() {
     }
 
     // index4 charts
-    if(document.querySelector('.canvasDoughnut3') !== null){
-        canvasDoughnut3();
-    }
     if(document.querySelector('#projectTracked') !== null){
         projectTracked();
     }

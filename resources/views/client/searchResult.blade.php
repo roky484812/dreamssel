@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex" id="link">
+                        <div class="d-flex justify-content-end" id="link">
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('.addToCartBtn').on('click', function(event) {
+            $(document).on('click', '.addToCartBtn', function(event) {
                 event.preventDefault(); // Prevent the default behavior (following the link)
 
                 // Get the product ID from the data attribute
@@ -73,7 +73,7 @@
     </script>
     <script>
         $(document).ready(function() {
-            $('.addToFavBtn').on('click', function(event) {
+            $(document).on('click', '.addToFavBtn', function(event) {
                 event.preventDefault(); // Prevent the default behavior (following the link)
 
                 // Get the product ID from the data attribute
@@ -213,8 +213,7 @@
                                 <div class="product-card">
                                     <div class="card-product-image">
 
-                                        <a href="{{ route('home.productPage', '') }}/${product.id}"
-                                            class="product-card-link">
+                                        <a href="{{ route('home.productPage', '') }}/${product.id}" class="product-card-link">
                                             
                                             <img src="${product.thumbnail_image}" alt="Product image"/>
                                         </a>
@@ -227,7 +226,7 @@
                                         </div>
                                         <div class="card-add-to-wishlist">
                                             @if (auth()->user())
-                                                <a href="" class="addToFavBtn"
+                                                <a href="javascript:void(0)" class="addToFavBtn"
                                                     data-product-fav-id="${ product.id }">
                                                     <i class="fa-regular fa-heart"></i>
                                                 </a>
@@ -243,7 +242,7 @@
                                         </div>
                                         <div class="card-add-to-cart">
                                             @if (auth()->user())
-                                                <a href="" class="addToCartBtn"
+                                                <a href="javascript:void(0)" class="addToCartBtn"
                                                     data-product-id="${ product.id }">
                                                     <i class="bi bi-cart3"></i>
                                                 </a>

@@ -140,7 +140,7 @@
                         </div>
 
                         <!-- payment buttons -->
-                        <div class="payment-options">
+                        <div class="payment-options d-none">
                             <div class="form-check form-check-inline payment-option bankPayOption">
                                 <div class="bankPayRadio">
                                     <input class="form-check-input" type="radio" name="payment" id="bankPay"
@@ -163,7 +163,7 @@
 
                         <!-- Coupon code -->
 
-                        <div class="coupon-section row">
+                        <div class="coupon-section row d-none">
                             <div class="couponInputBox col-xl-8  mb-3 ">
                                 <input name="coupon" type="text" id="coupon-code" placeholder="Enter Coupon Code">
                             </div>

@@ -1,0 +1,46 @@
+
+.orderCardAttributes .orderCardAttrLeft,
+.orderCardAttributes .orderCardAttrRight
+{
+    
+    flex-wrap: wrap;
+}
+
+.orderCardAttributes .orderCardAttrRight
+{
+    margin-left: 50px;
+}
+.orderAttrItem
+{
+    margin: 10px 0;
+}
+.orderAttrItem p
+{
+    margin-bottom: 0;
+    margin-right: 20px;
+}
+
+.card-footer{
+    display: flex;
+    justify-content: space-between;
+}
+@media screen and (max-width: 358px)
+{
+    .orderCardAttributes
+    {
+        flex-direction: column ;
+    }
+    .orderCardAttributes .orderCardAttrRight
+    {
+        margin: 0;
+    }
+    .orderAttrItem
+    {
+        justify-content: space-between;
+    }
+}
+
+.product-details{
+    height: 200px!important;
+    border-bottom: 0.5px solid rgba(0, 0, 0, .125);
+}
