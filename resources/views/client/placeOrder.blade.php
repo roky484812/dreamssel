@@ -106,13 +106,13 @@
                             <div class="orderProductTable">
                                 <div class="orderProductItem">
                                     <div class="product-image">
-                                        <img src="{{ $product->thumbnail_image }}">
+                                        <img src="{{ asset($product->thumbnail_image) }}">
                                     </div>
                                     <div class="productDetails">
                                         <div class="product-title">{{ $product->title }}
                                         </div>
                                     </div>
-                                    <div class="product-line-price">{{ $product->discounted_price }}</div>
+                                    <div class="product-line-price">{{ $product->distributor_price }}</div>
 
                                 </div>
 
@@ -124,8 +124,8 @@
                             <div class="totals-item">
                                 <label>Subtotal</label>
                                 <div class="totals-value" id="cart-subtotal"
-                                    data-subtotal="{{ $product->discounted_price }}">
-                                    {{ $product->discounted_price }}</div>
+                                    data-subtotal="{{ $product->distributor_price }}">
+                                    {{ $product->distributor_price }}</div>
                             </div>
                             <div class="totals-item">
                                 <label>Shipping</label>

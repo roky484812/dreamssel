@@ -86,25 +86,25 @@
                             $sub_total =0;
                         @endphp
                         @foreach ($product_carts as $product_cart)
-                            <?php $product = Product::find($product_cart->product_id); ?>
+                            <?php $product = Product::whereId($product_cart->product_id)->first(); ?>
                             
 
 
                             <div class="orderProductTable">
                                 <div class="orderProductItem">
                                     <div class="product-image">
-                                        <img src="{{ $product->thumbnail_image }}">
+                                        <img src="{{ asset($product->thumbnail_image) }}">
                                     </div>
                                     <div class="productDetails">
                                         <div class="product-title">{{ $product->title }}
                                         </div>
                                     </div>
-                                    <div class="product-line-price">{{ $product->discounted_price*$product_cart->quantity }}</div>
+                                    <div class="product-line-price">{{ $product->distributor_price*$product_cart->quantity }}</div>
 
                                 </div>
 
                             </div>
-                            {{$sub_total+=$product->discounted_price*$product_cart->quantity}}
+                            {{$sub_total+=$product->distributor_price*$product_cart->quantity}}
                         @endforeach
 
                         <div class="Ordertotals">
@@ -124,7 +124,7 @@
                                 <div class="totals-value" id="cart-total">00</div>
                             </div>
 
-
+ 
                         </div>
 
                         <!-- payment buttons -->

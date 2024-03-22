@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Announcement;
 use App\Models\Product_category;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\Paginator;
@@ -37,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
             }
             $categories = Product_category::get();
             $view->with('_categories', $categories);
+            $announcement = Announcement::latest()->first();
+            $view->with('_announcement', $announcement);
         });
         PaginationPaginator::useBootstrapFive();
     }

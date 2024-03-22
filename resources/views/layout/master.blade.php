@@ -45,7 +45,7 @@
 
     {{-- loader --}}
     <div id="global-loader">
-        <img src="{{ asset('assets/admin/images/svgs/global-loader-1.svg') }}" alt="loader">
+        <img src="{{ asset('assets/admin/images/svgs/loader.svg') }}" alt="loader">
     </div>
     <!-- Navigation Drawer -->
 
@@ -126,7 +126,9 @@
         <div class="status-bar-top">
             <div class="container statusBar">
                 <p class="status-offer">
-                    Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
+                    <a href="{{route('client.announcement.view', $_announcement->id)}}" class="text-decoration-none text-light">
+                        {{ $_announcement->title }}
+                    </a>
                 </p>
                 <a class="shop-now-link" href="">ShopNow</a>
             </div>

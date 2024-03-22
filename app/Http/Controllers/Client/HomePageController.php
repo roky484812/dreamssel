@@ -23,16 +23,17 @@ use App\Models\Product_attribute;
 use App\Models\Product_sub_category;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product_combination;
+use App\Models\profile_meta;
 use PhpParser\Node\Expr\AssignOp\ShiftLeft;
 
 class HomePageController extends Controller
 {
     public function homeViewer()
     {
-        $categories = Product_category::all();
         $products = Product::limit(20)->latest()->where('status', 1)
         ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
         ->select('products.*', 'product_countries.code as country_code')->get();
+        $categories = Product_category::all();
         $subcategories = Product_sub_category::all();
         $carousel_gallery = Carousel_gallery::all();
         $featured_image = Featured_image::first();
@@ -47,6 +48,17 @@ class HomePageController extends Controller
 
         return view('client.home', ['categories' => $categories, 'subcategories' => $subcategories, 'products' => $products, 'carousel_gallery' => $carousel_gallery, 'featured_image' => $featured_image, 'new_araival' => $new_araival, 'flash_items'=> $flash_items]);
     }
+    public function flash_products(){
+        $categories = Product_category::all();
+        $subcategories = Product_sub_category::all();
+        $flash_products = Flash_sale::leftJoin('products', 'products.id', 'flash_sales.product_id')
+        ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->where('products.status', 1)
+        ->orderBy('flash_sales.created_at')
+        ->select('products.*', 'flash_sales.id as flash_sale_id', 'product_countries.code as country_code')
+        ->paginate(20);
+        return view('client.flashSale', ['flash_products'=> $flash_products, 'categories' => $categories, 'subcategories' => $subcategories]);
+    }
 
     public function thankyouViewer()
     {
@@ -58,10 +70,44 @@ class HomePageController extends Controller
     public function search(Request $request)
     {
         $categories = Product_category::all();
-        $query = $request->input('query');
-        $products = Product::where('title', 'like', '%' . $query . '%')->get();
+        $search_product = $request->input('query');
+        $products = Product::where('title', 'like', '%' . $search_product . '%')->get();
         $subcategories = Product_sub_category::all();
-        return view('client.searchResult', ['categories' => $categories, 'subcategories' => $subcategories, 'products' => $products], compact('products', 'query'));
+        return view('client.searchResult', ['categories' => $categories, 'subcategories' => $subcategories, 'products' => $products], compact('products', 'search_product'));
+    }
+
+    public function search_products(Request $req){
+        $products = Product::where('products.status', 1)->whereBetween('products.price', [$req->input('min_price'), $req->input('max_price')])
+        ->leftjoin('product_categories', 'product_categories.id', 'products.category_id')
+        ->leftjoin('product_countries', 'product_countries.id', 'products.country_id');
+        if($req->input('search')){
+            $products->where('products.title', 'like', '%'.$req->input('search').'%');
+        }
+
+        if($req->input('category_id')){
+            $products->whereIn('products.category_id', $req->input('category_id'));
+        }
+        
+        if($req->input('sub_category_id')){
+            $products->whereIn('products.sub_category_id', $req->input('sub_category_id'));
+        }
+        $products_fetch = $products->select('products.id', 'products.title', 'products.price', 'products.distributor_price', 'products.sku', 'products.thumbnail_image', 'products.created_at', 'product_categories.category_name', 'product_countries.code as country_code', 'products.rating_count', 'products.rating')->latest()->paginate(20);
+
+        return response()->json([
+            'status' => true,
+            'data' => $products_fetch,
+            'message'=> 'Successfully searched.'
+        ]);
+    }
+    public function product_subcategory_filter(Request $req){
+        $category_id = (array) $req->input('category_id');
+        $sub_category = Product_sub_category::whereIn('category_id', $category_id)->get();
+
+        return response()->json([
+            'status'=> true,
+            'data'=> $sub_category,
+            'message'=> 'Sub-category fetched successfully.'
+        ]);
     }
 
     public function shopViewer()
@@ -116,7 +162,7 @@ class HomePageController extends Controller
 
             ]);
         } else {
-            return view('client.signIn', ['categories' => $categories, 'subcategories' => $subcategories]);
+            return view('login', ['categories' => $categories, 'subcategories' => $subcategories]);
         }
     }
 
@@ -205,7 +251,7 @@ class HomePageController extends Controller
         $categories = Product_category::paginate(12);
         $subcategories = Product_sub_category::all();
 
-        return view('client.signin', ['categories' => $categories, 'subcategories' => $subcategories]);
+        return view('login', ['categories' => $categories, 'subcategories' => $subcategories]);
     }
     public function cartViewer()
     {
@@ -214,12 +260,13 @@ class HomePageController extends Controller
         if (Auth::user()) {
 
 
-            $product_carts = Product_cart::where('user_id', Auth::user()->id)->get();
+            $product_carts = Product_cart::where('user_id', Auth::user()->id)->latest()->get();
+            
 
 
             return view('client.cart', ['categories' => $categories, 'subcategories' => $subcategories, 'product_carts' => $product_carts]);
         } else {
-            return view('client.signin', ['categories' => $categories, 'subcategories' => $subcategories]);
+            return view('login', ['categories' => $categories, 'subcategories' => $subcategories]);
         }
     }
     public function updateCartQuantity(Request $request)
@@ -228,7 +275,7 @@ class HomePageController extends Controller
         $quantity = $request->input('quantity');
 
         // Update the quantity in the database
-        $cartItem = Product_cart::where('product_id', $productId)->first();
+        $cartItem = Product_cart::where('id', $request->input('cart_id'))->first();
         if ($cartItem) {
             $cartItem->quantity = $quantity;
             $cartItem->save();
@@ -269,16 +316,37 @@ class HomePageController extends Controller
         }
     }
 
+    public function user_meta($user_id){
+        $user_metas = profile_meta::where('user_id', $user_id)->get();
+        $user = [];
+        foreach($user_metas as $user_meta){
+            $user[$user_meta['key']] = $user_meta['value'];
+        }
+        if(empty($user['post_code'])){
+            $user['post_code'] = '';
+        }
+        if(empty($user['address'])){
+            $user['address'] = '';
+        }
+        if(empty($user['city'])){
+            $user['city'] = '';
+        }
+        if(empty($user['phone'])){
+            $user['phone'] = '';
+        }
+        return $user;
+    }
+
     public function accountViewer()
     {
         $categories = Product_category::paginate(12);
         $subcategories = Product_sub_category::all();
-
         if (Auth::user()) {
             $user = Auth::user();
-            return view('client.account', ['user' => $user, 'categories' => $categories, 'subcategories' => $subcategories]);
+            $user_meta = (object)$this->user_meta($user->id);
+            return view('client.account', ['user' => $user, 'categories' => $categories, 'subcategories' => $subcategories, 'user_meta'=> $user_meta]);
         } else {
-            return view('client.signin', ['categories' => $categories, 'subcategories' => $subcategories])->with('success', 'You have to login first :)');
+            return view('login', ['categories' => $categories, 'subcategories' => $subcategories])->with('success', 'You have to login first :)');
         }
     }
     public function aboutViewer()
@@ -324,13 +392,14 @@ class HomePageController extends Controller
 
         // return $req->all();
 
-        $product = Product::find($req->product_id);
+        $product = Product::whereId($req->product_id);
 
         $order = new Order();
         $order_list = new Order_list();
 
         $order->phone = $req->input('phone');
         $order->name = $req->input('name');
+        $order->email = Auth::user()->email;
         $order->address = $req->input('address');
         $shipping_cost = ($req->shipping == "60") ? 60 : 120;
         $order->total_price = $shipping_cost;
@@ -338,15 +407,9 @@ class HomePageController extends Controller
         $order->status = '1';
         $order->save();
 
-
-        $order_list->color = $req->input(
-            'color',
-            null
-        );
-        $order_list->size = $req->input('size', null);
         $order_list->product_id = $req->product_id;
         $order_list->quantity = 1;
-        $order_list->price = $product->discounted_price;
+        $order_list->price = $product->distributor_price;
         $order_list->order_id = $order->id;
 
         if ($order_list->save()) {
@@ -398,16 +461,18 @@ class HomePageController extends Controller
 
             $order_list->product_id = $cart->product_id;
             $order_list->quantity = $cart->quantity;
-            $order_list->price = $product->discounted_price * $cart->quantity;
-            $order_list->color = $cart->color_code;
-            $order_list->size = $cart->size_value;
+            $order_list->price = $product->distributor_price * $cart->quantity;
+            $order_list->combination_unique_string = $cart->combination_unique_string;
             $order_list->order_id = $order->id;
             $order_list->save();
             $cart->delete();
+            $shipping_cost += $order_list->price;
         }
+        $order->total_price = $shipping_cost;
+        $order->save();
 
 
-        return redirect()->route('home.thankyou')->with('success', 'Place order succefully done :)');
+        return redirect()->route('home.thankyou')->with(['success'=> 'Place order succefully done :)', 'order_token'=> $order->order_token]);
     }
 
     public function pendingOrderView()
@@ -415,43 +480,40 @@ class HomePageController extends Controller
 
         $categories = Product_category::paginate(12);
         $subcategories = Product_sub_category::all();
-        $orders = Order::where('user_id', auth()->user()->id)
-            ->where('status', '1')
+        $orders = Order::where('email', auth()->user()->email)
+            ->where('status', '1')->with('order_list')
             ->orderBy('created_at', 'desc')->paginate(10);
-        $products = Product::all();
+        
 
         return view('client.orderStatus', [
-            'orders' => $orders, 'products' => $products, 'categories' => $categories,
+            'orders' => $orders, 'categories' => $categories,
             'subcategories' => $subcategories,
         ]);
     }
     public function confirmedOrderView()
     {
-
         $categories = Product_category::paginate(12);
         $subcategories = Product_sub_category::all();
-        $orders = Order::where('user_id', auth()->user()->id)
-            ->where('status', '2')
+        $orders = Order::where('email', auth()->user()->email)
+            ->where('status', '2')->with('order_list')
             ->orderBy('created_at', 'desc')->paginate(10);
-        $products = Product::all();
+        
 
         return view('client.orderStatus', [
-            'orders' => $orders, 'products' => $products, 'categories' => $categories,
+            'orders' => $orders, 'categories' => $categories,
             'subcategories' => $subcategories,
         ]);
     }
     public function cancelledOrderView()
     {
-
         $categories = Product_category::paginate(12);
         $subcategories = Product_sub_category::all();
-        $orders = Order::where('user_id', auth()->user()->id)
-            ->where('status', '3')
+        $orders = Order::where('email', auth()->user()->email)
+            ->where('status', '3')->with('order_list')
             ->orderBy('created_at', 'desc')->paginate(10);
-        $products = Product::all();
 
         return view('client.orderStatus', [
-            'orders' => $orders, 'products' => $products, 'categories' => $categories,
+            'orders' => $orders, 'categories' => $categories,
             'subcategories' => $subcategories,
         ]);
     }
@@ -493,7 +555,7 @@ class HomePageController extends Controller
         } else {
             $categories = Product_category::paginate(12);
             $subcategories = Product_sub_category::all();
-            return view('client.signin', ['categories' => $categories, 'subcategories' => $subcategories])->with('success', 'You have to login first :)');
+            return view('login', ['categories' => $categories, 'subcategories' => $subcategories])->with('success', 'You have to login first :)');
         }
     }
 }

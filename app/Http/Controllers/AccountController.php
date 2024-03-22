@@ -38,6 +38,7 @@ class AccountController extends Controller
             ]);
         }
     }
+
     public function updateData(Request $request)
     {
         // Validate the incoming request if needed
@@ -53,7 +54,7 @@ class AccountController extends Controller
         $logged_inUser = Auth::user();
 
         // Find the model instance by ID
-        $user = User::find($logged_inUser->id);
+        $user = User::whereId($logged_inUser->id);
 
         // Check if the current password is correct
         if($validatedData['password']){

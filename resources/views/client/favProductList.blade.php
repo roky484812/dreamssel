@@ -28,79 +28,99 @@
                 <div class="row">
                     @if ($fav_product_lists->count() > 0)
                         @foreach ($fav_product_lists as $fav_product_list)
-                            <?php $product = Product::find($fav_product_list->product_id); ?>
+                            <?php $product = Product::whereId($fav_product_list->product_id)->first(); ?>
                             <div class="col-md-3 col-sm-4 col-xsm-6">
 
-                            <div class="product-card">
-                                <div class="card-product-image">
-
-                                    <a href="{{ route('home.productPage', ['id' => $product->id]) }}"
-                                        class="product-card-link">
-                                        <img src="{{ $product->thumbnail_image }}" alt="Product image" />
-                                    </a>
-                                    <div class="card-discount">
-                                        <p>-{{ round((($product->price - $product->discounted_price) / $product->price) * 100) }}%
-                                        </p>
-                                    </div>
-                                    <div class="card-add-to-wishlist">
-
-                                        <a href="" class="remove-product"
-                                            data-fav-list-id="{{ $fav_product_list->id }}">
-                                            <i class="fa-solid fa-trash-can"></i>
+                                <div class="product-card">
+                                    <div class="card-product-image">
+    
+                                        <a href="{{ route('home.productPage', ['id' => $product->id]) }}" class="product-card-link">
+                                            <img src="{{ $product->thumbnail_image }}" alt="Product image" />
                                         </a>
-                            
+                                        <div class="card-discount">
+                                        @if (auth()->user()) 
+                                            <p>                                                
+                                            @php
+                                                try {
+                                                    echo round((($product->price - $product->distributor_price) / $product->price) * 100);
+                                                } catch (\Throwable $th) {
+                                                    echo 0;
+                                                }
+                                            @endphp %
+                                            </p>
+                                        @endif
+                                        </div>
+                                        <div class="card-add-to-wishlist">
+                                            @if (auth()->user())
+                                                <a href="" class="addToFavBtn"
+                                                    data-product-fav-id="{{ $product->id }}">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('home.signInPage') }}"
+                                                    data-product-fav-id="{{ $product->id }}">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                </a>
+                                            @endif
+                                        </div>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <span class="badge text-bg-dark">{{ $product->country_code }}</span>
+                                        </div>
+                                        <div class="card-add-to-cart">
+                                            @if (auth()->user())
+                                                <a href="" class="addToCartBtn"
+                                                    data-product-id="{{ $product->id }}">
+                                                    <i class="bi bi-cart3"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('home.signInPage') }}"
+                                                    data-product-id="{{ $product->id }}">
+                                                    <i class="bi bi-cart3"></i>
+                                                </a>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <div class="card-add-to-cart">
+                                    <div class="card-product-name">
+                                        <p>{{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}</p>
+                                    </div>
+                                    <div class="card-price">
                                         @if (auth()->user())
-                                            <a href="" class="addToCartBtn"
-                                                data-product-id="{{ $product->id }}">
-                                                <i class="bi bi-cart3"></i>
-                                            </a>
-                                        @else
-                                            <a href="{{ route('home.signInPage') }}"
-                                                data-product-id="{{ $product->id }}">
-                                                <i class="bi bi-cart3"></i>
-                                            </a>
+                                            <p>&#2547; {{ $product->distributor_price }} </p>
+                                            <span><del>&#2547; {{ $product->price }}</del></span>
+                                            @else
+                                            <p>&#2547; {{ $product->price }} </p>
                                         @endif
                                     </div>
-                                </div>
-                                <div class="card-product-name">
-                                    <p>{{ \Illuminate\Support\Str::limit($product->title, 40, $end = '...') }}</p>
-                                </div>
-                                <div class="card-price">
-                                    <p>&#2547; {{ $product->discounted_price }} </p>
-                                    <span><del>&#2547; {{ $product->price }}</del></span>
-                                </div>
-
-                                <div class="card-review-wrapper">
-                                    <div class="card-review">
-                                        @php
-                                            $rating = $product->rating;
-                                        @endphp
-                                        @for ($i = 0; $i < 5; $i++)
-                                            @if ($rating >= 1)
-                                                <img src="{{ asset('assets/client/images/filled_star.svg') }}"
-                                                    alt="" data-index="1" />
-                                            @else
-                                                <img src="{{ asset('assets/client/images/blank_star.svg') }}"
-                                                    alt="" data-index="5" />
-                                            @endif
+    
+                                    <div class="card-review-wrapper">
+                                        <div class="card-review">
                                             @php
-                                                $rating--;
+                                                $rating = $product->rating;
                                             @endphp
-                                        @endfor
+                                            @for ($i = 0; $i < 5; $i++)
+                                                @if ($rating >= 1)
+                                                    <img src="{{ asset('assets/client/images/filled_star.svg') }}"
+                                                        alt="" data-index="1" />
+                                                @else
+                                                    <img src="{{ asset('assets/client/images/blank_star.svg') }}"
+                                                        alt="" data-index="5" />
+                                                @endif
+                                                @php
+                                                    $rating--;
+                                                @endphp
+                                            @endfor
+                                        </div>
+                                        <div class="card-number-of-reviews">
+                                            <p>&#x28;{{ $product->rating_count }}&#x29;</p>
+                                        </div>
                                     </div>
-                                    <div class="card-number-of-reviews">
-                                        <p>&#x28;{{ $product->rating_count }}&#x29;</p>
-                                    </div>
+                                    <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}"
+                                        class="card-buy-now text-decoration-none" type="button">
+                                        <p>অর্ডার করুন</p>
+                                    </a>
                                 </div>
-                                <a href="@if(auth()->user()){{route('home.placeOrderView',['product_id'=>$product->id])}}@else
-                                    {{ route('home.signInPage') }}@endif" class="card-buy-now text-decoration-none" type="button">
-                                    <p>অর্ডার করুন</p>
-                                </a>
-                            </div>
 
-                        </div>
+                            </div>
                         @endforeach
                     @else
                         <div class=" col-md-12 d-flex justify-content-center">

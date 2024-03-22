@@ -20,49 +20,78 @@
 
     <!-- cart option start from here -->
     <div class="container">
-        <div class="shopping-cart">
-            <div class="column-labels">
-                <label class="product-image">Image</label>
-                <label class="productDetails">Product</label>
-                <label class="product-price">Price</label>
-                <label class="product-quantity">Quantity</label>
-                <label class="product-line-price">Total</label>
-                <label class="product-removal">Token</label>
-            </div>
-
-            @if($orders->count() == 0)
-            <div class="nothing-to-show d-flex justify-content-center mt-5 mb-5">
-                Nothing to show :<
-            </div>
-            @endif
-         
-
-            @foreach ($orders as $order)
-                <?php $product = $products->find($order->product_id); ?>
-                <div class="product">
-                    <div class="product-image">
-                        <img src="{{ $product->thumbnail_image }}">
-                    </div>
-                    <div class="productDetails">
-                        <div class="product-title">{{ $product->title }}</div>
-                    </div>
-                    <div class="product-price">{{ $product->discounted_price }}</div>
-                    <div class="product-quantity">
-                        <div class="inputSection">
-                            
-                            <input disabled type="number" value="{{ $order->quantity }}" min="1">
-                            
-                        </div>
-                    </div>
-                    <div class="product-line-price">{{ $order->quantity * $product->discounted_price }}</div>
-                    <div class="product-removal">{{$order->order_token}}</div>
-                 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Order Token</th>
+                    <th>Address</th>
+                    <th>Total Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if($orders->count() == 0)
+                <td colspan="5">
+                    Nothing to show :<
                 </div>
-                
-                
-            @endforeach
-
-        </div>
+                @endif
+                @foreach ($orders as $index => $order)
+                <tr>
+                    <td>{{ $index+1 }}</td>
+                    <td>{{ $order->order_token }}</td>
+                    <td>{{ $order->address }}</td>
+                    <td>{{ $order->total_price }}</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $order->id }}">Details</button>                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop{{ $order->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel{{ $order->id }}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel{{ $order->id }}">Order List</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                    <th>Single Price</th>
+                                                    <th>Total Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($order->order_list as $index => $order_list)   
+                                                <tr>
+                                                    <td>{{ $index+1 }}</td>
+                                                    <td>
+                                                        <a href="{{ route('home.productPage', ['id' => $order_list->product_fetch->id]) }}" class="text-dark">
+                                                            {{ Str::limit($order_list->product_fetch->title, '50') }}
+                                                        </a>
+                                                    </td>
+                                                    <td> {{ $order_list->quantity }} </td>
+                                                    <td>{{ $order_list->product_fetch->distributor_price }}</td>
+                                                    <td>{{ $order_list->quantity * $order_list->product_fetch->distributor_price }}</td>
+                                                </tr>   
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection
 

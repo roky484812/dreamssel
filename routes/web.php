@@ -159,6 +159,9 @@ Route::controller(ClientHomePageController::class)->group(function () {
     Route::get('/search/result', 'search')->name('home.searchView');
     Route::post('/update/cart/quantity', 'updateCartQuantity')->name('home.updateCartQuantity');
     Route::get('/product/combination', 'product_combinations')->name('client.product.combination');
+    Route::get('/product/flash-sale', 'flash_products')->name('flash_sale');
+    Route::get('product/subcategory/fetch', 'product_subcategory_filter')->name('client.product.sub_category_filter');
+    Route::get('/product/search/fetch', 'search_products')->name('client.product.search');
 });
 
 Route::controller(ClientAnnouncementController::class)->group(function(){

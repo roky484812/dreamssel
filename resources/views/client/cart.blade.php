@@ -38,7 +38,7 @@
 
 
             @foreach ($product_carts as $product_cart)
-                <?php $product = Product::find($product_cart->product_id); ?>
+                <?php $product = Product::whereId($product_cart->product_id)->first(); ?>
                 <div class="product" data-product-id="{{ $product->id }}">
                     <div class="product-image">
                         <img src="{{ $product->thumbnail_image }}">
@@ -46,30 +46,29 @@
                     <div class="productDetails">
                         <div class="product-title">{{ $product->title }}</div>
                     </div>
-                    <div class="product-price">{{ $product->discounted_price }}</div>
+                    <div class="product-price">{{ $product->distributor_price }}</div>
                     <div class="product-quantity">
                         <div class="inputSection">
                             <button class="quantity-button decrease">-</button>
-                            <input type="number" class="quantity-input" value="{{ $product_cart->quantity }}"
+                            <input type="number" class="quantity-input" data-product-cart-id="{{ $product_cart->id }}" value="{{ $product_cart->quantity }}"
                                 min="1">
                             <button class="quantity-button increase">+</button>
                         </div>
                     </div>
-                    <div class="product-line-price">{{ $product_cart->quantity * $product->discounted_price }}</div>
+                    <div class="product-line-price">{{ $product_cart->quantity * $product->distributor_price }}</div>
                     <div class="product-removal">
                         <button class="remove-product" data-product-cart-id="{{ $product_cart->id }}">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </div>
                 </div>
-                <input type="hidden" value="{{ $sub_total += $product_cart->quantity * $product->discounted_price }}">
+                <input type="hidden" value="{{ $sub_total += $product_cart->quantity * $product->distributor_price }}">
             @endforeach
 
 
             <!-- update button section -->
             <div class="updateButtons mt-5">
                 <a href="{{route('home')}}" class="returnToShopBtn btn border-dark text-decoration-none">Return to home</a>
-
             </div>
 
 
@@ -160,6 +159,8 @@
         function adjustQuantity(button, change) {
             var productId = button.closest('.product').data('product-id');
             var quantityInput = button.siblings('.quantity-input');
+            var product_cart_id = quantityInput.data('product-cart-id');
+            console.log('cart',product_cart_id);
             var currentQuantity = parseInt(quantityInput.val());
             var newQuantity = currentQuantity + change;
 
@@ -174,7 +175,8 @@
                 data: {
                     _token: '{{ csrf_token() }}',
                     product_id: productId,
-                    quantity: newQuantity
+                    quantity: newQuantity,
+                    cart_id: product_cart_id
                 },
                 success: function(response) {
                     if (response.success) {

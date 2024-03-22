@@ -185,7 +185,11 @@
             </div>
         </div>
         <div class="viewAllBtnSection">
-            <button class="viewAllProductBtn">View All Products</button>
+            <button class="viewAllProductBtn">
+                <a href="{{ route('flash_sale') }}" class="text-decoration-none text-light">
+                    View All Products
+                </a>
+            </button>
         </div>
     </div>
 
@@ -477,7 +481,11 @@
             </div>
         </div>
         <div class="viewAllBtnSection">
-            <button class="viewAllProductBtn">View All Products</button>
+            <button class="viewAllProductBtn">
+                <a href="{{ route('home.shopPage') }}" class="text-decoration-none text-light">
+                    View All Products
+                </a>
+            </button>
         </div>
     </div>
 

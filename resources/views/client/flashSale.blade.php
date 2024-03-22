@@ -1,4 +1,4 @@
-@extends('layout.master', ['title' => 'Shop Now'])
+@extends('layout.master', ['title' => 'Flash Sales'])
 
 
 @section('content')
@@ -7,7 +7,7 @@
             <div class="header-category">
                 <div class="box-pointer"></div>
                 <div class="header-category-title">
-                    <h6>Shop</h6>
+                    <h6>Flash Sale</h6>
                 </div>
             </div>
             <div class="flashSaleHeader">
@@ -20,7 +20,7 @@
         <div class="ourProductBox">
             <div class="product-list-wrapper">
                 <div class="row">
-                    @foreach ($products as $product)
+                    @foreach ($flash_products as $product)
                     <div class="col-md-3 col-sm-4 col-xsm-6">
 
                         <div class="product-card">
@@ -28,7 +28,7 @@
 
                                 <a href="{{ route('home.productPage', ['id' => $product->id]) }}"
                                     class="product-card-link">
-                                    <img src="{{ $product->thumbnail_image }}" alt="Product image" />
+                                    <img src="{{ asset($product->thumbnail_image) }}" alt="Product image" />
                                 </a>
                                 <div class="card-discount">
                                 @if (auth()->user()) 
@@ -118,7 +118,7 @@
 
                     <!-- Pagination -->
                     <div class=" paginate-style justify-content-center">
-                        {!! $products->links() !!}
+                        {{ $flash_products->links() }}
                     </div>
                    
 

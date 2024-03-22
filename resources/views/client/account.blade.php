@@ -14,7 +14,7 @@
             <div class="account-holder-name-wrapper">
                 <p>Welcome</p>
                 <div class="a-h-name">
-                    <p>{{ $user->fname }} {{ $user->lname }}</p>
+                    <p>{{ $user->name }}</p>
                 </div>
             </div>
         </div>
@@ -58,53 +58,47 @@
                 <div class="your-profile-text">
                     <h5>Edit Your Profile</h5>
                 </div>
-                <div class="ac-input-field-wrapper">
-                    <div class="ac-wrapper">
-                        <p>First Name</p>
-                        <div class="inputfield-wrapper">
-                            <input class="inputfield @error('fname') is-invalid @enderror" name="fname" type="text"
-                                placeholder="Farhan" value="{{ $user->fname }}" />
-                            @error('fname')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="ac-wrapper">
-                        <p>Last Name</p>
-                        <div class="inputfield-wrapper">
-                            <input class="inputfield @error('lname') is-invalid @enderror" name="lname" type="text"
-                                placeholder="Sadik" value="{{ $user->lname }}" />
-                            @error('lname')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
+                <div class="ac-full-width-wrapper">
+                    <p>Full Name</p>
+                    <div class="inputfield-wrapper">
+                        <input class="inputfield @error('fname') is-invalid @enderror" name="fname" type="text"
+                            placeholder="Farhan" value="{{ $user->name }}" />
+                        @error('fname')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="ac-input-field-wrapper">
                     <div class="ac-wrapper">
                         <p>Email</p>
                         <div class="inputfield-wrapper">
-                            <input class="inputfield" type="text" name="email" placeholder="example@gmail.com"
-                                value="{{ $user->email }}" disabled="true" />
+                            <input class="inputfield" type="text" name="email" placeholder="example@gmail.com" value="{{ $user->email }}" disabled="true" />
                         </div>
                     </div>
                     <div class="ac-wrapper">
                         <p>Phone</p>
                         <div class="inputfield-wrapper">
-                            <input class="inputfield" type="text" name="phone" placeholder="+8801516XXXXXXX"
-                                value="{{ $user->phone }}" />
+                            <input class="inputfield @error('phone') is-invalid @enderror" type="phone" name="text" placeholder="+8801516XXXXXXX" value="{{ $user_meta->phone }}" />
+                            @error('phone')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
                 </div>
                 <div class="ac-full-width-wrapper">
                     <p>Address</p>
                     <div class="inputfield-full-width-wrapper">
-                        <input class="full-inputfield" type="text" name="address"
-                            placeholder="Mirpur 10 Round,Dhaka,1216," value="{{ $user->address }}" />
+                        <input class="full-inputfield @error('address') is-invalid @enderror" type="text" name="address"
+                            placeholder="Mirpur 10 Round,Dhaka,1216," value="{{ $user_meta->address }}" />
+                            @error('address')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                     </div>
                 </div>
                 <div class="ac-full-width-wrapper">
