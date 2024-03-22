@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Client\AnnouncementController as ClientAnnouncementController;
@@ -164,11 +165,12 @@ Route::controller(ClientAnnouncementController::class)->group(function(){
     Route::get('/accouncement', 'announcementList')->name('client.announcement.list');
     Route::get('/accouncement/{id}', 'announcement_view')->name('client.announcement.view');
 });
+Route::post('/update-data', [AccountController::class, 'updateData'])->name('account.update');
 
 
 Route::group(['middleware'=> ['web', 'type.distributor']], function(){
     Route::controller(AuthController::class)->group(function(){
-        Route::get('/logout', 'logout')->name('dist.logout');
+        Route::get('/logout', 'logout')->name('logout');
     });
     Route::controller(DistDashboard::class)->group(function(){
         Route::get('/dashboard', 'index')->name('dist.dashboard');

@@ -94,3 +94,6 @@
         </div>
     </div>
 @endsection
+@section('custom_js')
+    @include('admin.widgets.alert')
+@endsection
