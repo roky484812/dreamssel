@@ -93,7 +93,7 @@
                                         <img src="{{ $product->thumbnail_image }}" alt="Product image" />
                                     </a>
                                     <div class="card-discount">
-                                        <p>-{{ round((($product->price - $product->discounted_price) / $product->price) * 100) }}%
+                                        <p>-{{ round((($product->price - $product->distributor_price) / $product->price) * 100) }}%
                                         </p>
                                     </div>
                                     <div class="card-add-to-wishlist">
@@ -125,7 +125,7 @@
                                     <p>{{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}</p>
                                 </div>
                                 <div class="card-price">
-                                    <p>&#2547; {{ $product->discounted_price }} </p>
+                                    <p>&#2547; {{ $product->distributor_price }} </p>
                                     <span><del>&#2547; {{ $product->price }}</del></span>
                                 </div>
 
@@ -226,7 +226,7 @@
                                         <img src="{{ $product->thumbnail_image }}" alt="Product image" />
                                     </a>
                                     <div class="card-discount">
-                                        <p>-{{ round((($product->price - $product->discounted_price) / $product->price) * 100) }}%
+                                        <p>-{{ round((($product->price - $product->distributor_price) / $product->price) * 100) }}%
                                         </p>
                                     </div>
                                     <div class="card-add-to-wishlist">
@@ -260,7 +260,7 @@
                                     <p>{{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}</p>
                                 </div>
                                 <div class="card-price">
-                                    <p>&#2547; {{ $product->discounted_price }} </p>
+                                    <p>&#2547; {{ $product->distributor_price }} </p>
                                     <span><del>&#2547; {{ $product->price }}</del></span>
                                 </div>
 
@@ -355,7 +355,7 @@
                                         <img src="{{ $product->thumbnail_image }}" alt="Product image" />
                                     </a>
                                     <div class="card-discount">
-                                        <p>-{{ round((($product->price - $product->discounted_price) / $product->price) * 100) }}%
+                                        <p>-{{ round((($product->price - $product->distributor_price) / $product->price) * 100) }}%
                                         </p>
                                     </div>
                                     <div class="card-add-to-wishlist">
@@ -389,7 +389,7 @@
                                     <p>{{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}</p>
                                 </div>
                                 <div class="card-price">
-                                    <p>&#2547; {{ $product->discounted_price }} </p>
+                                    <p>&#2547; {{ $product->distributor_price }} </p>
                                     <span><del>&#2547; {{ $product->price }}</del></span>
                                 </div>
 

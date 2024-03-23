@@ -15,7 +15,7 @@
 <div class="container">
     <div class="companyDetailsBox">
         <div class="imgBox">
-            <img src="../assets/companyStory.jpg" alt="">
+            <img src="{{ asset('assets/about/920020f0-bc1b-40c8-9afe-9cb70476a650.jpeg') }}" alt="">
         </div>
         <div class="storyBox">
             <h1>Our Story</h1>

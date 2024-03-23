@@ -79,7 +79,7 @@
                                                                             $product = $products->find(
                                                                                 $list_item->product_id,
                                                                             );
-                                                                            $localPrice+=$product->discounted_price*$list_item->quantity;
+                                                                            $localPrice+=$product->distributor_price*$list_item->quantity;
                                                                         @endphp
     
                                                                         <!-- Product Image and title -->
@@ -95,33 +95,14 @@
                                                                         </div>
                                                                         <div class="orderCardAttributes d-flex flex-wrap">
                                                                             <div class="orderCardAttrLeft">
-                                                                                <!-- Color -->
-    
-                                                                                <div
-                                                                                    class="orderAttrItem d-flex align-items-center justify-content-between">
-                                                                                    <p class="text-muted mb-0">Color:</p>
-                                                                                    <div class="me-2"
-                                                                                        style="
-                                                                                        width: 20px;
-                                                                                        height: 20px;
-                                                                                        background-color: {{ $list_item->color }};
-                                                                                      ">
-                                                                                    </div>
-                                                                                </div>
                                                                                 <!-- price -->
                                                                                 <div
                                                                                     class="orderAttrItem d-flex align-items-center justify-content-between">
                                                                                     <p class="text-muted">Price:</p>
-                                                                                    <span>{{ $product->discounted_price }}</span>
+                                                                                    <span>{{ $product->distributor_price }}</span>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="orderCardAttrRight">
-                                                                                <!-- Size -->
-                                                                                <div
-                                                                                    class="orderAttrItem d-flex align-items-center justify-content-between">
-                                                                                    <p class="text-muted mb-0">Size:</p>
-                                                                                    <span>{{ $list_item->size }}</span>
-                                                                                </div>
                                                                                 <!-- Quantity -->
                                                                                 <div
                                                                                     class="orderAttrItem d-flex align-items-center justify-content-between">
