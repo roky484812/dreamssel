@@ -80,7 +80,7 @@
                     <div class="ac-wrapper">
                         <p>Phone</p>
                         <div class="inputfield-wrapper">
-                            <input class="inputfield @error('phone') is-invalid @enderror" type="phone" name="text" placeholder="+8801516XXXXXXX" value="{{ $user_meta->phone }}" />
+                            <input class="inputfield @error('phone') is-invalid @enderror" type="text" name="phone" placeholder="+8801516XXXXXXX" value="{{ $user_meta->phone }}" />
                             @error('phone')
                                 <div class="invalid-feedback">
                                     {{ $message }}

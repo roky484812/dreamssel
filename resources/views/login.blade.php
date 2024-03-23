@@ -1,7 +1,11 @@
 @extends('layouts.auth')
     <!-- Section: Design Block -->
     @section('content')
-        <div class="container @if(Session::has('page')) sign-up-mode @endif">
+        <div class="container @if(Session::has('page')) 
+        @php
+            Session::forget('page')
+        @endphp
+         sign-up-mode @endif">
             <div class="forms-container">
                 <div class="signin-signup">
                     <form method="POST" action="{{ route('login') }}" class="sign-in-form">

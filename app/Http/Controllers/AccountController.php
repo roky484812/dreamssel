@@ -54,7 +54,7 @@ class AccountController extends Controller
         $logged_inUser = Auth::user();
 
         // Find the model instance by ID
-        $user = User::whereId($logged_inUser->id);
+        $user = User::whereId($logged_inUser->id)->first();
 
         // Check if the current password is correct
         if($validatedData['password']){

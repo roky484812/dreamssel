@@ -77,7 +77,7 @@ class ProductController extends Controller
     }
 
     public function product_click_log(){
-        $product_click_logs = Product_click_log::orderBy('view_count','desc')->with('product')->with('user')->get();
+        $product_click_logs = Product_click_log::orderBy('view_count','desc')->with('product')->with('user')->paginate(20);
         return view('admin.product_click_logs', ['product_click_logs'=> $product_click_logs]);
     }
     

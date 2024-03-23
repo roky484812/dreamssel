@@ -14,8 +14,8 @@
                 <div class="secondary-images">
                     @foreach ($product_galleries as $product_gallery)
                         <div class="image"><img
-                                onclick="swapImages('{{ $product_gallery->image }}','{{ $product->thumbnail_image }}')"
-                                src="{{ $product_gallery->image }}" alt="Product gallery images" /></div>
+                                onclick="swapImages('{{ asset($product_gallery->image) }}','{{ asset($product->thumbnail_image) }}')"
+                                src="{{ asset($product_gallery->image) }}" alt="Product gallery images" /></div>
                     @endforeach
                 </div>
                 <div class="primary-image">
@@ -370,7 +370,7 @@
         function swapImages(smallImage, bigImage) {
             var bigImageElement = document.getElementById('big-image');
             var thumbnailElement = event.target;
-
+            
             // Swap src attributes
             var temp = bigImageElement.src;
             bigImageElement.src = thumbnailElement.src;

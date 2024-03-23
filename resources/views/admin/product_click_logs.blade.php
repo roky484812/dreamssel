@@ -55,6 +55,9 @@
                                     </div>
                                     @endforeach
                                 </div>
+                                <div class="mt-3">
+                                    {{ $product_click_logs->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -99,8 +99,3 @@
 
 
 @endsection
-
-@section('custom_css')
-
-<link rel="stylesheet" href="{{asset('assets/client/css/about.css')}}"> 
-@endsection

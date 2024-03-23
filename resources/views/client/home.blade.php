@@ -233,7 +233,11 @@
                 <h1>Best Selling Products</h1>
             </div>
             <div class="ViewAllBtnBox">
-                <button class="ViewAllBtn">View All</button>
+                <button class="ViewAllBtn">
+                    <a href="{{ route('home.shopPage') }}" class="text-decoration-none text-light">
+                        View All
+                    </a>
+                </button>
             </div>
         </div>
         <!-- product list  -->

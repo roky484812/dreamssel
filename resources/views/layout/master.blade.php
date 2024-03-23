@@ -20,15 +20,7 @@
     <!-- Bootstrap icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <!-- custom css -->
-    <link rel="stylesheet" href="{{ asset('assets/client/css/viewProduct.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/client/css/test.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/client/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/client/css/card.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/client/css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/client/css/toolbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/client/css/bottomFetureProducts.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/client/css/account.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/client/css/signup.css') }}">
 
     @yield('custom_css')
     <!-- owl carousel -->
@@ -107,12 +99,6 @@
                     <li class="nav-item">
                         <a class="drawer-nav-link" href="{{ route('home.signInPage') }}">Sign In</a>
                     </li>
-                @else
-                    @if (Auth::user()->role == 2)
-                        <li class="nav-item">
-                            <a class="drawer-nav-link" href="{{ route('admin.dashboard') }}">Admin Panel</a>
-                        </li>
-                    @endif
                 @endif
 
             </ul>
@@ -155,10 +141,6 @@
                         <a href="{{ route('client.announcement.list') }}">Announcement</a>
                         @if (!Auth::check())
                             <a class="" href="{{ route('home.signUpPage') }}">Sign Up</a>
-                        @else
-                            @if (Auth::user()->role == 2)
-                                <a class="" href="{{ route('admin.dashboard') }}">Admin Panel</a>
-                            @endif
                         @endif
 
                     </div>
@@ -177,9 +159,18 @@
                         <a href="{{ route('home.favPage') }}"><i class="fa-regular fa-heart"></i></a>
                         <a href="{{ route('home.cart') }}">
                             <i class="fa-solid fa-cart-shopping"></i>
-
                         </a>
-                        <a href="{{ route('home.accountPage') }}"><i class="fa-regular fa-user"></i></a>
+                        
+                        <a href="@if(auth()->user()) 
+                                    @if( auth()->user()->role == 1 || auth()->user()->role == 2)
+                                        {{ route('admin.dashboard') }} 
+                                    @else
+                                        {{ route('home.accountPage') }} 
+                                    @endif
+                                @else
+                                    {{ route('home.accountPage') }} 
+                                @endif">
+                                    <i class="fa-regular fa-user"></i></a>
                     </div>
                 </div>
             </nav>

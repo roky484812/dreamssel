@@ -37,7 +37,7 @@
 @endsection
 
 @section('custom_css')
-    <link rel="stylesheet" href="{{ asset('assets/client_old/css/searchView.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/client/css/searchView.css') }}">
 @endsection
 @section('scripts')
     <script>
@@ -101,7 +101,7 @@
         });
     </script>
 
-    <script src="{{ asset('assets/client_old/js/priceRange.js') }}"></script>
+    <script src="{{ asset('assets/client/js/priceRange.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/moment/moment.js') }}"></script>
     <script>
         $(document).ready(function() {

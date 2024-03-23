@@ -27,6 +27,7 @@ use App\Models\Product_combination;
 use App\Models\profile_meta;
 use PhpParser\Node\Expr\AssignOp\ShiftLeft;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Session;
 
 class HomePageController extends Controller
 {
@@ -119,11 +120,17 @@ class HomePageController extends Controller
     }
 
     public function search_products(Request $req){
-        $products = Product::where('products.status', 1)->whereBetween('products.price', [$req->input('min_price'), $req->input('max_price')])
+        $products = Product::where('products.status', 1)
         ->leftjoin('product_categories', 'product_categories.id', 'products.category_id')
         ->leftjoin('product_countries', 'product_countries.id', 'products.country_id');
         if($req->input('search')){
             $products->where('products.title', 'like', '%'.$req->input('search').'%');
+        }
+
+        if(Auth::check()){
+            $products->whereBetween('products.distributor_price', [$req->input('min_price'), $req->input('max_price')]);
+        }else{
+            $products->whereBetween('products.price', [$req->input('min_price'), $req->input('max_price')]);
         }
 
         if($req->input('category_id')){
@@ -297,19 +304,12 @@ class HomePageController extends Controller
         return view('client.viewProduct', ['categories' => $categories, 'subcategories' => $subcategories, 'product' => $product, 'products' => $products, 'single_category' => $single_category, 'single_sub_category' => $single_sub_category, 'colors' => $colors, 'sizes' => $sizes, 'product_galleries' => $product_galleries, 'reviews' => $reviews, 'product_attributes'=> $product_attributes]);
     }
 
-    public function signUpViewer()
-    {
-        $categories = Product_category::paginate(12);
-        $subcategories = Product_sub_category::all();
-
-        return view('client.signup', ['categories' => $categories, 'subcategories' => $subcategories]);
+    public function signUpViewer(){
+        Session::put('page', 'signup');
+        return view('login');
     }
-    public function signInViewer()
-    {
-        $categories = Product_category::paginate(12);
-        $subcategories = Product_sub_category::all();
-
-        return view('login', ['categories' => $categories, 'subcategories' => $subcategories]);
+    public function signInViewer(){
+        return view('login');
     }
     public function cartViewer()
     {
