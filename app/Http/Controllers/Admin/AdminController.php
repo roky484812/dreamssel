@@ -9,7 +9,6 @@ use App\Http\Controllers\AuthController;
 use App\Models\profile_meta;
 use App\Models\Setting;
 use App\Models\User;
-use Illuminate\Support\Facades\Cache;
 
 class AdminController extends Controller
 {
@@ -59,15 +58,5 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Countdown timer end time has been updated successfully.');
     }
     // Scheduled Job or Background Task
-    public function updateCountdownTimer() {
-        $endTime = Setting::where('key', 'countdown_timer_end_time')->value('value');
-
-        if ($endTime) {
-            $remainingTime = strtotime($endTime) - time();
-
-            // Update the cache or another database field with the remaining time
-            Cache::put('countdown_timer_remaining_time', $remainingTime, now()->addMinutes(1));
-        }
-    }
 }
 
