@@ -256,7 +256,7 @@ class HomePageController extends Controller
         ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
         ->leftjoin('product_categories', 'product_categories.id', 'products.category_id')
         ->leftjoin('product_sub_categories', 'product_sub_categories.id', 'products.sub_category_id')
-        ->select('products.id', 'products.category_id', 'products.title', 'products.price', 'products.category_id', 'products.sub_category_id', 'products.distributor_price', 'products.thumbnail_image', 'products.sku', 'products.product_code', 'products.short_description', 'products.description', 'products.is_variational', 'products.created_at', 'product_countries.name as country_name', 'product_countries.code as country_code', 'product_categories.category_name', 'product_sub_categories.sub_category_name', 'products.view_count')
+        ->select('products.id', 'products.category_id', 'products.title', 'products.price', 'products.category_id', 'products.sub_category_id', 'products.distributor_price', 'products.thumbnail_image', 'products.sku', 'products.product_code', 'products.short_description', 'products.description', 'products.is_variational', 'products.created_at', 'product_countries.name as country_name', 'product_countries.code as country_code', 'product_categories.category_name', 'product_sub_categories.sub_category_name', 'products.view_count', 'products.rating', 'products.rating_count')
         ->first();
         $product_attributes = [];
         if($product->is_variational){

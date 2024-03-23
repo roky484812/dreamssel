@@ -109,9 +109,11 @@
                                             </svg>
                                         </a>
                                         <div class="mt-2 me-md-2">
-                                            <form class="form-inline">
+                                            <form class="form-inline" action="{{ route('admin.productManagement') }}">
                                                 <div class="search-element">
-                                                    <input type="search" class="form-control header-search"
+                                                    <input type="search" class="form-control header-search" name="search" @isset($selected['search'])
+                                                        value="{{ $selected['search'] }}"
+                                                    @endisset
                                                         placeholder="Search…" aria-label="Search" tabindex="1">
                                                     <button class="btn btn-primary-color" type="button">
                                                         <svg class="header-icon search-icon" x="1008" y="1248"
@@ -162,42 +164,6 @@
                                                     </path>
                                                 </svg>
                                             </a>
-                                        </div>
-                                        <div class="dropdown header-notify">
-                                            <a class="nav-link icon" data-bs-toggle="dropdown">
-                                                <svg class="header-icon" x="1008" y="1248" viewBox="0 0 24 24"
-                                                    height="100%" width="100%" preserveAspectRatio="xMidYMid meet"
-                                                    focusable="false">
-                                                    <path opacity=".3"
-                                                        d="M12 6.5c-2.49 0-4 2.02-4 4.5v6h8v-6c0-2.48-1.51-4.5-4-4.5z">
-                                                    </path>
-                                                    <path
-                                                        d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-11c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2v-5zm-2 6H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6zM7.58 4.08L6.15 2.65C3.75 4.48 2.17 7.3 2.03 10.5h2a8.445 8.445 0 013.55-6.42zm12.39 6.42h2c-.15-3.2-1.73-6.02-4.12-7.85l-1.42 1.43a8.495 8.495 0 013.54 6.42z">
-                                                    </path>
-                                                </svg>
-                                                <span class="pulse "></span>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow  animated">
-                                                <a href="chat.html" class="dropdown-item d-flex pb-3">
-                                                    <svg class="header-icon me-4" x="1008" y="1248"
-                                                        viewBox="0 0 24 24" height="100%" width="100%"
-                                                        preserveAspectRatio="xMidYMid meet" focusable="false">
-                                                        <path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3" />
-                                                        <path
-                                                            d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z" />
-                                                    </svg>
-                                                    <div>
-                                                        <div class="font-weight-bold">Message Sent.</div>
-                                                        <div class="small text-muted">3 hours ago</div>
-                                                    </div>
-                                                </a>
-
-
-
-                                                <div class=" text-center p-2 border-top">
-                                                    <a href="chat.html" class="">View All Notifications</a>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div class="dropdown profile-dropdown">
                                             <a href="javascript:void(0)" class="nav-link icon leading-none"
