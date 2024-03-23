@@ -12,39 +12,55 @@ use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
-    public function pendingOrder()
-    {
-        $orders = Order::where('status', '1')
-            ->with('order_list')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10); 
+    public function pendingOrder(Request $req){
         $products = Product::all();
         $users = User::all();
-        $orders = Order::where('status', '1')->with('order_list')
-        ->orderBy('created_at', 'desc')->paginate(10);
-
+        $orders_query = Order::where('status', '1')->with('order_list')
+        ->orderBy('created_at', 'desc');
+        if($req->input('token')){
+            $orders_query = $orders_query->where('order_token', 'like', '%'.$req->input('token').'%');
+        }
+        $orders = $orders_query->paginate(10);
         return view('admin.order.pendingOrder', [
             'orders' => $orders,
             'products' => $products,
-            'users' => $users
+            'users' => $users,
+            'search_token'=> $req->input('token')
         ]);
     }
-    public function confirmedOrder()
+    public function confirmedOrder(Request $req)
     {
-        $orders = Order::where('status', '2')->orderBy('created_at', 'desc')->with('order_list')->paginate(10); 
         $products = Product::all();
         $users = User::all();
-
-        return view('admin.order.confirmedOrder', ['orders' => $orders, 'products' => $products, 'users' => $users]);
+        $orders_query = Order::where('status', '2')->with('order_list')
+        ->orderBy('created_at', 'desc');
+        if($req->input('token')){
+            $orders_query = $orders_query->where('order_token', 'like', '%'.$req->input('token').'%');
+        }
+        $orders = $orders_query->paginate(10);
+        return view('admin.order.pendingOrder', [
+            'orders' => $orders,
+            'products' => $products,
+            'users' => $users,
+            'search_token'=> $req->input('token')
+        ]);
       
     }
-    public function cancelledOrder()
-    {
-        $orders = Order::where('status', '3')->orderBy('created_at', 'desc')->with('order_list')->paginate(10); 
+    public function cancelledOrder(Request $req){
         $products = Product::all();
         $users = User::all();
-
-        return view('admin.order.cancelledOrder', ['orders' => $orders, 'products' => $products, 'users' => $users]);
+        $orders_query = Order::where('status', '3')->with('order_list')
+        ->orderBy('created_at', 'desc');
+        if($req->input('token')){
+            $orders_query = $orders_query->where('order_token', 'like', '%'.$req->input('token').'%');
+        }
+        $orders = $orders_query->paginate(10);
+        return view('admin.order.pendingOrder', [
+            'orders' => $orders,
+            'products' => $products,
+            'users' => $users,
+            'search_token'=> $req->input('token')
+        ]);
     }
 
     public function order_confirm(Request $request, $order_id)

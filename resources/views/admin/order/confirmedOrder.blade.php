@@ -32,6 +32,25 @@
                             <div class="col-12 mb-3">
                                 <div class="e-panel card">
                                     <div class="card-body pb-2">
+                                        <div class="row">
+                                            <div class="col mb-4">
+                                                
+                                            </div>
+                                            <div class="col col-auto mb-4">
+                                                <form action="" method="get">
+                                                    <div class="row g-1">
+                                                        <div class="col px-1">
+                                                            <div class="input-icon">
+                                                                <span class="input-icon-addon">
+                                                                    <i class="fe fe-search"></i>
+                                                                </span>
+                                                                <input type="text" value="{{ $search_token }}" name="token" class="form-control " placeholder="Search Token" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                         @if($orders->count() == 0)
                                         <div class="nothing-to-show d-flex justify-content-center">
                                             Nothing to show :<
