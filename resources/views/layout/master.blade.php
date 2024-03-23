@@ -123,6 +123,7 @@
     <div class="drawer-overlay"></div>
 
     <header class="">
+        @if (isset($_announcement))  
         <div class="status-bar-top">
             <div class="container statusBar">
                 <p class="status-offer">
@@ -133,6 +134,7 @@
                 <a class="shop-now-link" href="{{ route('home.shopPage') }}">ShopNow</a>
             </div>
         </div>
+        @endif
 
         <div class="container">
             <nav class="navigation-bar">
