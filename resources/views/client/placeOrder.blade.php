@@ -109,7 +109,7 @@
                                         <img src="{{ asset($product->thumbnail_image) }}">
                                     </div>
                                     <div class="productDetails">
-                                        <div class="product-title">{{ $product->title }}
+                                        <div class="product-title">{{ Str::limit($product->title, 80) }}
                                         </div>
                                     </div>
                                     <div class="product-line-price">{{ $product->distributor_price }}</div>

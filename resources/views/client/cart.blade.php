@@ -44,7 +44,7 @@
                         <img src="{{ $product->thumbnail_image }}">
                     </div>
                     <div class="productDetails">
-                        <div class="product-title">{{ $product->title }}</div>
+                        <div class="product-title">{{ Str::limit($product->title, 30) }}</div>
                     </div>
                     <div class="product-price">{{ $product->distributor_price }}</div>
                     <div class="product-quantity">
@@ -61,8 +61,8 @@
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </div>
+                    <input type="hidden" value="{{ $sub_total += $product_cart->quantity * $product->distributor_price }}">
                 </div>
-                <input type="hidden" value="{{ $sub_total += $product_cart->quantity * $product->distributor_price }}">
             @endforeach
 
 
@@ -105,26 +105,65 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('.remove-product').on('click', function() {
-                var product_cart_id = $(this).data(
-                    'product-cart-id'); // Use the appropriate way to get the product ID
+            var fadeTime = 300;
+            function updateQuantity(quantityInput) {
+                /* Calculate line price */
+                var productRow = $(quantityInput).closest('.product');
+                var price = parseFloat(productRow.find('.product-price').text());
+                var quantity = parseInt($(quantityInput).val());
+                var linePrice = price * quantity;
 
+                /* Update line price display and recalc cart totals */
+                productRow.find('.product-line-price').text(linePrice.toFixed(0));
+                recalculateCart();
+            }
+            function recalculateCart() {
+                var subtotal = 0;
 
+                /* Sum up row totals */
+                $('.product').each(function () {
+                    subtotal += parseFloat($(this).find('.product-line-price').text());
+                });
+                /* Calculate totals */
+                // var total = subtotal;
 
-
-                console.log(product_cart_id);
-
+                /* Update totals display */
+                $('.totals-value').fadeOut(fadeTime, function () {
+                    $('#cart-subtotal').html(subtotal.toFixed(0));
+                    $('#cart-total').html(subtotal.toFixed(0));
+                    if (subtotal == 0) {
+                        $('.checkout').fadeOut(fadeTime);
+                    } else {
+                        $('.checkout').fadeIn(fadeTime);
+                    }
+                    $('.totals-value').fadeIn(fadeTime);
+                });
+            }
+            
+            /* Remove item from cart */
+            function removeItem(removeButton) {
+                /* Remove row from DOM and recalc cart total */
+                var productRow = $(removeButton).parent().parent();
+                console.log(productRow);
+                productRow.slideUp(fadeTime, function () {
+                    productRow.remove();
+                    recalculateCart();
+                });
+            }
+            $(document).on('click', '.remove-product', function() {
+                var product_cart_id = $(this).data('product-cart-id'); // Use the appropriate way to get the product ID
+                var remove_btn = $(this);
+                $(remove_btn).parent().parent().addClass('disabled');
                 $.ajax({
                     url: "{{ url('/remove-from-cart') }}/" + product_cart_id,
                     type: 'DELETE',
                     data: {
                         _token: '{{ csrf_token() }}',
-                        // Add any other data you need to send to the server
                     },
                     success: function(response) {
                         if (response.success) {
-
                             toastr.success(response.message, 'Success');
+                            removeItem(remove_btn);
                         } else {
                             toastr.error(response.message, 'Error');
                         }
@@ -132,14 +171,13 @@
                     error: function(error) {
                         toastr.error('Something went wrong ):', 'Error');
                         console.log(error);
+                    },
+                    complete: function(){
+                        $(remove_btn).parent().parent().removeClass('disabled');
                     }
                 });
             });
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
+            
             $(".increase").click(function() {
                 adjustQuantity($(this), 1);
                 var sub=parseInt( $('.product-line-price').val());
@@ -154,43 +192,51 @@
             $(".decrease").click(function() {
                 adjustQuantity($(this), -1);
             });
-        });
 
-        function adjustQuantity(button, change) {
-            var productId = button.closest('.product').data('product-id');
-            var quantityInput = button.siblings('.quantity-input');
-            var product_cart_id = quantityInput.data('product-cart-id');
-            console.log('cart',product_cart_id);
-            var currentQuantity = parseInt(quantityInput.val());
-            var newQuantity = currentQuantity + change;
+            function adjustQuantity(button, change) {
+                var productItem = button.closest('.product');
+                productItem.addClass('disabled');
+                var productId = button.closest('.product').data('product-id');
+                var quantityInput = button.siblings('.quantity-input');
 
-            // Ensure quantity doesn't go below 1
-            if (newQuantity < 1) {
-                newQuantity = 1;
-            }
-
-            $.ajax({
-                url: "{{ route('home.updateCartQuantity') }}",
-                type: "POST",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    product_id: productId,
-                    quantity: newQuantity,
-                    cart_id: product_cart_id
-                },
-                success: function(response) {
-                    if (response.success) {
-                        // Update the quantity displayed on the frontend
-                        quantityInput.val(newQuantity);
-                        // Update the line price
-                        var linePrice = response.line_price;
-                        button.closest('.product').find('.product-line-price').text(linePrice);
-                        // Update the total
-                        var subTotal = response.sub_total;
-                        $('#cart-total').text(subTotal);
-                    }
+                var product_cart_id = quantityInput.data('product-cart-id');
+                console.log('cart',product_cart_id);
+                var currentQuantity = parseInt(quantityInput.val());
+                var newQuantity = currentQuantity + change;
+    
+                // Ensure quantity doesn't go below 1
+                if (newQuantity < 1) {
+                    newQuantity = 1;
                 }
-            });
-        }
+    
+                $.ajax({
+                    url: "{{ route('home.updateCartQuantity') }}",
+                    type: "POST",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        product_id: productId,
+                        quantity: newQuantity,
+                        cart_id: product_cart_id
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Update the quantity displayed on the frontend
+                            quantityInput.val(newQuantity);
+                            // Update the line price
+                            updateQuantity(quantityInput);
+                            
+                            var linePrice = response.line_price;
+                            button.closest('.product').find('.product-line-price').text(linePrice);
+                            // Update the total
+                            var subTotal = response.sub_total;
+                            $('#cart-total').text(subTotal);
+                        }
+                    },
+                    complete: function(){
+                        productItem.removeClass('disabled');
+                    }
+                });
+            }
+        });
     </script>
 @endsection

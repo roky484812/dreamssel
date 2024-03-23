@@ -278,7 +278,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="{{ asset('assets/client/js/viewProduct.js') }}"></script>
-    <script src="{{ asset('assets/client/js/cart.js') }}"></script>
+    {{-- <script src="{{ asset('assets/client/js/cart.js') }}"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
