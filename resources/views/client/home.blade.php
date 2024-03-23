@@ -638,12 +638,12 @@
             function updateCountdown() {
                 var currentTime = moment();
                 var timeDiff = moment.duration(endTime.diff(currentTime));
-                
+
                 // Calculate days, hours, minutes, and seconds
-                var days = Math.floor(timeDiff.asDays());
-                var hours = timeDiff.hours();
-                var minutes = timeDiff.minutes();
-                var seconds = timeDiff.seconds();
+                var days = String(Math.floor(timeDiff.asDays())).padStart(2, '0');
+                var hours = String(timeDiff.hours()).padStart(2, '0');
+                var minutes = String(timeDiff.minutes()).padStart(2, '0');
+                var seconds = String(timeDiff.seconds()).padStart(2, '0');
     
                 // Update the HTML elements with the countdown values
                 $('#days-countdown').text(days);
