@@ -199,7 +199,7 @@
                     <div class="col">
                         <div class="footer-logo">
                             <div class="footer-brand-logo-single">
-                                <img src="{{ asset('assets/admin/images/brand/black_single_logo.svg') }}" alt="Logo">
+                                <img class="bg-transparent" src="{{ asset('assets/admin/images/brand/white_single_logo.svg') }}" alt="Logo">
                             </div>
                         </div>
                         <div class="subscribe">
