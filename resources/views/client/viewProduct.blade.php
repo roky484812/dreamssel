@@ -144,6 +144,12 @@
                         <i class="bi bi-download"></i>
                         <p>ছবি ডাউনলোড করুন</p>
                     </a>
+                    @if (auth()->user())
+                        <div class="add-to-cart cart-phn-whatsapp" type="button" id="copy" data-url="{{ route('home.productPage', ['id' => $product->id, 'ref'=> auth()->user()->id]) }}">
+                            <i class="bi bi-clipboard"></i>
+                            <p>লিংক কপি করুন</p>
+                        </div>
+                    @endif
 
                 
                 <div class="product-dessriptions mt-3 border-top pt-2">
@@ -549,5 +555,22 @@
             bigImageElement.src = thumbnailElement.src;
             thumbnailElement.src = temp;
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#copy').click(function() {
+                var urlToCopy = $(this).data('url');
+                copyToClipboard(urlToCopy);
+            });
+        
+            function copyToClipboard(text) {
+                var input = $('<textarea>');
+                $('body').append(input);
+                input.val(text).select();
+                document.execCommand('copy');
+                input.remove();
+                toastr.success('লিংকটি সফলভাবে কপি করা হয়েছে');
+            }
+        });
     </script>
 @endsection
