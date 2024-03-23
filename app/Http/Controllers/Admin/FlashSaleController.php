@@ -29,12 +29,17 @@ class FlashSaleController extends Controller
         }
     }
     public function addFlashSale($product_id){
-        $flash_sale = new Flash_sale();
-        $flash_sale->product_id = $product_id;
-        if($flash_sale->save()){
-            return redirect()->back()->with('success','Successfuly added to flashsale');
+        $flash_sale = Flash_sale::where('product_id', $product_id)->first();
+        if(!$flash_sale){
+            $flash_sale_insert = new Flash_sale();
+            $flash_sale_insert->product_id = $product_id;
+            if($flash_sale_insert->save()){
+                return redirect()->back()->with('success','Successfuly added to flashsale');
+            }else{
+                return redirect()->back()->with('error', 'Failed to publish flash item.');
+            }
         }else{
-            return redirect()->back()->with('error', 'Failed to publish flash item.');
+            return redirect()->back()->with('error', 'Already added to flashsale');
         }
     }
 }
