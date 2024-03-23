@@ -50,6 +50,45 @@ class HomePageController extends Controller
 
         return view('client.home', ['endTime'=> $endTime, 'categories' => $categories, 'subcategories' => $subcategories, 'products' => $products, 'carousel_gallery' => $carousel_gallery, 'featured_image' => $featured_image, 'new_araival' => $new_araival, 'flash_items'=> $flash_items]);
     }
+
+    public function download_images($product_id){
+        $product = Product::whereId($product_id)->first();
+        $filePaths = [];
+        $filePaths[] = public_path().$product->thumbnail_image;
+        $product_galleries = Product_gallery::where('product_id', $product_id)->get();
+        foreach($product_galleries as $product_gallery){
+            $filePaths[] = public_path().$product_gallery->image;
+        }
+        
+        // Check if there are any files to download
+        if (count($filePaths) == 0) {
+            // Handle case where there are no files to download
+            // For example, return a response indicating no files found
+            return response()->json(['message' => 'No files found for download'], 404);
+        }
+        
+        if(count($filePaths) == 1){
+            return response()->download($filePaths[0]);
+        }
+        // If there are files to download, create a zip archive
+        $zipFileName = 'product_images.zip';
+        $zip = new \ZipArchive();
+        if ($zip->open($zipFileName, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) !== true) {
+            // Handle case where zip archive could not be created
+            return response()->json(['message' => 'Failed to create zip archive'], 500);
+        }
+    
+        // Add each file to the zip archive
+        foreach ($filePaths as $filePath) {
+            $zip->addFile($filePath, basename($filePath));
+        }
+    
+        $zip->close();
+    
+        // Return the zip archive for download
+        return response()->download($zipFileName)->deleteFileAfterSend(true);
+    }
+    
     public function flash_products(){
         $categories = Product_category::all();
         $subcategories = Product_sub_category::all();

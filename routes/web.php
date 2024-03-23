@@ -172,6 +172,7 @@ Route::controller(ClientHomePageController::class)->group(function () {
     Route::get('/product/flash-sale', 'flash_products')->name('flash_sale');
     Route::get('product/subcategory/fetch', 'product_subcategory_filter')->name('client.product.sub_category_filter');
     Route::get('/product/search/fetch', 'search_products')->name('client.product.search');
+    Route::get('/product/image/{product_id}', 'download_images')->name('download_product_images');
 });
 
 Route::controller(ClientAnnouncementController::class)->group(function(){

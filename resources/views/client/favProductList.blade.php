@@ -34,7 +34,7 @@
                             ->select('products.*', 'product_countries.code as country_code')
                             ->first(); 
                              ?>
-                            <div class="col-md-3 col-sm-4 col-xsm-6">
+                            <div class="col-md-3 col-sm-4 col-xsm-6" class="card-col">
 
                                 <div class="product-card">
                                     <div class="card-product-image">
@@ -56,7 +56,7 @@
                                         @endif
                                         </div>
                                         <div class="card-add-to-wishlist">
-                                            <a href="" class="remove-product"
+                                            <a href="javascript:void(0)" class="remove-product"
                                                 data-fav-list-id="{{ $fav_product_list->id }}">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </a>

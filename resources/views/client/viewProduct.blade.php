@@ -28,7 +28,7 @@
                     @csrf
                     <div class="product-name">
                         <h4>{{ $product->title }}</h4>
-                        <div class="fav-icon">
+                        <div class="fav-icon addToFavBtn" data-product-fav-id="{{ $product->id }}">
                             <div class="toggle-button" type="button" id="fav-toggle">
                                 <i class="fa-regular fa-heart"></i>
                             </div>
@@ -125,6 +125,7 @@
                         </div>
 
                     </div>
+                </form>
                     @if (auth()->user())
                         <div class="add-to-cart cart-phn-whatsapp" type="button" id="add-to-cart"
                             data-main-product-id="{{ $product->id }}">
@@ -139,8 +140,12 @@
                             <p>কার্টে যোগ করুন</p>
                         </a>
                     @endif
+                    <a href="{{ route('download_product_images', $product->id) }}" class="text-decoration-none add-to-cart cart-phn-whatsapp" type="button">
+                        <i class="bi bi-download"></i>
+                        <p>ছবি ডাউনলোড করুন</p>
+                    </a>
 
-                </form>
+                
                 <div class="product-dessriptions mt-3 border-top pt-2">
                     <p>
                         {!! $product->description !!}
@@ -274,7 +279,7 @@
                                 </div>
                                 <div class="card-add-to-wishlist">
                                     @if (auth()->user())
-                                        <a href="" class="addToFavBtn"
+                                        <a href="javascript:void(0)" class="addToFavBtn"
                                             data-product-fav-id="{{ $product->id }}">
                                             <i class="fa-regular fa-heart"></i>
                                         </a>
@@ -418,19 +423,17 @@
     <script>
         $(document).ready(function() {
             $('#add-to-cart').on('click', function() {
-                var product_id = $(this).data(
-                    'main-product-id'); // Use the appropriate way to get the product ID
+                var product_id = $(this).data('main-product-id'); // Use the appropriate way to get the product ID
 
                 var color_code = $('input[name="color"]:checked').val();
                 var size_value = $('input[name="size"]:checked').val();
                 var quantity = $('input[name="quantity"]').val();
 
 
-                console.log(color_code, size_value, quantity, product_id);
 
                 $.ajax({
                     url: "{{ url('/add-to-cart-v') }}/" + product_id,
-                    type: 'POST',
+                    type: 'get',
                     data: {
 
                         color_code: color_code,
