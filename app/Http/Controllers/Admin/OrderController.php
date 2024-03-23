@@ -28,8 +28,7 @@ class OrderController extends Controller
             'search_token'=> $req->input('token')
         ]);
     }
-    public function confirmedOrder(Request $req)
-    {
+    public function confirmedOrder(Request $req) {
         $products = Product::all();
         $users = User::all();
         $orders_query = Order::where('status', '2')->with('order_list')
@@ -38,7 +37,7 @@ class OrderController extends Controller
             $orders_query = $orders_query->where('order_token', 'like', '%'.$req->input('token').'%');
         }
         $orders = $orders_query->paginate(10);
-        return view('admin.order.pendingOrder', [
+        return view('admin.order.confirmedOrder', [
             'orders' => $orders,
             'products' => $products,
             'users' => $users,
@@ -55,7 +54,7 @@ class OrderController extends Controller
             $orders_query = $orders_query->where('order_token', 'like', '%'.$req->input('token').'%');
         }
         $orders = $orders_query->paginate(10);
-        return view('admin.order.pendingOrder', [
+        return view('admin.order.cancelledOrder', [
             'orders' => $orders,
             'products' => $products,
             'users' => $users,

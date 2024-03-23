@@ -16,8 +16,6 @@ class DatabaseSeeder extends Seeder
             Product_country::class,
             User_role_seeder::class,
             User_seeder::class,
-            Fake_announcement_seeder::class,
-            Fake_user_seeder::class,
         ]);
     }
 }
