@@ -20,6 +20,7 @@ use App\Models\Product_category;
 use App\Http\Controllers\Controller;
 use App\Models\Flash_sale;
 use App\Models\Product_attribute;
+use App\Models\Product_click_log;
 use App\Models\Product_sub_category;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product_combination;
@@ -249,7 +250,7 @@ class HomePageController extends Controller
 
         return response()->json(['success' => false, 'message' => 'Product not found in the fav list.']);
     }
-    public function productViewer($id)
+    public function productViewer($id, Request $req)
     {
         $product = Product::where(['status'=> 1, 'products.id'=> $id])
         ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
@@ -260,6 +261,22 @@ class HomePageController extends Controller
         $product_attributes = [];
         if($product->is_variational){
             $product_attributes = Product_attribute::where('product_id', $id)->with('attribute_values')->get();
+        }
+        if($req->input('ref')){
+            $product_click_log = Product_click_log::where(['product_id'=> $id, 'user_id'=> $req->input('ref')])->first();
+            if(isset($product_click_log)){
+                $product_click_log->view_count = $product_click_log->view_count + 1;
+                $product_click_log->save(); 
+            }else{
+                $user = User::where('id', $req->input('ref'))->first();
+                if(isset($user)){
+                    $new_product_click_log = new Product_click_log();
+                    $new_product_click_log->product_id = $id;
+                    $new_product_click_log->user_id = $user->id;
+                    $new_product_click_log->view_count = 1;
+                    $new_product_click_log->save();
+                }
+            }
         }
         $reviews = Review::where('product_id', $id)->get();
         $product->view_count = $product->view_count + 1;

@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Product_attribute;
 use App\Models\Product_attribute_value;
 use App\Models\Product_category;
+use App\Models\Product_click_log;
 use App\Models\Product_combination;
 use App\Models\Product_country;
 use App\Models\Product_gallery;
@@ -73,6 +74,11 @@ class ProductController extends Controller
         $countries = Product_country::orderBy('id', 'desc')->get();
         $categories = Product_category::orderBy('id', 'desc')->get();
         return view('admin.add_product', ['categories'=> $categories, 'countries'=> $countries]);
+    }
+
+    public function product_click_log(){
+        $product_click_logs = Product_click_log::orderBy('view_count','desc')->with('product')->with('user')->get();
+        return view('admin.product_click_logs', ['product_click_logs'=> $product_click_logs]);
     }
     
     public function AddProduct(Request $req){

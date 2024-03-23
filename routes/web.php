@@ -89,6 +89,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=> ['web', 'type.adminEditor']], f
         Route::get('/product/delete/{id}', 'deleteProduct')->name('admin.product.delete');
         Route::delete('/product/image/{id?}', 'deleteProductImage')->name('admin.product.deleteImage');
         Route::post('/product/imaage/temp', 'productTempImage')->name('admin.product.image.temp');
+        Route::get('/product/click-log', 'product_click_log')->name('admin.product.click_log');
     });
     Route::controller(ProductCategoryController::class)->group(function(){
         Route::get('/product/category', 'categoryPage')->name('admin.product.categoryView');
