@@ -112,6 +112,10 @@
     </div>s
 @endsection
 @section('custom_js')
+<!-- File uploads js -->
+<script src="{{ asset('assets/admin/plugins/fileupload/js/dropify.js') }}"></script>
+<script src="{{ asset('assets/admin/js/filupload.js') }}"></script>
+
 <script>
     $(document).ready(function() {
 

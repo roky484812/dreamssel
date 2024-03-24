@@ -344,16 +344,11 @@ input[type="range"]::-moz-range-thumb {
   margin-top: 30px;
   margin-bottom: 20px;
 }
-.box-pointer {
-  height: 40px;
-  width: 20px;
-  border-radius: 4px;
-  background-color: var(--primaryColor);
-}
+
 .header-category {
   display: flex;
   justify-content: left;
-  margin-top: 50px;
+  margin: 30px 0;
 }
 .header-category-title {
   margin-left: 10px;
