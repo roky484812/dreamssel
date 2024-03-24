@@ -163,6 +163,7 @@ Route::controller(ClientHomePageController::class)->group(function () {
     Route::get('product/subcategory/fetch', 'product_subcategory_filter')->name('client.product.sub_category_filter');
     Route::get('/product/search/fetch', 'search_products')->name('client.product.search');
     Route::get('/product/image/{product_id}', 'download_images')->name('download_product_images');
+    Route::get('/category/{category_id}', 'viewFromCategory')->name('home.categoryProductView');
 });
 
 Route::controller(ClientAnnouncementController::class)->group(function(){

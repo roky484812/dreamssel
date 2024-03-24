@@ -56,7 +56,7 @@ class LandingImageController extends Controller
         }
         $manager = new ImageManager(new Driver());
         $ext = $image->getClientOriginalExtension();
-        $image_name = time() . '.' . $ext;
+        $image_name = time().uniqid().'.'.$ext;
         $image_path = $path . $image_name;
         $image_dest = public_path() . $image_path;
         $image = $manager->read($image);

@@ -209,10 +209,12 @@
 
             @foreach ($categories as $category)
                 <div class="categoryCarouselItem">
-                    <span>
-                        <img src="{{ asset($category->image) }}" alt="">
-                    </span>
-                    <p>{{ $category->category_name }}</p>
+                    <a href="{{ route('home.categoryProductView', $category->id) }}" class="text-decoration-none text-dark">
+                        <span>
+                            <img src="{{ asset($category->image) }}" alt="">
+                        </span>
+                        <p class="text-center">{{ $category->category_name }}</p>
+                    </a>
                 </div>
             @endforeach
 
@@ -385,7 +387,7 @@
 
         <div class="ourProductBox">
             <div class="product-list-wrapper">
-                <div class="row">
+                <div class="row g-1">
                     @foreach ($products as $product)
                         <div class="col-md-3 col-sm-4 col-xsm-6">
 
@@ -666,4 +668,12 @@
             setInterval(updateCountdown, 1000);
         });
     </script>
+@endsection
+
+@section('custom_css')
+    <style>
+        .categoryCarouselItem:hover p {
+            color: white;
+        }
+    </style>
 @endsection

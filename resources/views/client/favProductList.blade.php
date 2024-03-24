@@ -25,7 +25,7 @@
 
         <div class="ourProductBox">
             <div class="product-list-wrapper">
-                <div class="row">
+                <div class="row g-1">
                     @if ($fav_product_lists->count() > 0)
                         @foreach ($fav_product_lists as $fav_product_list)
                             <?php 

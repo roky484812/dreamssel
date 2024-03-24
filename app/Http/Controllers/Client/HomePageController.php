@@ -192,6 +192,24 @@ class HomePageController extends Controller
         ]);
     }
 
+    public function viewFromCategory($category_id)
+    {
+        $categories = Product_category::all();
+        $subcategories = Product_sub_category::all();
+        $category = Product_category::whereId($category_id)->first();
+
+        // Adjust the number of products per page
+        $products = Product::latest()->where(['products.status'=> 1, 'products.category_id'=>$category_id])
+        ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->select('products.*', 'product_countries.code as country_code')->paginate(32);
+        return view('client.categoryProductViewer', [
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'products' => $products,
+            'category' => $category
+        ]);
+    }
+
     public function viewFromFavList()
     {
         $categories = Product_category::all();

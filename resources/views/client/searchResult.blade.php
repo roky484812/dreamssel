@@ -19,10 +19,9 @@
                         @include('client.widgets.product_filter')
                     </div>
                     <div class="col-md-9">
-                        <div class="row" id="data">
+                        <div class="row g-1" id="data">
                             @foreach ($products as $product)
-                            <div class="col-md-3 col-sm-4 col-xsm-6">
-        
+                            <div class="col-md-4 col-sm-6">
                                 <div class="product-card">
                                     <div class="card-product-image">
         

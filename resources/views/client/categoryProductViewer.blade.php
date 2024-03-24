@@ -1,4 +1,4 @@
-@extends('layout.master', ['title' => $sub_category_name])
+@extends('layout.master', ['title' => $category->category_name])
 
 
 @section('content')
@@ -7,12 +7,12 @@
             <div class="header-category">
                 <div class="box-pointer"></div>
                 <div class="header-category-title">
-                    <h6>{{ $category_name }}</h6>
+                    <h6>Category</h6>
                 </div>
             </div>
             <div class="flashSaleHeader">
                 <div class="header">
-                    <h1>{{ $sub_category_name }}</h1>
+                    <h1>{{ $category->category_name }}</h1>
                 </div>
             </div>
         </div>

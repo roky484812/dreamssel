@@ -19,7 +19,7 @@
 
         <div class="ourProductBox">
             <div class="product-list-wrapper">
-                <div class="row">
+                <div class="row g-1">
                     @foreach ($flash_products as $product)
                     <div class="col-md-3 col-sm-4 col-xsm-6">
 
