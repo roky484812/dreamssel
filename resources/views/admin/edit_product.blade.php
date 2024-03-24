@@ -257,6 +257,14 @@
     </div>
 @endsection
 @section('custom_js')
+    <!-- File uploads js -->
+    <script src="{{ asset('assets/admin/plugins/fileupload/js/dropify.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/filupload.js') }}"></script>
+
+    <!-- quill js -->
+    <script src="{{ asset('assets/admin/plugins/quill/quill.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/form-editor2.js') }}"></script>
+
     @include('admin.widgets.alert')
     <script src="{{ asset('assets/admin/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/notify/js/sample.js') }}"></script>

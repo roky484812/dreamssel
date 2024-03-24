@@ -18,7 +18,7 @@
                 <p class="invalid-feedback">{{$message}}</p>
             @enderror
         </div>
-        <div class="mb-3">
+        <div class="mb-3 overflow-scroll">
             <label for="richeditor" class="form-label">Description</label>
             <textarea name="description" id="richeditor" placeholder="Description" class="form-control @error('description') is-invalid @enderror"></textarea>
             @error('description')
