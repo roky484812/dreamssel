@@ -15,12 +15,14 @@ class DistributorAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth()->user() && Auth()->user()->role == 3){
-            if(Auth()->user()->is_active == 0){
-                Auth()->logout();
-                return redirect('/login')->with('error', 'You are not an active user. Please contact to dreamssel.');
+        if(Auth()->user()){
+            if(Auth()->user()->role == 3){
+                if(Auth()->user()->is_active == 0){
+                    Auth()->logout();
+                    return redirect('/login')->with('error', 'You are not an active user. Please contact to dreamssel.');
+                }
+                return $next($request);
             }
-            return $next($request);
         }
         return redirect('/login');
     }

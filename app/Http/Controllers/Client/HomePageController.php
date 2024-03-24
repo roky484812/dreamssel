@@ -468,14 +468,16 @@ class HomePageController extends Controller
 
         // return $req->all();
 
-        $product = Product::whereId($req->product_id);
+        $product = Product::whereId($req->product_id)->first();
 
         $order = new Order();
         $order_list = new Order_list();
-
+        $user = Auth::user();
         $order->phone = $req->input('phone');
         $order->name = $req->input('name');
-        $order->email = Auth::user()->email;
+        if ($user) {
+            $order->email = $user->email;
+        }
         $order->address = $req->input('address');
         $shipping_cost = ($req->shipping == "60") ? 60 : 120;
         $order->total_price = $shipping_cost;
@@ -489,7 +491,7 @@ class HomePageController extends Controller
         $order_list->order_id = $order->id;
 
         if ($order_list->save()) {
-            return redirect()->route('home.thankyou')->with('success', 'Place order successfully done :)');
+            return redirect()->route('home.thankyou')->with(['success'=> 'Place order succefully done :)', 'order_token'=> $order->order_token]);
         } else {
             return redirect()->back()->with('error', 'Try again.');
         }
