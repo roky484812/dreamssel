@@ -221,7 +221,7 @@
 
     <!-- best selling product -->
 
-    <div class="container">
+    <div class="container d-none">
         <div class="header-category">
             <div class="box-pointer"></div>
             <div class="header-category-title">

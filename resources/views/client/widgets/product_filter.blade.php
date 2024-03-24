@@ -1,6 +1,5 @@
 <form id="product_filter" class="sideBar filterBox">
     <div class="search mb-3">
-        <h4 class="mb-2">Search</h4>
         <input type="text" name="search" value="{{ $search_product }}" id="search_filter" class="form-control" placeholder="Search Product">
     </div>
     <div class="category mb-3">
