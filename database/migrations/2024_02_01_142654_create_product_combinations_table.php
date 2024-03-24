@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->string('combination_string');
             $table->string('combination_unique');
-            $table->integer('price');
-            $table->integer('distributor_price');
-            $table->integer('sku');
+            $table->integer('price')->default(0);
+            $table->integer('distributor_price')->default(0);
+            $table->integer('sku')->default(0);
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });

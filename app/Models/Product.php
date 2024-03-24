@@ -23,4 +23,7 @@ class Product extends Model
     public function totalOrderedQuantity(){
         return $this->order_list()->sum('quantity');
     }
+    public function flash_sale(){
+        return $this->hasOne(Flash_sale::class, 'product_id');
+    }
 }

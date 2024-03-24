@@ -97,7 +97,9 @@
 
                                     @foreach ($products as $product)
                                         
-                                        <tr>
+                                        <tr @if (!$product->status)
+                                            style="background: #ff000021;"
+                                        @endif>
                                             <td>
                                                 <img src="{{ asset($product->thumbnail_image) }}" class="w-7 h-7 shadow me-3 rounded">
                                                 <span class="me-3">{{ \Illuminate\Support\Str::limit($product->title, 40, $end='...') }}</span>
@@ -112,7 +114,19 @@
                                                             <a href="{{route('admin.product.updateView', $product->id)}}" class="dropdown-item">Edit</a>
                                                         </li>
                                                         <li><a href="{{ route('admin.product.delete', $product->id) }}" class="dropdown-item del-product">Delete</a></li>
-                                                        <li><a href="{{ route('admin.product.flashSale.add', $product->id) }}" class="dropdown-item del-product">Add to Flash Sale</a></li>
+                                                        @if(!$product->flash_sale)
+                                                        <li>
+                                                            <a href="{{ route('admin.product.flashSale.add', $product->id) }}" class="dropdown-item del-product">
+                                                                Add to Flash Sale
+                                                            </a>
+                                                        </li>
+                                                        @else
+                                                        <li>
+                                                            <a href="{{ route('admin.product.flashSale.remove', $product->flash_sale->id) }}" class="dropdown-item del-product">
+                                                                Remove form Flash sale
+                                                            </a>
+                                                        </li>
+                                                        @endif
 
                                                     </ul>
                                                 </div>

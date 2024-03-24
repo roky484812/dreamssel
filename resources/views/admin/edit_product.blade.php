@@ -203,6 +203,7 @@
                                     <!-- popup for adding item -->
                                 </div>
                             </div>
+                            @if (count($product->product_combinations))
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Product attributes</h3>
@@ -247,6 +248,7 @@
 
                                 </div>
                             </div>
+                            @endif
                         </form>
                     </div>
                     <!-- /Row -->

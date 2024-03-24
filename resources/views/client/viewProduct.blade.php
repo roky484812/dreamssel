@@ -114,12 +114,10 @@
                         </div>
                         <div class="buyNowReviewBtnBox">
                             <div class="buy-now ">
-                                <button type="submit" class="buy-now-button ">অর্ডার করুন</button>
+                                <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}" class="buy-now-button d-inline-block text-decoration-none">অর্ডার করুন</a>
                             </div>
                             <div class="buy-now reviewBtnBox">
-                                <a href="#review-section" type="button"
-                                    class=" btn d-flex align-items-center text-decoration-none reviewBtn commonBtn">রিভিউ
-                                    দেখুন</a>
+                                <a href="#review-section" type="button" class=" btn d-flex align-items-center text-decoration-none reviewBtn commonBtn">রিভিউ দেখুন</a>
                             </div>
 
                         </div>
@@ -260,7 +258,7 @@
             </div>
 
             <div class="product-list-wrapper">
-                <div class="row">
+                <div class="row g-1">
                     @foreach ($products as $product)
                     <div class="col-md-3 col-sm-4 col-xsm-6">
                         <div class="product-card">

@@ -167,9 +167,15 @@ class ProductController extends Controller
                 sort($stringParts);
                 $combination_unique = implode($stringParts); //string sort and make single product unique combination string
                 $product_combination->combination_unique = $combination_unique;
-                $product_combination->price = $combination['price'];
-                $product_combination->distributor_price = $combination['dist_price'];
-                $product_combination->sku = $combination['stock'];
+                if($combination['price']){
+                    $product_combination->price = $combination['price'];
+                }
+                if($combination['dist_price']){
+                    $product_combination->distributor_price = $combination['dist_price'];
+                }
+                if($combination['stock']){
+                    $product_combination->sku = $combination['stock'];
+                }
                 $sku += $combination['stock'];
                 $product_combination->save();
             }
@@ -229,6 +235,7 @@ class ProductController extends Controller
         $product->sub_category_id = $req->input('sub_category');
         $product->short_description = $req->input('short_description');
         $product->description = $req->input('description');
+        $product->status = $req->input('status');
         if($req->input('sku')){
             $product->sku = $req->input('sku');
         }

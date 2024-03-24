@@ -311,7 +311,7 @@ class HomePageController extends Controller
         $products = Product::where(['category_id'=> $product->category_id, 'status'=> 1])
         ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
         ->select('products.*', 'product_countries.code as country_code')
-        ->limit(4)->get();
+        ->limit(4)->inRandomOrder()->get();
         $single_category = $categories->where('id', $product->category_id)->first();
         $single_sub_category = $subcategories->where('id', $product->sub_category_id)->first();
         $colors = (object)[];
@@ -468,7 +468,7 @@ class HomePageController extends Controller
 
         // return $req->all();
 
-        $product = Product::whereId($req->product_id)->first();
+        $product = Product::whereId($req->product_id)->where('status', 1)->first();
 
         $order = new Order();
         $order_list = new Order_list();
@@ -533,7 +533,7 @@ class HomePageController extends Controller
         $order->total_price = $shipping_cost;
         $order->save();
         foreach ($carts as $cart) {
-            $product = Product::whereId($cart->product_id)->first();
+            $product = Product::whereId($cart->product_id)->where('status', 1)->first();
 
             $order_list = new Order_list();
 

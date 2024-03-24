@@ -13,7 +13,7 @@
 
                             {{-- {{ route('your.route.name', ['category_id' => $category->id]) }} --}}
                             {{-- Route handler for category --}}
-                            <a href="">
+                            <a href="javascript:void(0)">
                                 {{ $category->category_name }}
                                 @if ($subcategories->where('category_id', $category->id)->isNotEmpty())
                                     <span><i class="fa-solid fa-angle-right"></i></span>
@@ -21,8 +21,7 @@
                             </a>
                             <ul>
                                 @foreach ($subcategories->where('category_id', $category->id) as $subcategory)
-                                    <li><a
-                                            href="{{ route('home.subCategoryView', ['category_name' => $category->category_name, 'sub_category_id' => $subcategory->id, 'sub_category_name' => $subcategory->sub_category_name]) }}">{{ $subcategory->sub_category_name }}</a>
+                                    <li><a href="{{ route('home.subCategoryView', ['category_name' => $category->category_name, 'sub_category_id' => $subcategory->id, 'sub_category_name' => $subcategory->sub_category_name]) }}">{{ $subcategory->sub_category_name }}</a>
                                     </li>
                                 @endforeach
 
@@ -173,8 +172,7 @@
                                     <p>&#x28;{{ $product->rating_count }}&#x29;</p>
                                 </div>
                             </div>
-                            <a href="@if (auth()->user()) {{ route('home.placeOrderView', ['product_id' => $product->id]) }}@else
-                            {{ route('home.signInPage') }} @endif"
+                            <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}"
                                 class="card-buy-now text-decoration-none" type="button">
                                 <p>অর্ডার করুন</p>
                             </a>
@@ -330,8 +328,7 @@
                                         <p>&#x28;{{ $product->rating_count }}&#x29;</p>
                                     </div>
                                 </div>
-                                <a href="@if (auth()->user()) {{ route('home.placeOrderView', ['product_id' => $product->id]) }}@else
-                                {{ route('home.signInPage') }} @endif"
+                                <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}"
                                     class="card-buy-now text-decoration-none" type="button">
                                     <p>অর্ডার করুন</p>
                                 </a>
