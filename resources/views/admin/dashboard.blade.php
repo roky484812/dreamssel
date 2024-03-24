@@ -540,7 +540,10 @@
         </div>
     </div>
 @endsection
-@section('custom_js').
+@section('custom_js')
+    <!--Chart js -->
+    <script src="{{ asset('assets/admin/plugins/chart/chart.min.js') }}"></script> 
+    
     @include('admin.widgets.alert')
     <script>
         product_status();

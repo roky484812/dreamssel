@@ -561,8 +561,8 @@
     <!--Othercharts js-->
     <script src="{{ asset('assets/admin/plugins/othercharts/jquery.sparkline.min.js') }}"></script>
 
-    <!-- Jquery-rating js-->
-    <script src="{{ asset('assets/admin/plugins/rating/jquery.rating-stars.js') }}"></script>
+    {{-- <!-- Jquery-rating js-->
+    <script src="{{ asset('assets/admin/plugins/rating/jquery.rating-stars.js') }}"></script> --}}
 
     <!-- Circle-progress js-->
     <script src="{{ asset('assets/admin/js/vendors/circle-progress.min.js') }}"></script>
@@ -576,7 +576,7 @@
     <!-- Sticky js -->
     <script src="{{ asset('assets/admin/js/sticky.js') }}"></script>
 
-    <!--Moment js-->
+    {{-- <!--Moment js-->
     <script src="{{ asset('assets/admin/plugins/moment/moment.js') }}"></script>
 
     <!-- Daterangepicker js-->
@@ -584,10 +584,10 @@
     <script src="{{ asset('assets/admin/js/daterange.js') }}"></script>
 
     <!-- ECharts js-->
-    <script src="{{ asset('assets/admin/plugins/echarts/echarts.js') }}"></script>
+    <script src="{{ asset('assets/admin/plugins/echarts/echarts.js') }}"></script>--}}
 
-    <!--Chart js -->
-    <script src="{{ asset('assets/admin/plugins/chart/chart.min.js') }}"></script>
+    {{-- <!--Chart js -->
+    <script src="{{ asset('assets/admin/plugins/chart/chart.min.js') }}"></script>  --}}
 
     <!-- Index js-->
     <script src="{{ asset('assets/admin/js/index4.js') }}"></script>
@@ -601,11 +601,11 @@
     <!-- Custom js-->
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
 
-    <!--Select2 js -->
+    {{-- <!--Select2 js -->
     <script src="{{ asset('assets/admin/plugins/select2/select2.full.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/select2.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/select2.js') }}"></script> --}}
 
-    <!-- Timepicker js -->
+    {{-- <!-- Timepicker js -->
     <script src="{{ asset('assets/admin/plugins/time-picker/jquery.timepicker.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/time-picker/toggles.min.js') }}"></script>
 
@@ -616,13 +616,13 @@
 
     <!-- File uploads js -->
     <script src="{{ asset('assets/admin/plugins/fileupload/js/dropify.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/filupload.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/filupload.js') }}"></script> --}}
 
     <!-- Multiple select js -->
     <script src="{{ asset('assets/admin/plugins/multipleselect/multiple-select.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/multipleselect/multi-select.js') }}"></script>
 
-    <!--Sumoselect js-->
+    {{-- <!--Sumoselect js-->
     <script src="{{ asset('assets/admin/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
 
     <!--jquery transfer js-->
@@ -638,14 +638,14 @@
 
     <!-- WYSIWYG Editor js -->
     <script src="{{ asset('assets/admin/plugins/wysiwyag/jquery.richtext.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/form-editor.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/form-editor.js') }}"></script> --}}
 
-    <!-- quill js -->
+    {{-- <!-- quill js -->
     <script src="{{ asset('assets/admin/plugins/quill/quill.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/form-editor2.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/form-editor2.js') }}"></script> --}}
 
-    <!-- poup add and cancel -->
-    <script src="{{ asset('assets/admin/popup.js') }}"></script>
+    {{-- <!-- poup add and cancel -->
+    <script src="{{ asset('assets/admin/popup.js') }}"></script> --}}
 
 
     @yield('custom_js')

@@ -222,5 +222,8 @@
 </div>
 @endsection
 @section('custom_js')
+<!--Select2 js -->
+<script src="{{ asset('assets/admin/plugins/select2/select2.full.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/select2.js') }}"></script>
 @include('admin.widgets.alert')
 @endsection

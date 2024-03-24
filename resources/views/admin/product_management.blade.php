@@ -177,6 +177,10 @@
 
 @section('custom_js')
     @include('admin.widgets.alert')
+    <!--Select2 js -->
+    <script src="{{ asset('assets/admin/plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/select2.js') }}"></script>
+    
     <script>
         function sub_category_fetch (e, id=null){
             var category_id = id ? id : $(this).val();
