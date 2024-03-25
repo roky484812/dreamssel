@@ -138,11 +138,11 @@
                             <p>কার্টে যোগ করুন</p>
                         </a>
                     @endif
-                    <a href="{{ route('download_product_images', $product->id) }}" class="text-decoration-none add-to-cart cart-phn-whatsapp" type="button">
-                        <i class="bi bi-download"></i>
-                        <p>ছবি ডাউনলোড করুন</p>
-                    </a>
                     @if (auth()->user())
+                        <a href="{{ route('download_product_images', $product->id) }}" class="text-decoration-none add-to-cart cart-phn-whatsapp" type="button">
+                            <i class="bi bi-download"></i>
+                            <p>ছবি ডাউনলোড করুন</p>
+                        </a>
                         <div class="add-to-cart cart-phn-whatsapp" type="button" id="copy" data-url="{{ route('home.productPage', ['id' => $product->id, 'ref'=> auth()->user()->id]) }}">
                             <i class="bi bi-clipboard"></i>
                             <p>লিংক কপি করুন</p>

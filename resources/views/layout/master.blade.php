@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @yield('meta')
     <title>Dreamssel | {{ $title }}</title>
+    <style>
+        *{
+            transition: 0.2s;
+        }
+    </style>
     <link rel="shortcut icon" href="{{ asset('assets/admin/images/brand/white_single_logo.svg') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- font-family -->
@@ -29,7 +34,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
         integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <style>
+        .message-btn{
+            right: 40px;
+            bottom: 40px;
+            z-index: 1000;
+            background: #6a983c;
+        }
+    </style>
 
 </head>
 
@@ -207,10 +219,10 @@
                     <div class="col">
                         <h6>Support</h6>
                         <p>
-                            111 Bijoy sarani, Dhaka, <br />
-                            DH 1515, Bangladesh.
+                            Gangni Bazer, Meherpur, <br />
+                            Gangni 7110, Bangladesh.
                         </p>
-                        <p>Email: info@example.com<br />Phone: 123-456-7890</p>
+                        <p>Email: support@dreamssel.com<br />Phone: +8801408-518196</p>
                     </div>
 
                     <div class="col">
@@ -236,16 +248,16 @@
                         <h6>Follow Us</h6>
                         <ul class="list-unstyled">
                             <li>
-                                <a href="#"><i class="fa-brands fa-square-facebook social-icon"></i>Facebook</a>
+                                <a href="https://www.facebook.com/profile.php?id=100083962342934" target="_blank"><i class="fa-brands fa-square-facebook social-icon"></i>Facebook</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa-brands fa-instagram social-icon"></i>Instagram</a>
+                                <a href="https://www.instagram.com/dreamssel_group/" target="_blank"><i class="fa-brands fa-instagram social-icon"></i>Instagram</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa-brands fa-twitter social-icon"></i>Twitter</a>
+                                <a href="https://www.youtube.com/@DreamsselGroup" target="_blank"><i class="fa-brands fa-youtube social-icon"></i>Youtube</a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa-brands fa-linkedin social-icon"></i>LinkedIn</a>
+                                <a href="https://www.tiktok.com/@dreamssel" target="_blank"><i class="fa-brands fa-tiktok social-icon"></i>Tiktok</a>
                             </li>
                         </ul>
                     </div>
@@ -257,7 +269,9 @@
         </div>
     </footer>
     <!-- footer end -->
-
+    <a href="https://wa.me/+8801408518196" target="_blank" class="message-btn position-fixed btn btn-success">
+        <i class="fa-brands fa-whatsapp" style="font-size: 30px;"></i>
+    </a>
 
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
