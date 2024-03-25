@@ -1,4 +1,4 @@
-@extends('layout.master', ['title' => 'Product'])
+@extends('layout.master', ['title' => $title])
 
 @section('content')
     <div class="container">

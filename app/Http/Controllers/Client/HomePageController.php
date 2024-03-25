@@ -283,6 +283,7 @@ class HomePageController extends Controller
         ->leftjoin('product_sub_categories', 'product_sub_categories.id', 'products.sub_category_id')
         ->select('products.id', 'products.category_id', 'products.title', 'products.price', 'products.category_id', 'products.sub_category_id', 'products.distributor_price', 'products.thumbnail_image', 'products.sku', 'products.product_code', 'products.short_description', 'products.description', 'products.is_variational', 'products.created_at', 'product_countries.name as country_name', 'product_countries.code as country_code', 'product_categories.category_name', 'product_sub_categories.sub_category_name', 'products.view_count', 'products.rating', 'products.rating_count')
         ->first();
+        $title = $product->title;
         $product_attributes = [];
         if($product->is_variational){
             $product_attributes = Product_attribute::where('product_id', $id)->with('attribute_values')->get();
@@ -308,18 +309,15 @@ class HomePageController extends Controller
         $product->save();
         $categories = Product_category::all();
         $subcategories = Product_sub_category::all();
-        $products = Product::where(['category_id'=> $product->category_id, 'status'=> 1])
+        $products = Product::where(['products.category_id'=> $product->category_id, 'products.status'=> 1])->where('products.id', '!=', $id)
         ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
         ->select('products.*', 'product_countries.code as country_code')
         ->limit(4)->inRandomOrder()->get();
         $single_category = $categories->where('id', $product->category_id)->first();
         $single_sub_category = $subcategories->where('id', $product->sub_category_id)->first();
-        $colors = (object)[];
-        $sizes = (object)[];
-        $product_galleries = Product_gallery::where('product_id', $id)->paginate(4);
+        $product_galleries = Product_gallery::where('product_id', $id)->limit(4)->get();
 
-
-        return view('client.viewProduct', ['categories' => $categories, 'subcategories' => $subcategories, 'product' => $product, 'products' => $products, 'single_category' => $single_category, 'single_sub_category' => $single_sub_category, 'colors' => $colors, 'sizes' => $sizes, 'product_galleries' => $product_galleries, 'reviews' => $reviews, 'product_attributes'=> $product_attributes]);
+        return view('client.viewProduct', ['title' => $title, 'categories' => $categories, 'subcategories' => $subcategories, 'product' => $product, 'products' => $products, 'single_category' => $single_category, 'single_sub_category' => $single_sub_category, 'product_galleries' => $product_galleries, 'reviews' => $reviews, 'product_attributes'=> $product_attributes]);
     }
 
     public function signUpViewer(){

@@ -8,26 +8,63 @@
         <div class="topCarouselCategoryBox">
             <div class="categoryMenuBox">
                 <ul>
-                    @foreach ($categories as $category)
-                        <li>
+                    @foreach ($categories as $cat_index => $category)
+                        @if ($cat_index == 7)
+                            <li>
 
-                            {{-- {{ route('your.route.name', ['category_id' => $category->id]) }} --}}
-                            {{-- Route handler for category --}}
-                            <a href="javascript:void(0)">
-                                {{ $category->category_name }}
-                                @if ($subcategories->where('category_id', $category->id)->isNotEmpty())
+                                {{-- {{ route('your.route.name', ['category_id' => $category->id]) }} --}}
+                                {{-- Route handler for category --}}
+                                <a href="javascript:void(0)">
+                                    More
                                     <span><i class="fa-solid fa-angle-right"></i></span>
-                                @endif
-                            </a>
-                            <ul>
-                                @foreach ($subcategories->where('category_id', $category->id) as $subcategory)
-                                    <li><a href="{{ route('home.subCategoryView', ['category_name' => $category->category_name, 'sub_category_id' => $subcategory->id, 'sub_category_name' => $subcategory->sub_category_name]) }}">{{ $subcategory->sub_category_name }}</a>
-                                    </li>
-                                @endforeach
+                                </a>
+                                <ul>
+                                    @foreach ($categories as $cat_index => $category)
+                                    @if ($cat_index >= 7)
+                                        <li>
+                                            {{-- {{ route('your.route.name', ['category_id' => $category->id]) }} --}}
+                                            {{-- Route handler for category --}}
+                                            <a href="javascript:void(0)">
+                                                {{ $category->category_name }}
+                                                @if ($subcategories->where('category_id', $category->id)->isNotEmpty())
+                                                    <span><i class="fa-solid fa-angle-right"></i></span>
+                                                @endif
+                                            </a>
+                                            <ul>
+                                                @foreach ($subcategories->where('category_id', $category->id) as $subcategory)
+                                                    <li><a href="{{ route('home.subCategoryView', ['category_name' => $category->category_name, 'sub_category_id' => $subcategory->id, 'sub_category_name' => $subcategory->sub_category_name]) }}">{{ $subcategory->sub_category_name }}</a>
+                                                    </li>
+                                                @endforeach
+                
+                                                {{-- {{ route('your.route.name', ['subcategory_id' => $subcategory->id]) }} --}}
+                                            </ul>
+                                        </li>
+                                    @endif
+                                    @endforeach
+                                </ul>
+                            </li>
+                            @break
+                        @else
+                            <li>
 
-                                {{-- {{ route('your.route.name', ['subcategory_id' => $subcategory->id]) }} --}}
-                            </ul>
-                        </li>
+                                {{-- {{ route('your.route.name', ['category_id' => $category->id]) }} --}}
+                                {{-- Route handler for category --}}
+                                <a href="javascript:void(0)">
+                                    {{ $category->category_name }}
+                                    @if ($subcategories->where('category_id', $category->id)->isNotEmpty())
+                                        <span><i class="fa-solid fa-angle-right"></i></span>
+                                    @endif
+                                </a>
+                                <ul>
+                                    @foreach ($subcategories->where('category_id', $category->id) as $subcategory)
+                                        <li><a href="{{ route('home.subCategoryView', ['category_name' => $category->category_name, 'sub_category_id' => $subcategory->id, 'sub_category_name' => $subcategory->sub_category_name]) }}">{{ $subcategory->sub_category_name }}</a>
+                                        </li>
+                                    @endforeach
+
+                                    {{-- {{ route('your.route.name', ['subcategory_id' => $subcategory->id]) }} --}}
+                                </ul>
+                            </li>
+                        @endif
                     @endforeach
 
 
@@ -671,6 +708,20 @@
     <style>
         .categoryCarouselItem:hover p {
             color: white;
+        }
+        .categoryMenuBox ul li ul li:hover ul{
+            display: block !important;
+            position: absolute;
+            top: 0;
+            right: -175px;
+            width: 175px;
+            margin: auto;
+        }
+        .categoryMenuBox ul li ul li ul{
+            display: none !important;
+            background-color: var(--secondary-2-color);
+            z-index: 11;
+            border-radius: 4px;
         }
     </style>
 @endsection
