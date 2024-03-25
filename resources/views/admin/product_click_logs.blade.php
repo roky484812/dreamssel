@@ -31,7 +31,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     @foreach ($product_click_logs as $product_click_log)
-                                    <div class="col-md-6 col-lg-4">
+                                    <div class="col-md-6 col-lg-4 mb-4">
                                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="d-flex w-100 justify-content-between">
                                                 <h5 class="mb-4">

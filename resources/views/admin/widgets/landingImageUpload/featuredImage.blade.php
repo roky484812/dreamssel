@@ -1,4 +1,4 @@
-@extends('layouts.admin', ['title' => 'Order Management', 'active' => 'user'])
+@extends('layouts.admin', ['title' => 'Resources | Featured Image', 'active' => 'featuredImage'])
 @section('content')
 <div class="app-content main-content">
     <div class="side-app">

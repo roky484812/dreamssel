@@ -390,7 +390,9 @@
                                 </ul>
                             </li>
                             <li class="slide">
-                                <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)">
+                                <a class="side-menu__item @if ( $active == 'carousel' || $active == 'featuredImage' || $active == 'newAraival')
+                                    active
+                                @endif" data-bs-toggle="slide" href="javascript:void(0)">
                                     <svg class="side-menu__icon" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -404,19 +406,18 @@
                                         <a href="javascript:void(0)"></a>Submenus
                                     </li>
                                     <li class="sub-slide">
-                                        <a class="sub-side-menu__item slide-item" href="{{route('admin.carousel.view')}}">
+                                        <a class="sub-side-menu__item slide-item @if ($active == 'carousel') active @endif" href="{{route('admin.carousel.view')}}">
                                             <span class="sub-side-menu__label">Top Carousel</span>
                                         </a>
                                     </li>
                                     <li class="sub-slide">
-                                        <a class="sub-side-menu__item slide-item" data-bs-toggle="sub-slide"
+                                        <a class="sub-side-menu__item slide-item @if ($active == 'featuredImage') active @endif" data-bs-toggle="sub-slide"
                                             href="{{route('admin.feature.view')}}">
                                             <span class="sub-side-menu__label">Feature Imaged</span>
                                         </a>
-
                                     </li>
                                     <li class="sub-slide">
-                                        <a class="sub-side-menu__item slide-item" data-bs-toggle="sub-slide"
+                                        <a class="sub-side-menu__item slide-item @if ($active == 'newAraival') active @endif" data-bs-toggle="sub-slide"
                                             href="{{route('admin.newAraival.view')}}">
                                             <span class="sub-side-menu__label">New Arrival</span>
                                         </a>
