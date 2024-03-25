@@ -190,12 +190,13 @@
                             @endif
                         </div>
 
-                        <div class="card-review-wrapper">
-                            @if ($product->rating_count > 0)
+                        @if ($product->rating_count > 0)
+                            <div class="card-review-wrapper">
                                 <div class="card-review">
                                     @php
                                         $rating = $product->rating;
                                     @endphp
+
                                     @for ($i = 0; $i < 5; $i++)
                                         @if ($rating >= 1)
                                             <img src="{{ asset('assets/client/images/filled_star.svg') }}"
@@ -208,12 +209,13 @@
                                             $rating--;
                                         @endphp
                                     @endfor
+
                                 </div>
                                 <div class="card-number-of-reviews">
                                     <p>&#x28;{{ $product->rating_count }}&#x29;</p>
                                 </div>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
                         <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}"
                             class="card-buy-now text-decoration-none" type="button">
                             <p>অর্ডার করুন</p>
@@ -353,30 +355,32 @@
                                 @endif
                             </div>
 
-                            <div class="card-review-wrapper">
-                                @if ($product->rating_count > 0)
+                             
+                                <div class="card-review-wrapper">
                                     <div class="card-review">
                                         @php
                                             $rating = $product->rating;
                                         @endphp
-                                        @for ($i = 0; $i < 5; $i++)
-                                            @if ($rating >= 1)
-                                                <img src="{{ asset('assets/client/images/filled_star.svg') }}"
-                                                    alt="" data-index="1" />
-                                            @else
-                                                <img src="{{ asset('assets/client/images/blank_star.svg') }}"
-                                                    alt="" data-index="5" />
-                                            @endif
-                                            @php
-                                                $rating--;
-                                            @endphp
-                                        @endfor
+                                        @if ($product->rating_count > 0)
+                                            @for ($i = 0; $i < 5; $i++)
+                                                @if ($rating >= 1)
+                                                    <img src="{{ asset('assets/client/images/filled_star.svg') }}"
+                                                        alt="" data-index="1" />
+                                                @else
+                                                    <img src="{{ asset('assets/client/images/blank_star.svg') }}"
+                                                        alt="" data-index="5" />
+                                                @endif
+                                                @php
+                                                    $rating--;
+                                                @endphp
+                                            @endfor
+
                                     </div>
                                     <div class="card-number-of-reviews">
                                         <p>&#x28;{{ $product->rating_count }}&#x29;</p>
                                     </div>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
                             <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}"
                                 class="card-buy-now text-decoration-none" type="button">
                                 <p>অর্ডার করুন</p>
@@ -503,12 +507,13 @@
                                 @endif
                             </div>
 
-                            <div class="card-review-wrapper">
-                                @if ($product->rating_count > 0)
+                            @if ($product->rating_count > 0)
+                                <div class="card-review-wrapper">
                                     <div class="card-review">
                                         @php
                                             $rating = $product->rating;
                                         @endphp
+
                                         @for ($i = 0; $i < 5; $i++)
                                             @if ($rating >= 1)
                                                 <img src="{{ asset('assets/client/images/filled_star.svg') }}"
@@ -525,8 +530,8 @@
                                     <div class="card-number-of-reviews">
                                         <p>&#x28;{{ $product->rating_count }}&#x29;</p>
                                     </div>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
                             <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}"
                                 class="card-buy-now text-decoration-none" type="button">
                                 <p>অর্ডার করুন</p>
