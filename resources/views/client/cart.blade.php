@@ -96,7 +96,84 @@
             </div>
 
         </div>
+
     </div>
+
+     <!-- cart option start from here test -->
+     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Employee Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-vcenter text-nowrap mb-0 border">
+                                <thead>
+                                    <tr>
+                                        <th class="">Image</th>
+                                        <th class="text-center">Product Title</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Total</th>
+                                        <th class="text-end">Remove</th>
+                                    </tr>
+                                </thead>
+                                @php
+                                    $sub_total = 0;
+                                @endphp
+
+                                
+                                <tbody >
+                                    @foreach ($product_carts as $product_cart)
+                                    <?php $product = Product::whereId($product_cart->product_id)->first(); ?>
+                                    <tr data-product-id="{{ $product->id }}">
+                                        <td class="">
+                                            <img class="avatar-lg me-3 cartProductImage"
+                                                src="../assets/image 63.png"
+                                                alt="Image description" {{ $product->thumbnail_image }}>
+                                            
+                                        </td>
+                                        <td class="text-center">{{ Str::limit($product->title, 30) }}</td>
+                                        <td class="text-center">
+                                            <div class="product-price">{{ $product->distributor_price }}</div>
+                                        </td>
+                                        <td class="text-center">
+                                            
+                                                <div class="inputSection text-center">
+                                                    <button class="quantity-button decrease">-</button>
+                                                    <input type="number" value="1" min="1" data-product-cart-id="{{ $product_cart->id }}" value="{{ $product_cart->quantity }}">
+                                                    <button class="quantity-button increase">+</button>
+                                                </div>
+                                            
+                                        </td>
+                                        <td>
+                                            <div class="product-line-price">{{ $product_cart->quantity * $product->distributor_price }}</div>
+                                        </td>
+                                        <td class="text-end">
+                                            <div class="product-removal">
+                                                <button class="remove-product" data-product-cart-id="{{ $product_cart->id }}">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <input type="hidden" value="{{ $sub_total += $product_cart->quantity * $product->distributor_price }}">
+                                    </tr>
+                                    @endforeach
+
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- test end --}}
+
 @endsection
 
 @section('custom_css')
