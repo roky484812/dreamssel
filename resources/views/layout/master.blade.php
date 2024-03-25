@@ -202,19 +202,13 @@
             <div class="footer-row-wrapper">
                 <div class="row">
                     <div class="col">
+                        <h6>IT Partner</h6>
                         <div class="footer-logo">
                             <div class="footer-brand-logo-single">
-                                <img class="bg-transparent" src="{{ asset('assets/admin/images/brand/white_single_logo.svg') }}" alt="Logo">
+                                <a href="https://pirhotech.com/"><img class="bg-transparent" src="{{ asset('assets/client/images/whitelogoPiRhoTech.svg') }}" alt="Logo"></a>
                             </div>
                         </div>
-                        <div class="subscribe">
-                            <a href="">Subscribe</a>
-                            <p>Get 10% off your first order</p>
-                            <div class="email-wrapper">
-                                <input class="email-field" type="email" placeholder="example@gmail.com" />
-                                <span><i class="fa-regular fa-paper-plane"></i></span>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="col">
                         <h6>Support</h6>
@@ -264,7 +258,11 @@
                 </div>
             </div>
             <div class="copyright-text">
-                <p>&copy; Copyright Ecommerce 2024 All right reserved</p>
+                <p>
+                    Copyright &copy 2023 <a href="https://dreamssel.com/" class="text-success text-decoration-none">Dreamssel</a>. Developed with <span
+                      class="fa fa-heart text-danger"></span> by <a class="text-success text-decoration-none" href="https://www.pirhotech.com"> PiRhoTech
+                    </a> All rights reserved.
+                  </p>
             </div>
         </div>
     </footer>
