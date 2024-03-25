@@ -25,28 +25,31 @@
 
                             <div class="product-card">
                                 <div class="card-product-image">
-    
+
                                     <a href="{{ route('home.productPage', ['id' => $product->id]) }}"
                                         class="product-card-link">
                                         <img src="{{ asset($product->thumbnail_image) }}" alt="Product image" />
                                     </a>
                                     <div class="card-discount">
-                                    @if (auth()->user()) 
-                                        <p>                                                
-                                        @php
-                                            try {
-                                                echo round((($product->price - $product->distributor_price) / $product->price) * 100);
-                                            } catch (\Throwable $th) {
-                                                echo 0;
-                                            }
-                                        @endphp %
-                                        </p>
-                                    @endif
+                                        @if (auth()->user())
+                                            <p>
+                                                @php
+                                                    try {
+                                                        echo round(
+                                                            (($product->price - $product->distributor_price) /
+                                                                $product->price) *
+                                                                100,
+                                                        );
+                                                    } catch (\Throwable $th) {
+                                                        echo 0;
+                                                    }
+                                                @endphp %
+                                            </p>
+                                        @endif
                                     </div>
                                     <div class="card-add-to-wishlist">
                                         @if (auth()->user())
-                                            <a href="" class="addToFavBtn"
-                                                data-product-fav-id="{{ $product->id }}">
+                                            <a href="" class="addToFavBtn" data-product-fav-id="{{ $product->id }}">
                                                 <i class="fa-regular fa-heart"></i>
                                             </a>
                                         @else
@@ -61,13 +64,11 @@
                                     </div>
                                     <div class="card-add-to-cart">
                                         @if (auth()->user())
-                                            <a href="" class="addToCartBtn"
-                                                data-product-id="{{ $product->id }}">
+                                            <a href="" class="addToCartBtn" data-product-id="{{ $product->id }}">
                                                 <i class="bi bi-cart3"></i>
                                             </a>
                                         @else
-                                            <a href="{{ route('home.signInPage') }}"
-                                                data-product-id="{{ $product->id }}">
+                                            <a href="{{ route('home.signInPage') }}" data-product-id="{{ $product->id }}">
                                                 <i class="bi bi-cart3"></i>
                                             </a>
                                         @endif
@@ -80,32 +81,34 @@
                                     @if (auth()->user())
                                         <p>&#2547; {{ $product->distributor_price }} </p>
                                         <span><del>&#2547; {{ $product->price }}</del></span>
-                                        @else
+                                    @else
                                         <p>&#2547; {{ $product->price }} </p>
                                     @endif
                                 </div>
-    
+
                                 <div class="card-review-wrapper">
-                                    <div class="card-review">
-                                        @php
-                                            $rating = $product->rating;
-                                        @endphp
-                                        @for ($i = 0; $i < 5; $i++)
-                                            @if ($rating >= 1)
-                                                <img src="{{ asset('assets/client/images/filled_star.svg') }}"
-                                                    alt="" data-index="1" />
-                                            @else
-                                                <img src="{{ asset('assets/client/images/blank_star.svg') }}"
-                                                    alt="" data-index="5" />
-                                            @endif
+                                    @if ($product->rating_count > 0)
+                                        <div class="card-review">
                                             @php
-                                                $rating--;
+                                                $rating = $product->rating;
                                             @endphp
-                                        @endfor
-                                    </div>
-                                    <div class="card-number-of-reviews">
-                                        <p>&#x28;{{ $product->rating_count }}&#x29;</p>
-                                    </div>
+                                            @for ($i = 0; $i < 5; $i++)
+                                                @if ($rating >= 1)
+                                                    <img src="{{ asset('assets/client/images/filled_star.svg') }}"
+                                                        alt="" data-index="1" />
+                                                @else
+                                                    <img src="{{ asset('assets/client/images/blank_star.svg') }}"
+                                                        alt="" data-index="5" />
+                                                @endif
+                                                @php
+                                                    $rating--;
+                                                @endphp
+                                            @endfor
+                                        </div>
+                                        <div class="card-number-of-reviews">
+                                            <p>&#x28;{{ $product->rating_count }}&#x29;</p>
+                                        </div>
+                                    @endif
                                 </div>
                                 <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}"
                                     class="card-buy-now text-decoration-none" type="button">
