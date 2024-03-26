@@ -96,7 +96,7 @@
                                                                         $product = $products->find(
                                                                             $list_item->product_id,
                                                                         );
-                                                                        $localPrice+=$product->distributor_price*$list_item->quantity;
+                                                                        $localPrice+=$list_item->price*$list_item->quantity;
                                                                     @endphp
 
                                                                     <!-- Product Image and title -->
@@ -106,9 +106,9 @@
                                                                             alt="Product Image" class="img-fluid mb-3"
                                                                             style="max-width: 50px" />
                                                                         <!-- Product Title -->
-                                                                        <p class="text-dark font-weight-semibold ms-3">
+                                                                        <a href="{{ route('home.productPage', $product->id) }}" class="text-dark font-weight-semibold ms-3">
                                                                             {{ $product->title }}
-                                                                        </p>
+                                                                        </a>
                                                                     </div>
                                                                     <div class="orderCardAttributes d-flex flex-wrap">
                                                                         <div class="orderCardAttrLeft">
@@ -116,7 +116,7 @@
                                                                             <div
                                                                                 class="orderAttrItem d-flex align-items-center justify-content-between">
                                                                                 <p class="text-muted">Price:</p>
-                                                                                <span>{{ $product->distributor_price }}</span>
+                                                                                <span>{{ $list_item->price }}</span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="orderCardAttrRight">
