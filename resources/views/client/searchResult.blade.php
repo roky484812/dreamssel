@@ -21,98 +21,104 @@
                     <div class="col-md-9">
                         <div class="row g-1" id="data">
                             @foreach ($products as $product)
-                            <div class="col-md-4 col-sm-6">
-                                <div class="product-card">
-                                    <div class="card-product-image">
-        
-                                        <a href="{{ route('home.productPage', ['id' => $product->id]) }}"
-                                            class="product-card-link">
-                                            <img src="{{ $product->thumbnail_image }}" alt="Product image" />
-                                        </a>
-                                        <div class="card-discount">
-                                        @if (auth()->user()) 
-                                            <p>                                                
-                                            @php
-                                                try {
-                                                    echo round((($product->price - $product->distributor_price) / $product->price) * 100);
-                                                } catch (\Throwable $th) {
-                                                    echo 0;
-                                                }
-                                            @endphp %
-                                            </p>
-                                        @endif
-                                        </div>
-                                        <div class="card-add-to-wishlist">
-                                            @if (auth()->user())
-                                                <a href="" class="addToFavBtn"
-                                                    data-product-fav-id="{{ $product->id }}">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </a>
-                                            @else
-                                                <a href="{{ route('home.signInPage') }}"
-                                                    data-product-fav-id="{{ $product->id }}">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </a>
-                                            @endif
-                                        </div>
-                                        <div class="position-absolute bottom-0 end-0">
-                                            <span class="badge text-bg-dark">{{ $product->country_code }}</span>
-                                        </div>
-                                        <div class="card-add-to-cart">
-                                            @if (auth()->user())
-                                                <a href="" class="addToCartBtn"
-                                                    data-product-id="{{ $product->id }}">
-                                                    <i class="bi bi-cart3"></i>
-                                                </a>
-                                            @else
-                                                <a href="{{ route('home.signInPage') }}"
-                                                    data-product-id="{{ $product->id }}">
-                                                    <i class="bi bi-cart3"></i>
-                                                </a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="card-product-name">
-                                        <p>{{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}</p>
-                                    </div>
-                                    <div class="card-price">
-                                        @if (auth()->user())
-                                            <p>&#2547; {{ $product->distributor_price }} </p>
-                                            <span><del>&#2547; {{ $product->price }}</del></span>
-                                            @else
-                                            <p>&#2547; {{ $product->price }} </p>
-                                        @endif
-                                    </div>
-        
-                                    <div class="card-review-wrapper">
-                                        <div class="card-review">
-                                            @php
-                                                $rating = $product->rating;
-                                            @endphp
-                                            @for ($i = 0; $i < 5; $i++)
-                                                @if ($rating >= 1)
-                                                    <img src="{{ asset('assets/client/images/filled_star.svg') }}"
-                                                        alt="" data-index="1" />
-                                                @else
-                                                    <img src="{{ asset('assets/client/images/blank_star.svg') }}"
-                                                        alt="" data-index="5" />
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="product-card">
+                                        <div class="card-product-image">
+
+                                            <a href="{{ route('home.productPage', ['id' => $product->id]) }}"
+                                                class="product-card-link">
+                                                <img src="{{ $product->thumbnail_image }}" alt="Product image" />
+                                            </a>
+                                            <div class="card-discount">
+                                                @if (auth()->user())
+                                                    <p>
+                                                        @php
+                                                            try {
+                                                                echo round(
+                                                                    (($product->price - $product->distributor_price) /
+                                                                        $product->price) *
+                                                                        100,
+                                                                );
+                                                            } catch (\Throwable $th) {
+                                                                echo 0;
+                                                            }
+                                                        @endphp %
+                                                    </p>
                                                 @endif
-                                                @php
-                                                    $rating--;
-                                                @endphp
-                                            @endfor
+                                            </div>
+                                            <div class="card-add-to-wishlist">
+                                                @if (auth()->user())
+                                                    <a href="" class="addToFavBtn"
+                                                        data-product-fav-id="{{ $product->id }}">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('home.signInPage') }}"
+                                                        data-product-fav-id="{{ $product->id }}">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </a>
+                                                @endif
+                                            </div>
+                                            <div class="position-absolute bottom-0 end-0">
+                                                <span class="badge text-bg-dark">{{ $product->country_code }}</span>
+                                            </div>
+                                            <div class="card-add-to-cart">
+                                                @if (auth()->user())
+                                                    <a href="" class="addToCartBtn"
+                                                        data-product-id="{{ $product->id }}">
+                                                        <i class="bi bi-cart3"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('home.signInPage') }}"
+                                                        data-product-id="{{ $product->id }}">
+                                                        <i class="bi bi-cart3"></i>
+                                                    </a>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="card-number-of-reviews">
-                                            <p>&#x28;{{ $product->rating_count }}&#x29;</p>
+                                        <div class="card-product-name">
+                                            <p>{{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}</p>
                                         </div>
+                                        <div class="card-price">
+                                            @if (auth()->user())
+                                                <p>&#2547; {{ $product->distributor_price }} </p>
+                                                <span><del>&#2547; {{ $product->price }}</del></span>
+                                            @else
+                                                <p>&#2547; {{ $product->price }} </p>
+                                            @endif
+                                        </div>
+
+                                        <div class="card-review-wrapper">
+                                            @if ($product->rating_count > 0)
+                                                <div class="card-review">
+                                                    @php
+                                                        $rating = $product->rating;
+                                                    @endphp
+                                                    @for ($i = 0; $i < 5; $i++)
+                                                        @if ($rating >= 1)
+                                                            <img src="{{ asset('assets/client/images/filled_star.svg') }}"
+                                                                alt="" data-index="1" />
+                                                        @else
+                                                            <img src="{{ asset('assets/client/images/blank_star.svg') }}"
+                                                                alt="" data-index="5" />
+                                                        @endif
+                                                        @php
+                                                            $rating--;
+                                                        @endphp
+                                                    @endfor
+                                                </div>
+                                                <div class="card-number-of-reviews">
+                                                    <p>&#x28;{{ $product->rating_count }}&#x29;</p>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}"
+                                            class="card-buy-now text-decoration-none" type="button">
+                                            <p>অর্ডার করুন</p>
+                                        </a>
                                     </div>
-                                    <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}"
-                                        class="card-buy-now text-decoration-none" type="button">
-                                        <p>অর্ডার করুন</p>
-                                    </a>
+
                                 </div>
-        
-                            </div>
                             @endforeach
                         </div>
                         <div class="d-flex justify-content-end" id="link">
@@ -194,13 +200,13 @@
     <script src="{{ asset('assets/admin/plugins/moment/moment.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $(document).on('change', '.category_check', function(){
+            $(document).on('change', '.category_check', function() {
                 var category = $('input[name="category_id[]"]:checked');
                 var category_id = [];
-                category.each(function(){
+                category.each(function() {
                     category_id.push($(this).val());
                 })
-                
+
                 $.ajax({
                     url: "{{ route('client.product.sub_category_filter') }}",
                     type: 'GET',
@@ -209,12 +215,12 @@
                         'category_id[]': category_id
                     },
                     success: function(response) {
-                        if(response.status){
+                        if (response.status) {
                             console.log(response);
                             searchProducts();
                             $('#sub_cat').empty();
                             let options = '';
-                            if(response.data.length){
+                            if (response.data.length) {
                                 response.data.forEach(sub_category => {
                                     options += `
                                         <div>
@@ -240,23 +246,23 @@
                     },
                 });
             });
-            $('#min_price').on('change', function(){
-                searchProducts();
-            });
-            
-            $('#max_price').on('change', function(){
+            $('#min_price').on('change', function() {
                 searchProducts();
             });
 
-            $('#search_filter').on('keyup', function(){
+            $('#max_price').on('change', function() {
                 searchProducts();
             });
 
-            $(document).on('change', '.subcategory_check', function(){
+            $('#search_filter').on('keyup', function() {
                 searchProducts();
             });
 
-            function searchProducts(page = 1){
+            $(document).on('change', '.subcategory_check', function() {
+                searchProducts();
+            });
+
+            function searchProducts(page = 1) {
                 let form = $('#product_filter')[0];
                 let formData = new FormData(form);
                 let objectData = {};
@@ -273,22 +279,24 @@
                 }
                 $('#data').addClass('disabled');
                 $.ajax({
-                    url: "{{ route('client.product.search') }}"+"?page="+page,
+                    url: "{{ route('client.product.search') }}" + "?page=" + page,
                     type: 'GET',
                     dataType: 'json',
                     data: objectData,
                     success: function(response) {
                         var products = '';
-                        response.data.data.forEach((product)=>{
+                        response.data.data.forEach((product) => {
                             console.log(product);
                             var rating = product.rating;
                             var i = 0;
                             var image = '';
-                            for(i; i < 5; i++){
-                                if(rating >= 1){
-                                    image += `<img src="{{ asset('assets/client/images/filled_star.svg') }}" alt="" data-index="1" />`;
-                                }else{
-                                    image += `<img src="{{ asset('assets/client/images/blank_star.svg') }}" alt="" data-index="5" />`;
+                            for (i; i < 5; i++) {
+                                if (rating >= 1) {
+                                    image +=
+                                        `<img src="{{ asset('assets/client/images/filled_star.svg') }}" alt="" data-index="1" />`;
+                                } else {
+                                    image +=
+                                        `<img src="{{ asset('assets/client/images/blank_star.svg') }}" alt="" data-index="5" />`;
                                 }
                                 rating--;
                             }
@@ -297,7 +305,7 @@
                                     ${image}
                                 </div>
                             `;
-                            products +=`
+                            products += `
                             <div class="col-md-4 col-sm-6">
                                 <div class="product-card">
                                     <div class="card-product-image">
@@ -369,17 +377,17 @@
                             </div>
                             `;
                         });
-                        if(products.length > 0){
+                        if (products.length > 0) {
                             $('#data').html(products);
                             $('html,body').scrollTop(0);
-                        }else{
+                        } else {
                             $('#data').html('<h4 class="text-muted text-center">No Product!</h4>');
                         }
 
                         // create links
                         var options = '';
                         response.data.links.forEach(function(link) {
-                            if(link.url){
+                            if (link.url) {
                                 options += `
                                     <li class="page-item ${link.active ? 'active': ''} ">
                                         <a class="page-link" href="${link.url}">${link.label}</a>
@@ -389,22 +397,23 @@
                         var links = `<ul class="pagination">
                             ${options}
                         </ul>`;
-                        if(products.length > 0){
+                        if (products.length > 0) {
                             $('#link').html(links);
-                        }else{
+                        } else {
                             $('#link').empty();
                         }
                     },
-                    complete: function(){
+                    complete: function() {
                         $('#data').removeClass('disabled');
                     }
                 });
             }
-            function str_limit(text, count){
+
+            function str_limit(text, count) {
                 return text.slice(0, count) + (text.length > count ? "..." : "");
             }
 
-            $('#product_filter').on('submit', function(e){
+            $('#product_filter').on('submit', function(e) {
                 e.preventDefault();
             });
 

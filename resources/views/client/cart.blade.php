@@ -50,14 +50,14 @@
                     <div class="product-quantity">
                         <div class="inputSection">
                             <button class="quantity-button decrease">-</button>
-                            <input type="number" class="quantity-input" data-product-cart-id="{{ $product_cart->id }}" value="{{ $product_cart->quantity }}"
-                                min="1">
+                            <input type="number" class="quantity-input" data-product-cart-id="{{ $product_cart->id }}"
+                                value="{{ $product_cart->quantity }}" min="1">
                             <button class="quantity-button increase">+</button>
                         </div>
                     </div>
                     <div class="product-line-price">{{ $product_cart->quantity * $product->distributor_price }}</div>
                     <div class="product-removal">
-                        <button class="remove-product" data-product-cart-id="{{ $product_cart->id }}">
+                        <button class="remove-product text-danger" data-product-cart-id="{{ $product_cart->id }}">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </div>
@@ -68,7 +68,8 @@
 
             <!-- update button section -->
             <div class="updateButtons mt-5">
-                <a href="{{route('home')}}" class="returnToShopBtn btn border-dark text-decoration-none">Return to home</a>
+                <a href="{{ route('home') }}" class="returnToShopBtn btn border-dark text-decoration-none">Return to
+                    home</a>
             </div>
 
 
@@ -84,7 +85,7 @@
                         <label>Subtotal</label>
                         <div class="totals-value" id="cart-subtotal">{{ $sub_total }}</div>
                     </div>
-                    
+
                     <div class="checkOutBtn">
                         <a href="{{ route('home.placeOrdersView') }}" class="checkout text-decoration-none">Procees to
                             Checkout</a>
@@ -96,16 +97,17 @@
             </div>
 
         </div>
+
     </div>
 @endsection
 
 @section('custom_css')
-    <link rel="stylesheet" href="{{ asset('assets/client/css/cart.css') }}">
 @endsection
 @section('scripts')
     <script>
         $(document).ready(function() {
             var fadeTime = 300;
+
             function updateQuantity(quantityInput) {
                 /* Calculate line price */
                 var productRow = $(quantityInput).closest('.product');
@@ -117,18 +119,19 @@
                 productRow.find('.product-line-price').text(linePrice.toFixed(0));
                 recalculateCart();
             }
+
             function recalculateCart() {
                 var subtotal = 0;
 
                 /* Sum up row totals */
-                $('.product').each(function () {
+                $('.product').each(function() {
                     subtotal += parseFloat($(this).find('.product-line-price').text());
                 });
                 /* Calculate totals */
                 // var total = subtotal;
 
                 /* Update totals display */
-                $('.totals-value').fadeOut(fadeTime, function () {
+                $('.totals-value').fadeOut(fadeTime, function() {
                     $('#cart-subtotal').html(subtotal.toFixed(0));
                     $('#cart-total').html(subtotal.toFixed(0));
                     if (subtotal == 0) {
@@ -139,19 +142,20 @@
                     $('.totals-value').fadeIn(fadeTime);
                 });
             }
-            
+
             /* Remove item from cart */
             function removeItem(removeButton) {
                 /* Remove row from DOM and recalc cart total */
                 var productRow = $(removeButton).parent().parent();
                 console.log(productRow);
-                productRow.slideUp(fadeTime, function () {
+                productRow.slideUp(fadeTime, function() {
                     productRow.remove();
                     recalculateCart();
                 });
             }
             $(document).on('click', '.remove-product', function() {
-                var product_cart_id = $(this).data('product-cart-id'); // Use the appropriate way to get the product ID
+                var product_cart_id = $(this).data(
+                    'product-cart-id'); // Use the appropriate way to get the product ID
                 var remove_btn = $(this);
                 $(remove_btn).parent().parent().addClass('disabled');
                 $.ajax({
@@ -172,20 +176,20 @@
                         toastr.error('Something went wrong ):', 'Error');
                         console.log(error);
                     },
-                    complete: function(){
+                    complete: function() {
                         $(remove_btn).parent().parent().removeClass('disabled');
                     }
                 });
             });
-            
+
             $(".increase").click(function() {
                 adjustQuantity($(this), 1);
-                var sub=parseInt( $('.product-line-price').val());
-                var price=parseInt( $('.product-price').val());
+                var sub = parseInt($('.product-line-price').val());
+                var price = parseInt($('.product-price').val());
 
-                var total_price=sub+price;
+                var total_price = sub + price;
                 console.log(total_price);
-                
+
 
             });
 
@@ -200,15 +204,15 @@
                 var quantityInput = button.siblings('.quantity-input');
 
                 var product_cart_id = quantityInput.data('product-cart-id');
-                console.log('cart',product_cart_id);
+                console.log('cart', product_cart_id);
                 var currentQuantity = parseInt(quantityInput.val());
                 var newQuantity = currentQuantity + change;
-    
+
                 // Ensure quantity doesn't go below 1
                 if (newQuantity < 1) {
                     newQuantity = 1;
                 }
-    
+
                 $.ajax({
                     url: "{{ route('home.updateCartQuantity') }}",
                     type: "POST",
@@ -224,7 +228,7 @@
                             quantityInput.val(newQuantity);
                             // Update the line price
                             updateQuantity(quantityInput);
-                            
+
                             var linePrice = response.line_price;
                             button.closest('.product').find('.product-line-price').text(linePrice);
                             // Update the total
@@ -232,7 +236,7 @@
                             $('#cart-total').text(subTotal);
                         }
                     },
-                    complete: function(){
+                    complete: function() {
                         productItem.removeClass('disabled');
                     }
                 });
