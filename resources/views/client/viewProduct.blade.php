@@ -67,9 +67,8 @@
                                     <p>In Stock</p>
                                 </div>
                             @else
-                                <div class="out-stock">
-
-                                    <p>Stock Out</p>
+                                <div class="out-stock text-danger">
+                                    <p class="text-danger">Stock Out</p>
                                 </div>
                             @endif
                         </div>
@@ -531,7 +530,7 @@
                             } else {
                                 stock = `
                                     <div class="out-stock">
-                                        <p>Stock Out</p>
+                                        <p class="text-danger">Stock Out</p>
                                     </div>
                                 `;
                             }

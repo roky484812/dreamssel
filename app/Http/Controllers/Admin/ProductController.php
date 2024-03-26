@@ -52,9 +52,9 @@ class ProductController extends Controller
             $product_fetch->where('products.country_id', $req->input('country'));
         }
 
-        $countries = Product_country::get();
-        $categories = Product_category::get();
-        $sub_categories = Product_sub_category::get();
+        $countries = Product_country::orderBy('id', 'desc')->get();
+        $categories = Product_category::orderBy('id', 'desc')->get();
+        $sub_categories = Product_sub_category::orderBy('id', 'desc')->get();
         $products = $product_fetch->paginate(20);
         return view('admin.product_management', [
             'products'=> $products,
@@ -205,7 +205,7 @@ class ProductController extends Controller
         ->with('product_galleries')
         ->with('product_combinations')
         ->first();
-        $categories = Product_category::get();
+        $categories = Product_category::orderBy('id', 'desc')->get();
         $countries = Product_country::orderBy('id', 'desc')->get();
         return view('admin.edit_product', ['categories'=> $categories, 'product'=> $product, 'countries'=> $countries]);
     }

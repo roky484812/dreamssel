@@ -43,7 +43,6 @@ class OrderController extends Controller
             'users' => $users,
             'search_token'=> $req->input('token')
         ]);
-      
     }
     public function cancelledOrder(Request $req){
         $products = Product::all();

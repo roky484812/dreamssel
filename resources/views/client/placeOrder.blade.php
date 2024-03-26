@@ -85,12 +85,12 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" required type="radio" name="shipping" id="insideDhaka"
                                     value="60">
-                                <label class="form-check-label" for="insideDhaka">ঢাকার ভিতরে (৬০)</label>
+                                <label class="form-check-label" for="insideDhaka">মেহেরপুরের ভিতরে (৬০)</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="shipping" id="outsideDhaka"
                                     value="120">
-                                <label class="form-check-label" required for="outsideDhaka">ঢাকার বাইরে (১২০)</label>
+                                <label class="form-check-label" required for="outsideDhaka">মেহেরপুরের বাইরে (১২০)</label>
                             </div>
                         </div>
 
@@ -112,7 +112,11 @@
                                         <div class="product-title">{{ Str::limit($product->title, 80) }}
                                         </div>
                                     </div>
-                                    <div class="product-line-price">{{ $product->distributor_price }}</div>
+                                    @if (auth()->user())
+                                        <div class="product-line-price">{{ $product->distributor_price }}</div>
+                                    @else
+                                        <div class="product-line-price">{{ $product->price }}</div>
+                                    @endif
 
                                 </div>
 
@@ -123,9 +127,17 @@
 
                             <div class="totals-item">
                                 <label>Subtotal</label>
+                                @if (auth()->user())
                                 <div class="totals-value" id="cart-subtotal"
                                     data-subtotal="{{ $product->distributor_price }}">
                                     {{ $product->distributor_price }}</div>
+                                @else
+                                <div class="totals-value" id="cart-subtotal"
+                                data-subtotal="{{ $product->price }}">
+                                {{ $product->price }}</div>
+                                @endif
+
+
                             </div>
                             <div class="totals-item">
                                 <label>Shipping</label>

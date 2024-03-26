@@ -68,12 +68,12 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" required type="radio" name="shipping" id="insideDhaka"
                                     value="60">
-                                <label class="form-check-label" for="insideDhaka">ঢাকার ভিতরে (৬০)</label>
+                                <label class="form-check-label" for="insideDhaka">মেহেরপুরের ভিতরে (৬০)</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" required type="radio" name="shipping" id="outsideDhaka"
                                     value="120">
-                                <label class="form-check-label" for="outsideDhaka">ঢাকার বাইরে (১২০)</label>
+                                <label class="form-check-label" for="outsideDhaka">মেহেরপুরের বাইরে (১২০)</label>
                             </div>
                         </div>
 

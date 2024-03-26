@@ -485,7 +485,11 @@ class HomePageController extends Controller
 
         $order_list->product_id = $req->product_id;
         $order_list->quantity = 1;
-        $order_list->price = $product->distributor_price;
+        if($user){
+            $order_list->price = $product->distributor_price;
+        }else{
+            $order_list->price = $product->price;
+        }
         $order_list->order_id = $order->id;
 
         if ($order_list->save()) {

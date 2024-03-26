@@ -101,12 +101,12 @@ class ProductCategoryController extends Controller
         $req->validate([
             'category_id'=> 'nullable|exists:product_categories,id'
         ]);
-        $sub_category = Product_sub_category::select('product_sub_categories.*', 'product_categories.category_name')->leftJoin('product_categories', 'product_categories.id', 'product_sub_categories.category_id');
+        $sub_category = Product_sub_category::select('product_sub_categories.*', 'product_categories.category_name')->leftJoin('product_categories', 'product_categories.id', 'product_sub_categories.category_id')->orderBy('product_sub_categories.id', 'desc');
         if($req->input('category_id')){
             $sub_category->where('category_id', $req->input('category_id'));
         }
         $sub_category_paginate = $sub_category->paginate(20);
-        $categories = Product_category::get();
+        $categories = Product_category::orderBy('id', 'desc')->get();
 
         return view('admin.product_sub_category', ['subcategories'=> $sub_category_paginate, 'categories'=> $categories]);
     }

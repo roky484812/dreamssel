@@ -152,15 +152,18 @@ Route::controller(ClientAnnouncementController::class)->group(function(){
     Route::get('/accouncement', 'announcementList')->name('client.announcement.list');
     Route::get('/accouncement/{id}', 'announcement_view')->name('client.announcement.view');
 });
-Route::post('/update-data', [AccountController::class, 'updateData'])->name('account.update');
+
 
 
 Route::group(['middleware'=> ['web', 'type.distributor']], function(){
+    Route::post('/update-data', [AccountController::class, 'updateData'])->name('account.update');
+    
     Route::controller(ClientCartController::class)->group(function () {
         Route::post('/add-to-cart-v/{product_id}/', 'addToCartFromViewPage')->name('addToCartFromViewPage');
         Route::get('/add-to-cart-v/{product_id}/', 'addToCart')->name('addToCart');
         Route::delete('/remove-from-cart/{product_cart_id}/', 'removeFromCart')->name('removeFromCart');
     });
+
     Route::controller(ClientHomePageController::class)->group(function () {
         Route::post('/place-orders', 'placeOrders')->name('home.placeOrders');
         Route::get('/pending/order', 'pendingOrderView')->name('home.pendingOrder');
@@ -175,12 +178,15 @@ Route::group(['middleware'=> ['web', 'type.distributor']], function(){
         Route::delete('/remove-from-fav/{fav_list_id}/', 'removeFromFavList')->name('removeFromFav');
         Route::get('/place-orders/view/', 'placeOrderViewerFromCart')->name('home.placeOrdersView');
     });
+
     Route::controller(AuthController::class)->group(function(){
         Route::get('/logout', 'logout')->name('logout');
     });
+    
     Route::controller(DistDashboard::class)->group(function(){
         Route::get('/dashboard', 'index')->name('dist.dashboard');
     });
+
     Route::controller(EditProfileController::class)->group(function(){
         Route::get('/profile', 'edit_distributor_profile')->name('dist.edit_profile');
         Route::post('/profile/update', 'update_distributor_profile')->name('dist.update_profile');
