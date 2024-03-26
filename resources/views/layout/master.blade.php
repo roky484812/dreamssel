@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="Dreamssel Ecommerce">
+    <meta property="og:description" content="For your fashion dream">
+    <meta property="og:image" content="{{ asset('assets/admin/images/brand/white_single_logo.svg') }}">
+    <meta property="og:url" content="https://dreamssel.com/">
+    <meta property="og:type" content="Ecommerce">
+
     @yield('meta')
     <title>Dreamssel | {{ $title }}</title>
     <style>
