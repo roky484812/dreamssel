@@ -34,6 +34,10 @@ class AuthController extends Controller
         ]);
         $Credential = $req->only('email', 'password');
         if(Auth::attempt($Credential)){
+            if(Auth()->user()->is_active == 0){
+                Auth()->logout();
+                return back()->with('error', 'You are not an active user. Please contact to dreamssel.');
+            }
             $route = $this->redirectDash();
             return redirect($route);
         }else{
