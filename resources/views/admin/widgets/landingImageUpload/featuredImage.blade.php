@@ -25,7 +25,7 @@
                             <div class="row">
 
                                 <div class="col-lg-12 col-sm-12">
-                                    <label class="form-label text-dark" for="">Featured Photo</label>
+                                    <label class="form-label text-dark" for="">Featured Photo(1000*350)</label>
                                     <input type="file" class="dropify"
                                         accept=".jpg, .png, image/jpeg, image/png" data-height="180" name="image" />
                                 </div>

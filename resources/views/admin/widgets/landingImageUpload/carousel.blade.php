@@ -25,7 +25,7 @@
                                 <div class="row">
 
                                     <div class="col-lg-12 col-sm-12">
-                                        <label class="form-label text-dark" for="">Multiple Image</label>
+                                        <label class="form-label text-dark" for="">Carousel Image(1000*350)</label>
                                         <div id="multiple_image"></div>
                                         @error('images.*')
                                             <p class="text-danger">{{ $message }}</p>
