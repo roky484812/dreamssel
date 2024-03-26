@@ -46,7 +46,7 @@ class ProductCategoryController extends Controller
         $image_dest = public_path().$image_path;
         $image = $manager->read($image);
         $image->cover(80, 80);
-        $image->save($image_dest, 50);
+        $image->save($image_dest, 80);
         return $image_path;
     }
 

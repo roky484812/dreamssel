@@ -86,9 +86,12 @@
         </div>
     </div>
 </div>
-
+@php
+    $givenCarbonDateTime = \Carbon\Carbon::parse($endTime);
+    $currentDateTime = \Carbon\Carbon::now();
+@endphp
+@if(strtotime($givenCarbonDateTime) > strtotime($currentDateTime))
 <!-- flash sale section -->
-
 <div class="container" id="flash_sale">
     <div class="headerSection">
         <div class="header-category">
@@ -153,7 +156,7 @@
                             </div>
                             <div class="card-add-to-wishlist">
                                 @if (auth()->user())
-                                    <a href="" class="addToFavBtn" data-product-fav-id="{{ $product->id }}">
+                                    <a href="javascript:void(0)" class="addToFavBtn" data-product-fav-id="{{ $product->id }}">
                                         <i class="fa-regular fa-heart"></i>
                                     </a>
                                 @else
@@ -165,7 +168,7 @@
                             </div>
                             <div class="card-add-to-cart">
                                 @if (auth()->user())
-                                    <a href="" class="addToCartBtn" data-product-id="{{ $product->id }}">
+                                    <a href="javascript:void(0)" class="addToCartBtn" data-product-id="{{ $product->id }}">
                                         <i class="bi bi-cart3"></i>
                                     </a>
                                 @else
@@ -234,6 +237,9 @@
         </button>
     </div>
 </div>
+@endif
+
+
 
 <!-- browse by category section -->
 
@@ -318,7 +324,7 @@
                                 </div>
                                 <div class="card-add-to-wishlist">
                                     @if (auth()->user())
-                                        <a href="" class="addToFavBtn"
+                                        <a href="javascript:void(0)" class="addToFavBtn"
                                             data-product-fav-id="{{ $product->id }}">
                                             <i class="fa-regular fa-heart"></i>
                                         </a>
@@ -331,7 +337,7 @@
                                 </div>
                                 <div class="card-add-to-cart">
                                     @if (auth()->user())
-                                        <a href="" class="addToCartBtn"
+                                        <a href="javascript:void(0)" class="addToCartBtn"
                                             data-product-id="{{ $product->id }}">
                                             <i class="bi bi-cart3"></i>
                                         </a>
@@ -467,7 +473,7 @@
                                 </div>
                                 <div class="card-add-to-wishlist">
                                     @if (auth()->user())
-                                        <a href="" class="addToFavBtn"
+                                        <a href="javascript:void(0)" class="addToFavBtn"
                                             data-product-fav-id="{{ $product->id }}">
                                             <i class="fa-regular fa-heart"></i>
                                         </a>
@@ -483,7 +489,7 @@
                                 </div>
                                 <div class="card-add-to-cart">
                                     @if (auth()->user())
-                                        <a href="" class="addToCartBtn"
+                                        <a href="javascript:void(0)" class="addToCartBtn"
                                             data-product-id="{{ $product->id }}">
                                             <i class="bi bi-cart3"></i>
                                         </a>
@@ -569,25 +575,25 @@
         @if ($new_araival)
             <div class="new-arival-products">
                 <div class="left-large">
-                    <a href="">
+                    <a href="javascript:void(0)">
                         <img src="{{ $new_araival->large_potrait }}" alt="" />
                     </a>
                 </div>
 
                 <div class="right-wrapper">
                     <div class="right-top">
-                        <a href="">
+                        <a href="javascript:void(0)">
                             <img src="{{ $new_araival->large_landscape }}" alt="" />
                         </a>
                     </div>
                     <div class="right-bottom-wrapper">
                         <div class="right-bottom-left">
-                            <a href="">
+                            <a href="javascript:void(0)">
                                 <img src="{{ $new_araival->lsm_potrait }}" alt="" />
                             </a>
                         </div>
                         <div class="right-bottom-right">
-                            <a href="">
+                            <a href="javascript:void(0)">
                                 <img src="{{ $new_araival->rsm_potrait }}" alt="" />
                             </a>
                         </div>
@@ -713,9 +719,6 @@
             $('#hours-countdown').text(hours);
             $('#minutes-countdown').text(days);
             $('#seconds-countdown').text(seconds);
-            if (days <= 0 && hours <= 0 && days <= 0 && seconds <= 0) {
-                $('#flash_sale').addClass('d-none');
-            }
         }
 
         // Initial call to update the countdown

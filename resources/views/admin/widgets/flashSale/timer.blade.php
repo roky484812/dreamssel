@@ -12,7 +12,11 @@
 
                 </div>
                 <!--End Page header-->
-
+                @php
+                    $givenCarbonDateTime = \Carbon\Carbon::parse($endTime);
+                    $currentDateTime = \Carbon\Carbon::now();
+                @endphp
+                @if(strtotime($givenCarbonDateTime) > strtotime($currentDateTime))
                 <!-- Row -->
                 <div class="row">
                     <div class="col-md-12">
@@ -24,7 +28,7 @@
                                 <div class="under-countdown row">
                                     <div class="col-xl-3 col-sm-6 mt-3">
                                         <div class="countdown">
-                                            <span id="days-countdown" class="countdown"> 00</span>
+                                            <span id="days-countdown" class="countdown">00</span>
                                             <span class="">Days</span>
                                         </div>
                                     </div>
@@ -54,6 +58,48 @@
 
                     <!-- /Row -->
                 </div>
+                @else
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Day Counter</h3>
+                            </div>
+                            <div class="card-body text-center">
+                                <div class="under-countdown row">
+                                    <div class="col-xl-3 col-sm-6 mt-3">
+                                        <div class="countdown">
+                                            <span class="countdown"> 00</span>
+                                            <span class="">Days</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-sm-6 mt-3">
+                                        <div class="countdown">
+                                            <span class="countdown">00</span>
+                                            <span class="">Hours</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-sm-6 mt-3">
+                                        <div class="countdown">
+                                            <span class="countdown">00</span>
+                                            <span class="">Minutes</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-sm-6 mt-3">
+                                        <div class="countdown">
+                                            <span class="countdown">00</span>
+                                            <span class="">Seconds</span>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /Row -->
+                </div>
+                @endif
                 <div class="row">
 
                     <form action="{{route('admin.flash.sale.set.endtime')}}" method="POST">

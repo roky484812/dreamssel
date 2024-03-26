@@ -49,7 +49,7 @@
                                     </div>
                                     <div class="card-add-to-wishlist">
                                         @if (auth()->user())
-                                            <a href="" class="addToFavBtn" data-product-fav-id="{{ $product->id }}">
+                                            <a href="javascript:void(0)" class="addToFavBtn" data-product-fav-id="{{ $product->id }}">
                                                 <i class="fa-regular fa-heart"></i>
                                             </a>
                                         @else
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="card-add-to-cart">
                                         @if (auth()->user())
-                                            <a href="" class="addToCartBtn" data-product-id="{{ $product->id }}">
+                                            <a href="javascript:void(0)" class="addToCartBtn" data-product-id="{{ $product->id }}">
                                                 <i class="bi bi-cart3"></i>
                                             </a>
                                         @else
