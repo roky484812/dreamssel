@@ -8,6 +8,14 @@
 	<link rel="icon" href="{{ asset('assets/admin/images/brand/white_single_logo.svg') }}" type="image/x-icon" />
     <link rel="stylesheet" href="{{ asset('assets/auth_layout/css/auth.css') }}">
 	<title>Sign in & Sign up Form</title>
+	<style>
+		.text-danger{
+			color:red;
+		}
+		.invalid_feedback{
+			color: red;
+		}
+	</style>
 </head>
 <body>
 

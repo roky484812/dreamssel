@@ -87,12 +87,11 @@ class AuthController extends Controller
             Mail::to($mail)->send(new DistributorSignup($message));
             return $token;
         }catch(Exception $e){
-            return 0;
+            return $e->getMessage();
         }
     }
 
-    public function email_verify(Request $req): string
-    {
+    public function email_verify(Request $req){
         $temp_user = Temp_user::where('token', $req->input('token'))->first();
         if($temp_user){
             $localDateTime = now()->timezone('Asia/Dhaka')->format('Y-m-d H:i:s');
@@ -106,13 +105,13 @@ class AuthController extends Controller
             $user->updated_at = $temp_user->updated_at;
             if($user->save()){
                 $temp_user->delete();
-                return 'Email verified successfuly.';
+                return view('email.signup.verify', ['status'=> 'Email verified successfuly.']);
             }else{
-                return 'Something went wrong.';
+                return view('email.signup.verify', ['status'=> 'Something went wrong.']);
             }
 
         }else{
-            return "Can't verify your email address. Maybe your token is expired or already been verified.";
+            return view('email.signup.verify', ['status'=> "Can't verify your email address. Maybe your token is expired or already been verified."]);
         }
     }
 
