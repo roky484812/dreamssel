@@ -96,7 +96,7 @@ class LandingImageController extends Controller
             $image_dest = public_path() . $image_path;
             $image = $manager->read($image);
             $image->cover(600, 795);
-            $image->save($image_dest, 50);
+            $image->save($image_dest, 80);
 
             $new_araival->large_potrait = $image_path;
         }
@@ -114,7 +114,7 @@ class LandingImageController extends Controller
             $image_dest = public_path() . $image_path;
             $image = $manager->read($image);
             $image->cover(600, 390);
-            $image->save($image_dest, 50);
+            $image->save($image_dest, 80);
             $new_araival->large_landscape = $image_path;
         }
         if ($request->hasFile('lsm_potrait')) {
@@ -131,7 +131,7 @@ class LandingImageController extends Controller
             $image_dest = public_path() . $image_path;
             $image = $manager->read($image);
             $image->cover(312, 412);
-            $image->save($image_dest, 50);
+            $image->save($image_dest, 80);
             $new_araival->lsm_potrait = $image_path;
         }
         if ($request->hasFile('rsm_potrait')) {
@@ -148,7 +148,7 @@ class LandingImageController extends Controller
             $image_dest = public_path() . $image_path;
             $image = $manager->read($image);
             $image->cover(312, 412);
-            $image->save($image_dest, 50);
+            $image->save($image_dest, 80);
             $new_araival->rsm_potrait = $image_path;
         }
 

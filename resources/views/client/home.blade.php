@@ -260,7 +260,7 @@
                 <a href="{{ route('home.categoryProductView', $category->id) }}"
                     class="text-decoration-none text-dark">
                     <span>
-                        <img src="{{ asset($category->image) }}" alt="">
+                        <img src="{{ asset($category->image) }}" alt="" class="category_image">
                     </span>
                     <p class="text-center">{{ $category->category_name }}</p>
                 </a>
@@ -735,7 +735,10 @@
     .categoryCarouselItem:hover p {
         color: white;
     }
-
+    .category_image{
+        height: 80px;
+        width: 80px;
+    }
     .categoryMenuBox ul li ul li:hover ul {
         display: block !important;
         position: absolute;
