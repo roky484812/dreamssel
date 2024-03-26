@@ -119,7 +119,7 @@
                                                                             <div class="mb-3">
                                                                                 <label for="sub_category"
                                                                                     class="form-label">Sub-Category
-                                                                                    Title</label>
+                                                                                    Title *</label>
                                                                                 <input type="text" name="sub_category"
                                                                                     value="{{$subcategory['sub_category_name']}}"
                                                                                     class="form-control @error('sub_category') is-invalid @enderror"
@@ -132,7 +132,7 @@
                                                                             </div>
                                                                             <div class="mb-3">
                                                                                 <label for="category"
-                                                                                    class="form-label">Category</label>
+                                                                                    class="form-label">Category *</label>
                                                                                 <select name="category_id" id="category"
                                                                                     class="select2 form-control @error('category_id') is-invalid @enderror" required>
                                                                                     <option>Select Category</option>

@@ -10,7 +10,7 @@ use Carbon\Carbon;
 class AnnouncementController extends Controller
 {
     public function announcementList(){
-        $announcements = Announcement::paginate(10);
+        $announcements = Announcement::latest()->paginate(10);
         return view('admin.announcement', ['announcements'=> $announcements]);
     }
 

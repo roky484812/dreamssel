@@ -41,21 +41,11 @@
                                             <form action="{{ route('admin.userlist') }}" method="get">
                                                 <div class="row g-1">
                                                     <div class="col px-1">
-                                                        <select name="type" class="select2 @error ('type') is-invalid @enderror" required>
-                                                            <option value="">--Search With--</option>
-                                                            <option value="name" {{ $input['type'] == 'name' ? 'selected': '' }}>Name</option>
-                                                            <option value="email" {{ $input['type'] == 'email' ? 'selected': '' }}>Email</option>
-                                                        </select>
-                                                        @error('type')
-                                                        <span class="invalid-feedback">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="col px-1">
                                                         <div class="input-icon">
                                                             <span class="input-icon-addon">
                                                                 <i class="fe fe-search"></i>
                                                             </span>
-                                                            <input type="text" value="{{ $input['search'] }}" name="search" class="form-control @error('search') is-invalid @enderror" placeholder="Search User" required>
+                                                            <input type="text" value="{{ $input['search'] }}" name="search" class="form-control @error('search') is-invalid @enderror" placeholder="Search User by name or email">
                                                             @error('search')
                                                             <span class="invalid-feedback">{{ $message }}</span>
                                                             @enderror

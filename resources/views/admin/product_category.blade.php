@@ -99,7 +99,7 @@
                                                                                 </div>
                                                                                 <div class="modal-body">
                                                                                     <div class="mb-3">
-                                                                                        <label for="category" class="form-label">Category Title</label>
+                                                                                        <label for="category" class="form-label">Category Title *</label>
                                                                                         <input type="text" name="category" value="{{$category['category_name']}}" class="form-control @error('category') is-invalid @enderror" id="category" placeholder="Enter Category Title">
                                                                                         @error('category')
                                                                                             <p class="invalid-feedback">{{$message}}</p>
@@ -152,15 +152,15 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <label for="category" class="form-label">Category Title</label>
-                    <input type="text" name="category_name" class="form-control @error('category_name') is-invalid @enderror" id="category" placeholder="Enter Category Title">
+                    <label for="category" class="form-label">Category Title *</label>
+                    <input type="text" name="category_name" required class="form-control @error('category_name') is-invalid @enderror" id="category" placeholder="Enter Category Title">
                     @error('category_name')
                         <p class="invalid-feedback">{{$message}}</p>
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="image">Category Image</label>
-                    <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
+                    <label for="image">Category Image *</label>
+                    <input type="file" name="image" required id="image" class="form-control @error('image') is-invalid @enderror">
                     @error('image')
                         <p class="invalid-feedback">{{$message}}</p>
                     @enderror

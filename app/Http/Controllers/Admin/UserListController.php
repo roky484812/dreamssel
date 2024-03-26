@@ -13,7 +13,6 @@ class UserListController extends Controller
 {
     public function userList(Request $req){
         $req->validate([
-            'type'=> 'nullable|in:name,email',
             'search'=> 'nullable|string'
         ]);
         $userFetch = User::select('users.id', 'users.name', 'users.username', 'users.email', 'users.profile_picture', 'users.is_active', 'user_roles.role as role_name')
@@ -23,7 +22,11 @@ class UserListController extends Controller
             ->latest();
 
         if($req->input('search')){
-            $userFetch->where('users.'.$req->input('type'), 'like', '%'.$req->input('search').'%');
+            $searchTerm = $req->input('search');
+            $userFetch->where(function($query) use ($searchTerm) {
+                $query->where('users.email', 'LIKE', '%'.$searchTerm.'%')
+                    ->orWhere('users.name', 'LIKE', '%'.$searchTerm.'%');
+            });
         }
         $users = $userFetch->paginate(12);
         $users->each(function ($user) {

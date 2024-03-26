@@ -72,11 +72,11 @@ class EditProfileController extends Controller
 
     public function update_user_meta(Request $req){
         $req->validate([
-            'fullname'=> 'string|min:3|max:100',
-            'phone'=> 'min:10',
-            'address'=> 'max:100',
-            'city'=> 'max:50',
-            'post_code'=> 'min:4|max:6'
+            'fullname'=> 'nullable|string|min:3|max:100',
+            'phone'=> 'nullable|min:10',
+            'address'=> 'nullable|max:100',
+            'city'=> 'nullable|max:50',
+            'post_code'=> 'nullable|min:4|max:6'
         ]);
 
         try {
@@ -95,23 +95,27 @@ class EditProfileController extends Controller
                 );
             }
 
-            profile_meta::updateOrCreate(
-                [
-                    'user_id'=> $user_id,
-                    'key'=> 'address'
-                ],[
-                    'value'=> $req->input('address')
-                ]
-            );
-
-            profile_meta::updateOrCreate(
-                [
-                    'user_id'=> $user_id,
-                    'key'=> 'city'
-                ],[
-                    'value'=> $req->input('city')
-                ]
-            );
+            if($req->input('address')){
+                profile_meta::updateOrCreate(
+                    [
+                        'user_id'=> $user_id,
+                        'key'=> 'address'
+                    ],[
+                        'value'=> $req->input('address')
+                    ]
+                );
+            }
+            
+            if($req->input('city')){
+                profile_meta::updateOrCreate(
+                    [
+                        'user_id'=> $user_id,
+                        'key'=> 'city'
+                    ],[
+                        'value'=> $req->input('city')
+                    ]
+                );
+            }
 
             if($req->input('post_code')){
                 profile_meta::updateOrCreate(

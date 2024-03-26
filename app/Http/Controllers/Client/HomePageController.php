@@ -39,7 +39,7 @@ class HomePageController extends Controller
         $categories = Product_category::all();
         $subcategories = Product_sub_category::all();
         $carousel_gallery = Carousel_gallery::all();
-        $featured_image = Featured_image::first();
+        $featured_image = Featured_image::latest()->first();
         $new_araival = New_araival::first();
         $flash_items = Flash_sale::leftJoin('products', 'products.id', 'flash_sales.product_id')
         ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
@@ -114,7 +114,7 @@ class HomePageController extends Controller
     {
         $categories = Product_category::all();
         $search_product = $request->input('query');
-        $products = Product::where('title', 'like', '%' . $search_product . '%')->get();
+        $products = Product::where('title', 'like', '%' . $search_product . '%')->where('status', '1')->get();
         $subcategories = Product_sub_category::all();
         return view('client.searchResult', ['categories' => $categories, 'subcategories' => $subcategories, 'products' => $products], compact('products', 'search_product'));
     }
@@ -225,24 +225,19 @@ class HomePageController extends Controller
                 'subcategories' => $subcategories,
                 'products' => $products,
                 'fav_product_lists' => $fav_product_lists,
-
-
             ]);
         } else {
             return view('login', ['categories' => $categories, 'subcategories' => $subcategories]);
         }
     }
 
-    public function addToFavList($product_id)
-    {
+    public function addToFavList($product_id){
 
         $user_id = auth()->user()->id;
         $fav_product_lists = Fav_product_list::where('user_id', auth()->user()->id)->where('product_id', $product_id)->first();
 
 
         if ($fav_product_lists) {
-
-
             return response()->json(['success' => true, 'message' => 'Already added to favourite lists :)']);
         } else {
             $fav_product_list = new Fav_product_list();

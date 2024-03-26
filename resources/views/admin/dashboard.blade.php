@@ -216,7 +216,7 @@
                                         <tr>
                                             <td>
                                                 <img src="{{ asset($p_product->thumbnail_image) }}" class="w-7 h-7 shadow me-3 rounded">
-                                                {{  $p_product->title }}
+                                                {{  Str::limit($p_product->title, 40) }}
                                             </td>
                                             <td>
                                                 <div class="dropdown">
@@ -331,11 +331,11 @@
                                                             src="{{ $product->thumbnail_image }}" alt="Image description">
                                                         <div class="ms-3 mt-2">
                                                             <h5 class="mb-0 text-dark">
-                                                                {{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}
+                                                                {{ \Illuminate\Support\Str::limit($product->title, 40, $end = '...') }}
                                                             </h5>
                                                             <p class="mb-0  fs-13 text-muted">
-                                                                {{ \Illuminate\Support\Str::limit($product->description, 25, $end = '...') }}
-                                                                </ </p>
+                                                                {{ \Illuminate\Support\Str::limit($product->short_description, 40, $end = '...') }}
+                                                            </ </p>
                                                         </div>
                                                     </td>
                                                     <td class="text-center">{{$product->category->category_name}}</td>
@@ -434,7 +434,7 @@
                                         <tr>
                                             <td>
                                                 <img src="{{ asset($p_product->thumbnail_image) }}" class="w-7 h-7 shadow me-3 rounded">
-                                                {{  $p_product->title }}
+                                                {{  Str::limit($p_product->title, 40) }}
                                             </td>
                                             <td>
                                                 <div class="dropdown">

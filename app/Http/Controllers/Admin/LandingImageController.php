@@ -15,24 +15,19 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class LandingImageController extends Controller
 {
-    public function carouselBladeViewer()
-    {
+    public function carouselBladeViewer(){
         $Carousel_gallery = Carousel_gallery::all();
         return view('admin.widgets.landingImageUpload.carousel', ['carousel_gallery' => $Carousel_gallery]);
     }
-    public function featuredBladeViewer()
-    {
-        $featured_image = Featured_image::all();
+    public function featuredBladeViewer(){
+        $featured_image = Featured_image::latest()->get();
         return view('admin.widgets.landingImageUpload.featuredImage', ['featured_image' => $featured_image]);
     }
-    public function newAraivalBladeViewer()
-    {
+    public function newAraivalBladeViewer(){
         $new_araival = New_araival::all();
         return view('admin.widgets.landingImageUpload.newAraival', ['new_araival' => $new_araival]);
     }
-    public function CarouselImageUploader(Request $request)
-    {
-
+    public function CarouselImageUploader(Request $request) {
         if ($request->hasFile('images')) {
 
             foreach ($request->file('images') as $image) {
@@ -65,8 +60,7 @@ class LandingImageController extends Controller
         return $image_path;
     }
 
-    public function featuredImageUploader(Request $request)
-    {
+    public function featuredImageUploader(Request $request){
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $path = '/images/featured/';
