@@ -128,14 +128,9 @@ class AuthController extends Controller
         $user = Socialite::driver('facebook')->user();
         $findUser = User::where('facebook_id', $user->id);
         if($findUser->exists()){
-            if(Auth::login($findUser->first())){
-                if(Auth()->user()->is_active == 0){
-                    return redirect(route('login'))->with('error', 'You are not an active user. Please contact to dreamssel.');
-                }else{
-                    $route = $this->redirectDash();
-                    return redirect($route);
-                }
-            }
+            Auth::login($findUser->first());
+            $route = $this->redirectDash();
+            return redirect($route);
         }else{
             $newUser = User::updateOrCreate(
                 ['email' => $user->email],
@@ -145,18 +140,9 @@ class AuthController extends Controller
                 ]
             );
 
-            if(Auth::login($newUser)){
-                if(Auth()->user()->is_active == 0){
-                    Auth()->logout();
-                    return redirect(route('login'))->with('error', 'You are not an active user. Please contact to dreamssel.');
-                    // return back()->with('error', 'You are not an active user. Please contact to dreamssel.');
-                }else{
-                    $route = $this->redirectDash();
-                    return redirect($route);
-                }
-            }else{
-                return redirect(route('login'));
-            }
+            Auth::login($newUser);
+            $route = $this->redirectDash();
+            return redirect($route);
         }
     }
 
@@ -168,15 +154,9 @@ class AuthController extends Controller
         $user = Socialite::driver('google')->user();
         $findUser = User::where('google_id', $user->id);
         if($findUser->exists()){
-            if(Auth::login($findUser->first())){
-                if(Auth()->user()->is_active == 0){
-                    Auth()->logout();
-                    return redirect(route('login'))->with('error','You are not an active user. Please contact to dreamssel.');
-                }else{
-                    $route = $this->redirectDash();
-                    return redirect($route);
-                }
-            }
+            Auth::login($findUser->first());
+            $route = $this->redirectDash();
+            return redirect($route);
         }else{
             $newUser = User::updateOrCreate(
                 ['email' => $user->email],
@@ -185,15 +165,9 @@ class AuthController extends Controller
                     'password' => Hash::make($user->id.$user->email),
                 ]
             );
-            if(Auth::login($newUser->first())){
-                if(Auth()->user()->is_active == 0){
-                    Auth()->logout();
-                    return redirect(route('login'))->with('error','You are not an active user. Please contact to dreamssel.');
-                }else{
-                    $route = $this->redirectDash();
-                    return redirect($route);
-                }
-            }
+            Auth::login($newUser);
+            $route = $this->redirectDash();
+            return redirect($route);
         }
     }
 
@@ -221,7 +195,7 @@ class AuthController extends Controller
         if(Auth::user() && Auth::user()->role == 1 ||  Auth::user()->role == 2){
             $redirect = route('admin.dashboard');
         }else{
-            $redirect = route('home');
+            $redirect = route('home.accountPage');
         }
         return $redirect;
     }

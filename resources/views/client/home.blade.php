@@ -413,7 +413,7 @@
                 <img src="{{ $featured_image->image }}" alt="" />
             @endif
 
-            <div class="bannerContent">
+            <div class="bannerContent d-none">
                 <div class="bannerContentText">
                     <button class="bannerBtn">
                         অর্ডার করুন
@@ -735,9 +735,14 @@
     .categoryCarouselItem:hover p {
         color: white;
     }
-    .category_image{
-        height: 80px;
-        width: 80px;
+    .categoryCarouselItem span {
+        height: 75px;
+        width: 75px;
+        font-size: 40px;
+        display: inline-block;
+    }
+    .categoryCarouselItem a {
+        text-align:center;
     }
     .categoryMenuBox ul li ul li:hover ul {
         display: block !important;
