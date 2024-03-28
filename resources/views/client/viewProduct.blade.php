@@ -159,13 +159,13 @@
                 @endif
 
 
-                <div class="product-dessriptions mt-3 border-top pt-2">
-                    <p>
-                        {!! $product->description !!}
-                    </p>
-                </div>
-
+                
             </div>
+        </div>
+        <div class="product-dessriptions mt-3 border-top pt-2 overflow-auto">
+            <p>
+                {!! $product->description !!}
+            </p>
         </div>
     </div>
     <!-- product-details end -->
