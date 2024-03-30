@@ -46,7 +46,7 @@
                             </li>
                         @break
 
-                    @else
+                        @else
                         <li>
 
                             {{-- {{ route('your.route.name', ['category_id' => $category->id]) }} --}}
@@ -67,14 +67,10 @@
                                 {{-- {{ route('your.route.name', ['subcategory_id' => $subcategory->id]) }} --}}
                             </ul>
                         </li>
-                    @endif
-                @endforeach
-
-
-
-
-
-            </ul>
+                        @endif
+                    @endforeach
+                </ul>
+            </div>
         </div>
         <div class="carouselBox">
             <div class="topCarousel owl-carousel owl-theme">
@@ -701,24 +697,27 @@
 <script>
     $(document).ready(function() {
         // Set the end time for the countdown (assuming endTime is fetched from the backend)
-        var endTime = moment("{{ $endTime }}");
+        var endTime = moment("{{ $givenCarbonDateTime }}");
 
         // Function to update the countdown display
         function updateCountdown() {
             var currentTime = moment();
             var timeDiff = moment.duration(endTime.diff(currentTime));
-
+            console.log(timeDiff);
             // Calculate days, hours, minutes, and seconds
             var days = String(Math.floor(timeDiff.asDays())).padStart(2, '0');
             var hours = String(timeDiff.hours()).padStart(2, '0');
             var minutes = String(timeDiff.minutes()).padStart(2, '0');
             var seconds = String(timeDiff.seconds()).padStart(2, '0');
-
+            console.log('day', days, 'hour', hours, 'minites', minutes, 'sec', seconds);
             // Update the HTML elements with the countdown values
-            $('#days-countdown').text(days);
-            $('#hours-countdown').text(hours);
-            $('#minutes-countdown').text(days);
-            $('#seconds-countdown').text(seconds);
+            if(days<=0 && hours <= 0 && days <= 0 && seconds <= 0){
+                $('#days-countdown').text(days);
+                $('#hours-countdown').text(hours);
+                $('#minutes-countdown').text(days);
+                $('#seconds-countdown').text(seconds);
+            }
+
         }
 
         // Initial call to update the countdown
