@@ -166,7 +166,10 @@ class HomePageController extends Controller
 
         // Adjust the number of products per page
 
-        $products = Product::where('status', 1)->paginate(32);
+        $products = Product::where('status', 1)
+        ->leftjoin('product_countries', 'product_countries.id', 'products.country_id')
+        ->select('products.*', 'product_countries.code as country_code')
+        ->paginate(32);
         return view('client.shop', [
             'categories' => $categories,
             'subcategories' => $subcategories,

@@ -12,11 +12,33 @@
 
                 </div>
                 <!--End Page header-->
-                @php
-                    $givenCarbonDateTime = \Carbon\Carbon::parse($endTime);
-                    $currentDateTime = \Carbon\Carbon::now();
-                @endphp
-                @if(strtotime($givenCarbonDateTime) > strtotime($currentDateTime))
+            @php
+                use Carbon\Carbon;
+            
+                $currentDateTime = Carbon::now('Asia/Dhaka');
+            
+                // Set the timezone to "Asia/Dhaka" for $givenDateTime
+                $givenDateTime = Carbon::parse($endTime, 'Asia/Dhaka');
+            
+                // Calculate the time difference
+                $timeDifference = $currentDateTime->diff($givenDateTime)->format('%d days, %h hours, %I minutes, %S seconds');
+            
+                // Explode the formatted time difference string into an array
+                $timeDifferenceArray = explode(', ', $timeDifference);
+            
+                // Initialize an associative array to hold the time difference values
+                $timeDifferenceAssoc = [];
+            
+                // Iterate through the exploded array and split the key-value pairs
+                foreach ($timeDifferenceArray as $difference) {
+                    $pair = explode(' ', $difference, 2);
+                    $timeDifferenceAssoc[$pair[1]] = (int)$pair[0];
+                }
+            
+                // Convert associative array to JSON
+                $timeDifferenceJson = json_encode($timeDifferenceAssoc);
+            @endphp
+            @if(strtotime($givenDateTime) > strtotime($currentDateTime))
                 <!-- Row -->
                 <div class="row">
                     <div class="col-md-12">
@@ -58,7 +80,7 @@
 
                     <!-- /Row -->
                 </div>
-                @else
+            @else
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -154,40 +176,43 @@
     <script src="{{ asset('assets/admin/plugins/moment/moment.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/countdown/moment-timezone-with-data.min.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/countdown/moment-timezone.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            // Set the end time for the countdown (assuming endTime is fetched from the backend)
-            var endTime = moment("{{ $endTime }}");
+    @if(strtotime($givenDateTime) > strtotime($currentDateTime))
+        <script>
+            $(document).ready(function() {
+                var timeDifference = JSON.parse('@php echo $timeDifferenceJson; @endphp');
+                let {days, hours, minutes, seconds} = timeDifference;
 
-            // Function to update the countdown display
-            function updateCountdown() {
-                var currentTime = moment();
-                var timeDiff = moment.duration(endTime.diff(currentTime));
-
-                // Calculate days, hours, minutes, and seconds
-                var days = Math.floor(timeDiff.asDays());
-                var hours = timeDiff.hours();
-                var minutes = timeDiff.minutes();
-                var seconds = timeDiff.seconds();
-
-                // Update the HTML elements with the countdown values
-                $('#days-countdown').text(days);
-                $('#hours-countdown').text(hours);
-                $('#minutes-countdown').text(minutes);
-                $('#seconds-countdown').text(seconds);
-                if(days<=0 && hours <= 0 && days <= 0 && seconds <= 0){
-                    $('#days-countdown').text(0);
-                    $('#hours-countdown').text(0);
-                    $('#minutes-countdown').text(0);
-                    $('#seconds-countdown').text(0);
+                // Initial call to update the countdown
+                updateCountdown();
+                // Update the countdown every second
+                const intervalId = setInterval(updateCountdown, 1000);
+                // Function to update the countdown display
+                function updateCountdown() {
+                    if(seconds == 0){
+                        if(minutes == 0){
+                            if(hours == 0){
+                                if(days != 0){
+                                    days--;
+                                    hours = 24
+                                }
+                            }
+                            hours--;
+                            minutes = 60;
+                        }
+                        minutes--;
+                        seconds = 60;
+                    }
+                    seconds--;
+                    if(days == 0 && hours == 0 && minutes == 0 && seconds == 0){
+                        $('#flash_sale').addClass('d-none');
+                        clearInterval(intervalId);
+                    }
+                    $('#days-countdown').text(days);
+                    $('#hours-countdown').text(hours);
+                    $('#minutes-countdown').text(minutes);
+                    $('#seconds-countdown').text(seconds);
                 }
-            }
-
-            // Initial call to update the countdown
-            updateCountdown();
-
-            // Update the countdown every second
-            setInterval(updateCountdown, 1000);
-        });
-    </script>
+            });
+        </script>
+    @endif
 @endsection

@@ -87,10 +87,32 @@
     </div>
 </div>
 @php
-    $givenCarbonDateTime = \Carbon\Carbon::parse($endTime);
-    $currentDateTime = \Carbon\Carbon::now();
+    use Carbon\Carbon;
+
+    $currentDateTime = Carbon::now('Asia/Dhaka');
+
+    // Set the timezone to "Asia/Dhaka" for $givenDateTime
+    $givenDateTime = Carbon::parse($endTime, 'Asia/Dhaka');
+
+    // Calculate the time difference
+    $timeDifference = $currentDateTime->diff($givenDateTime)->format('%d days, %h hours, %I minutes, %S seconds');
+
+    // Explode the formatted time difference string into an array
+    $timeDifferenceArray = explode(', ', $timeDifference);
+
+    // Initialize an associative array to hold the time difference values
+    $timeDifferenceAssoc = [];
+
+    // Iterate through the exploded array and split the key-value pairs
+    foreach ($timeDifferenceArray as $difference) {
+        $pair = explode(' ', $difference, 2);
+        $timeDifferenceAssoc[$pair[1]] = (int)$pair[0];
+    }
+
+    // Convert associative array to JSON
+    $timeDifferenceJson = json_encode($timeDifferenceAssoc);
 @endphp
-@if(strtotime($givenCarbonDateTime) > strtotime($currentDateTime))
+@if(strtotime($givenDateTime) > strtotime($currentDateTime))
 <!-- flash sale section -->
 <div class="container" id="flash_sale">
     <div class="headerSection">
@@ -135,7 +157,7 @@
                         <div class="card-product-image">
 
                             <a href="{{ route('home.productPage', ['id' => $product->id]) }}" class="product-card-link">
-                                <img src="{{ $product->thumbnail_image }}" alt="Product image" />
+                                <img src="{{ asset($product->thumbnail_image) }}" alt="Product image" />
                             </a>
                             <div class="card-discount">
                                 @if (auth()->user())
@@ -182,7 +204,11 @@
                             </div>
                         </div>
                         <div class="card-product-name">
-                            <p>{{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}</p>
+                            <p>
+                                <a href="{{ route('home.productPage', ['id' => $product->id]) }}" class="text-decoration-none text-dark">
+                                    {{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}
+                                </a>
+                            </p>
                         </div>
                         <div class="card-price">
                             @if (auth()->user())
@@ -300,10 +326,9 @@
 
                         <div class="product-card">
                             <div class="card-product-image">
-
-                                <a href="{{ route('home.productPage', ['id' => $product->id]) }}"
-                                    class="product-card-link">
-                                    <img src="{{ $product->thumbnail_image }}" alt="Product image" />
+    
+                                <a href="{{ route('home.productPage', ['id' => $product->id]) }}" class="product-card-link">
+                                    <img src="{{ asset($product->thumbnail_image) }}" alt="Product image" />
                                 </a>
                                 <div class="card-discount">
                                     @if (auth()->user())
@@ -324,8 +349,7 @@
                                 </div>
                                 <div class="card-add-to-wishlist">
                                     @if (auth()->user())
-                                        <a href="javascript:void(0)" class="addToFavBtn"
-                                            data-product-fav-id="{{ $product->id }}">
+                                        <a href="javascript:void(0)" class="addToFavBtn" data-product-fav-id="{{ $product->id }}">
                                             <i class="fa-regular fa-heart"></i>
                                         </a>
                                     @else
@@ -337,20 +361,25 @@
                                 </div>
                                 <div class="card-add-to-cart">
                                     @if (auth()->user())
-                                        <a href="javascript:void(0)" class="addToCartBtn"
-                                            data-product-id="{{ $product->id }}">
+                                        <a href="javascript:void(0)" class="addToCartBtn" data-product-id="{{ $product->id }}">
                                             <i class="bi bi-cart3"></i>
                                         </a>
                                     @else
-                                        <a href="{{ route('home.signInPage') }}"
-                                            data-product-id="{{ $product->id }}">
+                                        <a href="{{ route('home.signInPage') }}" data-product-id="{{ $product->id }}">
                                             <i class="bi bi-cart3"></i>
                                         </a>
                                     @endif
                                 </div>
+                                <div class="position-absolute bottom-0 end-0">
+                                    <span class="badge text-bg-dark">{{ $product->country_code }}</span>
+                                </div>
                             </div>
                             <div class="card-product-name">
-                                <p>{{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}</p>
+                                <p>
+                                    <a href="{{ route('home.productPage', ['id' => $product->id]) }}" class="text-decoration-none text-dark">
+                                        {{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}
+                                    </a>
+                                </p>
                             </div>
                             <div class="card-price">
                                 @if (auth()->user())
@@ -360,27 +389,27 @@
                                     <p>&#2547; {{ $product->price }} </p>
                                 @endif
                             </div>
-
-                             
+    
+                            @if ($product->rating_count > 0)
                                 <div class="card-review-wrapper">
                                     <div class="card-review">
                                         @php
                                             $rating = $product->rating;
                                         @endphp
-                                        @if ($product->rating_count > 0)
-                                            @for ($i = 0; $i < 5; $i++)
-                                                @if ($rating >= 1)
-                                                    <img src="{{ asset('assets/client/images/filled_star.svg') }}"
-                                                        alt="" data-index="1" />
-                                                @else
-                                                    <img src="{{ asset('assets/client/images/blank_star.svg') }}"
-                                                        alt="" data-index="5" />
-                                                @endif
-                                                @php
-                                                    $rating--;
-                                                @endphp
-                                            @endfor
-
+    
+                                        @for ($i = 0; $i < 5; $i++)
+                                            @if ($rating >= 1)
+                                                <img src="{{ asset('assets/client/images/filled_star.svg') }}"
+                                                    alt="" data-index="1" />
+                                            @else
+                                                <img src="{{ asset('assets/client/images/blank_star.svg') }}"
+                                                    alt="" data-index="5" />
+                                            @endif
+                                            @php
+                                                $rating--;
+                                            @endphp
+                                        @endfor
+    
                                     </div>
                                     <div class="card-number-of-reviews">
                                         <p>&#x28;{{ $product->rating_count }}&#x29;</p>
@@ -449,10 +478,9 @@
 
                         <div class="product-card">
                             <div class="card-product-image">
-
-                                <a href="{{ route('home.productPage', ['id' => $product->id]) }}"
-                                    class="product-card-link">
-                                    <img src="{{ $product->thumbnail_image }}" alt="Product image" />
+    
+                                <a href="{{ route('home.productPage', ['id' => $product->id]) }}" class="product-card-link">
+                                    <img src="{{ asset($product->thumbnail_image) }}" alt="Product image" />
                                 </a>
                                 <div class="card-discount">
                                     @if (auth()->user())
@@ -473,36 +501,37 @@
                                 </div>
                                 <div class="card-add-to-wishlist">
                                     @if (auth()->user())
-                                        <a href="javascript:void(0)" class="addToFavBtn"
-                                            data-product-fav-id="{{ $product->id }}">
+                                        <a href="javascript:void(0)" class="addToFavBtn" data-product-fav-id="{{ $product->id }}">
                                             <i class="fa-regular fa-heart"></i>
                                         </a>
                                     @else
                                         <a href="{{ route('home.signInPage') }}"
                                             data-product-fav-id="{{ $product->id }}">
                                             <i class="fa-regular fa-heart"></i>
+                                        </a>
+                                    @endif
+                                </div>
+                                <div class="card-add-to-cart">
+                                    @if (auth()->user())
+                                        <a href="javascript:void(0)" class="addToCartBtn" data-product-id="{{ $product->id }}">
+                                            <i class="bi bi-cart3"></i>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('home.signInPage') }}" data-product-id="{{ $product->id }}">
+                                            <i class="bi bi-cart3"></i>
                                         </a>
                                     @endif
                                 </div>
                                 <div class="position-absolute bottom-0 end-0">
                                     <span class="badge text-bg-dark">{{ $product->country_code }}</span>
                                 </div>
-                                <div class="card-add-to-cart">
-                                    @if (auth()->user())
-                                        <a href="javascript:void(0)" class="addToCartBtn"
-                                            data-product-id="{{ $product->id }}">
-                                            <i class="bi bi-cart3"></i>
-                                        </a>
-                                    @else
-                                        <a href="{{ route('home.signInPage') }}"
-                                            data-product-id="{{ $product->id }}">
-                                            <i class="bi bi-cart3"></i>
-                                        </a>
-                                    @endif
-                                </div>
                             </div>
                             <div class="card-product-name">
-                                <p>{{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}</p>
+                                <p>
+                                    <a href="{{ route('home.productPage', ['id' => $product->id]) }}" class="text-decoration-none text-dark">
+                                        {{ \Illuminate\Support\Str::limit($product->title, 25, $end = '...') }}
+                                    </a>
+                                </p>
                             </div>
                             <div class="card-price">
                                 @if (auth()->user())
@@ -512,14 +541,14 @@
                                     <p>&#2547; {{ $product->price }} </p>
                                 @endif
                             </div>
-
+    
                             @if ($product->rating_count > 0)
                                 <div class="card-review-wrapper">
                                     <div class="card-review">
                                         @php
                                             $rating = $product->rating;
                                         @endphp
-
+    
                                         @for ($i = 0; $i < 5; $i++)
                                             @if ($rating >= 1)
                                                 <img src="{{ asset('assets/client/images/filled_star.svg') }}"
@@ -532,6 +561,7 @@
                                                 $rating--;
                                             @endphp
                                         @endfor
+    
                                     </div>
                                     <div class="card-number-of-reviews">
                                         <p>&#x28;{{ $product->rating_count }}&#x29;</p>
@@ -698,36 +728,49 @@
 <script src="{{ asset('assets/admin/plugins/moment/moment.js') }}"></script>
 <script src="{{ asset('assets/admin/plugins/countdown/moment-timezone-with-data.min.js') }}"></script>
 <script src="{{ asset('assets/admin/plugins/countdown/moment-timezone.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        // Set the end time for the countdown (assuming endTime is fetched from the backend)
-        var endTime = moment("{{ $endTime }}");
+@if(strtotime($givenDateTime) > strtotime($currentDateTime))
+    <script>
+        $(document).ready(function() {
+            var timeDifference = JSON.parse('@php echo $timeDifferenceJson; @endphp');
+            let {days, hours, minutes, seconds} = timeDifference;
 
-        // Function to update the countdown display
-        function updateCountdown() {
-            var currentTime = moment();
-            var timeDiff = moment.duration(endTime.diff(currentTime));
+            // Initial call to update the countdown
+            updateCountdown();
+            // Update the countdown every second
+            const intervalId = setInterval(updateCountdown, 1000);
+            // Function to update the countdown display
+            function updateCountdown() {
+                $('#days-countdown').text(days);
+                $('#hours-countdown').text(hours);
+                $('#minutes-countdown').text(minutes);
+                $('#seconds-countdown').text(seconds);
+                if(seconds == 0){
+                    if(minutes == 0){
+                        if(hours == 0){
+                            if(days != 0){
+                                days--;
+                                hours = 24
+                            }
+                        }
+                        hours--;
+                        minutes = 60;
+                    }
+                    minutes--;
+                    seconds = 60;
+                }
+                seconds--;
+                if(days == 0 && hours == 0 && minutes == 0 && seconds == 0){
+                    $('#flash_sale').addClass('d-none');
+                    clearInterval(intervalId);
+                }
+            }
 
-            // Calculate days, hours, minutes, and seconds
-            var days = String(Math.floor(timeDiff.asDays())).padStart(2, '0');
-            var hours = String(timeDiff.hours()).padStart(2, '0');
-            var minutes = String(timeDiff.minutes()).padStart(2, '0');
-            var seconds = String(timeDiff.seconds()).padStart(2, '0');
+        });
+    </script>
+@endif
 
-            // Update the HTML elements with the countdown values
-            $('#days-countdown').text(days);
-            $('#hours-countdown').text(hours);
-            $('#minutes-countdown').text(days);
-            $('#seconds-countdown').text(seconds);
-        }
 
-        // Initial call to update the countdown
-        updateCountdown();
 
-        // Update the countdown every second
-        setInterval(updateCountdown, 1000);
-    });
-</script>
 @endsection
 
 @section('custom_css')
