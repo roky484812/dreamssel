@@ -522,7 +522,7 @@
                                                 <td class="text-center">Editor</td>
                                                 <td class="text-center">{{ $editor->products->count() }}</td>
                                                 <td class="text-end">
-                                                    <a class="btn btn-light" href="{{route('admin.user.view', ['user_id'=>$distributor['id']])}}"> View Profile</a>
+                                                    <a class="btn btn-light" href="{{route('admin.user.view', ['user_id'=>$editor['id']])}}"> View Profile</a>
                                                 </td>
                                             </tr>
                                             @endforeach

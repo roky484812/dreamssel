@@ -237,8 +237,8 @@
                     <div class="col">
                         <h6>Quick Link</h6>
                         <ul class="list-unstyled">
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms Of Use</a></li>
+                            <li><a href="https://sites.google.com/view/privacy-policy-of-dreamssel/home">Privacy Policy</a></li>
+                            <li><a href="https://sites.google.com/view/terms-and-conditions-of-dreams/home">Terms Of Use</a></li>
                             <li><a href="#">FAQ</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>
