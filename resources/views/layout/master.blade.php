@@ -169,7 +169,7 @@
                         <div class="search-box-icon-wrapper">
                             <input class="search-input-field" type="text" name="query"
                                 placeholder="Search products..." />
-                            <span><button class=" border-0" type="submit"><i
+                            <span><button class="bg-transparent border-0" type="submit"><i
                                         class="fa-solid fa-magnifying-glass"></i></button></span>
                         </div>
                     </form>
@@ -265,8 +265,8 @@
             </div>
             <div class="copyright-text">
                 <p>
-                    Copyright &copy 2023 <a href="https://dreamssel.com/" class="text-success text-decoration-none">Dreamssel</a>. Developed with <span
-                      class="fa fa-heart text-danger"></span> by <a class="text-success text-decoration-none" href="https://www.pirhotech.com"> PiRhoTech
+                    Copyright &copy 2023 <a href="https://dreamssel.com/" class="text-decoration-none" style="color: #d7ad61;">Dreamssel</a>. Developed with <span
+                      class="fa fa-heart text-danger"></span> by <a class="text-decoration-none" style="color: #d7ad61;" href="https://www.pirhotech.com"> PiRhoTech
                     </a> All rights reserved.
                   </p>
             </div>
