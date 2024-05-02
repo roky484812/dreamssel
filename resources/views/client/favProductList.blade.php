@@ -120,7 +120,7 @@
                                         @endif
                                     </div>
                                     <a href="{{ route('home.placeOrderView', ['product_id' => $product->id]) }}"
-                                        class="card-buy-now text-decoration-none" type="button">
+                                        class="card-buy-now btn text-decoration-none" type="button">
                                         <p>অর্ডার করুন</p>
                                     </a>
                                 </div>
